@@ -7,7 +7,7 @@ class Api {
     // baseURL: "https://artbasicallymaster.herokuapp.com/"
     // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
     // baseURL: 'http://192.168.86.37:4000/',
-    baseURL: 'http://localhost:4000/',
+    baseURL: '/api',
     // baseURL: "https://artbasically.com/server"
   });
 
