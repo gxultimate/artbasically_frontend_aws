@@ -1,6 +1,6 @@
 {
 	"name": "xlsx",
-	"version": "0.15.6",
+	"version": "0.16.4",
 	"author": "sheetjs",
 	"description": "SheetJS Spreadsheet data parser and writer",
 	"keywords": [
@@ -38,8 +38,9 @@
 		"commander": "~2.17.1",
 		"crc-32": "~1.2.0",
 		"exit-on-epipe": "~1.0.1",
-		"wmf": "~1.0.1",
-		"ssf": "~0.10.3"
+		"ssf": "~0.11.2",
+		"word": "~0.3.0",
+		"wmf": "~1.0.1"
 	},
 	"devDependencies": {
 		"@sheetjs/uglify-js": "~2.7.3",
@@ -52,7 +53,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/SheetJS/js-xlsx.git"
+		"url": "git://github.com/SheetJS/sheetjs.git"
 	},
 	"scripts": {
 		"pretest": "git submodule init && git submodule update",

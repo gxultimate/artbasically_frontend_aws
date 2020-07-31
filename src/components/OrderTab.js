@@ -1,20 +1,18 @@
 import {
-  MDBCol,
+  MDBBtn, MDBCol,
   MDBIcon,
   MDBNav,
   MDBNavItem,
   MDBNavLink,
   MDBRow,
   MDBTabContent,
-  MDBTabPane,
-  MDBBtn,
+  MDBTabPane
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import OrderDetails from './OrderDetails';
-import art from '../images/artworks/art1.png';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Cart from './Cart';
+import OrderDetails from './OrderDetails';
 
 class OrderTab extends Component {
   state = {

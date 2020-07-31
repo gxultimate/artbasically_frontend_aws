@@ -1,32 +1,32 @@
+import { Provider } from 'mobx-react';
 import React from 'react';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
-import {Provider} from 'mobx-react';
-
-//pages
-import Landing from './pages/Landing';
-import Homepage from './pages/Homepage';
-import SingleArtist from './pages/SingleArtist';
-import ArtistReg from './pages/ArtistReg';
-import ArtGalReg from './pages/ArtGalReg';
-import UserReg from './pages/UserReg';
-import UploadWork from './pages/UploadWork';
-import SingleArt from './pages/SingleArt';
-import Artworks from './pages/Artworks';
-import Artists from './pages/Artists';
-import CProfile from './pages/CProfile';
-import CProfileEdit from './pages/CProfileEdit';
-import Order from './pages/Order';
-import RegVerify from './pages/RegVerify';
-import SubmitArt from './pages/SubmitArt';
+import { Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import AdminHome from './admin/Admin';
 //Admin
 import Admin from './admin/AdminLogin';
-import AdminHome from './admin/Admin';
-import {ToastContainer} from 'react-toastify';
+import ArtGalReg from './pages/ArtGalReg';
+import ArtistReg from './pages/ArtistReg';
+import Artists from './pages/Artists';
+import Artworks from './pages/Artworks';
+import CProfile from './pages/CProfile';
+import CProfileEdit from './pages/CProfileEdit';
+import Homepage from './pages/Homepage';
+//pages
+import Landing from './pages/Landing';
+import Order from './pages/Order';
+import RegVerify from './pages/RegVerify';
+import SingleArt from './pages/SingleArt';
+import SingleArtist from './pages/SingleArtist';
+import SubmitArt from './pages/SubmitArt';
+import UploadWork from './pages/UploadWork';
+import UserReg from './pages/UserReg';
 //PrintPartner
 // import PartnerLogin from './printingpartner/PartnerLogin';
 import PrintingPartner from './printingpartner/PrintingPartner';
+import { Api, StartingStore } from './stores';
 
-import {StartingStore, Api} from './stores';
+
 
 const api = new Api();
 const startingStore = new StartingStore(api);
@@ -41,7 +41,7 @@ class Routes extends React.Component {
       <Provider {...stores}>
         <ToastContainer
           position='top-right'
-          autoClose={5000}
+          autoClose={1200}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -71,10 +71,7 @@ class Routes extends React.Component {
         <Route exact path='/PrintingPartner' component={PrintingPartner} />
         <ToastContainer />
 
-        {/* render={function() {
-              return <h1>Not Found</h1>;
-            }}
-          /> */}
+    
       </Provider>
     );
   }

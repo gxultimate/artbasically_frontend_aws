@@ -5,11 +5,13 @@ import './css/style.css';
 import './css/normalize.css';
 import './css/printart.css';
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from './ScrollToTop'
 class App extends Component {
   render() {
     return (
       <Router basename={'/'}>
         <main>
+          <ScrollToTop/>
           <Routes />
         </main>
       </Router>

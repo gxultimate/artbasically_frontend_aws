@@ -261,6 +261,9 @@ export interface WorkBook {
 }
 
 export interface SheetProps {
+    /** Name of Sheet */
+    name?: string;
+
     /** Sheet Visibility (0=Visible 1=Hidden 2=VeryHidden) */
     Hidden?: 0 | 1 | 2;
 
@@ -623,6 +626,12 @@ export interface Sheet2CSVOpts extends DateNFOption {
 
     /** Skip hidden rows and columns in the CSV output */
     skipHidden?: boolean;
+
+    /** Force quotes around fields */
+    forceQuotes?: boolean;
+
+    /** if true, return raw numbers; if false, return formatted numbers */
+    rawNumbers?: boolean;
 }
 
 export interface OriginOption {
@@ -659,6 +668,9 @@ export interface Sheet2JSONOpts extends DateNFOption {
 
     /** if true, return raw data; if false, return formatted text */
     raw?: boolean;
+
+    /** if true, return raw numbers; if false, return formatted numbers */
+    rawNumbers?: boolean;
 }
 
 export interface AOA2SheetOpts extends CommonOptions, DateNFOption {

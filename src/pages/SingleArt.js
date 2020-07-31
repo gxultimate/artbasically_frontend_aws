@@ -56,15 +56,10 @@ class SingleArt extends Component {
     getSingleArtists(this.props.match.params.name);
     getArtistArtwork(this.props.match.params.name);
     getToCart();
-
-    //   .then(response => {
-
-    //  })
-    // getToCart();
   }
 
   checkFollower = (follower) => {
-    if (follower !== undefined && follower[0] !== '') {
+    if (follower !== undefined && follower !== '') {
       return follower.length;
     } else {
       return 0;
@@ -95,7 +90,6 @@ class SingleArt extends Component {
       options.push(i);
     }
 
-    console.log(listOfSingleArtwork, 'aws2332323');
     return (
       <div className='home'>
         <Navbar />
@@ -105,8 +99,8 @@ class SingleArt extends Component {
               <div className='left'>
                 <div className='artworkInfo'>
                   <h2 className='title artistname'>
-                    {listOfSingleArtwork[0] !== undefined ? (
-                      listOfSingleArtwork[0].artistName
+                    {listOfSingleArtwork !== undefined ? (
+                      listOfSingleArtwork.artistName
                     ) : (
                       <Skeleton active />
                     )}
@@ -128,16 +122,16 @@ class SingleArt extends Component {
                     </MDBBtn>
                   </h2>
                   <span className='arttitle'>
-                    {listOfSingleArtwork[0] !== undefined ? (
-                      listOfSingleArtwork[0].artName
+                    {listOfSingleArtwork !== undefined ? (
+                      listOfSingleArtwork.artName
                     ) : (
                       <Skeleton active />
                     )}
                     ,&nbsp;
                   </span>
                   <span className='year'>
-                    {listOfSingleArtwork[0] !== undefined ? (
-                      listOfSingleArtwork[0].artworkDateCreated
+                    {listOfSingleArtwork !== undefined ? (
+                      listOfSingleArtwork.artworkDateCreated
                     ) : (
                       <Skeleton active />
                     )}
@@ -145,8 +139,8 @@ class SingleArt extends Component {
                   <div className='artImg'>
                     <img
                       src={
-                        listOfSingleArtwork[0] !== undefined ? (
-                          listOfSingleArtwork[0].artworkImg
+                        listOfSingleArtwork !== undefined ? (
+                          listOfSingleArtwork.artworkImg
                         ) : (
                           <Skeleton active />
                         )
@@ -154,14 +148,14 @@ class SingleArt extends Component {
                       alt=''
                     />
 
-                    {listOfSingleArtwork[0] !== undefined ? (
+                    {listOfSingleArtwork !== undefined ? (
                       <ul className='artOpt'>
                         {' '}
                         <li>
                           <a href=''>Add to List</a>
                         </li>
                         <li>
-                          <ViewRoom img={listOfSingleArtwork[0].artworkImg} />
+                          <ViewRoom img={listOfSingleArtwork.artworkImg} />
                         </li>
                         <li>
                           <a href=''>Share</a>
@@ -174,8 +168,8 @@ class SingleArt extends Component {
                   <div className='abtArtist'>
                     <h4>About the Artist</h4>
                     <span>
-                      {listOfSingleArtwork[0] !== undefined ? (
-                        listOfSingleArtwork[0].artistName
+                      {listOfSingleArtwork !== undefined ? (
+                        listOfSingleArtwork.artistName
                       ) : (
                         <Skeleton active />
                       )}
@@ -189,11 +183,11 @@ class SingleArt extends Component {
                       className='seemore'
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${listOfSingleArtwork[0].artistName}`,
+                          pathname: `/Artist/${listOfSingleArtwork.artistName}`,
                           state: {
                             artistName:
-                              listOfSingleArtwork[0] !== undefined
-                                ? listOfSingleArtwork[0].artistName
+                              listOfSingleArtwork !== undefined
+                                ? listOfSingleArtwork.artistName
                                 : '',
                             // "accImg": listofArtistInfo.artistImg,
                             // "artistDescription": listofArtistInfo.accDescription,
@@ -325,8 +319,8 @@ class SingleArt extends Component {
                       PHP{' '}
                       {Number(
                         parseFloat(
-                          listOfSingleArtwork[0] !== undefined
-                            ? parseFloat(listOfSingleArtwork[0].artPrice) *
+                          listOfSingleArtwork !== undefined
+                            ? parseFloat(listOfSingleArtwork.artPrice) *
                                 parseFloat(cart.artworkQuantity)
                             : '0.00'
                         )
@@ -337,12 +331,12 @@ class SingleArt extends Component {
                     </a>
                     <div style={{float: 'right'}}>
                       <AddToBag
-                        cartData={listOfSingleArtwork[0]}
+                        cartData={listOfSingleArtwork}
                         disable={
                           cart.artworkFramingOptions !== '' ? true : false
                         }
                       />
-                      <ViewCart cartData={listOfSingleArtwork[0]} />
+                      <ViewCart cartData={listOfSingleArtwork} />
                     </div>
                   </div>
                 </form>
@@ -352,8 +346,8 @@ class SingleArt extends Component {
           <section className='relcat'>
             <h3>
               Other Works by{' '}
-              {listOfSingleArtwork[0] !== undefined ? (
-                listOfSingleArtwork[0].artistName
+              {listOfSingleArtwork !== undefined ? (
+                listOfSingleArtwork.artistName
               ) : (
                 <Skeleton active />
               )}
@@ -363,12 +357,12 @@ class SingleArt extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listOfSingleArtwork[0] !== undefined ? (
+              {listOfSingleArtwork !== undefined ? (
                 listofArtistArtwork
                   .reverse()
                   .slice(0, 3)
                   .map((art) => {
-                    if (art.artworkID !== listOfSingleArtwork[0].artworkID) {
+                    if (art.artworkID !== listOfSingleArtwork.artworkID) {
                       return (
                         <li>
                           <a href='' className='artlink'>
@@ -386,7 +380,7 @@ class SingleArt extends Component {
                           </a>
                           <div className='artistinfo'>
                             <p>
-                              {listOfSingleArtwork[0] !== undefined ? (
+                              {listOfSingleArtwork !== undefined ? (
                                 art.artName
                               ) : (
                                 <Skeleton active />
@@ -409,12 +403,12 @@ class SingleArt extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listRelatedWorkByCategory[0] !== undefined ? (
+              {listRelatedWorkByCategory !== undefined && listOfSingleArtwork !== undefined ? (
                 listRelatedWorkByCategory
                   .reverse()
                   .slice(0, 3)
                   .map((art) => {
-                    if (art.artworkID !== listOfSingleArtwork[0].artworkID) {
+                    if (art.artworkID !== listOfSingleArtwork.artworkID) {
                       return (
                         <li>
                           <a href='' className='artlink'>
@@ -432,7 +426,7 @@ class SingleArt extends Component {
                           </a>
                           <div className='artistinfo'>
                             <p>
-                              {listOfSingleArtwork[0] !== undefined ? (
+                              {listOfSingleArtwork !== undefined ? (
                                 art.artName
                               ) : (
                                 <Skeleton active />

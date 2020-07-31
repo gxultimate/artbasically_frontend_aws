@@ -35,7 +35,7 @@ export class Homepage extends Component {
   componentDidMount() {
     let {
       startingStore: {
-        getArtists,
+        // getArtists,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
@@ -46,7 +46,7 @@ export class Homepage extends Component {
       getArtistFollowArtwork();
       getEmergingArtistArtwork();
       getArtworkInfo();
-      getArtists();
+      // getArtists();
     }
   }
 
