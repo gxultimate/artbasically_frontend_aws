@@ -95,7 +95,7 @@ export class Artworks extends Component {
           <div className='aside'>
             <div className='filter'>
               <div className='filter'>
-                <h4>Search by Filter</h4>
+              
                 <form>
                   <h5>Category</h5>
                   <ul>
@@ -129,110 +129,7 @@ export class Artworks extends Component {
                     ))}
                   </ul>
 
-                  <h5>Price</h5>
-                  <ul>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='anyprice'
-                      />
-                      <label class='custom-control-label' for='anyprice'>
-                        Any
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange1'
-                        onChange={() => {
-                          this.setPrice(['0', '5000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange1'>
-                        PHP0 - PHP5,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange2'
-                        onChange={() => {
-                          this.setPrice(['5000', '10000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange2'>
-                        PHP5,000 - PHP10,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange3'
-                        onChange={() => {
-                          this.setPrice(['10000', '20000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange3'>
-                        PHP10,000 - PHP20,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange4'
-                        onChange={() => {
-                          this.setPrice(['20000', '30000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange4'>
-                        PHP20,000 - PHP30,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange5'
-                        onChange={() => {
-                          this.setPrice(['30000', '40000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange5'>
-                        PHP30,000 - PHP40,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange6'
-                        onChange={() => {
-                          this.setPrice(['40000', '50000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange6'>
-                        PHP40,000 - PHP50,000
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='pricerange7'
-                        onChange={() => {
-                          this.setPrice(['50000', '1000000']);
-                        }}
-                      />
-                      <label class='custom-control-label' for='pricerange7'>
-                        PHP50,000 and Up
-                      </label>
-                    </li>
-                  </ul>
+          
 
                   <h5>Orientation</h5>
                   <ul>

@@ -346,7 +346,7 @@ class ArtworkFilter extends Component {
             total={
               this.props.type.length !== 0
                 ? this.props.type.length
-                : listOfArtworks.length
+                : artworks.length
             }
             //
           />

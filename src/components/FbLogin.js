@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import FacebookLogin from 'react-facebook-login';
+import {inject,observer} from 'mobx-react'
 
-export default class Facebook extends Component {
+
+
+
+class FbLogin extends Component {
+
   state = {
     isLoggedIn: false,
     userID: '',
@@ -11,7 +16,7 @@ export default class Facebook extends Component {
   };
 
   responseFacebook = (response) => {
-    // console.log(response);
+    console.log(response,'ress');
 
     this.setState({
       isLoggedIn: true,
@@ -20,6 +25,9 @@ export default class Facebook extends Component {
       email: response.email,
       // picture: response.picture.data.url,
     });
+
+
+    
   };
 
   componentClicked = () => console.log('clicked');
@@ -45,7 +53,7 @@ export default class Facebook extends Component {
     } else {
       fbContent = (
         <FacebookLogin
-          appId='3247134108844592'
+          appId='1202679590094694'
           autoLoad={false}
           fields='name,email,picture'
           onClick={this.componentClicked}
@@ -54,9 +62,9 @@ export default class Facebook extends Component {
       );
     }
 
-    return <div>{fbContent}</div>;
+    return (<div>{fbContent}</div>)
   }
-}
+
 
 // const styles = {
 //   fontFamily: "sans-serif",
@@ -82,3 +90,6 @@ export default class Facebook extends Component {
 // render(<FbLogin />, document.getElementById("root"));
 
 // export default FbLogin;
+}
+
+export default inject('startingStore')(observer(FbLogin))

@@ -13,6 +13,7 @@ class AdminLogin extends Component {
       startingStore: {loginAccount},
     } = this.props;
     loginAccount().then((res) => {
+
       if (res === true) {
         const success = () => {
           message
@@ -22,7 +23,7 @@ class AdminLogin extends Component {
 
         setTimeout(() => {
           success();
-        }, 200);
+        }, 500);
         this.props.history.push('/AdminHome');
       } else if (res === 3) {
         const success = () => {
@@ -33,7 +34,7 @@ class AdminLogin extends Component {
 
         setTimeout(() => {
           success();
-        }, 200);
+        }, 500);
         this.props.history.push('/PrintingPartner');
       } else {
         const success = () => {
@@ -44,7 +45,7 @@ class AdminLogin extends Component {
 
         setTimeout(() => {
           success();
-        }, 200);
+        }, 500);
         this.props.history.push('/Admin');
       }
     });

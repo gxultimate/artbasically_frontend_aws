@@ -1,6 +1,6 @@
-import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
-import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import { MDBContainer, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBIcon, MDBBtn } from 'mdbreact';
+import {inject, observer} from 'mobx-react';
 
 class ArtistReg extends Component {
   state = {

@@ -3,6 +3,7 @@ import {inject, observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import notif from './Notif';
+import moment from 'moment'
 
 class OrderTab extends Component {
   state = {
@@ -62,17 +63,32 @@ class OrderTab extends Component {
   };
 
   addOrder = () => {
+
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
+    let date = new Date();
+
     let {
       startingStore: {order, addOrder, editToCart},
     } = this.props;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     let currentDate = new Date();
+    order.setProperty('orderID',`${getHash(date.getFullYear())}-${ Math.floor(1000 + Math.random() * 9000)}`)
     order.setProperty('modeOfPayment', 'COD');
-    order.setProperty('orderDate', currentDate);
+    order.setProperty('orderDate', moment().format('MMM/DD/YYYY'));
     order.setProperty('orderItems', this.state.selected);
     order.setProperty('orderStatus', 'Pending');
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
+    order.setProperty('artworkPaymentAmount',this.state.totalPrice)
     addOrder();
     if (this.state.selected.length > 1) {
       this.state.selected.map((item) => {
@@ -109,12 +125,12 @@ class OrderTab extends Component {
           className='needs-validation animated zoomIn'
           onSubmit={this.submitHandler}
         >
-          <div className='cartord'>
+          <div className='cartord' style={{border:'1px solid #C8C8C8',marginTop:'16px'}}>
             {listOfUserCart.map((item, indexes) => {
               if (listOfUserCart.length > 0) {
                 return (
-                  <MDBRow className='artlistorder'>
-                    <MDBCol md='1'>
+                  <MDBRow className='artlistorder' >
+                    <MDBCol md='1' >
                       {item.artworkQuantity !== '' ? (
                         <MDBInput
                           onChange={(data) => {
@@ -242,7 +258,7 @@ class OrderTab extends Component {
                         this.addOrder();
                       }}
                     >
-                      Checkout
+                      Checkouts
                     </MDBBtn>
                   </div>
                 </MDBCol>

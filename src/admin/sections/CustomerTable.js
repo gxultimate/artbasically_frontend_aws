@@ -49,7 +49,7 @@ class CustomerTable extends Component {
       startingStore: {listOfUsers},
     } = this.props;
     let listOfCustomers = listOfUsers.filter((artist) => {
-      if (artist.accessType !== 'Artist' && artist.accessType !== 'Admin') {
+      if (artist.accessType === 'Standard') {
         return artist;
       }
     });
@@ -77,48 +77,32 @@ class CustomerTable extends Component {
               <MDBTable hover className='tablescroll'>
                 <MDBTableHead color='blue-grey lighten-4'>
                   <tr>
-                    <th>Profile</th>
-                    <th>ID</th>
-                    <th>Email Address</th>
-                    <th>Prefix</th>
+                   
+                  
+                
+                  <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Email Address</th>
                     <th>Contact Number</th>
-                    <th>Followers</th>
-                    <th>Points</th>
-                    <th>Full Address</th>
-                    <th>Company / Institution</th>
-                    <th>Documents</th>
-                    <th>Following Theme</th>
-                    <th>Following Style</th>
+                    <th>Address</th>
+                 
                     <th>Action</th>
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
                   {listOfCustomers.reverse().map((data) => (
                     <tr>
-                      <td>
-                        <div className='prof'>
-                          <img src={data.accImg} alt='' />
-                        </div>
-                      </td>
-                      <td>{data.accID}</td>
-                      <td>{data.accEmailAddress}</td>
-                      <td>{data.accSuffix}</td>
+                    
+                      
+                  
+                    <td>{data.accID}</td>
                       <td>{data.accFname}</td>
                       <td>{data.accLname}</td>
+                      <td>{data.accEmailAddress}</td>
                       <td>{data.accContact}</td>
-                      <td>{data.accFollowers}</td>
-                      <td>{data.accPoints}</td>
                       <td>{data.accAddress}</td>
-                      <td>{data.accInstitution}</td>
-                      <td>
-                        <div className='docs'>
-                          <img src={data.acc_Documents} alt='' />
-                        </div>
-                      </td>
-                      <td>{themeType(data.accCategories)}</td>
-                      <td>{themeType(data.accStyles)}</td>
+                      
                       <td>
                         <EditAcc data={data} />
                       </td>

@@ -20,7 +20,7 @@ class ViewCart extends Component {
 
   render() {
     let {
-      startingStore: { listOfUserCart, },
+      startingStore: {account, listOfUserCart, getToCart},
     } = this.props;
 
     let totalPrice = listOfUserCart.reduce(

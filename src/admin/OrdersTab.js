@@ -11,7 +11,7 @@ import {
 import OrderTable from './sections/OrderTable';
 import PendingOrderTable from './sections/PendingOrderTable';
 
-export class OrdersTab extends Component {
+class OrdersTab extends Component {
   render() {
     return (
       <div>
@@ -44,6 +44,7 @@ export class OrdersTab extends Component {
             </MDBCardBody>
           </MDBCard>
         </div>
+      
         <PendingOrderTable />
         <OrderTable />
       </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
+import {MDBInput, MDBModal, MDBModalHeader, MDBBtn,MDBNavLink} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../components/FbLogin';
@@ -67,10 +67,7 @@ class NavLogin extends Component {
           success();
         }, 200);
         this.props.history.push('/Home');
-      } else if 
-      // (typeof res === 'string')
-      ( res === 4)
-       {
+      } else if (typeof res === 'string') {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -80,7 +77,7 @@ class NavLogin extends Component {
         setTimeout(() => {
           success();
         }, 200);
-        this.props.history.push(`/Home`);
+        this.props.history.push(`/CProfile/${res}`);
       } else {
         const success = () => {
           message
@@ -107,9 +104,9 @@ class NavLogin extends Component {
 
     return (
       <div className='btnmodal btnmodalnav'>
-        <MDBBtn onClick={this.toggle(1)} color='#fff' className='navlogin'>
-          Hello, Sign In
-        </MDBBtn>
+        <MDBNavLink onClick={this.toggle(1)} to='' className='inlinelink rborder btnYellow navbtn'>
+        Post, Basically
+        </MDBNavLink>
         <MDBModal
           isOpen={this.state.modal1}
           toggle={this.toggle(1)}
@@ -123,7 +120,6 @@ class NavLogin extends Component {
               onSubmit={this.submitHandler}
             >
               <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
-              <h3>LOGIN</h3>
               <div className='adloginpt clearfix'>
                 <MDBInput
                   type='email'
@@ -173,10 +169,10 @@ class NavLogin extends Component {
             </form>
             <FbLogin />
             <GoogleLogin />
-            {/* <p className='reghere'>
+            <p className='reghere'>
               Don't have an Account?{' '}
               <a href='/UserRegistration'>Register Here.</a>
-            </p> */}
+            </p>
           </div>
         </MDBModal>
       </div>

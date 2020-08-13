@@ -104,11 +104,11 @@ class AddCat extends Component {
         <div style={{float: 'left'}}>
           <MDBBtn onClick={this.toggle(1)} color='transparent'>
             <MDBIcon icon='plus-circle' size='2x' />
-            ADD ART THEME
+            ADD THEME
           </MDBBtn>
           <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered>
             <MDBModalHeader toggle={this.toggle(1)}>
-              ADD ART THEME
+              ADD THEME
             </MDBModalHeader>
             <MDBModalBody className='adminmodalbody'>
               <form onSubmit={this.submitHandler} className='formbtn'>

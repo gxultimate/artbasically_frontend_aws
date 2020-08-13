@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import Login from '../components/Login';
 import Navbar from '../components/Navbar';
 
-export class Landing extends Component {
+ class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {

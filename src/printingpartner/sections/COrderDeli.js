@@ -32,7 +32,7 @@ class CustomerTable extends Component {
         src += img[0];
       }
     });
-    console.log(this.state.img, 'sdsdsds');
+    
     return src;
   };
 
@@ -40,7 +40,7 @@ class CustomerTable extends Component {
     let {
       startingStore: {listOfOrders, listOfUsers},
     } = this.props;
-    console.log(listOfOrders, 'taeeeee');
+   
     let listOfOrderDelivery = listOfOrders.filter((Delivery) => {
       if (Delivery.orderStatus === 'Delivery') {
         return Delivery;

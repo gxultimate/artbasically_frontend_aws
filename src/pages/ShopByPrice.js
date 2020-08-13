@@ -95,39 +95,9 @@ export class Artworks extends Component {
           <div className='aside'>
             <div className='filter'>
               <div className='filter'>
-                <h4>Search by Filter</h4>
+               
                 <form>
-                  <h5>Category</h5>
-                  <ul>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='anycat'
-                        onChange={() => {
-                          this.setCategories('none');
-                        }}
-                      />
-                      <label class='custom-control-label' for='anycat'>
-                        Any
-                      </label>
-                    </li>
-                    {categoryList.map((cat) => (
-                      <li class='custom-control custom-checkbox'>
-                        <input
-                          type='checkbox'
-                          class='custom-control-input'
-                          id={cat}
-                          onChange={() => {
-                            this.setCategories(cat);
-                          }}
-                        />
-                        <label class='custom-control-label' for={cat}>
-                          {cat}
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
+         
 
                   <h5>Price</h5>
                   <ul>

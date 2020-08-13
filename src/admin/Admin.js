@@ -30,6 +30,14 @@ class Admin extends Component {
     collapseID: '',
   };
 
+  componentDidMount(){
+    let logged = JSON.parse(sessionStorage.getItem('userData'))
+
+    if(logged === null || logged === undefined){
+      this.props.history.push('/Admin')
+    }
+  }
+
   toggleCollapse = (collapseID) => () => {
     this.setState((prevState) => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : '',
@@ -60,14 +68,21 @@ class Admin extends Component {
     }
   };
 
+
+
   render() {
+    function  logout() {
+      sessionStorage.clear();
+      window.location.href = '/Admin';
+  }
     return (
       <div>
         <div className='admin'>
           <MDBNavbar className='position-fixed' dark expand='md'>
             <MDBNav className='topnav'>
               <a href='/Admin' className='logo-wrapper ablogo'>
-                <img alt='MDB React Logo' className='img-fluid' src={logo} />
+                <img alt='MDB React Logo' className='img-fluid' src={logo} />{' '}
+                <p>ADMIN</p>
               </a>
               <div className='topcon'>
                 {/* <MDBNavItem>
@@ -78,7 +93,7 @@ class Admin extends Component {
                 </MDBNavItem>
                 <MDBNavItem>
                   <MDBBtn
-                    onClick={() => this.props.history.push('/Admin')}
+                    onClick={() => logout()}
                     color='transparent'
                     className='btnYellow logout'
                   >
@@ -196,7 +211,7 @@ class Admin extends Component {
           </MDBTabContent>
         </div>
 
-        <MDBContainer className='notif'>
+        {/* <MDBContainer className='notif'> */}
           {/* <MDBNotification
             show
             fade
@@ -205,7 +220,7 @@ class Admin extends Component {
             message="Jane: See? Just like this."
             text="just now"
           /> */}
-          <MDBNotification
+          {/* <MDBNotification
             show
             fade
             iconClassName='yell'
@@ -223,7 +238,7 @@ class Admin extends Component {
             message='New art submission'
             text='2 seconds ago'
           />
-        </MDBContainer>
+        </MDBContainer> */}
       </div>
     );
   }

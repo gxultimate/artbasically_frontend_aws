@@ -107,12 +107,12 @@ class ArtworkTable extends Component {
                     <th>Title</th>
                     <th className='showmore'>Description</th>
                     <th>Artist</th>
-                    <th>Dimension</th>
-                    <th>Year</th>
+                   
+                   
                     <th>Themes</th>
-                    <th>Style</th>
-                    <th>Price</th>
-                    <th>Availability</th>
+                    <th>Year</th>
+               
+                 
                     <th className='act'>Actions</th>
                   </tr>
                 </MDBTableHead>
@@ -135,15 +135,15 @@ class ArtworkTable extends Component {
                         </ShowMoreText>
                       </td>
                       <td>{data.artistName}</td>
-                      <td>{data.artDimension}</td>
-                      <td>{data.artworkDateCreated}</td>
+                     
+                   
                       {/* {data.catType.map(type => <td>{type}</td>)} */}
                       {/* {data.styleType.map(type => <td>{type}</td>)} */}
-                      <td>{themeType(data.artStyle)}</td>
+                    
                       <td>{themeType(data.artTheme)}</td>
-                      {/* <td>{data.styleType}</td> */}
-                      <td>{data.artPrice}</td>
-                      <td>{data.artType}</td>
+                      <td>{data.artworkDateCreated}</td>
+                
+                    
                       <td className='actions'>
                         <ViewImage data={data.artworkImg} />
                         <EditArt data={data} />
