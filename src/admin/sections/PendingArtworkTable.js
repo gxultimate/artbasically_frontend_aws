@@ -97,10 +97,12 @@ class PendingArtworkTable extends Component {
                     <th>Title</th>
                     <th className='showmore'>Description</th>
                     <th>Artist</th>
-                   
+                    <th>Dimension</th>
+                    <th>Year</th>
+                    <th>Themes</th>
                     <th>Style</th>
                     <th>Price</th>
-                  
+                    <th>Availability</th>
                     <th className='act'>Actions</th>
                   </tr>
                 </MDBTableHead>
@@ -123,14 +125,15 @@ class PendingArtworkTable extends Component {
                         </ShowMoreText>
                       </td>
                       <td>{data.artistName}</td>
-                 
+                      <td>{data.artDimension}</td>
+                      <td>{data.artworkDateCreated}</td>
                       {/* {data.catType.map(type => <td>{type}</td>)} */}
                       {/* {data.styleType.map(type => <td>{type}</td>)} */}
                       <td>{themeType(data.artStyle)}</td>
-               
+                      <td>{themeType(data.artTheme)}</td>
                       {/* <td>{data.styleType}</td> */}
                       <td>{data.artPrice}</td>
-                     
+                      <td>{data.artType}</td>
                       <td className='artworkactions'>
                         <div className='actionsIcons'>
                           <ViewImage data={data.artworkImg} />

@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import Cart from './Cart';
 import notify from '../components/Notif';
-import moment from 'moment'
 class AddToBag extends Component {
   state = {
     modal1: false,
@@ -89,30 +88,16 @@ class AddToBag extends Component {
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     let currentDate = new Date();
 
-    
-    function getHash(input){
-      var hash = 0, len = input.length;
-      for (var i = 0; i < len; i++) {
-        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
-        hash |= 0; // to 32bit integer
-      }
-    
-            
-      return hash;
-    }
-    let date = new Date();
-
     order.setProperty(
       'orderID',
-      `${getHash(date.getFullYear())}-${Math.floor(1000 + Math.random() * 9000)}`
+      `${this.getHash('order')}-${Math.floor(1000 + Math.random() * 9000)}`
     );
     order.setProperty('modeOfPayment', 'COD');
-    order.setProperty('orderDate', moment().format('MMM/DD/YYYY'));
+    order.setProperty('orderDate', currentDate);
     order.setProperty('orderItems', this.state.selected);
     order.setProperty('orderStatus', 'Pending');
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
-    order.setProperty('artworkPaymentAmount',this.state.totalPrice)
     addOrder();
   };
 

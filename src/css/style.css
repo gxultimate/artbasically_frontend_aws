@@ -598,7 +598,6 @@ textarea {
 .modalform {
   /* width: 100%; */
   max-width: 600px;
-  padding: 20px;
 }
 
 .modalbtn {
@@ -1272,16 +1271,6 @@ h4 {
 .footer {
   background-color: #231f20;
   padding: 0 40px;
-  
-}
-.footerdiv {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  margin-top: 50px;
-  text-align: center;
-
 }
 
 .footer .navfoot {

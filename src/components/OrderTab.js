@@ -1,20 +1,18 @@
 import {
-  MDBCol,
+  MDBBtn, MDBCol,
   MDBIcon,
   MDBNav,
   MDBNavItem,
   MDBNavLink,
   MDBRow,
   MDBTabContent,
-  MDBTabPane,
-  MDBBtn,
+  MDBTabPane
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import OrderDetails from './OrderDetails';
-import art from '../images/artworks/art1.png';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Cart from './Cart';
+import OrderDetails from './OrderDetails';
 
 class OrderTab extends Component {
   state = {
@@ -146,15 +144,15 @@ class OrderTab extends Component {
 
         <MDBTabContent activeItem={this.state.activeItem}>
           <MDBTabPane tabId='1' role='tabpanel' className='cartab'>
-            <div className='artlist' >
+            <div className='artlist'>
               <Cart cartData={listOfSingleArtwork[0]} />
             </div>
           </MDBTabPane>
 
           <MDBTabPane tabId='2' role='tabpanel' className='tabs'>
-            <div className='artlist pending '>
+            <div className='artlist pending'>
               {pendingOrders.reverse().map((items, indexes) => (
-                <div className='cartord ' style={{border:'1px solid #C8C8C8',marginTop:'16px'}}>
+                <div className='cartord'>
                   {items !== undefined
                     ? items.orderItems.map((item) => {
                         return (
@@ -240,17 +238,14 @@ class OrderTab extends Component {
                         TOTAL
                       </MDBCol>
                       <MDBCol md='7' className='total'>
-                        
+                        &#8369;
                         {
-                          (+items.orderItems.reduce(
+                          +items.orderItems.reduce(
                             (a, b) =>
                               parseFloat(a) +
                               parseFloat(b.artworkPaymentAmount),
                             0
-                          )).toLocaleString('en-GB', {
-                            style: 'currency',
-                            currency: 'PHP',
-                          })
+                          )
                         }
                       </MDBCol>
                       <MDBCol>
@@ -281,7 +276,7 @@ class OrderTab extends Component {
           <MDBTabPane tabId='3' role='tabpanel' className='tabs complete'>
             <div className='artlist'>
               {listOfOrderReceived.reverse().map((items, indexes) => (
-                <div className='cartord' style={{border:'1px solid #C8C8C8',marginTop:'16px'}}>
+                <div className='cartord'>
                   {items !== undefined
                     ? items.orderItems.map((item) => {
                         return (
@@ -408,7 +403,7 @@ class OrderTab extends Component {
           <MDBTabPane tabId='4' role='tabpanel' className='tabs'>
             <div className='artlist cancelled'>
               {listOfOrderCancelled.reverse().map((items, indexes) => (
-                <div className='cartord' style={{border:'1px solid #C8C8C8',marginTop:'16px'}}>
+                <div className='cartord'>
                   {items !== undefined
                     ? items.orderItems.map((item) => {
                         return (
@@ -532,7 +527,7 @@ class OrderTab extends Component {
           <MDBTabPane tabId='5' role='tabpanel' className='tabs'>
             <div className='artlist history'>
               {listofUserOrder.reverse().map((items, indexes) => (
-                <div className='cartord' style={{border:'1px solid #C8C8C8',marginTop:'16px'}}>
+                <div className='cartord'>
                   {items !== undefined
                     ? items.orderItems.map((item) => {
                         return (

@@ -19,7 +19,7 @@ class DownloadImage extends Component {
       <div>
         <a href='#!' onClick={this.toggle(14)} className='viewimage approve'>
           {' '}
-          Zoom Image
+          Download Image
           {/* <MDBIcon icon="eye" /> */}
         </a>
         <MDBModal

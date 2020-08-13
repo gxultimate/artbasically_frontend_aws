@@ -33,18 +33,9 @@ export class Homepage extends Component {
   }
 
   componentDidMount() {
-
-
-    let logged = JSON.parse(sessionStorage.getItem('userData'))
-
-    if(logged === null || logged === undefined){
-      this.props.history.push('/')
-    }
-
-
     let {
       startingStore: {
-        getArtists,
+        // getArtists,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
@@ -55,7 +46,7 @@ export class Homepage extends Component {
       getArtistFollowArtwork();
       getEmergingArtistArtwork();
       getArtworkInfo();
-      getArtists();
+      // getArtists();
     }
   }
 
@@ -426,7 +417,7 @@ export class Homepage extends Component {
             message="Jane: See? Just like this."
             text="just now"
           /> */}
-          {/* <MDBNotification
+          <MDBNotification
             show
             fade
             iconClassName='yell'
@@ -443,7 +434,7 @@ export class Homepage extends Component {
             title='Notification'
             message='New art submission'
             text='2 seconds ago'
-          /> */}
+          />
         </MDBContainer>
         <Footer />
       </div>

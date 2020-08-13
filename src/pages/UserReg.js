@@ -116,8 +116,60 @@ export class UserReg extends Component {
               <p>Fill up the form and start sharing your artworks!</p>
             </div>
             <form onSubmit={this.submitHandler} className='regform formbtn'>
-            
-          
+              <MDBInput
+                label='Email Address'
+                type='email'
+                onChange={(accEmailAddress) =>
+                  account.setProperty(
+                    'accEmailAddress',
+                    accEmailAddress.target.value
+                  )
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a valid email.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Password'
+                type='password'
+                onChange={(password) =>
+                  account.setProperty('password', password.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a valid password.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Confirm Password'
+                type='password'
+                onChange={(confirmPassword) =>
+                  account.setProperty(
+                    'confirmPassword',
+                    confirmPassword.target.value
+                  )
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a valid password.
+                </div>
+              </MDBInput>
+              <select
+                className='prefix'
+                placeholder='Prefix'
+                onChange={(accSuffix) =>
+                  account.setProperty('accSuffix', accSuffix.target.value)
+                }
+              >
+                <option> Prefix </option>
+                <option value='mr'> MR. </option>
+                <option value='ms'> MS. </option>
+                <option value='mrs'> MRS. </option>
+              </select>
               <MDBInput
                 label='First Name'
                 type='text'
@@ -154,7 +206,22 @@ export class UserReg extends Component {
                   Please provide a Birth Year.
                 </div>
               </MDBInput>
-           
+              {/* <MDBInput
+                type='textarea'
+                label='Biography'
+                rows='3'
+                onChange={(artistDescription) =>
+                  account.setProperty(
+                    'artistDescription',
+                    artistDescription.target.value
+                  )
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a short Bio.
+                </div>
+              </MDBInput> */}
               <MDBInput
                 label='Contact Number'
                 type='text'
@@ -200,8 +267,8 @@ export class UserReg extends Component {
                 }
               >
                 <option> User Type </option>
-                <option value='Standard'> Art Gallery </option>
-                <option value='Artist'> Artist </option>
+                <option value='Standard'> Standard </option>
+                <option value='Curator'> Curator </option>
                 {/* <option value='Admin'> Admin </option> */}
               </select>
               <Multiselect
@@ -222,50 +289,6 @@ export class UserReg extends Component {
                 displayValue='styleType'
                 // onChange={styleType => artwork.setProperty("styleType", styleType.target.value)}
               />
-
-              <MDBInput
-                label='Email Address'
-                type='email'
-                onChange={(accEmailAddress) =>
-                  account.setProperty(
-                    'accEmailAddress',
-                    accEmailAddress.target.value
-                  )
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a valid email.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Password'
-                type='password'
-                onChange={(password) =>
-                  account.setProperty('password', password.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a valid password.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Confirm Password'
-                type='password'
-                onChange={(confirmPassword) =>
-                  account.setProperty(
-                    'confirmPassword',
-                    confirmPassword.target.value
-                  )
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a valid password.
-                </div>
-              </MDBInput>
-
               <div className='uploadreq clearfix'>
                 <input type='file' name='file' onChange={this.onFileChange} />
                 <p className='req'>

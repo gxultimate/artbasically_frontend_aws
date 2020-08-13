@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
 import {
-  MDBContainer,
-  MDBBtn,
-  MDBModal,
-  MDBModalBody,
   MDBCol,
-  MDBIcon,
+  MDBIcon, MDBModal,
+  MDBModalBody
 } from 'mdbreact';
+import React, { Component } from 'react';
 
 export class Search extends Component {
   state = {

@@ -6,15 +6,6 @@ ol {
   width: 100%;
   max-width: 200px;
   padding: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.admin .ablogo p {
-  font-size: 24px;
-  padding: 0 0 0 10px;
-  opacity: 0.2;
-  font-weight: bold;
 }
 
 .admincon {

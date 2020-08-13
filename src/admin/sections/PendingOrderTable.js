@@ -61,20 +61,20 @@ class PendingOrderTable extends Component {
     };
 
     return (
-      <MDBRow className='mb-5'>
+      <MDBRow className='mb-4'>
         <MDBCol md='12'>
           <MDBCard>
             <MDBCardBody>
               <h3>Pending Order List</h3>
-              <MDBTable hover className='tablescroll' autoWidth>
+              <MDBTable hover className='tablescroll'>
                 <MDBTableHead color='blue-grey lighten-4'>
                   <tr>
-                    <th  >Order ID </th>
-             
+                    <th>Order ID </th>
+                    <th>Account ID </th>
                     <th>Ordered by</th>
                     <th>Order Date</th>
                     <th>Total Amount</th>
-              
+                    <th>Order Status</th>
                     <th>Payment Status</th>
                     <th>Shipping Method</th>
                     <th>Action</th>
@@ -83,12 +83,12 @@ class PendingOrderTable extends Component {
                 <MDBTableBody>
                   {listOfPending.reverse().map((data) => (
                     <tr>
-                      <td > {data.orderID} </td>
-               
+                      <td> {data.orderID} </td>
+                      <td> {data.accID} </td>
                       <td> {findName(data.accID)} </td>
                       <td> {data.orderDate} </td>
                       <td> {findTotal(data.orderItems)} </td>
-                     
+                      <td> {data.orderStatus} </td>
                       <td> {data.paymentStatus} </td>
                       <td> {data.modeOfPayment} </td>
                       <td className='oactions'>

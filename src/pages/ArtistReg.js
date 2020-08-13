@@ -58,7 +58,7 @@ export class ArtistReg extends Component {
     formData.append('artworkImg', this.state.selectedFile);
     formData.append('type', 'artist');
     upload(formData, true);
-    account.setProperty('acc_Status', 'pending');
+
     account.setProperty('accessType', 'Artist');
     account.setProperty('accID', this.getUniqueID());
 
@@ -80,10 +80,6 @@ export class ArtistReg extends Component {
     }, 1000);
     this.props.history.push('/RegVerify');
     // this.onSubmit();
-
-    setTimeout(() => {
-      this.props.history.push('/');
-    }, 4000);
   };
 
   changeHandler = (event) => {
@@ -107,112 +103,7 @@ export class ArtistReg extends Component {
               <p>Fill up the form and start sharing your artworks!</p>
             </div>
             <form onSubmit={this.submitHandler} className='regform formbtn'>
-         
-              {/* <select
-                className='prefix'
-                placeholder='Prefix'
-                onChange={(accSuffix) =>
-                  account.setProperty('accSuffix', accSuffix.target.value)
-                }
-              >
-                <option> Prefix </option>
-                <option value='mr'> MR. </option>
-                <option value='ms'> MS. </option>
-                <option value='mrs'> MRS. </option>
-              </select> */}
               <MDBInput
-                label='First Name'
-                type='text'
-                onChange={(accFname) =>
-                  account.setProperty('accFname', accFname.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a First Name.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Last Name'
-                type='text'
-                onChange={(accLname) =>
-                  account.setProperty('accLname', accLname.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a Last Name.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Birth Year'
-                type='number'
-                onChange={(accBday) =>
-                  account.setProperty('accBday', accBday.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a Birth Year.
-                </div>
-              </MDBInput>
-              <MDBInput
-                type='textarea'
-                label='Biography'
-                rows='3'
-                onChange={(artistDescription) =>
-                  account.setProperty(
-                    'artistDescription',
-                    artistDescription.target.value
-                  )
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a short Bio.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Contact Number'
-                type='text'
-                maxlength='11'
-                onChange={(accContact) =>
-                  account.setProperty('accContact', accContact.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a Contact Number.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Institution / Company'
-                type='text'
-                onChange={(accInstitution) =>
-                  account.setProperty(
-                    'accInstitution',
-                    accInstitution.target.value
-                  )
-                }
-              >
-                <div className='invalid-feedback'>
-                  Please provide a Institution / Company.
-                </div>
-              </MDBInput>
-              <MDBInput
-                label='Full Address'
-                type='text'
-                onChange={(accAddress) =>
-                  account.setProperty('accAddress', accAddress.target.value)
-                }
-                required
-              >
-                <div className='invalid-feedback'>
-                  Please provide a Address.
-                </div>
-              </MDBInput>
-
-                   <MDBInput
                 label='Email Address'
                 type='email'
                 onChange={(accEmailAddress) =>
@@ -252,6 +143,108 @@ export class ArtistReg extends Component {
               >
                 <div className='invalid-feedback'>
                   Please provide a valid password.
+                </div>
+              </MDBInput>
+              <select
+                className='prefix'
+                placeholder='Prefix'
+                onChange={(accSuffix) =>
+                  account.setProperty('accSuffix', accSuffix.target.value)
+                }
+              >
+                <option> Prefix </option>
+                <option value='mr'> MR. </option>
+                <option value='ms'> MS. </option>
+                <option value='mrs'> MRS. </option>
+              </select>
+              <MDBInput
+                label='First Name'
+                type='text'
+                onChange={(accFname) =>
+                  account.setProperty('accFname', accFname.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a First Name.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Last Name'
+                type='text'
+                onChange={(accLname) =>
+                  account.setProperty('accLname', accLname.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a Last Name.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Birth Year'
+                type='text'
+                onChange={(accBday) =>
+                  account.setProperty('accBday', accBday.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a Birth Year.
+                </div>
+              </MDBInput>
+              <MDBInput
+                type='textarea'
+                label='Biography'
+                rows='3'
+                onChange={(artistDescription) =>
+                  account.setProperty(
+                    'artistDescription',
+                    artistDescription.target.value
+                  )
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a short Bio.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Contact Number'
+                type='text'
+                onChange={(accContact) =>
+                  account.setProperty('accContact', accContact.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a Contact Number.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Institution / Company'
+                type='text'
+                onChange={(accInstitution) =>
+                  account.setProperty(
+                    'accInstitution',
+                    accInstitution.target.value
+                  )
+                }
+              >
+                <div className='invalid-feedback'>
+                  Please provide a Institution / Company.
+                </div>
+              </MDBInput>
+              <MDBInput
+                label='Full Address'
+                type='text'
+                onChange={(accAddress) =>
+                  account.setProperty('accAddress', accAddress.target.value)
+                }
+                required
+              >
+                <div className='invalid-feedback'>
+                  Please provide a Address.
                 </div>
               </MDBInput>
               <div className='uploadreq clearfix'>

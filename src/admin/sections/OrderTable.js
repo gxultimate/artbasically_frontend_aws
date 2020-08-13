@@ -39,11 +39,11 @@ class OrderTable extends Component {
     let {
       startingStore: {listOfOrders, editOrder, listOfUsers},
     } = this.props;
-    let Approved = listOfOrders.filter((Pending) => {
-      if (Pending.orderStatus === 'Pending Print') {
-        return Pending;
-      }
-    });
+    // let listOfPending = listOfOrders.filter((Pending) => {
+    //   if (Pending.orderStatus === 'Pending') {
+    //     return Pending;
+    //   }
+    // });
 
     let findName = (accID) => {
       let aw = listOfUsers.map((user) => {
@@ -70,25 +70,27 @@ class OrderTable extends Component {
                 <MDBTableHead color='blue-grey lighten-4'>
                   <tr>
                     <th>Order ID </th>
-                  
+                    <th>Account ID </th>
                     <th>Ordered by</th>
                     <th>Order Date</th>
                     <th>Total Amount</th>
                     <th>Order Status</th>
                     <th>Payment Status</th>
+                    <th>Shipping Method</th>
                     <th>Action</th>
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
-                  {Approved.reverse().map((data) => (
+                  {listOfOrders.reverse().map((data) => (
                     <tr>
                       <td> {data.orderID} </td>
-                   
+                      <td> {data.accID} </td>
                       <td> {findName(data.accID)} </td>
                       <td> {data.orderDate} </td>
                       <td> {findTotal(data.orderItems)} </td>
                       <td> {data.orderStatus} </td>
                       <td> {data.paymentStatus} </td>
+                      <td> {data.modeOfPayment} </td>
                       <td className='oactions'>
                         <ViewOrderDetails data={data.orderItems} />
                         {/* <span className='btncon'>

@@ -110,11 +110,11 @@ class AddUser extends Component {
       <MDBContainer>
         <MDBBtn onClick={this.toggle(1)} color='transparent'>
           <MDBIcon icon='plus-circle' size='2x' />
-          ADD USER 
+          ADD USER ACCOUNT
         </MDBBtn>
         <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered>
           <MDBModalHeader toggle={this.toggle(1)}>
-            ADD USER 
+            ADD USER ACCOUNT
           </MDBModalHeader>
           <MDBModalBody className='adminmodalbody'>
             <form onSubmit={this.submitHandler} className='formbtn'>

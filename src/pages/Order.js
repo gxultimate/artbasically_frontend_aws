@@ -22,9 +22,7 @@ class Order extends Component {
             </div>
           </div>
         </div>
-        <div >
         <Footer />
-        </div>
       </div>
     );
   }
