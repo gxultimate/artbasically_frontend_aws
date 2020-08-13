@@ -3,8 +3,7 @@ import { action, decorate } from 'mobx';
 
 class Api {
 	api = axios.create({
-		baseURL: '/api',
-		// baseURL: 'http://localhost:4000/'
+		baseURL: '/api'
 	});
 
 	// ACCOUNT
