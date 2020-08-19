@@ -169,10 +169,10 @@ class NavLogin extends Component {
             </form>
             <FbLogin />
             <GoogleLogin />
-            <p className='reghere'>
+            {/* <p className='reghere'>
               Don't have an Account?{' '}
               <a href='/UserRegistration'>Register Here.</a>
-            </p>
+            </p> */}
           </div>
         </MDBModal>
       </div>

@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import Cart from './Cart';
 import notify from '../components/Notif';
+import moment from 'moment'
 class AddToBag extends Component {
   state = {
     modal1: false,
@@ -24,7 +25,7 @@ class AddToBag extends Component {
       startingStore: {cart, addToCart},
     } = this.props;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
-    let currentDate = new Date();
+   
 
     cart.setProperty('artistName', this.props.cartData.artistName);
     cart.setProperty('artworkName', this.props.cartData.artName);
@@ -36,7 +37,7 @@ class AddToBag extends Component {
         parseFloat(cart.artworkQuantity)
     );
     cart.setProperty('accID', userData.accID);
-    cart.setProperty('dateOfTransaction', currentDate);
+    cart.setProperty('dateOfTransaction', moment().format('MMM/DD/YYYY'))
     if (cart.artworkQuantity !== '' || cart.artworkQuantity !== null) {
       notify('success', 'Artwork added successfully');
       addToCart();
@@ -86,18 +87,32 @@ class AddToBag extends Component {
       startingStore: {order, addOrder},
     } = this.props;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
-    let currentDate = new Date();
+   
+
+    
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
+    let date = new Date();
 
     order.setProperty(
       'orderID',
-      `${this.getHash('order')}-${Math.floor(1000 + Math.random() * 9000)}`
+      `${getHash(date.getFullYear())}-${Math.floor(1000 + Math.random() * 9000)}`
     );
     order.setProperty('modeOfPayment', 'COD');
-    order.setProperty('orderDate', currentDate);
+    order.setProperty('orderDate', moment().format('MMM/DD/YYYY'));
     order.setProperty('orderItems', this.state.selected);
     order.setProperty('orderStatus', 'Pending');
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
+    order.setProperty('artworkPaymentAmount',this.state.totalPrice)
     addOrder();
   };
 

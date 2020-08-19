@@ -3,9 +3,15 @@ import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../components/FbLogin';
-import GoogleLogin from '../components/GoogleLogin';
+import GgLogin from '../components/GoogleLogin/';
 import logo from '../images/adminlogo.png';
 import {withRouter} from 'react-router-dom';
+
+
+import './../css/style.css';
+import './../css/normalize.css';
+import './../css/printart.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 class NavLogin extends Component {
   state = {
@@ -67,7 +73,10 @@ class NavLogin extends Component {
           success();
         }, 200);
         this.props.history.push('/Home');
-      } else if (typeof res === 'string') {
+      } else if 
+      // (typeof res === 'string')
+      ( res === 4)
+       {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -77,7 +86,7 @@ class NavLogin extends Component {
         setTimeout(() => {
           success();
         }, 200);
-        this.props.history.push(`/CProfile/${res}`);
+        this.props.history.push(`/Home`);
       } else {
         const success = () => {
           message
@@ -120,6 +129,7 @@ class NavLogin extends Component {
               onSubmit={this.submitHandler}
             >
               <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
+              <h3>LOGIN</h3>
               <div className='adloginpt clearfix'>
                 <MDBInput
                   type='email'
@@ -168,11 +178,11 @@ class NavLogin extends Component {
               </MDBBtn>
             </form>
             <FbLogin />
-            <GoogleLogin />
-            <p className='reghere'>
+            <GgLogin />
+            {/* <p className='reghere'>
               Don't have an Account?{' '}
               <a href='/UserRegistration'>Register Here.</a>
-            </p>
+            </p> */}
           </div>
         </MDBModal>
       </div>

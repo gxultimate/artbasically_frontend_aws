@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLoginBtn from 'react-facebook-login';
+import {inject,observer} from 'mobx-react'
+import {message} from 'antd';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
-export default class Facebook extends Component {
+
+class FbLogin extends Component {
+
   state = {
     isLoggedIn: false,
     userID: '',
@@ -11,15 +16,81 @@ export default class Facebook extends Component {
   };
 
   responseFacebook = (response) => {
-    // console.log(response);
-
+    console.log(response,'ress');
+    if (response.status === undefined || response.status === null || response.status === 'unknown'){
+      console.log('error')
+      }
+  else{
     this.setState({
       isLoggedIn: true,
       userID: response.userID,
       name: response.name,
       email: response.email,
-      // picture: response.picture.data.url,
+      picture: response.picture.data.url,
     });
+    let { startingStore: { addAccount, account ,loginAccount ,getArtists,
+      getArtworkInfo,
+      getEmergingArtistArtwork,
+      getArtistFollowArtwork,listOfUsers} } = this.props;
+      
+    loginAccount().then((res) => {
+     
+      getArtworkInfo();
+      getEmergingArtistArtwork();
+      getArtists();
+      getArtistFollowArtwork(account.accEmailAddress);
+      if (res === true) {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.error('Login Unsuccessful', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 1000);
+        this.props.history.push('/');
+      } else if (res === 2) {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.success('Successfully Login', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push('/Home');
+      } else if 
+      // (typeof res === 'string')
+      ( res === 4)
+       {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.success('Successfully Login', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push(`/Home`);
+      } else {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.error('Login Unsuccessful', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push('/');
+      }
+    });
+
+  }
+    
   };
 
   componentClicked = () => console.log('clicked');
@@ -37,26 +108,28 @@ export default class Facebook extends Component {
             padding: '20px',
           }}
         >
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
+         <div style={{textAlign:'center'}}><img src={this.state.picture} alt={this.state.name} /></div> 
+          <h6>Welcome {this.state.name}</h6>
           Email: {this.state.email}
         </div>
       );
     } else {
       fbContent = (
-        <FacebookLogin
-          appId='3247134108844592'
+        <FacebookLoginBtn
+          appId='216207193165878'
           autoLoad={false}
+          cssClass="LoginFb"
           fields='name,email,picture'
           onClick={this.componentClicked}
           callback={this.responseFacebook}
+          icon={<FacebookIcon className='fbicon' style={{color:'white'}}/>}
         />
       );
     }
 
-    return <div>{fbContent}</div>;
+    return (<div>{fbContent}</div>)
   }
-}
+
 
 // const styles = {
 //   fontFamily: "sans-serif",
@@ -82,3 +155,6 @@ export default class Facebook extends Component {
 // render(<FbLogin />, document.getElementById("root"));
 
 // export default FbLogin;
+}
+
+export default inject('startingStore')(observer(FbLogin))

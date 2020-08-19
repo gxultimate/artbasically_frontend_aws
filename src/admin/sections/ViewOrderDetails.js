@@ -80,10 +80,10 @@ class ViewOrderDetails extends Component {
                       <td>{data.artistName}</td>
                       <td>{data.artworkName}</td>
                       <td>{data.artworkSize}</td>
-                      <td>{data.artworkPaymentAmount}</td>
+                      <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
                       <td>{data.artworkMaterial}</td>
                       <td>{data.artworkFramingOptions}</td>
-                      <td>{data.artPrice}</td>
+                      <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
                       <td>{data.artworkQuantity}</td>
                       <td className='actions'>
                         <DownloadImage data={data.artworkImg} />

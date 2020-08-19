@@ -18,7 +18,6 @@ class Account extends Model {
       password: '',
       username: '',
       accContact: '',
-      accBday: '',
       accImg: undefined,
       accCategories: [],
       accStyles: [],
@@ -53,6 +52,7 @@ class Account extends Model {
 }
 
 decorate(Account, {
+  _id: observable,
   accID: observable,
   accFname: observable,
   accLname: observable,
@@ -66,9 +66,7 @@ decorate(Account, {
   password: observable,
   username: observable,
   accContact: observable,
-  accBday: observable,
   accImg: observable,
-  _id: observable,
   accCategories: observable,
   accStyles: observable,
   dateAdded: observable,

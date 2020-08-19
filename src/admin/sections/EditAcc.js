@@ -160,9 +160,9 @@ class EditAcc extends Component {
                   <MDBInput
                     label='Birth Year'
                     type='text'
-                    valueDefault={this.props.data.accBday}
-                    onChange={(accBday) =>
-                      account.setProperty('accBday', accBday.target.value)
+                    valueDefault={this.props.data.birthYear}
+                    onChange={(birthYear) =>
+                      account.setProperty('birthYear', birthYear.target.value)
                     }
                     required
                   >

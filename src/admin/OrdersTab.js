@@ -10,8 +10,9 @@ import {
 } from 'mdbreact';
 import OrderTable from './sections/OrderTable';
 import PendingOrderTable from './sections/PendingOrderTable';
+import Completed from './sections/CompletedOrder'
 
-export class OrdersTab extends Component {
+class OrdersTab extends Component {
   render() {
     return (
       <div>
@@ -44,8 +45,10 @@ export class OrdersTab extends Component {
             </MDBCardBody>
           </MDBCard>
         </div>
+      
         <PendingOrderTable />
         <OrderTable />
+        <Completed/>
       </div>
     );
   }

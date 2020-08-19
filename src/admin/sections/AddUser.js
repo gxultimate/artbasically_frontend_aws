@@ -95,7 +95,7 @@ class AddUser extends Component {
     } = this.props;
 
     function selectCategory(list, listitem) {
-      console.log(list, listitem, 'category');
+     
       let categorySelected = list.map((cat) => cat.catType);
 
       account.setProperty('accCategories', categorySelected);
@@ -110,11 +110,11 @@ class AddUser extends Component {
       <MDBContainer>
         <MDBBtn onClick={this.toggle(1)} color='transparent'>
           <MDBIcon icon='plus-circle' size='2x' />
-          ADD USER ACCOUNT
+          ADD USER 
         </MDBBtn>
         <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered>
           <MDBModalHeader toggle={this.toggle(1)}>
-            ADD USER ACCOUNT
+            ADD USER 
           </MDBModalHeader>
           <MDBModalBody className='adminmodalbody'>
             <form onSubmit={this.submitHandler} className='formbtn'>
@@ -197,8 +197,8 @@ class AddUser extends Component {
                   <MDBInput
                     label='Birth Year'
                     type='text'
-                    onChange={(accBday) =>
-                      account.setProperty('accBday', accBday.target.value)
+                    onChange={(birthYear) =>
+                      account.setProperty('birthYear', birthYear.target.value)
                     }
                     required
                   >

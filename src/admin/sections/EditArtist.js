@@ -40,7 +40,7 @@ class EditArtist extends Component {
     account.setProperty('password', '');
     account.setProperty('username', '');
     account.setProperty('accContact', '');
-    account.setProperty('accBday', '');
+    account.setProperty('birthYear', '');
     account.setProperty('accImg', undefined);
   };
 
@@ -107,7 +107,7 @@ class EditArtist extends Component {
                         'accEmailAddress',
                         accEmailAddress.target.value
                       );
-                      console.log(account, 'rawrrwowadwasd');
+                     
                     }}
                   >
                     <div className='invalid-feedback'>
@@ -178,9 +178,9 @@ class EditArtist extends Component {
                   <MDBInput
                     label='Birth Year'
                     type='text'
-                    valueDefault={this.props.data.accBday}
-                    onChange={(accBday) =>
-                      account.setProperty('accBday', accBday.target.value)
+                    valueDefault={this.props.data.birthYear}
+                    onChange={(birthYear) =>
+                      account.setProperty('birthYear', birthYear.target.value)
                     }
                   >
                     <div className='invalid-feedback'>

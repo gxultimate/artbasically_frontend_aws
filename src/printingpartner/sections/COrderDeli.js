@@ -32,15 +32,15 @@ class CustomerTable extends Component {
         src += img[0];
       }
     });
-    console.log(this.state.img, 'sdsdsds');
+    
     return src;
   };
 
   render() {
     let {
-      startingStore: {listOfOrders, listOfUsers},
+      startingStore: {listOfOrders,editOrder, listOfUsers},
     } = this.props;
-    console.log(listOfOrders, 'taeeeee');
+   
     let listOfOrderDelivery = listOfOrders.filter((Delivery) => {
       if (Delivery.orderStatus === 'Delivery') {
         return Delivery;
@@ -65,12 +65,12 @@ class CustomerTable extends Component {
               <MDBTable hover className='tablescroll'>
                 <MDBTableHead color='blue-grey lighten-4'>
                   <tr>
-                    <th>Order ID </th>
-                    <th>Account ID </th>
+                    <th>Order ID</th>
+                    <th>Order By</th>
                     <th>Order Date</th>
                     <th>Status</th>
-                    <th>PaymentStatus</th>
-
+                    <th>Payment Status</th>
+                    <th>Payment Method</th>
                     <th className='act'>Actions</th>
                   </tr>
                 </MDBTableHead>
@@ -78,14 +78,38 @@ class CustomerTable extends Component {
                   {listOfOrderDelivery.reverse().map((data) => (
                     <tr>
                       <td>{data.orderID}</td>
-                      <td>{data.accID}</td>
+                    
                       <td> {findName(data.accID)} </td>
                       <td>{data.orderDate}</td>
                       <td>{data.orderStatus}</td>
                       <td>{data.paymentStatus}</td>
-                      <td>
-                        <ViewData data={data.orderItems} />
+                      <td>{data.modeOfPayment}</td>
+                      <td className='oactions'>
+                        <span>
+                          <ViewData data={data.orderItems} />{' '}
+                        </span>
+                        <span className='btncon'>
+                          <a
+                            href='#!'
+                            className='approve'
+                            onClick={() =>
+                              editOrder(data._id, 'Completed', data.accID)
+                            }
+                          >
+                            Done
+                          </a>
+                          <a
+                            href='#!'
+                            className='reject'
+                            onClick={() =>
+                              editOrder(data._id, 'Cancelled', data.accID)
+                            }
+                          >
+                            Cancel
+                          </a>
+                        </span>
                       </td>
+                
                     </tr>
                   ))}
                 </MDBTableBody>

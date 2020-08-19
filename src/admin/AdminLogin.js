@@ -13,38 +13,31 @@ class AdminLogin extends Component {
       startingStore: {loginAccount},
     } = this.props;
     loginAccount().then((res) => {
+
       if (res === true) {
         const success = () => {
           message
-            .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
+            .loading('', 1)
+            .then(() => message.success('Welcome to Art Basically', 3));
         };
 
-        setTimeout(() => {
-          success();
-        }, 200);
-        this.props.history.push('/AdminHome');
-      } else if (res === 3) {
-        const success = () => {
-          message
-            .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
-        };
-
-        setTimeout(() => {
-          success();
-        }, 200);
-        this.props.history.push('/PrintingPartner');
+     
+        
+       setTimeout(()=>
+       success()
+       ,10)
+        this.props.history.push('/AdminHome')
+       
       } else {
         const success = () => {
           message
-            .loading('Signing in..', 1.2)
-            .then(() => message.error('Login Unsuccessful', 1));
+            .loading('Signing in..', 0.5)
+            .then(() => message.error('Email or password is incorrect', 1.5));
         };
 
         setTimeout(() => {
           success();
-        }, 200);
+        }, 100);
         this.props.history.push('/Admin');
       }
     });

@@ -53,10 +53,10 @@ class AddArtwork extends Component {
         console.log(error.message);
       });
 
-    console.log(image.size, 'img');
+ 
 
     this.setState({selectedFile: image});
-    // console.log( image, "Aws")
+    
   }
   onSubmit(e) {
     let {

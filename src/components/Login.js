@@ -3,7 +3,7 @@ import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../components/FbLogin';
-import GoogleLogin from '../components/GoogleLogin';
+import GoogleLogin from './GoogleLogin/index';
 import logo from '../images/adminlogo.png';
 import {withRouter} from 'react-router-dom';
 

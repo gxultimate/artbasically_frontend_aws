@@ -25,7 +25,7 @@ class CategoryTable extends Component {
     let {
       startingStore: {listOfCategories, listOfStyles},
     } = this.props;
-    console.log(listOfStyles, 'oooooo');
+  
     // let listOfCustomers = listOfCategories.filter(artist => {
     //   if (artist.accessType !== "artist") {
     //     return artist;

@@ -38,13 +38,23 @@ class CustomerTable extends Component {
 
   render() {
     let {
-      startingStore: {listOfOrders},
+      startingStore: {listOfOrders,listOfUsers},
     } = this.props;
     let listOfOrderDelivery = listOfOrders.filter((Delivery) => {
-      if (Delivery.orderStatus === 'Received') {
+      if (Delivery.orderStatus === 'Completed') {
         return Delivery;
       }
     });
+
+
+    let findName = (accID) => {
+      let aw = listOfUsers.map((user) => {
+        if (user._id === accID) {
+          return `${user.accFname} ${user.accLname}`;
+        }
+      });
+      return aw;
+    };
 
     return (
       <MDBRow className='mb-4'>
@@ -55,11 +65,12 @@ class CustomerTable extends Component {
               <MDBTable hover className='tablescroll'>
                 <MDBTableHead color='blue-grey lighten-4'>
                   <tr>
-                    <th>Order ID </th>
-                    <th>Account ID </th>
+                  <th>Order ID</th>
+                    <th>Order By</th>
                     <th>Order Date</th>
                     <th>Status</th>
-                    <th>PaymentStatus</th>
+                    <th>Payment Status</th>
+                    <th>Payment Method</th>
 
                     <th className='act'>Actions</th>
                   </tr>
@@ -67,11 +78,13 @@ class CustomerTable extends Component {
                 <MDBTableBody>
                   {listOfOrderDelivery.map((data) => (
                     <tr>
-                      <td>{data.orderID}</td>
-                      <td>{data.accID}</td>
-                      <td>{data.orderDate}</td>
-                      <td>{data.orderStatus}</td>
-                      <td>{data.paymentStatus}</td>
+                         <td>{data.orderID}</td>
+                    
+                    <td> {findName(data.accID)} </td>
+                    <td>{data.orderDate}</td>
+                    <td>{data.orderStatus}</td>
+                    <td>{data.paymentStatus}</td>
+                    <td>{data.modeOfPayment}</td>
 
                       <td>
                         <ViewData data={data.orderItems} />

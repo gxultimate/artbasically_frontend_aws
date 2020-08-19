@@ -74,7 +74,7 @@ class ViewData extends Component {
                     <tr>
                       <td>
                         <img
-                          style={{width: '30px ', height: '20px'}}
+                          style={{width: '100% ', height: 'auto'}}
                           src={data.artworkImg}
                           alt=''
                         />
@@ -83,7 +83,7 @@ class ViewData extends Component {
                       <td> {data.artworkName}</td>
                       <td> {data.dateOfTransaction}</td>
                       <td> {data.artworkSize}</td>
-                      <td> {data.artworkPaymentAmount}</td>
+                      <td> {data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
                       <td>{data.artworkMaterial}</td>
                       <td>{data.artworkFramingOptions}</td>
                       <td>{data.artworkQuantity}</td>

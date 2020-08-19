@@ -49,7 +49,7 @@ class CCancelOrder extends Component {
       startingStore: {listOfOrders, listOfUsers},
     } = this.props;
     let listOfOrderPrintCancelled = listOfOrders.filter((PrintRejected) => {
-      if (PrintRejected.orderStatus === 'PrintRejected') {
+      if (PrintRejected.orderStatus === 'PrintRejected' || PrintRejected.orderStatus === 'Cancelled') {
         return PrintRejected;
       }
     });
