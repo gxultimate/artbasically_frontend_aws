@@ -42,7 +42,7 @@ class FbReg extends Component {
   responseFacebook = (response) => {
     console.log(response,'ress');
 
-    if (response.status === undefined || response.status === null){
+    if (response.email === undefined || response.email === null){
     console.log('error')
     }
 else{
@@ -72,7 +72,7 @@ else{
 
   if (fil === 0 || fil === null){
         account.setProperty('accessType', this.props.user);
-        account.setProperty('acc_Status', 'pending');
+        account.setProperty('acc_Status', 'Pending');
   
         account.setProperty("accEmailAddress", response.email)
         account.setProperty('accID', response.userID)

@@ -3,7 +3,12 @@ import {action, decorate} from 'mobx';
 
 class Api {
   api = axios.create({
-    baseURL: '/api'
+    // baseURL: 'https://0390f98b29fa.ngrok.io/',
+    // baseURL: "https://artbasicallymaster.herokuapp.com/"
+    // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
+    baseURL: 'http://localhost:4000/',
+    // baseURL: 'http://localhost:4000/',
+    // baseURL: "https://artbasically.com/server"
   });
 
   // getUsers = () => {
@@ -121,6 +126,23 @@ class Api {
     return this.api.get('categoryRoute/getStyles');
   };
 
+  //Print Size
+  addprintsize = (data) => {
+    return this.api.post('categoryRoute/addprintSize', {
+      mode: 'cors',
+      data: data,
+    });
+  };
+  getprintsize = () => {
+    return this.api.get('categoryRoute/getprintSize');
+  };
+  editprintsize =(data)=>{
+    return this.api.post('categoryRoute/editprintSize'),{
+      mode:'cors',
+      data:data,
+    }
+  }
+
   //ARTIST
   getArtists = () => {
     return this.api.get('accountsRoute/getArtists');
@@ -209,6 +231,9 @@ decorate(Api, {
   getToCart: action,
   editToCart: action,
   addStyle: action,
+  addprintsize:action,
+  getprintsize:action,
+  editprintsize:action,
   getStyles: action,
   editStyle: action,
   getsingleartworkinfo: action,

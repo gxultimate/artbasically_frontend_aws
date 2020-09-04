@@ -13,7 +13,7 @@ import {
   MDBBtn,
 } from 'mdbreact';
 import Dashboard from './Dashboard';
-import PendingTab from './PendingTab';
+import PrintingTab from './PrintingTab';
 import OrderDeliverytab from './OrderDeliverytab';
 import CompletedOrderTab from './CompletedOrderTab';
 import CancelOrdertab from './CancelOrdertab';
@@ -89,9 +89,9 @@ class PrintingPartner extends Component {
       <div className='admin'>
         <MDBNavbar className='position-fixed' dark expand='md'>
           <MDBNav className='topnav'>
-            <a href='/Admin' className='logo-wrapper ablogo'>
+            <a href='/PrintingPartner' className='logo-wrapper ablogo'>
               <img alt='MDB React Logo' className='img-fluid' src={logo} />{' '}
-              <p>ADMIN</p>
+              <p>Printing</p>
             </a>
             <div className='topcon'>
               {/* <MDBNavItem>
@@ -138,8 +138,8 @@ class PrintingPartner extends Component {
                   active={this.state.items['default'] === '2'}
                   onClick={this.togglePills('default', '2')}
                 >
-                  <MDBIcon icon='bell' className='mr-3' />
-                  Pending
+                  <MDBIcon icon='print' className='mr-3' />
+                  Printing
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -148,7 +148,7 @@ class PrintingPartner extends Component {
                   active={this.state.items['default'] === '3'}
                   onClick={this.togglePills('default', '3')}
                 >
-                  <MDBIcon icon='paint-brush' className='mr-3' />
+                  <MDBIcon icon='truck' className='mr-3' />
                   Delivery
                 </MDBNavLink>
               </MDBNavItem>
@@ -158,7 +158,7 @@ class PrintingPartner extends Component {
                   active={this.state.items['default'] === '4'}
                   onClick={this.togglePills('default', '4')}
                 >
-                  <MDBIcon icon='user' className='mr-3' />
+                  <MDBIcon icon='calendar-check' className='mr-3' />
                   Completed
                 </MDBNavLink>
               </MDBNavItem>
@@ -168,11 +168,11 @@ class PrintingPartner extends Component {
                   active={this.state.items['default'] === '5'}
                   onClick={this.togglePills('default', '5')}
                 >
-                  <MDBIcon icon='user-tie' className='mr-3' />
+                  <MDBIcon icon='ban' className='mr-3' />
                   Cancelled
                 </MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem>
+              {/* <MDBNavItem>
                 <MDBNavLink
                   to='#'
                   active={this.state.items['default'] === '6'}
@@ -181,7 +181,18 @@ class PrintingPartner extends Component {
                   <MDBIcon icon='th-large' className='mr-3' />
                   History
                 </MDBNavLink>
-              </MDBNavItem>
+              </MDBNavItem> */}
+
+              <MDBNavItem>
+                  <MDBNavLink
+                    to='#'
+                    active={this.state.items['default'] === '6'}
+                    onClick={this.togglePills('default', '6')}
+                  >
+                    <MDBIcon icon='cog' className='mr-3' />
+                    Account
+                  </MDBNavLink>
+                </MDBNavItem>
             </MDBNav>
           </MDBCollapse>
         </MDBNavbar>
@@ -191,7 +202,7 @@ class PrintingPartner extends Component {
               <Dashboard />
             </MDBTabPane>
             <MDBTabPane tabId='2'>
-              <PendingTab />
+              <PrintingTab />
             </MDBTabPane>
             <MDBTabPane tabId='3'>
               <OrderDeliverytab />
@@ -203,7 +214,7 @@ class PrintingPartner extends Component {
               <CancelOrdertab />
             </MDBTabPane>
             <MDBTabPane tabId='6'>
-              <History />
+      
             </MDBTabPane>
           </MDBTabContent>
         </div>

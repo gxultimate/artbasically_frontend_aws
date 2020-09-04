@@ -4,6 +4,7 @@ import {
   MDBFormInline, MDBBtn
 } from 'mdbreact';
 import COrderDeli from './sections/COrderDeli';
+import { Grid, Paper } from '@material-ui/core';
 
 export class Orders extends Component {
   render() {
@@ -16,15 +17,23 @@ export class Orders extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Orders for Delivery</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className="md-form m-0 printpsearch">
-                <input className="form-control form-control-sm" type="search" placeholder="Type your query" aria-label="Search" />
-                <MDBBtn size="sm" color="#FAE933" className="my-0" type="submit"><MDBIcon icon="search" /></MDBBtn>
-              </MDBFormInline>
+           
             </MDBCardBody>
           </MDBCard>
         </div>
 
-      <COrderDeli />
+
+
+      <Grid container xs={12} sm={12}>
+      <Grid item xs={12} sm={12}>
+      <Paper>
+      <div class='p-2 '>
+ <h3>Orders to delivery</h3>
+ <COrderDeli />
+      </div>
+      </Paper>
+      </Grid>
+      </Grid>  
 
       </div>
     )

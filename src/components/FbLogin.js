@@ -3,7 +3,7 @@ import FacebookLoginBtn from 'react-facebook-login';
 import {inject,observer} from 'mobx-react'
 import {message} from 'antd';
 import FacebookIcon from '@material-ui/icons/Facebook';
-
+import {withRouter} from 'react-router-dom'
 
 class FbLogin extends Component {
 
@@ -17,7 +17,7 @@ class FbLogin extends Component {
 
   responseFacebook = (response) => {
     console.log(response,'ress');
-    if (response.status === undefined || response.status === null || response.status === 'unknown'){
+    if (response.email === undefined || response.email === null ){
       console.log('error')
       }
   else{
@@ -157,4 +157,4 @@ class FbLogin extends Component {
 // export default FbLogin;
 }
 
-export default inject('startingStore')(observer(FbLogin))
+export default withRouter(inject('startingStore')(observer(FbLogin)))

@@ -53,7 +53,7 @@ import Navbar from '../../components/Navbar';
       return (
         <ul className='col3img clearfix'>
           {listOfArtworks
-            .filter((item) => item.artworkStatus !== 'Pending')
+            .filter((item) => item.accID === '9320-279')
             .reverse()
             .slice(0, 3)
             .map((image) => {
@@ -104,16 +104,16 @@ import Navbar from '../../components/Navbar';
     }
 
     function MatchRouteEmergingArtist() {
-      console.log(listOfEmergingArtist, 'asdfgjkl');
+    
       return (
         <ul className='col3img clearfix'>
           {listOfEmergingArtist
             .filter((item) => item.artworkStatus !== 'Pending')
             .reverse()
             .slice(0, 3)
-            .map((image) => {
+            .map((image,i) => {
               return (
-                <li>
+                <li key={i}>
                   <a href='#!' className='artlink'>
                     <div className='artlabel'>
                       <span className='new'>NEW</span>
@@ -219,7 +219,41 @@ import Navbar from '../../components/Navbar';
               See More &nbsp;
               <MDBIcon icon='caret-right' />
             </a>
-            <MatchRoute />
+            {/* <MatchRoute /> */}
+            <ul className='col3img clearfix'>
+              {/*  */}
+              {listOfArtworks
+                .filter((item) => item.artworkStatus !== 'Pending')
+                
+                .slice(0, 3)
+                .map((image) => {
+                  return (
+                    <li>
+                      <a href='#!' className='artlink'>
+                        <div className='artlabel'>
+                          <span className='new'>NEW</span>
+                          <span className='hot'>HOT</span>
+                          <span className='type'>
+                            {image.artType === 'Secondary'
+                              ? 'Second Edition'
+                              : 'Original'}
+                          </span>
+                        </div>
+                        <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          }}
+                        >
+                          <img src={image.artworkImg} alt='' />
+                        </Link>
+                      </a>
+                      <div className='artistinfo clearfix pad10'>
+                        <p>{image.artistName}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+            </ul>
           </section>
           <section className='latest' id='latest'>
             <h3>Latest Drops</h3>

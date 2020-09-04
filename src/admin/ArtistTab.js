@@ -4,8 +4,8 @@ import {
   MDBFormInline, MDBBtn
 } from 'mdbreact';
 import AddArtist from './sections/AddArtist';
-import ArtistTable from './sections/ArtistTable';
 
+import ArtistsTab from './sections/ArtistsTab'
 export class ArtistTab extends Component {
   render () {
     return (
@@ -17,15 +17,18 @@ export class ArtistTab extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Artist</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className="md-form m-0 adminsearch">
-                <input className="form-control form-control-sm" type="search" placeholder="Type your query" aria-label="Search" />
-                <MDBBtn size="sm" color="#FAE933" className="my-0" type="submit"><MDBIcon icon="search" /></MDBBtn>
-              </MDBFormInline>
+         
             </MDBCardBody>
           </MDBCard>
         </div>
         <AddArtist />
-        <ArtistTable />
+   
+   <MDBCard>
+     <MDBCardBody>
+<ArtistsTab/>
+     </MDBCardBody>
+   </MDBCard>
+        
       </div>
     )
   }

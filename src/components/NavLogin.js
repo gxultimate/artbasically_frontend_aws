@@ -65,33 +65,63 @@ class NavLogin extends Component {
       } else if (res === 2) {
         const success = () => {
           message
-            .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
+            .loading('Signing in..', 1)
+            .then(() => message.success('Welcome to Art,Basically!', 1));
         };
 
         setTimeout(() => {
           success();
         }, 200);
+        setTimeout(() => {
+       
         this.props.history.push('/Home');
+       
+      }, 500);
       } else if 
       // (typeof res === 'string')
       ( res === 4)
        {
         const success = () => {
           message
-            .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
+            .loading('Signing in..', 1)
+            .then(() => message.success('Welcome to Art,Basically!', 1));
         };
 
         setTimeout(() => {
           success();
         }, 200);
-        this.props.history.push(`/Home`);
-      } else {
+        setTimeout(() => {
+          // this.props.history.push(`/CProfile/${res}`);
+          this.props.history.push('/ArtistHome');
+         
+        }, 500);
+      } else if(res === 5){
         const success = () => {
           message
-            .loading('Signing in..', 1.2)
-            .then(() => message.error('Login Unsuccessful', 1));
+            .loading('Signing in..', 1.5)
+            .then(() => message.error('Please wait for your account confirmation', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push('/');
+      }else if(res === 6){
+        const success = () => {
+          message
+            .loading('Signing in..', 1.5)
+            .then(() => message.error('Your account request rejected', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push('/');
+      }else{
+        const success = () => {
+          message
+            .loading('Signing in..', 1.5)
+            .then(() => message.error('Username or password is incorrect', 1));
         };
 
         setTimeout(() => {
@@ -178,7 +208,7 @@ class NavLogin extends Component {
               </MDBBtn>
             </form>
             <FbLogin />
-            <GgLogin />
+            {/* <GgLogin /> */}
             {/* <p className='reghere'>
               Don't have an Account?{' '}
               <a href='/UserRegistration'>Register Here.</a>

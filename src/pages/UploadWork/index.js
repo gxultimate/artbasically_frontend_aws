@@ -82,6 +82,9 @@ class UploadWork extends Component {
       success();
     }, 1500);
     this.props.history.push('/SubmitArt');
+    setTimeout(() => {
+      this.props.history.push('/Upload');
+    }, 4000);
   }
 
   toggle = (nr) => () => {
@@ -157,7 +160,7 @@ class UploadWork extends Component {
                 <div>
                   <MDBInput
                     label='Year'
-                    type='text'
+                    type='number'
                     onChange={(artworkDateCreated) =>
                       artwork.setProperty(
                         'artworkDateCreated',
@@ -243,7 +246,7 @@ class UploadWork extends Component {
                   <p>How many copies of your artworks are you selling?</p>
                   <MDBInput
                     label='Quantity'
-                    type='text'
+                    type='number'
                     // onChange={artPrice => artwork.setProperty("artPrice", artPrice.target.value)} required
                   >
                     <div className='invalid-feedback'>
@@ -267,7 +270,7 @@ class UploadWork extends Component {
                   <span>Price</span>
                   <MDBInput
                     label='Price'
-                    type='text'
+                    type='number'
                     onChange={(artPrice) =>
                       artwork.setProperty('artPrice', artPrice.target.value)
                     }

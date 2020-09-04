@@ -11,7 +11,7 @@ import Navbar from '../../components/Navbar';
 import ViewCart from '../../components/ViewCart';
 import ViewRoom from '../../components/ViewRoom';
 import art from '../../images/artworks/art1.png';
-
+import {Multiselect} from 'multiselect-react-dropdown';
 class SingleArt extends Component {
   constructor(props) {
     super(props);
@@ -50,13 +50,14 @@ class SingleArt extends Component {
         getSingleArtists,
         getSingleArtworkInfo,
         getToCart,
+        getPrintSize
       },
     } = this.props;
     getSingleArtworkInfo(this.props.match.params.id);
     getSingleArtists(this.props.match.params.name);
     getArtistArtwork(this.props.match.params.name);
     getToCart();
-
+    getPrintSize()
     //   .then(response => {
 
     //  })
@@ -87,6 +88,8 @@ class SingleArt extends Component {
         listofArtistArtwork,
         followArtist,
         listRelatedWorkByCategory,
+        listOfPrintSize,
+       
       },
     } = this.props;
 
@@ -240,8 +243,9 @@ class SingleArt extends Component {
                       What material is the best for you?
                     </a>
                   </div>
-                  <div>
+                  <div >
                     <span>Size</span>
+            
                     <select
                       onChange={(artworkSize) =>
                         cart.setProperty(
@@ -250,12 +254,11 @@ class SingleArt extends Component {
                         )
                       }
                     >
-                      <option selected value=''>
-                        Choose Size
-                      </option>
-                      <option value='30.48 cm x 45.72 cm'>
-                        30.48 cm x 45.72 cm
-                      </option>
+                      {listOfPrintSize.map((sizes) => (
+                          <option key={sizes.printSize} value={sizes.printSize}>
+                            {sizes.printSize}
+                          </option>
+                        ))}
                     </select>
                     <a className='bluelink' href=''>
                       Which size best fits your needs?

@@ -1,104 +1,192 @@
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCol,
-  MDBRow,
+ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-} from 'mdbreact';
+  MDBTableHead,} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
-import ViewData from '../sections/ViewOrderDetails';
-class CustomerTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: [],
-    };
-  }
-
-  arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
-  }
-
-  checkList = (id) => {
-    let src = '';
-    let imgsrc = this.state.img.filter((img) => {
-      if (img[1][0] === id) {
-        src += img[0];
-      }
-    });
-    console.log(this.state.img, 'sdsdsds');
-    return src;
+import React, { Component, Fragment } from 'react'
+import DownloadImage from '../sections/DownloadImage';
+ class CompletedOrder extends Component {
+  state = {
+    modal: false,
+    items:[],
+   
   };
 
+
+  
+
   render() {
-    let {
-      startingStore: {listOfOrders,listOfUsers},
-    } = this.props;
-    let listOfOrderDelivery = listOfOrders.filter((Delivery) => {
-      if (Delivery.orderStatus === 'Completed') {
-        return Delivery;
-      }
-    });
+    let { startingStore: {listOfOrders,listOfUsers}} = this.props;
+
+    
+    function createData(items,id, orderBy, date, paymentStat,action) {
+      return { items,id, orderBy, date, paymentStat,action };
+    }
+
+let Corder = listOfOrders.filter((Delivery) => {
+            if (Delivery.orderStatus === 'Completed') {
+              return Delivery;
+            }
+          }).map(orders =>{
+            return(createData(
+           orders.orderItems,orders.orderID,listOfUsers.filter(usr=> usr._id === orders.accID).map(user =>( user.accFname
+              )),orders.orderDate,orders.paymentStatus
+            ))
+          })
 
 
-    let findName = (accID) => {
-      let aw = listOfUsers.map((user) => {
-        if (user._id === accID) {
-          return `${user.accFname} ${user.accLname}`;
-        }
-      });
-      return aw;
-    };
+        let  toggle = (itm) => {
+        
+            this.setState({
+              modal: !this.state.modal,
+              items:itm
+            });
+          
+          };
+          let close =()=>{
+            this.setState({
+              modal: false,
+            
+            });
+          }
+        
 
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Completed Orders</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                  <th>Order ID</th>
-                    <th>Order By</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Payment Status</th>
-                    <th>Payment Method</th>
+const CompletedOrderTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Order By',
+        field: 'orderBy',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Date',
+        field: 'date',
+        sort: 'asc',
+        width: 'auto'
+      },
 
-                    <th className='act'>Actions</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {listOfOrderDelivery.map((data) => (
-                    <tr>
-                         <td>{data.orderID}</td>
-                    
-                    <td> {findName(data.accID)} </td>
-                    <td>{data.orderDate}</td>
-                    <td>{data.orderStatus}</td>
-                    <td>{data.paymentStatus}</td>
-                    <td>{data.modeOfPayment}</td>
+      {
+        label: 'Payment Stat',
+        field: 'paymentStat',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
+    
+    ],
+    rows: 
+   
+    [...Corder.map((row,i) => (
+      
+     {
+        id: `${row.id}`,
+        orderBy: `${row.orderBy}`,
+        date: `${row.date}`,
+      
+        paymentStat: `${row.paymentStat}`,
+        action: <MDBBtn  onClick={()=>toggle(row.items)} color='yellow'> Items</MDBBtn>,
+      
 
-                      <td>
-                        <ViewData data={data.orderItems} />
-                      </td>
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
-  }
+     }
+     
+     ))
+    ]
+
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+
+    <MDBModal
+    size='lg'
+    isOpen={this.state.modal}
+    toggle={()=>close()}
+    centered
+    className='singleModal'
+  >
+    <MDBModalHeader
+      toggle={()=>{close()}}
+      className='mhead'
+    ></MDBModalHeader>
+    <MDBModalBody>
+      <div className='imagecom'>
+        <h3>Order Items</h3>
+        <MDBTable hover className='tablescroll'>
+          <MDBTableHead color='blue-grey lighten-4'>
+            <tr>
+              <th>Artwork</th>
+              <th>Artist Name </th>
+              <th>Artwork Name</th>
+              <th>Artwork Size</th>
+              <th>Payment Amount</th>
+              <th>Artwork Material</th>
+              <th>Framing Options</th>
+              <th>Price Per Piece</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </MDBTableHead>
+
+          <MDBTableBody>
+
+            {this.state.items.map((data) => (
+              <tr>
+                <td>
+                  <img
+                    style={{width: '100% ', height: 'auto'}}
+                    src={data.artworkImg}
+                    alt=''
+                  />
+                </td>
+                <td>{data.artistName}</td>
+                <td>{data.artworkName}</td>
+                <td>{data.artworkSize}</td>
+                <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkMaterial}</td>
+                <td>{data.artworkFramingOptions}</td>
+                <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkQuantity}</td>
+                <td className='actions'>
+                  <DownloadImage data={data.artworkImg} />
+                </td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </div>
+    </MDBModalBody>
+  </MDBModal>
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(CustomerTable));
+return (
+  <CompletedOrderTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(CompletedOrder))

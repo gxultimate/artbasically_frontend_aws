@@ -225,8 +225,8 @@ class ArtworkFilter extends Component {
             </li>
           ));
       } else if (this.props.type === 'latest') {
-        return toJS(listOfArtworks)
-          .reverse()
+        return toJS(listOfArtworks.filter(art=> art.artworkStatus === 'Approved'))
+         .reverse()
           .map((image) => (
             <li>
               <a href='#!' className='artlink'>

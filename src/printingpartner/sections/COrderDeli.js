@@ -1,125 +1,148 @@
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCol,
-  MDBRow,
+import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-} from 'mdbreact';
+  MDBTableHead,} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
-import ViewData from '../sections/ViewData';
-class CustomerTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: [],
-    };
-  }
+import React, { Component, Fragment } from 'react'
 
-  arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
-  }
+import {message} from 'antd';
 
-  checkList = (id) => {
-    let src = '';
-    let imgsrc = this.state.img.filter((img) => {
-      if (img[1][0] === id) {
-        src += img[0];
-      }
-    });
-    
-    return src;
+
+ class ForDelivery extends Component {
+  state = {
+    modal: false,
+    items:[]
+   
   };
 
-  render() {
+  componentDidMount() {
     let {
-      startingStore: {listOfOrders,editOrder, listOfUsers},
+      startingStore: {getOrders, getAccounts},
     } = this.props;
    
-    let listOfOrderDelivery = listOfOrders.filter((Delivery) => {
-      if (Delivery.orderStatus === 'Delivery') {
-        return Delivery;
-      }
-    });
-
-    let findName = (accID) => {
-      let aw = listOfUsers.map((user) => {
-        if (user._id === accID) {
-          return `${user.accFname} ${user.accLname}`;
-        }
-      });
-      return aw;
-    };
-
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Orders for Delivery</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Order By</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Payment Status</th>
-                    <th>Payment Method</th>
-                    <th className='act'>Actions</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {listOfOrderDelivery.reverse().map((data) => (
-                    <tr>
-                      <td>{data.orderID}</td>
-                    
-                      <td> {findName(data.accID)} </td>
-                      <td>{data.orderDate}</td>
-                      <td>{data.orderStatus}</td>
-                      <td>{data.paymentStatus}</td>
-                      <td>{data.modeOfPayment}</td>
-                      <td className='oactions'>
-                        <span>
-                          <ViewData data={data.orderItems} />{' '}
-                        </span>
-                        <span className='btncon'>
-                          <a
-                            href='#!'
-                            className='approve'
-                            onClick={() =>
-                              editOrder(data._id, 'Completed', data.accID)
-                            }
-                          >
-                            Done
-                          </a>
-                          <a
-                            href='#!'
-                            className='reject'
-                            onClick={() =>
-                              editOrder(data._id, 'Cancelled', data.accID)
-                            }
-                          >
-                            Cancel
-                          </a>
-                        </span>
-                      </td>
-                
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
+    getAccounts();
+    getOrders();
   }
+  
+
+  render() {
+    let { startingStore: {listOfOrders,listOfUsers, editOrder}} = this.props;
+
+    
+    function createData(orderDB,items,id, orderBy, date, paymentStat,action) {
+      return { orderDB,items,id, orderBy, date, paymentStat,action };
+    }
+
+let Corder = listOfOrders.filter((Delivery) => {
+            if (Delivery.orderStatus === 'ForDelivery') {
+              return Delivery;
+            }
+          }).map(orders =>{
+            return(createData(
+           orders,orders.orderItems,orders.orderID,listOfUsers.filter(usr=> usr._id === orders.accID).map(user =>( user.accFname
+              )),orders.orderDate,orders.paymentStatus
+            ))
+          })
+
+
+        let  moreinfo = (itm) => {
+        
+       
+          };
+          let done =(itm)=>{
+            editOrder(itm._id, 'Completed', itm.accID)
+
+            const success = () => {
+              message
+                .loading('', 1)
+                .then(() => message.success('Order Completed', 3));
+            };
+
+            setTimeout(() =>{
+              success()
+            },1000)
+          }
+        
+
+const ForDeliveryTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Order By',
+        field: 'orderBy',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Date',
+        field: 'date',
+        sort: 'asc',
+        width: 'auto'
+      },
+
+      {
+        label: 'Payment Stat',
+        field: 'paymentStat',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
+    
+    ],
+    rows: 
+   
+    [...Corder.map((row,i) => (
+      
+     {
+        id: `${row.id}`,
+        orderBy: `${row.orderBy}`,
+        date: `${row.date}`,
+      
+        paymentStat: `${row.paymentStat}`,
+        action:<div><MDBBtn  onClick={()=>moreinfo(row.orderDB)} color='approve'>More Info</MDBBtn>
+        <MDBBtn  onClick={()=>done(row.orderDB)} color='reject'> Done</MDBBtn></div>,
+      
+
+     }
+     
+     ))
+    ]
+
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+
+
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(CustomerTable));
+return (
+  <ForDeliveryTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(ForDelivery))

@@ -4,8 +4,8 @@ import {
   MDBFormInline, MDBBtn
 } from 'mdbreact';
 import CCancelOrder from './sections/CCancelOrder';
-
-export class Orders extends Component {
+import { Grid, Paper } from '@material-ui/core';
+class Orders extends Component {
   render() {
     return (
       <div>
@@ -16,14 +16,24 @@ export class Orders extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Cancelled Orders</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className="md-form m-0 printpsearch">
-                <input className="form-control form-control-sm" type="search" placeholder="Type your query" aria-label="Search" />
-                <MDBBtn size="sm" color="#FAE933" className="my-0" type="submit"><MDBIcon icon="search" /></MDBBtn>
-              </MDBFormInline>
+           
             </MDBCardBody>
           </MDBCard>
         </div>
-        <CCancelOrder />
+       
+
+
+        <Grid container xs={12} sm={12}>
+      <Grid item xs={12} sm={12}>
+      <Paper>
+      <div class='p-2 '>
+ <h3>Cancelled Orders</h3>
+ <CCancelOrder />
+      </div>
+      </Paper>
+      </Grid>
+      </Grid>  
+
       </div>
     )
   }

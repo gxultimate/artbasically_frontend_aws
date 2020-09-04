@@ -14,6 +14,7 @@ import {
   MDBContainer,
   MDBBtn,
 } from 'mdbreact';
+
 import Dashboard from './Dashboard';
 import OrdersTab from './OrdersTab';
 import ArtworkTab from './ArtworkTab';
@@ -150,7 +151,7 @@ class Admin extends Component {
                     onClick={this.togglePills('default', '4')}
                   >
                     <MDBIcon icon='user' className='mr-3' />
-                    Users
+                    Customer
                   </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
@@ -193,6 +194,7 @@ class Admin extends Component {
             <MDBTabPane tabId='1'>
               <Dashboard />
             </MDBTabPane>
+          
             <MDBTabPane tabId='2'>
               <OrdersTab />
             </MDBTabPane>
@@ -211,34 +213,6 @@ class Admin extends Component {
           </MDBTabContent>
         </div>
 
-        {/* <MDBContainer className='notif'> */}
-          {/* <MDBNotification
-            show
-            fade
-            icon="envelope"
-            title="Message"
-            message="Jane: See? Just like this."
-            text="just now"
-          /> */}
-          {/* <MDBNotification
-            show
-            fade
-            iconClassName='yell'
-            icon='bell'
-            title='Notification'
-            message='Recieved an order from Jane Doe'
-            text='Just now'
-          />
-          <MDBNotification
-            show
-            fade
-            iconClassName='yell'
-            icon='bell'
-            title='Notification'
-            message='New art submission'
-            text='2 seconds ago'
-          />
-        </MDBContainer> */}
       </div>
     );
   }

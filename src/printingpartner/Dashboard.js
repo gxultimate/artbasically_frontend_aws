@@ -15,11 +15,13 @@ import CCompletedOrder from './sections/CCompletedOrder';
 import CCancelOrder from './sections/CCancelOrder';
 import COrderDeli from './sections/COrderDeli';
 import History from './sections/History';
+import DashCards from './DashCards';
+import { Grid, Paper } from '@material-ui/core';
 
 const pDashboardSection = () => {
   return (
     <div>
-      <div className='printbreadcrumb'>
+      <div className='printbreadcrumb' style={{marginBottom:'16px'}}>
         <MDBCard>
           <MDBCardBody
             id='breadcrumb'
@@ -29,26 +31,31 @@ const pDashboardSection = () => {
               <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
               <MDBBreadcrumbItem active>Dashboard</MDBBreadcrumbItem>
             </MDBBreadcrumb>
-            <MDBFormInline className='md-form m-0 adminsearch'>
-              <input
-                className='form-control form-control-sm'
-                type='search'
-                placeholder='Type your query'
-                aria-label='Search'
-              />
-              <MDBBtn size='sm' color='pink' className='my-0' type='submit'>
-                <MDBIcon icon='search' />
-              </MDBBtn>
-            </MDBFormInline>
+  
           </MDBCardBody>
         </MDBCard>
       </div>
 
-      <CPendingOrders />
-      <COrderDeli />
+      <div class='mb-4'>
+      <DashCards/>
+      </div>
+
+
+      <Grid container xs={12} sm={12}>
+      <Grid item xs={12} sm={12}>
+      <Paper>
+      <div class='p-2 '>
+ <h3>Pending Orders</h3>
+ <CPendingOrders />
+      </div>
+      </Paper>
+      </Grid>
+      </Grid>  
+    
+      {/* <COrderDeli />
       <CCompletedOrder />
       <CCancelOrder />
-      <History />
+      <History /> */}
     </div>
   );
 };

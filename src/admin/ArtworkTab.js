@@ -1,18 +1,12 @@
-import React, {Component} from 'react';
 import {
-  MDBCard,
-  MDBCardBody,
-  MDBIcon,
   MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBFormInline,
-  MDBBtn,
+  MDBBreadcrumbItem, MDBCard,
+  MDBCardBody
 } from 'mdbreact';
-import PendingArtworkTable from './sections/PendingArtworkTable';
-import ArtworkTable from './sections/ArtworkTable';
+import React, { Component } from 'react';
 import AddArtwork from './sections/AddArtwork';
-
-export class ArtworkTab extends Component {
+import ArtworkTabs from './sections/ArtworkTab';
+ class ArtworkTab extends Component {
   render() {
     return (
       <div>
@@ -26,28 +20,17 @@ export class ArtworkTab extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Artworks</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className='md-form m-0 adminsearch'>
-                <input
-                  className='form-control form-control-sm'
-                  type='search'
-                  placeholder='Type your query'
-                  aria-label='Search'
-                />
-                <MDBBtn
-                  size='sm'
-                  color='#FAE933'
-                  className='my-0'
-                  type='submit'
-                >
-                  <MDBIcon icon='search' />
-                </MDBBtn>
-              </MDBFormInline>
+        
             </MDBCardBody>
           </MDBCard>
         </div>
         <AddArtwork />
-        <PendingArtworkTable />
-        <ArtworkTable />
+      
+        <MDBCard>
+     <MDBCardBody>
+     <ArtworkTabs/>
+     </MDBCardBody>
+   </MDBCard>
       </div>
     );
   }

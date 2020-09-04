@@ -1,97 +1,162 @@
-import React, {Component} from 'react';
-import ShowMoreText from 'react-show-more-text';
-import {
-  MDBCard,
-  MDBCardBody,
+
+import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
-} from 'mdbreact';
+  MDBTableHead} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import EditArtist from '../sections/EditArtist';
+import React, { Component, Fragment } from 'react'
+import DownloadImage from './../sections/DownloadImage';
+import {message} from 'antd';
 
-class ArtistTable extends Component {
-  componentDidMount() {
+
+ class Artists extends Component {
+  state = {
+    modal: false,
+    items:[]
+   
+  };
+
+   componentDidMount() {   
     let {
       startingStore: {getAccounts},
     } = this.props;
     getAccounts();
-  }
+ 
 
-  executeOnClick(isExpanded) {
-    console.log(isExpanded);
   }
-
-  checkFollower = (follower) => {
-    if (follower !== undefined && follower[0] !== '') {
-      return follower.length;
-    } else {
-      return 0;
-    }
-  };
+  
 
   render() {
-    let {
-      startingStore: {listOfUsers},
-    } = this.props;
+    let { startingStore: {listOfUsers,editAccount, account}} = this.props;
 
-  
-    let listOfArtist = listOfUsers.filter((artist) => {
-      if (artist.accessType === 'Artist' && artist.acc_Status === 'approved') {
-        return artist;
-      }
-    });
+    
+    function createData(userDB,id,fname, email, address,action) {
+      return { userDB,id,fname, email, address,action };
+    }
 
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Artists List</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                   
-                    <th>ID</th>
-                  
-                    <th>Prefix</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                 
-                    <th>Full Address</th>
-                    <th>Company / Institution</th>
+let users = listOfUsers.filter((usr) => {
+            if (usr.accessType === 'Artist' && usr.acc_Status === 'Active') {
+              return usr;
+            }
+          }).map(users =>{
+            return(createData(
+           users,users.accID
+           ,`${users.accFname} ${users.accLname}`
+           ,users.accEmailAddress,users.accEmailAddress,users.accAddress
+
+
+            ))
+          })
+
+
+        let  moreinfo = (itm) => {
+         
+       
+          };
+          let deactivate =(itm)=>{
+            account.setProperty('_id',itm._id)
+            account.setProperty('acc_Status','Deactivated')
+     editAccount()
+            const success = () => {
+             message
+               .loading('', 1)
+               .then(() => message.success('Account Deactivated', 3));
+           };
+     
+           setTimeout(() =>{
+             success()
+           },1000)
+
+      
+          }
         
-                    <th>Action</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {listOfArtist.reverse().map((data) => (
-                    <tr>
-                   
-                      <td>{data.accID}</td>
-                  
-                      <td>{data.accSuffix}</td>
-                      <td>{data.accFname}</td>
-                      <td>{data.accLname}</td>
-                   
-                      <td>{data.accAddress}</td>
-                      <td>{data.accInstitution}</td>
-                 
-                      <td>
-                        <EditArtist data={data} />
-                      </td>
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
-  }
+
+const ArtistsTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Name',
+        field: 'fname',
+        sort: 'asc',
+        width: 'auto'
+      },
+     
+
+      {
+        label: 'Email',
+        field: 'email',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Address',
+        field: 'address',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
+    
+    ],
+    rows: 
+   
+    [...users.map((row,i) => {
+     
+      return(
+
+     {
+        id: `${row.id}`,
+        fname: `${row.fname}`,
+       
+      
+        email: `${row.email}`,
+        address: `${row.address}`,
+        action:<div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>moreinfo(row.userDB)} color='moreinfo'>More Info</MDBBtn>
+        <MDBBtn style={{float:'left'}} onClick={()=>deactivate(row.userDB)} color='reject'> Deactivate</MDBBtn></div>,
+      
+
+     }
+     
+     ) })
+    ]
+
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+
+
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(ArtistTable));
+return (
+  <ArtistsTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(Artists))
+
+
+

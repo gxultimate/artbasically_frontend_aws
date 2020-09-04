@@ -28,7 +28,7 @@ import {ToastContainer} from 'react-toastify';
 //PrintPartner
 import PartnerLogin from './printingpartner/PartnerLogin';
 import PrintingPartner from './printingpartner/PrintingPartner';
-
+import ArtistHome from './ArtistPage'
 import {StartingStore, Api} from './stores';
 
 const api = new Api();
@@ -78,6 +78,8 @@ class Routes extends React.Component {
         <Route exact path='/Order' component={Order} />
         <Route exact path='/PartnerLogin' component={PartnerLogin} />
         <Route exact path='/PrintingPartner' component={PrintingPartner} />
+
+        <Route exact path='/ArtistHome' component={ArtistHome} />
         <ToastContainer />
 
         {/* render={function() {

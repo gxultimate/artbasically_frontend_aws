@@ -61,7 +61,7 @@ class OrderTab extends Component {
 
     let pendingOrders = listofUserOrder.filter((items) => {
       if (
-        items.orderStatus === 'Delivery' ||
+        items.orderStatus === 'Printing' || items.orderStatus === 'ForDelivery' ||
         items.orderStatus.includes('Pending')
       ) {
         return items;
@@ -69,7 +69,7 @@ class OrderTab extends Component {
     });
 
     let listOfOrderReceived = listOfOrders.filter((Received) => {
-      if (Received.orderStatus === 'Received') {
+      if (Received.orderStatus === 'Completed') {
         return Received;
       }
     });

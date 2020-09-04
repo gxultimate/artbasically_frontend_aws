@@ -1,121 +1,160 @@
-import React, {Component} from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
+import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
-} from 'mdbreact';
+  MDBTableHead,} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import EditAcc from './EditAcc';
+import React, { Component, Fragment } from 'react'
+import DownloadImage from '../sections/DownloadImage';
+import {message} from 'antd';
 
-class CustomerTable extends Component {
-  componentDidMount() {
-    let {
-      startingStore: {getArtworkInfo, getAccounts, getStyles, getCategories},
-    } = this.props;
-    getAccounts();
-    getArtworkInfo();
-    getStyles();
-    getCategories();
-  }
 
-  arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
-  }
-
-  checkList = (id) => {
-    let src = '';
-    let imgsrc = this.state.img.filter((img) => {
-      if (img[1][0] === id) {
-        src += img[0];
-      }
-    });
-    
-    return src;
+ class Customer extends Component {
+  state = {
+    modal: false,
+    items:[]
+   
   };
 
-  // executeOnClick (isExpanded) {
-  //   console.log(isExpanded);
-  // }
+   componentDidMount() {   
+    let {
+      startingStore: {getAccounts},
+    } = this.props;
+    getAccounts();
+ 
+
+  }
+  
 
   render() {
-    let {
-      startingStore: {listOfUsers},
-    } = this.props;
-    let listOfCustomers = listOfUsers.filter((artist) => {
-      if (artist.accessType === 'Standard') {
-        return artist;
-      }
-    });
+    let { startingStore: {listOfUsers,editAccount, account}} = this.props;
 
-    function themeType(array) {
-      let arrayList = '';
-      array.map((theme) => {
-        if (theme !== '' && array.length > 1) {
-          arrayList += `${theme}, `;
-        } else if (array.length === 1 && array[0] !== '') {
-          arrayList += `${theme}`;
-        } else {
-          arrayList += 'No Categories Selected';
-        }
-      });
-      return arrayList;
+    
+    function createData(userDB,id,fname, email, address,action) {
+      return { userDB,id,fname, email, address,action };
     }
 
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Customer List</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                   
-                  
-                
-                  <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email Address</th>
-                    <th>Contact Number</th>
-                    <th>Address</th>
-                 
-                    <th>Action</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {listOfCustomers.reverse().map((data) => (
-                    <tr>
-                    
-                      
-                  
-                    <td>{data.accID}</td>
-                      <td>{data.accFname}</td>
-                      <td>{data.accLname}</td>
-                      <td>{data.accEmailAddress}</td>
-                      <td>{data.accContact}</td>
-                      <td>{data.accAddress}</td>
-                      
-                      <td>
-                        <EditAcc data={data} />
-                      </td>
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
-  }
+let users = listOfUsers.filter((usr) => {
+            if (usr.accessType === 'Standard' && usr.acc_Status === 'Active') {
+              return usr;
+            }
+          }).map(users =>{
+            return(createData(
+           users,users.accID
+           ,`${users.accFname} ${users.accLname}`
+           ,users.accEmailAddress,users.accEmailAddress,users.accAddress
+
+
+            ))
+          })
+
+
+        let  moreInfo = (itm) => {
+         
+       
+          };
+          let deactivate =(itm)=>{
+         
+
+            account.setProperty('_id',itm._id)
+            account.setProperty('acc_Status','Deactivated')
+     editAccount()
+            const success = () => {
+             message
+               .loading('', 1)
+               .then(() => message.success('Account Deactivated', 3));
+           };
+     
+           setTimeout(() =>{
+             success()
+           },1000)
+          }
+        
+
+const CustomerTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Name',
+        field: 'fname',
+        sort: 'asc',
+        width: 'auto'
+      },
+      
+
+      {
+        label: 'Email',
+        field: 'email',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Address',
+        field: 'address',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
+    
+    ],
+    rows: 
+   
+    [...users.map((row,i) => {
+     
+      return(
+
+     {
+        id: `${row.id}`,
+        fname: `${row.fname}`,
+      
+      
+        email: `${row.email}`,
+        address: `${row.address}`,
+        action:<div><MDBBtn  onClick={()=>moreInfo(row.userDB)} color='approve'> More Info</MDBBtn>
+        <MDBBtn  onClick={()=>deactivate(row.userDB)} color='reject'> Deactivate</MDBBtn></div>,
+      
+
+     }
+     
+     ) })
+    ]
+
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+
+
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(CustomerTable));
+return (
+  <CustomerTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(Customer))
+
+

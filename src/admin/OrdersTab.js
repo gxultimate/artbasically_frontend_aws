@@ -11,6 +11,7 @@ import {
 import OrderTable from './sections/OrderTable';
 import PendingOrderTable from './sections/PendingOrderTable';
 import Completed from './sections/CompletedOrder'
+import OrderTabs from './sections/OrderTab'
 
 class OrdersTab extends Component {
   render() {
@@ -26,29 +27,15 @@ class OrdersTab extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Orders</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className='md-form m-0 adminsearch'>
-                <input
-                  className='form-control form-control-sm'
-                  type='search'
-                  placeholder='Type your query'
-                  aria-label='Search'
-                />
-                <MDBBtn
-                  size='sm'
-                  color='#FAE933'
-                  className='my-0'
-                  type='submit'
-                >
-                  <MDBIcon icon='search' />
-                </MDBBtn>
-              </MDBFormInline>
+        
             </MDBCardBody>
           </MDBCard>
         </div>
-      
-        <PendingOrderTable />
-        <OrderTable />
-        <Completed/>
+        <MDBCard>
+          <MDBCardBody>
+      <OrderTabs/>
+      </MDBCardBody>
+      </MDBCard>
       </div>
     );
   }

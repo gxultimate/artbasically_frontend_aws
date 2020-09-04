@@ -11,7 +11,7 @@ import {
   MDBRow,
 } from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-// import SelectTheme from '../../components/SelectTheme';
+
 import {Multiselect} from 'multiselect-react-dropdown';
 import imageCompression from 'browser-image-compression';
 import React, {Component} from 'react';
@@ -95,7 +95,8 @@ class AddArtwork extends Component {
     let {
       startingStore: {artwork, listOfArtists, listOfCategories, listOfStyles},
     } = this.props;
-
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
+    artwork.setProperty('accID',mydata.accID)
     function selectCategory(list, listitem) {
       let artThemeSelected = list.map((cat) => cat.catType);
       artwork.setProperty('artTheme', artThemeSelected);

@@ -72,6 +72,27 @@ class AddCat extends Component {
     addStyle();
   };
 
+  submitHandlerSize = (event) => {
+    event.preventDefault();
+    event.target.className += ' was-validated';
+
+    let {
+      startingStore: {addPrintSize, printsize},
+    } = this.props;
+    printsize.setProperty('sizeID', this.getUniqueID());
+    const success = () => {
+      message
+        .loading('Submitting printing size..', 1.2)
+        .then(() => message.success('Printing size added', 1));
+    };
+
+    setTimeout(() => {
+      success();
+    }, 1000);
+    addPrintSize();
+  };
+
+
   changeHandler = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
@@ -97,18 +118,18 @@ class AddCat extends Component {
 
   render() {
     let {
-      startingStore: {categories, style},
+      startingStore: {categories, style,printsize},
     } = this.props;
     return (
       <MDBContainer>
         <div style={{float: 'left'}}>
           <MDBBtn onClick={this.toggle(1)} color='transparent'>
             <MDBIcon icon='plus-circle' size='2x' />
-            ADD THEME
+            Add Theme
           </MDBBtn>
           <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered>
             <MDBModalHeader toggle={this.toggle(1)}>
-              ADD THEME
+              Add Theme
             </MDBModalHeader>
             <MDBModalBody className='adminmodalbody'>
               <form onSubmit={this.submitHandler} className='formbtn'>
@@ -134,11 +155,11 @@ class AddCat extends Component {
         <div style={{float: 'left'}}>
           <MDBBtn onClick={this.toggle(2)} color='transparent'>
             <MDBIcon icon='plus-circle' size='2x' />
-            ADD ART STYLE
+            Add  Style
           </MDBBtn>
           <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)} centered>
             <MDBModalHeader toggle={this.toggle(2)}>
-              ADD ART STYLE
+              Add  Style
             </MDBModalHeader>
             <MDBModalBody className='adminmodalbody'>
               <form onSubmit={this.submitHandlerStyle} className='formbtn'>
@@ -147,6 +168,37 @@ class AddCat extends Component {
                   type='text'
                   onChange={(styleType) =>
                     style.setProperty('styleType', styleType.target.value)
+                  }
+                  required
+                >
+                  <div className='invalid-feedback'>
+                    Please provide a valid email.
+                  </div>
+                </MDBInput>
+                <MDBBtn className='submitreg clearfix' type='submit'>
+                  SUBMIT
+                </MDBBtn>
+              </form>
+            </MDBModalBody>
+          </MDBModal>
+        </div>
+
+        <div style={{float: 'left'}}>
+          <MDBBtn onClick={this.toggle(2)} color='transparent'>
+            <MDBIcon icon='plus-circle' size='2x' />
+            Add Printing Size
+          </MDBBtn>
+          <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)} centered>
+            <MDBModalHeader toggle={this.toggle(2)}>
+              Add Printing Size
+            </MDBModalHeader>
+            <MDBModalBody className='adminmodalbody'>
+              <form onSubmit={this.submitHandlerSize} className='formbtn'>
+                <MDBInput
+                  label='Printing Size'
+                  type='text'
+                  onChange={(printSize) =>
+                    printsize.setProperty('printSize', printSize.target.value)
                   }
                   required
                 >

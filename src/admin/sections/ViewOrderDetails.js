@@ -13,23 +13,27 @@ import {
 class ViewOrderDetails extends Component {
   state = {
     modal14: false,
+    orderItems:[],
   };
+
+  componentDidMount(){
+    if (this.props.data !== undefined || this.props.data !== null){
+      this.setState({orderItems:this.props.data});
+    }else{
+      console.log('noData')
+    }
+  }
 
   toggle = (nr) => () => {
     let modalNumber = 'modal' + nr;
     this.setState({
       [modalNumber]: !this.state[modalNumber],
     });
-    // console.log(this.props.data,)
+  
   };
 
   render() {
-    // let { startingStore: { listOfOrder } } = this.props;
-    // let listOfPending = listOfOrders.filter(Pending => {
-    //   if (Pending.paymentStatus === "Pending") {
-    //     return Pending;
-    //   }
-    // })
+    
     return (
       <div>
         <a href='#!' onClick={this.toggle(14)} className='viewimage iconbtn'>
@@ -68,7 +72,8 @@ class ViewOrderDetails extends Component {
                 </MDBTableHead>
 
                 <MDBTableBody>
-                  {this.props.data.reverse().map((data) => (
+
+                  {this.state.orderItems.map((data) => (
                     <tr>
                       <td>
                         <img

@@ -7,6 +7,8 @@ import Categories from '../models/Categories';
 import Order from '../models/Order';
 import Style from '../models/Style';
 import User from '../models/User';
+import PrintSize from './../models/PrintSize'
+
 class StartingStore {
   account = new Account();
   artwork = new Artwork();
@@ -14,6 +16,8 @@ class StartingStore {
   style = new Style();
   cart = new Cart();
   order = new Order();
+  printsize = new PrintSize();
+  listOfPrintSize =[];
   listOfOrders = [];
   welcomeMessage = 'Welcome!';
   listOfUsers = [];
@@ -82,14 +86,13 @@ class StartingStore {
 
   getAccounts = () => {
     this.api.getaccounts().then((resp) => {
-      // console.log(resp.data.data)
+    
       this.listOfUsers = resp.data;
     });
   };
 
   editAccount = () => {
     return new Promise((resolve, reject) => {
-
     this.api
       .editAccount(this.removeUndefinedProps(this.account))
       .then((resp) => {
@@ -105,20 +108,31 @@ class StartingStore {
   loginAccount = () => {
     return new Promise((resolve, reject) => {
       this.api.loginaccount(this.account).then((resp) => {
-        sessionStorage.setItem('userData', JSON.stringify(resp.data));
+       
         if (resp.data.accessType === 'Admin') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(true);
         } else if (
-          resp.data.accessType === 'Standard' ||
-          resp.data.accessType === 'Curator'
+          
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' ||
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'
         ) {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(2);
         } else if (resp.data.accessType === 'PrintingPartner') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(3);
-        } else if (resp.data.accessType === 'Artist') {
-          // resolve(`${resp.data.accFname} ${resp.data.accLname}`);
+        } else if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+        
           resolve(4)
-        } else {
+        } else if (resp.data.acc_Status === 'Pending'){
+          resolve(5)
+         
+        } else if (resp.data.acc_Status === 'Rejected'){
+          resolve(6)
+         
+        }else{
           resolve(false);
         }
       });
@@ -363,6 +377,30 @@ class StartingStore {
     });
   };
 
+  //PrintSize
+
+  addPrintSize = () => {
+    this.api.addprintsize(this.printsize).then((resp) => {
+      this.listOfPrintSize = resp.data;
+  
+    });
+  };
+
+  getPrintSize = () => {
+    this.api.getprintsize().then((resp) => {
+      this.listOfPrintSize = resp.data;
+    
+    });
+  };
+
+  editPrintSize = () => {
+    this.api.editprintsize(this.printsize).then((resp) => {
+      this.listOfPrintSize = resp.data;
+  
+    });
+  };
+
+
   //Artist
   getArtists = (artist) => {
     return new Promise((resolve, reject) => {
@@ -567,6 +605,9 @@ decorate(StartingStore, {
   type: observable,
   followed: observable,
   setFollowed: observable,
+  addPrintSize:action,
+  getPrintSize:action,
+  editPrintSize:action,
 });
 
 export default StartingStore;

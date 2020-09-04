@@ -1,33 +1,23 @@
-import React, {Component} from 'react';
-import ShowMoreText from 'react-show-more-text';
-import {
-  MDBCard,
-  MDBCardBody,
+import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBDropdownToggle,
-  MDBBtn,
-} from 'mdbreact';
-import ViewImage from './ViewImage';
-import EditArt from './EditArt';
+  MDBTableHead, MDBModalFooter} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-// import axios from 'axios';
-class PendingArtworkTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: [],
-    };
-  }
+import React, { Component, Fragment } from 'react'
 
-  componentDidMount() {
+import {message} from 'antd';
+import { Grid } from '@material-ui/core';
+
+ class PendingArtwork extends Component {
+  state = {
+    modal: false,
+    items:[]
+   
+  };
+
+   componentDidMount() {   
     let {
       startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
     } = this.props;
@@ -35,170 +25,217 @@ class PendingArtworkTable extends Component {
     getArtists();
     getStyles();
     getCategories();
-    // axios.get(
-    //   //"https://artbasically.herokuapp.com/artworkRoute/getArtworks",
-    //   "http://192.168.86.38:4000/",
-    //   {
-    // }).then(res => {
-    //   if (res.data.length !== 0){
-    //     var base64Flag = 'data:image/jpeg;base64,';
-    //     let images = []
-    //     let imgArray = res.data.map((image , index) => {
-    //       images.push([ base64Flag+this.arrayBufferToBase64(res.data[index].img.data.data),  res.data[index].img.id])
-    //   })
 
-    //   this.setState({
-    //     img: images
-
-    //   })
-
-    //   }
-    // })
   }
-
-  executeOnClick(isExpanded) {
-    console.log(isExpanded);
-  }
+  
 
   render() {
-    let {
-      startingStore: {listOfArtworks, editArtwork, artwork},
-    } = this.props;
+    let { startingStore: {listOfArtworks, editArtwork, artwork}} = this.props;
 
-    function themeType(array) {
-      let arrayList = '';
-      array.map((theme) => {
-        if (theme !== '' && array.length > 1) {
-          arrayList += `${theme}, `;
-        } else if (array.length === 1 && array[0] !== '') {
-          arrayList += `${theme}`;
-        } else {
-          arrayList += 'No Categories Selected';
-        }
-      });
-      return arrayList;
+    
+    function createData(artworkDB,id,title,artist, style, date, price,action) {
+      return { artworkDB,id,title,artist, style, date, price,action };
     }
 
-    let pendingArtwork = listOfArtworks.filter(
-      (art) => art.artworkStatus === 'Pending'
-    );
+let pArtworks = listOfArtworks.filter((art) => {
+            if (art.artworkStatus === 'Pending') {
+              return art;
+            }
+          }).map(artworks =>{
+            return(createData(
+           artworks,artworks.artworkID,artworks.artName
+           ,artworks.artistName,artworks.artStyle,artworks.dateAdded
+           ,artworks.artPrice
+            ))
+          })
+
+          let  info = (itm) => {
+            artwork.setProperty('artStyle',itm.artStyle)
+            artwork.setProperty('artTheme',itm.artTheme)
+            artwork.setProperty('artSize',itm.artSize)
+            artwork.setProperty('artCategory',itm.artCategory)
+            artwork.setProperty('artworkID',itm.artworkID)
+            artwork.setProperty('artName',itm.artName)
+            artwork.setProperty('artDescription',itm.artDescription)
+            artwork.setProperty('artPrice',itm.artPrice)
+            artwork.setProperty('artistName',itm.artistName)
+            artwork.setProperty('artworkDateCreated',itm.artworkDateCreated)
+            artwork.setProperty('artDimension',itm.artDimension)
+            artwork.setProperty('artType',itm.artType)
+            artwork.setProperty('dateAdded',itm.dateAdded)
+            artwork.setProperty('artworkImg',itm.artworkImg)
+            this.setState({
+              modal: !this.state.modal
+            });
+            };
+
+            let  close = () => {
+              this.setState({
+                modal: false
+              });
+              };
+        let  approve = (data) => {
+         
+
+
+
+
+          artwork.setProperty('_id', data._id);
+          artwork.setProperty('artworkStatus','Approved');
+
+          editArtwork();
+
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Arwork Approved', 3));
+          };
+          setTimeout(() =>{
+            success()
+          },1000)
+          };
+          let reject =(data)=>{
+            artwork.setProperty('_id', data._id);
+            artwork.setProperty('artworkStatus','Rejected');
+  
+            editArtwork();
+
+            const success = () => {
+              message
+                .loading('', 1)
+                .then(() => message.success('Arwork Rejected', 3));
+            };
+
+            setTimeout(() =>{
+              success()
+            },1000)
+          }
+        
+
+const PendingArtworkTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'No.',
+        field: 'no',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Title',
+        field: 'title',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Artist',
+        field: 'artist',
+        sort: 'asc',
+        width: 'auto'
+      },
+
+      {
+        label: 'Style',
+        field: 'style',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Price',
+        field: 'price',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
     
+    ],
+    rows: 
+   
+    [...pArtworks.map((row,i) => {
+      let no = i+1;
+      return(
 
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Pending Artworks List</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th className='showmore'>Description</th>
-                    <th>Artist</th>
-                   
-                    <th>Style</th>
-                    <th>Price</th>
-                  
-                    <th className='act'>Actions</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {pendingArtwork.reverse().map((data) => (
-                    <tr>
-                      <td>{data.artworkID}</td>
-                      <td>{data.artName}</td>
-                      <td className='showmore'>
-                        <ShowMoreText
-                          /* Default options */
-                          lines={1}
-                          more='Show more'
-                          less='Show less'
-                          anchorClass=''
-                          onClick={this.executeOnClick}
-                          expanded={false}
-                        >
-                          {data.artDescription}
-                        </ShowMoreText>
-                      </td>
-                      <td>{data.artistName}</td>
-                 
-                      {/* {data.catType.map(type => <td>{type}</td>)} */}
-                      {/* {data.styleType.map(type => <td>{type}</td>)} */}
-                      <td>{themeType(data.artStyle)}</td>
-               
-                      {/* <td>{data.styleType}</td> */}
-                      <td>{data.artPrice}</td>
-                     
-                      <td className='artworkactions'>
-                        <div className='actionsIcons'>
-                          <ViewImage data={data.artworkImg} />
-                          <EditArt data={data} />
-                          <div>
-                            <a href='#!' className='viewimage actdel'>
-                              <MDBIcon icon='trash-alt' />
-                            </a>
-                          </div>
-                        </div>
-                        <MDBDropdown className='ddtable clearfix'>
-                          <MDBDropdownToggle caret color='#fae933'>
-                            CONFIRM/REJECT
-                          </MDBDropdownToggle>
-                          <MDBDropdownMenu color='#fae933 '>
-                            <MDBDropdownItem>
-                              <MDBBtn
-                                className='btnact'
-                                onClick={() => {
-                                  artwork.setProperty('_id', data._id);
-                                  artwork.setProperty(
-                                    'artworkStatus',
-                                    'Approved'
-                                  );
+     {
+        no: `${no}`,
+        id: `${row.id}`,
+        title: `${row.title}`,
+        artist: `${row.artist}`,
+      
+        style: `${row.style}`,
+        price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+        action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'> Info</MDBBtn><MDBBtn style={{float:'left'}}  onClick={()=>approve(row.artworkDB)} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>reject(row.artworkDB)} color='reject'> Reject</MDBBtn></div>,
+      
 
-                                  editArtwork();
-                                }}
-                              >
-                                CONFIRM{' '}
-                                <MDBIcon
-                                  icon='check-circle'
-                                  className='actionicon'
-                                />
-                              </MDBBtn>
-                            </MDBDropdownItem>
-                            <MDBDropdownItem>
-                              <MDBBtn
-                                className='btnact'
-                                onClick={() => {
-                                  artwork.setProperty('_id', data._id);
-                                  artwork.setProperty(
-                                    'artworkStatus',
-                                    'Rejected'
-                                  );
+     }
+     
+     ) })
+    ]
 
-                                  editArtwork();
-                                }}
-                              >
-                                REJECT{' '}
-                                <MDBIcon
-                                  icon='times-circle'
-                                  className='actionicon'
-                                />
-                              </MDBBtn>
-                            </MDBDropdownItem>
-                          </MDBDropdownMenu>
-                        </MDBDropdown>
-                      </td>
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
-  }
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+  
+  <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+          <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
+          <MDBModalBody>
+            <Grid container direction='row' xs={12}>
+            <Grid item xs={12}>
+            <span className='arttitle'>
+{artwork.artName}, {artwork.artworkDateCreated}
+      </span>
+       </Grid>
+       <Grid item xs={4}  >
+       <div className='artImg'  >
+                    <img
+                
+                      src={artwork.artworkImg}/></div>
+</Grid>
+<Grid item xs={8}  >
+<div style={{padding:'10px'}}>
+    <h6>Theme : {artwork.artTheme}</h6>
+
+                    <h6>Style : {artwork.artStyle} </h6>
+    <h6>Size : {artwork.artSize}</h6>
+    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Description : </h6>
+    <p>{artwork.artDescription}</p>
+                    </div>
+                    </Grid>
+                    </Grid>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={()=>close()}>Close</MDBBtn>
+         
+          </MDBModalFooter>
+        </MDBModal>
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(PendingArtworkTable));
+return (
+  <PendingArtworkTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(PendingArtwork))

@@ -5,7 +5,7 @@ import ArtworkFilter from '../../components/ArtworkFilter';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
-export class Artworks extends Component {
+class Artworks extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ export class Artworks extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let {
       startingStore: {getArtists, getArtworkInfo, getCategories},
     } = this.props;

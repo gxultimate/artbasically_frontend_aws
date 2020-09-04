@@ -1,133 +1,156 @@
-import React, {Component} from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
+
+import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
-} from 'mdbreact';
+  MDBTableHead,} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import ViewData from '../sections/ViewData';
-class PendingOrders extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: [],
-    };
-  }
+import React, { Component, Fragment } from 'react'
+
+import {message} from 'antd';
+
+
+ class PendingPrint extends Component {
+  state = {
+    modal: false,
+    items:[]
+   
+  };
 
   componentDidMount() {
     let {
       startingStore: {getOrders, getAccounts},
     } = this.props;
-    // getCategories();
+   
     getAccounts();
     getOrders();
   }
-
-  arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
-  }
-
-  // checkList = (id) => {
-  //   let src = '';
-  //   // let imgsrc = this.state.img.filter((img) => {
-  //   // 	if (img[1][0] === id) {
-  //   // 		src += img[0];
-  //   // 	}
-  //   // });
-  //   console.log(this.state.img, 'sdsdsds');
-  //   return src;
-  // };
+  
 
   render() {
-    let {
-      startingStore: {listOfOrders, editOrder, listOfUsers},
-    } = this.props;
-    let listOfPending = listOfOrders.filter((Pending) => {
-      if (Pending.orderStatus === 'Pending Print') {
-        return Pending;
-      }
-    });
+    let { startingStore: {listOfOrders,listOfUsers, editOrder}} = this.props;
 
-    let findName = (accID) => {
-      let aw = listOfUsers.map((user) => {
-        if (user._id === accID) {
-          return `${user.accFname} ${user.accLname}`;
-        }
-      });
-      return aw;
-    };
+    
+    function createData(orderDB,items,id, orderBy, date, paymentStat,action) {
+      return { orderDB,items,id, orderBy, date, paymentStat,action };
+    }
 
-    return (
-      <MDBRow className='mb-4'>
-        <MDBCol md='12'>
-          <MDBCard>
-            <MDBCardBody>
-              <h3>Pending Orders</h3>
-              <MDBTable hover className='tablescroll'>
-                <MDBTableHead color='blue-grey lighten-4'>
-                  <tr>
-                   
-                    <th>Account ID </th>
-                    <th>Ordered by</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Payment Status</th>
-                    <th>Payment Method</th>
-                    <th className='act'>Actions</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                  {listOfPending.reverse().map((data) => (
-                    <tr>
-                      <td>{data.orderID}</td>
-                 
-                      <td> {findName(data.accID)} </td>
-                      <td>{data.orderDate}</td>
-                      <td>{data.orderStatus}</td>
-                      <td>{data.paymentStatus}</td>
-                      <td>{data.modeOfPayment}</td>
-                      <td className='oactions'>
-                        <span>
-                          <ViewData data={data.orderItems} />{' '}
-                        </span>
-                        <span className='btncon'>
-                          <a
-                            href='#!'
-                            className='approve'
-                            onClick={() =>
-                              editOrder(data._id, 'Delivery', data.accID)
-                            }
-                          >
-                            Approve
-                          </a>
-                          <a
-                            href='#!'
-                            className='reject'
-                            onClick={() =>
-                              editOrder(data._id, 'PrintRejected', data.accID)
-                            }
-                          >
-                            Reject
-                          </a>
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    );
-  }
+let Corder = listOfOrders.filter((Delivery) => {
+            if (Delivery.orderStatus === 'PendingPrint') {
+              return Delivery;
+            }
+          }).map(orders =>{
+            return(createData(
+           orders,orders.orderItems,orders.orderID,listOfUsers.filter(usr=> usr._id === orders.accID).map(user =>( user.accFname
+              )),orders.orderDate,orders.paymentStatus
+            ))
+          })
+
+
+        let  approve = (itm) => {
+          editOrder(itm._id, 'Printing', itm.accID)
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Approved to print', 3));
+          };
+          setTimeout(() =>{
+            success()
+          },1000)
+          };
+          let reject =(itm)=>{
+            editOrder(itm._id, 'Rejected', itm.accID)
+
+            const success = () => {
+              message
+                .loading('', 1)
+                .then(() => message.success('Order Rejected', 3));
+            };
+
+            setTimeout(() =>{
+              success()
+            },1000)
+          }
+        
+
+const PendingPrintTable = () => {
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Order By',
+        field: 'orderBy',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Date',
+        field: 'date',
+        sort: 'asc',
+        width: 'auto'
+      },
+
+      {
+        label: 'Payment Stat',
+        field: 'paymentStat',
+        sort: 'asc',
+        width: 'auto'
+      },
+      {
+        label: 'Action',
+        field: 'action',
+        sort: 'asc',
+        width: 'auto'
+      },
+    
+    ],
+    rows: 
+   
+    [...Corder.map((row,i) => (
+      
+     {
+        id: `${row.id}`,
+        orderBy: `${row.orderBy}`,
+        date: `${row.date}`,
+      
+        paymentStat: `${row.paymentStat}`,
+        action:<div><MDBBtn  onClick={()=>approve(row.orderDB)} color='approve'>Approve</MDBBtn>
+        <MDBBtn  onClick={()=>reject(row.orderDB)} color='reject'> Reject</MDBBtn></div>,
+      
+
+     }
+     
+     ))
+    ]
+
+  };
+
+  return (
+    <Fragment>
+    <MDBDataTable
+      striped
+      bordered
+      small
+      data={data}
+    />
+
+
+  </Fragment>
+  );
 }
 
-export default inject('startingStore')(observer(PendingOrders));
+return (
+  <PendingPrintTable/>
+)
+}
+}
+
+
+
+export default inject('startingStore')(observer(PendingPrint))

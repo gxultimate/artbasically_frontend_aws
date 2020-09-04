@@ -40,7 +40,7 @@ class ViewRoom extends Component {
             className='closeviewinroom'
             color='transparent'
           >
-            Close View in Room
+            Close 
           </MDBBtn>
         </MDBModal>
       </div>

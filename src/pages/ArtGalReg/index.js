@@ -51,7 +51,7 @@ import GmailReg from './../../components/RegisterGmail/'
       startingStore: {addAccount, account},
     } = this.props;
     account.setProperty('accessType', 'Standard')
-    account.setProperty('acc_Status', 'active')
+    account.setProperty('acc_Status', 'Active')
     account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
     account.setProperty('accID',  `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`)
     account.setProperty('password',this.state.password)
@@ -60,7 +60,7 @@ import GmailReg from './../../components/RegisterGmail/'
 
     const success = () => {
       // message.then(() =>
-      message.success('You can now login your account', 2);
+      message.success('You have been successfully registered', 2);
       // );
     };
     setTimeout(() => {
@@ -100,9 +100,9 @@ import GmailReg from './../../components/RegisterGmail/'
           <div className='reg clearfix'>
             <div className='left'>
               <h2>
-                Art Gallery <br /> Registration
+                Art Enthusiast <br /> Registration
               </h2>
-              <p>Fill up the form and start sharing your artworks!</p>
+              <p>Fill up the form and start exploring the best artworks!</p>
             </div>
             <form onSubmit={this.submitHandler} className='regform formbtn'>
          
@@ -160,7 +160,7 @@ import GmailReg from './../../components/RegisterGmail/'
               </MDBInput>
   
               <MDBInput
-                label='Full Address'
+                label='Home Address'
                 type='text'
                 style={{textTransform: 'capitalize'}}
                 onChange={(accAddress) =>

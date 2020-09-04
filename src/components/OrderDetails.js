@@ -27,11 +27,11 @@ class OrderDetails extends Component {
       this.setState({
         steps: 1,
       });
-    } else if (status === 'Pending Print' || status === 'Pending Printing') {
+    } else if (status === 'PendingPrint' || status === 'Printing') {
       this.setState({
         steps: 2,
       });
-    } else if (status === 'Delivery') {
+    } else if (status === 'ForDelivery') {
       this.setState({
         steps: 3,
       });
@@ -215,7 +215,7 @@ class OrderDetails extends Component {
                       : '0').toLocaleString('en-GB', {
                         style: 'currency',
                         currency: 'PHP',
-                      })}
+                      }).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                   </MDBCol>
                 </MDBRow>
                 {/* <div className='actsbtn'>

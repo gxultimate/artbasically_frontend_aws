@@ -17,10 +17,7 @@ export class CategoryTab extends Component {
                 <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Categories</MDBBreadcrumbItem>
               </MDBBreadcrumb>
-              <MDBFormInline className="md-form m-0 adminsearch">
-                <input className="form-control form-control-sm" type="search" placeholder="Type your query" aria-label="Search" />
-                <MDBBtn size="sm" color="#FAE933" className="my-0" type="submit"><MDBIcon icon="search" /></MDBBtn>
-              </MDBFormInline>
+        
             </MDBCardBody>
           </MDBCard>
         </div>
