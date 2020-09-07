@@ -3,17 +3,8 @@ import {action, decorate} from 'mobx';
 
 class Api {
   api = axios.create({
-    // baseURL: 'https://0390f98b29fa.ngrok.io/',
-    // baseURL: "https://artbasicallymaster.herokuapp.com/"
-    // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
-    baseURL: 'http://localhost:4000/',
-    // baseURL: 'http://localhost:4000/',
-    // baseURL: "https://artbasically.com/server"
+    baseURL: '/api',
   });
-
-  // getUsers = () => {
-  //   return this.api.get("accounts")
-  // }
 
   // ACCOUNT
   addaccount = (data) => {
@@ -42,6 +33,14 @@ class Api {
 
   loginaccount = async (data) => {
     return this.api.post('accountsRoute/loginAccounts', {
+      mode: 'cors',
+      data: data,
+    });
+  };
+
+  loginfbaccount = async (data) => {
+   
+    return this.api.post('accountsRoute/loginFBAccounts', {
       mode: 'cors',
       data: data,
     });
@@ -218,6 +217,7 @@ decorate(Api, {
   addaccount: action,
   getaccounts: action,
   loginaccount: action,
+  loginfbaccount: action,
   editAccount: action,
   addartwork: action,
   getartwork: action,

@@ -16,7 +16,13 @@ class FbLogin extends Component {
   };
 
   responseFacebook = (response) => {
+    let { startingStore: { addAccount, account ,loginFBAccount ,getArtists,
+      getArtworkInfo,
+      getEmergingArtistArtwork,
+      getArtistFollowArtwork,listOfUsers} } = this.props;
     console.log(response,'ress');
+    account.setProperty('accFname',response.name)
+    account.setProperty('accEmailAddress',response.email)
     if (response.email === undefined || response.email === null ){
       console.log('error')
       }
@@ -28,54 +34,59 @@ class FbLogin extends Component {
       email: response.email,
       picture: response.picture.data.url,
     });
-    let { startingStore: { addAccount, account ,loginAccount ,getArtists,
-      getArtworkInfo,
-      getEmergingArtistArtwork,
-      getArtistFollowArtwork,listOfUsers} } = this.props;
-      
-    loginAccount().then((res) => {
+  
+      setTimeout(()=>{
+    loginFBAccount().then((res) => {
      
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
       getArtistFollowArtwork(account.accEmailAddress);
-      if (res === true) {
+      if (res === 1) {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
-            .then(() => message.error('Login Unsuccessful', 1));
+            .then(() => message.error('Welcome to artBasically', 1));
         };
 
         setTimeout(() => {
           success();
         }, 1000);
-        this.props.history.push('/');
+        this.props.history.push('/ArtistHome');
       } else if (res === 2) {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
+            .then(() => message.success('Welcome to artBasically', 1));
         };
 
         setTimeout(() => {
           success();
         }, 200);
         this.props.history.push('/Home');
-      } else if 
-      // (typeof res === 'string')
-      ( res === 4)
-       {
+      }else if (res === 3) {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
-            .then(() => message.success('Successfully Login', 1));
+            .then(() => message.success('Please wait for your account approval', 1));
         };
 
         setTimeout(() => {
           success();
         }, 200);
-        this.props.history.push(`/Home`);
-      } else {
+        this.props.history.push('/Home');
+      }else if (res === 4) {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.success('Account rejected', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        this.props.history.push('/Home');
+      }  else {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -88,7 +99,7 @@ class FbLogin extends Component {
         this.props.history.push('/');
       }
     });
-
+  },1000)
   }
     
   };

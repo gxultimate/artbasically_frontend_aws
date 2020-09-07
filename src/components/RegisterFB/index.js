@@ -71,11 +71,18 @@ else{
   
 
   if (fil === 0 || fil === null){
+    let stat ='';
+    if (this.props.user === 'Standard'){
+      stat = 'Active'
+
+    }else{
+      stat = 'Pending'
+    }
         account.setProperty('accessType', this.props.user);
-        account.setProperty('acc_Status', 'Pending');
+        account.setProperty('acc_Status', stat);
   
         account.setProperty("accEmailAddress", response.email)
-        account.setProperty('accID', response.userID)
+        account.setProperty('accID', `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`)
         account.setProperty("accFname", response.name)
     
         account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
@@ -87,47 +94,22 @@ else{
               getEmergingArtistArtwork();
               getArtists();
               getArtistFollowArtwork(account.accEmailAddress);
-              if (res === true) {
+            if (res === 2) {
                 const success = () => {
                   message
                     .loading('Signing in..', 1.2)
-                    .then(() => message.error('Login Unsuccessful', 1));
-                };
-        
-                setTimeout(() => {
-                  success();
-                }, 1000);
-                this.props.history.push('/');
-              } else if (res === 2) {
-                const success = () => {
-                  message
-                    .loading('Signing in..', 1.2)
-                    .then(() => message.success('Successfully Login', 1));
+                    .then(() => message.success('Welcome to artBasically', 1));
                 };
         
                 setTimeout(() => {
                   success();
                 }, 200);
                 this.props.history.push('/Home');
-              } else if 
-              // (typeof res === 'string')
-              ( res === 4)
-               {
+              }  else {
                 const success = () => {
                   message
                     .loading('Signing in..', 1.2)
-                    .then(() => message.success('Successfully Login', 1));
-                };
-        
-                setTimeout(() => {
-                  success();
-                }, 200);
-                this.props.history.push(`/Home`);
-              } else {
-                const success = () => {
-                  message
-                    .loading('Signing in..', 1.2)
-                    .then(() => message.error('Login Unsuccessful', 1));
+                    .then(() => message.error('Registration Unsuccessful', 1));
                 };
         
                 setTimeout(() => {

@@ -73,6 +73,8 @@ let users = listOfUsers.filter((usr) => {
               account.setProperty('artistDescription',itm.artistDescription)
               account.setProperty('acc_Documents',itm.acc_Documents)
               account.setProperty('profile_Img',itm.profile_Img)
+              account.setProperty('accEmailAddress',itm.accEmailAddress)
+              account.setProperty('password',itm.password)
               this.setState({
                 modal: true
               
@@ -85,6 +87,7 @@ let users = listOfUsers.filter((usr) => {
         
        account.setProperty('_id',itm._id)
        account.setProperty('acc_Status','Active')
+      
 editAccount()
        const success = () => {
         message

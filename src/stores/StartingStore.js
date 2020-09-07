@@ -139,6 +139,36 @@ class StartingStore {
     });
   };
 
+
+  loginFBAccount = () => {
+    return new Promise((resolve, reject) => {
+      this.api.loginfbaccount(this.account).then((resp) => {
+       
+       
+        if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(1);
+        }else if (
+          
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' ||
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'
+        ) {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(2);
+        }else if (resp.data.acc_Status === 'Pending'){
+          resolve(3)
+         
+        }else if (resp.data.acc_Status === 'Rejected'){
+          resolve(3)
+         
+        }
+         else{
+          resolve(false);
+        }
+      });
+    });
+  };
+
   addArtwork = () => {
   
     this.api.addartwork(this.artwork).then((resp) => {
@@ -609,6 +639,8 @@ decorate(StartingStore, {
   addPrintSize:action,
   getPrintSize:action,
   editPrintSize:action,
+  loginAccount:action,
+  loginFBAccount:action,
 });
 
 export default StartingStore;
