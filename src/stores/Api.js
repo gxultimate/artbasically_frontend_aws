@@ -3,6 +3,12 @@ import {action, decorate} from 'mobx';
 
 class Api {
   api = axios.create({
+    // baseURL: 'https://0390f98b29fa.ngrok.io/',
+    // baseURL: "https://artbasicallymaster.herokuapp.com/"
+    // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
+    baseURL: 'http://localhost:4000/',
+    // baseURL: 'http://localhost:4000/',
+    // baseURL: "https://artbasically.com/server"
   });
 
   // getUsers = () => {
