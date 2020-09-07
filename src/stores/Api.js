@@ -6,7 +6,7 @@ class Api {
     // baseURL: 'https://0390f98b29fa.ngrok.io/',
     // baseURL: "https://artbasicallymaster.herokuapp.com/"
     // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
-    baseURL: 'http://localhost:4000/',
+    baseURL: '/api',
     // baseURL: 'http://localhost:4000/',
     // baseURL: "https://artbasically.com/server"
   });
