@@ -3,18 +3,9 @@ import {action, decorate} from 'mobx';
 
 class Api {
   api = axios.create({
-<<<<<<< HEAD
-    baseURL: '/api',
-=======
-    // baseURL: 'https://0390f98b29fa.ngrok.io/',
-    // baseURL: "https://artbasicallymaster.herokuapp.com/"
-    // baseURL: "https://gxultimate-artbasicallybackend.glitch.me/"
-    baseURL: '/api',
-    // baseURL: 'http://localhost:4000/',
-    // baseURL: "https://artbasically.com/server"
->>>>>>> 7ab54706d0f54f2b4c7f375e912fae87529c82fd
-  });
 
+    baseURL: '/api',
+  })
   // ACCOUNT
   addaccount = (data) => {
     return this.api.post('accountsRoute/addAccounts', {
