@@ -23,22 +23,25 @@ class AdminLogin extends Component {
 
      
         
-       setTimeout(()=>
+       setTimeout(()=>{
        success()
-       ,10)
+       },200)
+       setTimeout(()=>
         this.props.history.push('/AdminHome')
-       
+        ,500)
       } else {
         const success = () => {
           message
             .loading('Signing in..', 0.5)
             .then(() => message.error('Email or password is incorrect', 1.5));
         };
-
+        setTimeout(()=>{
+          success()
+          },200)
         setTimeout(() => {
-          success();
-        }, 100);
-        this.props.history.push('/Admin');
+          this.props.history.push('/Admin');
+        }, 500);
+    
       }
     });
   };
