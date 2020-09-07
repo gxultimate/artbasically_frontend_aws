@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {MDBInput, MDBBtn} from 'mdbreact';
 import logo from '../images/adminlogo.png';
 import {inject, observer} from 'mobx-react';
-
+import {message} from 'antd';
 class PartnerLogin extends Component {
   submitHandler = (event) => {
     event.preventDefault();
@@ -13,9 +13,31 @@ class PartnerLogin extends Component {
     } = this.props;
     loginAccount().then((res) => {
       if (res === 3) {
+        const success = () => {
+          message
+            .loading('Signing in..', 1)
+            .then(() => message.success('Welcome to Art,Basically!', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        setTimeout(()=>{
         this.props.history.push('/PrintingPartner');
+      },500)
       } else {
+        const success = () => {
+          message
+            .loading('Signing in..', 1)
+            .then(() => message.success('Email or password is incorrect', 1));
+        };
+
+        setTimeout(() => {
+          success();
+        }, 200);
+        setTimeout(()=>{
         this.props.history.push('/PartnerLogin');
+      },500)
       }
     });
   };
