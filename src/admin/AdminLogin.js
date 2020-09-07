@@ -28,7 +28,7 @@ class AdminLogin extends Component {
        },200)
        setTimeout(()=>
         this.props.history.push('/AdminHome')
-        ,1000)
+        ,1500)
       } else {
         const success = () => {
           message
@@ -40,7 +40,7 @@ class AdminLogin extends Component {
           },200)
         setTimeout(() => {
           this.props.history.push('/Admin');
-        }, 1000);
+        }, 1500);
     
       }
     });
