@@ -424,7 +424,8 @@ class StartingStore {
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     return new Promise((resolve, reject) => {
       this.api.getSingleArtists(id).then((resp) => {
-        if (resp.data !== false && resp.data.length !== 0) {
+       
+        if (userData !== null) {
           this.listofArtistInfo = resp.data[0];
           if (resp.data[0].accFollowers.includes(userData.accEmailAddress)) {
             this.followed = true;

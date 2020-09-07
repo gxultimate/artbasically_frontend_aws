@@ -49,7 +49,7 @@ class CategoryTable extends Component {
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
-                    {listOfCategories.reverse().map((data,index) => {
+                    {listOfCategories.map((data,index) => {
                       let no = index +1;
                       return(
                       <tr key={index}>
@@ -81,7 +81,7 @@ class CategoryTable extends Component {
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
-                    {listOfStyles.reverse().map((data,index) => {
+                    {listOfStyles.map((data,index) => {
                       let no = index +1;
                       return(
                       <tr key ={index}>
@@ -115,7 +115,7 @@ class CategoryTable extends Component {
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
-                    {listOfPrintSize.reverse().map((data,index) => {
+                    {listOfPrintSize.map((data,index) => {
 
                         let no = index +1;
 return(

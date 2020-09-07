@@ -49,6 +49,7 @@ export class Homepage extends Component {
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
         listOfEmergingArtist,
+        getPrintSize
       },
     } = this.props;
     if (listOfEmergingArtist) {
@@ -56,6 +57,7 @@ export class Homepage extends Component {
       getEmergingArtistArtwork();
       getArtworkInfo();
       getArtists();
+      getPrintSize()
     }
   }
 
@@ -76,7 +78,7 @@ export class Homepage extends Component {
         <ul className='col3img clearfix'>
           {/*  */}
           {listOfArtworks
-            .filter((item) => item.artworkStatus !== 'Pending')
+            .filter((item) => item.accID === '9420-404')
             .reverse()
             .slice(0, 3)
             .map((image) => {

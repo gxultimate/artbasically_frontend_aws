@@ -79,7 +79,7 @@ class FbLogin extends Component {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
-            .then(() => message.error('Login Unsuccessful', 1));
+            .then(() => message.error('No facebook account registered', 1));
         };
 
         setTimeout(() => {

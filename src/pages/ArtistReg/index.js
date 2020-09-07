@@ -295,14 +295,7 @@ import Resizer from 'react-image-file-resizer';
                 </div>
               </MDBInput>
             
-              <img style={{marginBottom:'8px'}} src={this.state.profileImg} ></img>
-              <div className='uploadreq clearfix'>
-                <input type='file' name='file' onChange={this.onFileChangeP} required/>
-            
-              </div>
-              <p className='req'>
-                  Profile Picture
-                </p>
+        
               
               <div className='uploadreq clearfix'>
                 <input type='file' name='file' onChange={this.onFileChange} required/>
@@ -313,6 +306,16 @@ import Resizer from 'react-image-file-resizer';
                   government-issued photo ID that meets these criteria.
                 </p>
               </div>
+
+              <img style={{marginBottom:'8px'}} src={this.state.profileImg} ></img>
+              <div className='uploadreq clearfix'>
+                <input type='file' name='file' onChange={this.onFileChangeP} required/>
+            
+              </div>
+              <p className='req'>
+                 Upload Profile Picture
+                </p>
+
               <FBReg user='Artist'/>
               <GmailReg user='Artist'/>
               <MDBBtn

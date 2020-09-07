@@ -12,6 +12,7 @@ import ViewCart from '../../components/ViewCart';
 import ViewRoom from '../../components/ViewRoom';
 import art from '../../images/artworks/art1.png';
 import {Multiselect} from 'multiselect-react-dropdown';
+import LoginCart from './../../components/CartLogin/'
 class SingleArt extends Component {
   constructor(props) {
     super(props);
@@ -98,6 +99,7 @@ class SingleArt extends Component {
       options.push(i);
     }
 
+    let mydata =JSON.parse(sessionStorage.getItem('userData'))
 
     return (
       <div className='home'>
@@ -339,13 +341,19 @@ class SingleArt extends Component {
                       How long will your order arrive?
                     </a>
                     <div style={{float: 'right'}}>
-                      <AddToBag
+                      {mydata === null ? (
+                        <LoginCart/>
+                      ):( 
+                        
+                        <AddToBag
                         cartData={listOfSingleArtwork[0]}
                         disable={
                           cart.artworkFramingOptions !== '' ? true : false
                         }
-                      />
+                      />)}
+                    
                       <ViewCart cartData={listOfSingleArtwork[0]} />
+                     
                     </div>
                   </div>
                 </form>

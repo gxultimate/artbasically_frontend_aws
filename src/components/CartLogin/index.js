@@ -134,27 +134,21 @@ class Login extends Component {
     let {
       startingStore: {account},
     } = this.props;
-let btn = this.props.login;
+
 
     return (
       <div className='btnmodal'>
-        {btn === 'ay'  ? (
- <MDBBtn
- onClick={this.toggle(1)}
- color='#FAE933'
- className='btnYellow'
->
- Add Yours
-</MDBBtn>
-        )
-        :(  <MDBBtn
+
+         <MDBBtn
           onClick={this.toggle(1)}
-          color='#FAE933'
-          className='btnBlack'
+          
+          color='yellow'
+          size='md'
+          style={{borderRadius: '50px'}}
          >
-          Add your work now
-         </MDBBtn>)
-        }
+         Add to Cart
+         </MDBBtn>
+        
        
         <MDBModal
           isOpen={this.state.modal1}
@@ -208,7 +202,7 @@ let btn = this.props.login;
                   class='custom-control-input'
                   id='rempass'
                 />
-                <label class='custom-control-label' for='rempass'>
+                <label class='custom-control-label' for='rempass' style={{marginBottom:'10px'}}> 
                   Remember me
                 </label>
               </div>

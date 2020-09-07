@@ -21,12 +21,9 @@ import Notif from './sections/Notif';
 import History from './History';
 import {inject, observer} from 'mobx-react';
 
-//import CompletedOrderTab from './CompletedOrderTab';
-//import PrintLogOut from './PrintLogOut';
-//import ArtworkTab from './ArtworkTab';
-//import UserTab from './UserTab';
-//import ArtistTab from './ArtistTab';
+
 import '../css/printart.css';
+import {withRouter} from 'react-router-dom'
 
 class PrintingPartner extends Component {
   state = {
@@ -223,4 +220,4 @@ class PrintingPartner extends Component {
   }
 }
 
-export default inject('startingStore')(observer(PrintingPartner));
+export default withRouter(inject('startingStore')(observer(PrintingPartner)))

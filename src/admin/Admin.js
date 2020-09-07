@@ -24,7 +24,8 @@ import CategoryTab from './CategoryTab';
 import Notif from './sections/Notif';
 // import Message from './sections/Message';
 import '../css/admin.css';
-
+import {inject,observer} from 'mobx-react'
+import {withRouter} from 'react-router-dom'
 class Admin extends Component {
   state = {
     collapse1: false,
@@ -37,6 +38,16 @@ class Admin extends Component {
     if(logged === null || logged === undefined){
       this.props.history.push('/Admin')
     }
+
+    let {startingStore:{getOrders, getAccounts,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
+    getAccounts();
+    getOrders();
+
+    getArtworkInfo();
+    getArtists();
+    getStyles();
+    getCategories();
+    getPrintSize()
   }
 
   toggleCollapse = (collapseID) => () => {
@@ -218,4 +229,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default withRouter(inject('startingStore')(observer(Admin)))

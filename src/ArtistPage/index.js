@@ -26,6 +26,8 @@ import Notif from './Notification';
 import Settings from './AccountSetting'
 import Profile from './Profile'
 import '../css/admin.css';
+import {withRouter} from 'react-router-dom'
+import {inject,observer} from 'mobx-react'
 
 class Admin extends Component {
   state = {
@@ -39,6 +41,15 @@ class Admin extends Component {
     if(logged === null || logged === undefined){
       this.props.history.push('/Admin')
     }
+
+    let {startingStore:{getAccounts,getOrder,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
+    getAccounts()
+    getOrder()
+    getArtworkInfo();
+    getArtists();
+    getStyles();
+    getCategories();
+    getPrintSize()
   }
 
   toggleCollapse = (collapseID) => () => {
@@ -190,4 +201,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default withRouter(inject('startingStore')(observer(Admin)))

@@ -1,7 +1,7 @@
 import {BackTop} from 'antd';
 import {MDBIcon, MDBNavLink} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import AYLogin from '../../components/AddYoursLogin/index.js';
@@ -30,16 +30,18 @@ import Navbar from '../../components/Navbar';
   componentDidMount() {
     let {
       startingStore: {
-        getArtists,
+     
         listOfEmergingArtist,
         getArtworkInfo,
         getEmergingArtistArtwork,
+        getPrintSize
       },
     } = this.props;
     if (listOfEmergingArtist) {
       getEmergingArtistArtwork();
       getArtworkInfo();
-      // getArtists();
+      getPrintSize()
+     
     }
   }
 
@@ -53,7 +55,7 @@ import Navbar from '../../components/Navbar';
       return (
         <ul className='col3img clearfix'>
           {listOfArtworks
-            .filter((item) => item.accID === '9320-279')
+            .filter((item) => item.artistName === 'Cleon  Peterson')
             .reverse()
             .slice(0, 3)
             .map((image) => {
@@ -112,8 +114,10 @@ import Navbar from '../../components/Navbar';
             .reverse()
             .slice(0, 3)
             .map((image,i) => {
+            
               return (
-                <li key={i}>
+                <Fragment key={i}>
+                <li >
                   <a href='#!' className='artlink'>
                     <div className='artlabel'>
                       <span className='new'>NEW</span>
@@ -152,12 +156,14 @@ import Navbar from '../../components/Navbar';
                     </MDBBtn> */}
                   </a>
                 </li>
+                </Fragment>
               );
             })}
         </ul>
       );
     }
     return (
+      <Fragment>
       <div className='home'>
         <Navbar />
         <div className='maincon con'>
@@ -305,10 +311,14 @@ import Navbar from '../../components/Navbar';
               Basically, be famous, <br /> without all the work.
             </h2>
             <p>Post your art and start earning like crazy.</p>
-            <MDBNavLink to='#!' className='btnBlack'>
-              Add your work now
-            </MDBNavLink>
-            <a href='#!' className='learnmore'>
+            
+
+            {userData !== null && userData !== undefined ? (
+            <MDBNavLink to='/Upload' className='btnBlack'>
+            Add your work now
+          </MDBNavLink>)
+        : (<AYLogin login={'aywn'} />)}
+            <a href='/Upload' className='learnmore'>
               Learn More <MDBIcon icon='caret-right' />{' '}
             </a>
           </div>
@@ -325,14 +335,12 @@ import Navbar from '../../components/Navbar';
             <MatchRouteEmergingArtist />
           </section>
           <div className='bttop'>
-            {/* <MDBNavLink to='/Upload' className='btnYellow'>
-              Add Yours
-            </MDBNavLink> */}
+         
 
             {userData !== null && userData !== undefined ? (<MDBNavLink to='/Upload' className='btnYellow'>
               Add Yours
             </MDBNavLink>)
-        : (<AYLogin />)}
+        : (<AYLogin login={'ay'}/>)}
             <BackTop>
               {' '}
               <a href='#!'>
@@ -343,6 +351,7 @@ import Navbar from '../../components/Navbar';
         </div>
         <Footer />
       </div>
+      </Fragment>
     );
   }
 }
