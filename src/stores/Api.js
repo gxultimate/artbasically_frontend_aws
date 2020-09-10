@@ -39,8 +39,8 @@ class Api {
 		});
 	};
 
-	loginemail = async (data) => {
-		return this.api.post('/loginEmail', {
+	loginfbaccount = async (data) => {
+		return this.api.post('/loginFBAccounts', {
 			mode: 'cors',
 			data: data
 		});
