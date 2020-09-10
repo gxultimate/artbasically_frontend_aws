@@ -33,6 +33,8 @@ class SingleArt extends Component {
       isToggleOn: true,
     };
     this.handleClick = this.handleClick.bind(this);
+
+    
   }
 
   handleClick() {
@@ -45,6 +47,8 @@ class SingleArt extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+    
     let {
       startingStore: {
         getArtistArtwork,

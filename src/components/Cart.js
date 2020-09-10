@@ -2,7 +2,7 @@ import {MDBBtn, MDBCol, MDBIcon, MDBInput, MDBRow} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import notif from './Notif';
+import Notification from './Notif';
 import moment from 'moment'
 
 class OrderTab extends Component {
@@ -77,24 +77,34 @@ class OrderTab extends Component {
     let date = new Date();
 
     let {
-      startingStore: {order, addOrder, editToCart},
+      startingStore: {order, addOrder, editToCart,notif,addNotif},
     } = this.props;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     
     order.setProperty('orderID',`${moment().format('YY')}-${ Math.floor(100 + Math.random() * 900)}`)
     order.setProperty('modeOfPayment', 'COD');
-    order.setProperty('orderDate', moment().format('MMM/DD/YYYY'));
+    order.setProperty('orderDate', moment().format('MMM/DD/YYYY,h:mm:ssa'));
     order.setProperty('orderItems', this.state.selected);
     order.setProperty('orderStatus', 'Pending');
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
     order.setProperty('artworkPaymentAmount',this.state.totalPrice)
     addOrder();
+    console.log(userData.accFname.slice(0,3),'Slice')
+    let recipient = this.state.selected.map( ntf =>  (ntf.accID))
+    notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+    notif.setProperty('notifSender',userData.accID)
+    notif.setProperty('notifRecipient',userData.accID)
+    notif.setProperty('notifSubject','Placed order')
+    notif.setProperty('notifMsg',`${userData.accFname } order an artwork(s)`)
+    notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
+    notif.setProperty('notifStatus','unread')
+addNotif();
     if (this.state.selected.length > 1) {
       this.state.selected.map((item) => {
         editToCart(item);
      
-        notif('success', 'Checkout Successfully');
+        Notification('success', 'Checkout Successfully');
      
            setTimeout(() => {
         this.props.history.push('/Order')
@@ -103,7 +113,7 @@ class OrderTab extends Component {
     } else {
       editToCart(this.state.selected[0]);
 
-      notif('success', 'Checkout Successfully');
+      Notification('success', 'Checkout Successfully');
 
       setTimeout(() => {
         this.props.history.push('/Order')
@@ -118,6 +128,9 @@ class OrderTab extends Component {
   };
 
   render() {
+    
+
+  
     let {
       startingStore: {listOfOrder, listOfUserCart},
     } = this.props;

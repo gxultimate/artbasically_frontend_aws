@@ -17,14 +17,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
      
     };
   
-     componentDidMount() {   
-      let {
-        startingStore: {getAccounts},
-      } = this.props;
-      getAccounts();
-   
-  
-    }
+ 
     
   
     render() {

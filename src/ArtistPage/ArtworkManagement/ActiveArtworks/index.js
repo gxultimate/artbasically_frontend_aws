@@ -12,16 +12,16 @@ import { Grid } from '@material-ui/core';
      
     };
   
-     componentDidMount() {   
-      let {
-        startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
-      } = this.props;
-      getArtworkInfo();
-      getArtists();
-      getStyles();
-      getCategories();
+    //  componentDidMount() {   
+    //   let {
+    //     startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
+    //   } = this.props;
+    //   getArtworkInfo();
+    //   getArtists();
+    //   getStyles();
+    //   getCategories();
   
-    }
+    // }
     
   
     render() {
@@ -33,11 +33,7 @@ import { Grid } from '@material-ui/core';
         return { artworkDB,id,title,artist, style,  price,action };
       }
   
-  let pArtworks = listOfArtworks.filter((art) => {
-              if (art.artworkStatus === 'Approved' &&  art.accID === mydata.accID) {
-                return art;
-              }
-            }).map(artworks =>{
+  let pArtworks = listOfArtworks.filter((art) => art.artworkStatus === 'Approved' &&  art.accID === mydata.accID).map(artworks =>{
               return(createData(
              artworks,artworks.artworkID,artworks.artName
              ,artworks.artistName,artworks.artStyle

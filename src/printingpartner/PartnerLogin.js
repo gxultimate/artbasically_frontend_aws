@@ -3,6 +3,7 @@ import {MDBInput, MDBBtn} from 'mdbreact';
 import logo from '../images/adminlogo.png';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
+import {withRouter} from 'react-router-dom';
 class PartnerLogin extends Component {
   submitHandler = (event) => {
     event.preventDefault();
@@ -111,4 +112,4 @@ class PartnerLogin extends Component {
   }
 }
 
-export default inject('startingStore')(observer(PartnerLogin));
+export default withRouter(inject('startingStore')(observer(PartnerLogin)))

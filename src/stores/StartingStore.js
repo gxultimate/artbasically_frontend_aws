@@ -8,6 +8,7 @@ import Order from '../models/Order';
 import Style from '../models/Style';
 import User from '../models/User';
 import PrintSize from './../models/PrintSize'
+import Notification from './../models/Notif'
 
 class StartingStore {
   account = new Account();
@@ -17,6 +18,8 @@ class StartingStore {
   cart = new Cart();
   order = new Order();
   printsize = new PrintSize();
+  notif = new Notification();
+  listOfNotif=[];
   listOfPrintSize =[];
   listOfOrders = [];
   welcomeMessage = 'Welcome!';
@@ -98,7 +101,7 @@ class StartingStore {
       .then((resp) => {
         let user = resp.data.filter((us) => us._id === this.account._id);
        
-        resolve(user[0].acc_Status)
+        resolve('success')
         sessionStorage.setItem('userData', JSON.stringify(user[0]));
         this.listOfUsers = resp.data;
       });
@@ -140,9 +143,9 @@ class StartingStore {
   };
 
 
-  loginFBAccount = () => {
+  loginEmail = () => {
     return new Promise((resolve, reject) => {
-      this.api.loginfbaccount(this.account).then((resp) => {
+      this.api.loginemail(this.account).then((resp) => {
        
        
         if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
@@ -567,6 +570,66 @@ class StartingStore {
       }
     });
   };
+
+  addNotif = () => { 
+    return new Promise((resolve, reject) => {   
+      this.api.addnotif(this.notif)
+      .then(resp => {    
+         this.listOfNotif = resp.data
+   
+         if (resp.data !== false ) {   
+                  resolve(resp.data);       
+                  } 
+         else {         
+           resolve(false);      
+           }  
+           });
+          })
+    }
+
+    getNotif = () => { 
+   
+      return new Promise((resolve, reject) => {   
+        let getId = JSON.parse(sessionStorage.getItem('userData'))
+        console.log(getId.accID,'idd')
+        this.api.getnotif(getId.accID)
+        .then(resp => {    
+          console.log(resp.data,'notifresp')
+           this.listOfNotif = resp.data
+     
+           if (resp.data !== false ) {   
+                    resolve(resp.data);       
+                    } 
+           else {         
+             resolve(false);      
+             }  
+             });
+            })
+      }
+
+      getAllNotif = () => {
+        this.api.getallnotif()
+        .then(resp => {
+    
+         this.listOfNotif=resp.data
+        
+      
+        })
+
+      }
+
+
+      editNotif = (id, status, notif) => {
+        
+        let data = {id: id, status: status, notif: notif};
+     
+        this.api.editnotif(data).then((resp) => {
+          if (resp.data !== false) {
+            this.listOfNotif = resp.data;
+          }
+        });
+      }
+
 }
 
 decorate(StartingStore, {
@@ -640,7 +703,13 @@ decorate(StartingStore, {
   getPrintSize:action,
   editPrintSize:action,
   loginAccount:action,
-  loginFBAccount:action,
+  loginEmail:action,
+  notif:observable,
+  listOfNotif:observable,
+  addNotif:action,
+  getNotif:action,
+  getAllNotif:action,
+  editNotif:action,
 });
 
 export default StartingStore;

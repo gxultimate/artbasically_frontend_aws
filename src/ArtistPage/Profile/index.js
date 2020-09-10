@@ -21,13 +21,13 @@ class ArtistProfile extends Component {
     } = this.props;
 let mydata = JSON.parse(sessionStorage.getItem('userData'));
 
-function createData(userDB,id,fname,lname, email, address,contactno,birthYear,institution,document,description) {
-  return { userDB,id,fname,lname, email, address,contactno,birthYear,institution,document,description };
+function createData(userDB,id,fname,lname, email, address,contactno,birthYear,institution,document,description, profile_Img) {
+  return { userDB,id,fname,lname, email, address,contactno,birthYear,institution,document,description, profile_Img };
 }
 let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
 
   return(createData(
-    info,info.accID,info.accFname,info.accLname,info.accEmailAddress,info.accAddress,info.accContact,info.birthYear,info.accInstitution,info.acc_Documents,info.artistDescription
+    info,info.accID,info.accFname,info.accLname,info.accEmailAddress,info.accAddress,info.accContact,info.birthYear,info.accInstitution,info.acc_Documents,info.artistDescription,info.profile_Img
 
 
   )
@@ -57,7 +57,10 @@ let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
                 <div className='artistpp'>
                 
                
-                    <img src={row.document} alt='' />
+                <img 
+      src={row.profile_Img}
+      alt="profilePic"
+      />
                   ) 
                 </div>
                 <div className='artistInfo'>

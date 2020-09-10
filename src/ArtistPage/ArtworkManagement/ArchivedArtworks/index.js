@@ -11,16 +11,16 @@ import { Grid } from '@material-ui/core';
      
     };
   
-     componentDidMount() {   
-      let {
-        startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
-      } = this.props;
-      getArtworkInfo();
-      getArtists();
-      getStyles();
-      getCategories();
+    //  componentDidMount() {   
+    //   let {
+    //     startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
+    //   } = this.props;
+    //   getArtworkInfo();
+    //   getArtists();
+    //   getStyles();
+    //   getCategories();
   
-    }
+    // }
      
   
     render() {
@@ -32,11 +32,7 @@ import { Grid } from '@material-ui/core';
         return { artworkDB,id,title,artist, style, date, price,action };
       }
   
-  let pArtworks = listOfArtworks.filter((art) => {
-              if (art.artworkStatus === 'Archived' && art.accID === mydata.accID) {
-                return art;
-              }
-            }).map(arworks =>{
+  let pArtworks = listOfArtworks.filter((art) => art.artworkStatus === 'Archived' && art.accID === mydata.accID).map(arworks =>{
               return(createData(
              arworks,arworks.artworkID
              ,arworks.artistName,arworks.dateAdded

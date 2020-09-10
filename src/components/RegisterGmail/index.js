@@ -18,7 +18,7 @@ class GmailRegister extends Component {
       console.log(response);
       console.log(response.profileObj,);
 
-      let { startingStore: { addAccount, account ,loginAccount ,getArtists,
+      let { startingStore: { addAccount, account ,loginEmail ,getArtists,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,listOfUsers} } = this.props;
@@ -31,68 +31,67 @@ let fil = checkuser.filter(usr => usr === response.profileObj.email).length
 
 if (fil === 0 || fil === null){
       account.setProperty('accessType', this.props.user);
-      account.setProperty('acc_Status', 'pending');
-
+      if (this.props.user === 'Artist'){
+      account.setProperty('acc_Status', 'Pending');
+      }else{
+        account.setProperty('acc_Status', 'Active');
+      }
+      account.setProperty("profile_Img", response.profileObj.imageUrl)
       account.setProperty("accEmailAddress", response.profileObj.email)
-      account.setProperty('accID', response.profileObj.googleId);
+      account.setProperty('accID', `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`);
       account.setProperty("accFname", response.profileObj.givenName)
       account.setProperty("accLname", response.profileObj.familyName)
       account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'));
       addAccount().then(res => {
+        
         if(res === true){
            
-          loginAccount().then((res) => {
+          loginEmail().then((res) => {
             getArtworkInfo();
             getEmergingArtistArtwork();
             getArtists();
             getArtistFollowArtwork(account.accEmailAddress);
-            if (res === true) {
+            if (res === 1) {
               const success = () => {
                 message
                   .loading('Signing in..', 1.2)
-                  .then(() => message.error('Login Unsuccessful', 1));
+                  .then(() => message.error('Welcome to artBasically', 1));
               };
       
               setTimeout(() => {
                 success();
               }, 1000);
-              this.props.history.push('/');
-            } else if (res === 2) {
+              this.props.history.push('/ArtistHome');
+            } 
+            else if (res === 2){
               const success = () => {
                 message
                   .loading('Signing in..', 1.2)
-                  .then(() => message.success('Successfully Login', 1));
+                  .then(() => message.error('Welcome to artBasically', 1));
               };
       
-              setTimeout(() => {
+            
                 success();
-              }, 200);
+                setTimeout(() => {
               this.props.history.push('/Home');
-            } else if 
-            // (typeof res === 'string')
-            ( res === 4)
-             {
+            }, 100);
+            } 
+            
+            
+            else {
               const success = () => {
                 message
-                  .loading('Signing in..', 1.2)
-                  .then(() => message.success('Successfully Login', 1));
+                  .loading('Registering..', 1.2)
+                  .then(() => message.error('Account created', 1));
               };
       
               setTimeout(() => {
                 success();
               }, 200);
-              this.props.history.push(`/Home`);
-            } else {
-              const success = () => {
-                message
-                  .loading('Signing in..', 1.2)
-                  .then(() => message.error('Login Unsuccessful', 1));
-              };
-      
+              this.props.history.push('/RegVerify');
               setTimeout(() => {
-                success();
-              }, 200);
-              this.props.history.push('/');
+                this.props.history.push('/');
+              }, 4500);
             }
           });
 
@@ -127,7 +126,7 @@ if (fil === 0 || fil === null){
     return (
       <div>
         <GoogleLogin
-          clientId='20336597669-2frj8irujj3t3dtdvvop9p7jip354cic.apps.googleusercontent.com'
+          clientId='652149429118-9a2b3e9c3rcvr7ebaaf5kpamjro2akj5.apps.googleusercontent.com'
           buttonText='Sign up with Google'
           onSuccess={this.responseGoogle}
           onFailure={this.responseGoogle}

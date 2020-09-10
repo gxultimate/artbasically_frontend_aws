@@ -22,13 +22,13 @@ import SubmitArt from './pages/SubmitArt/';
 import ShopByPrice from './pages/ShopByPrice/';
 import ShopByCategory from './pages/ShopByCategory/';
 //Admin
-import Admin from './admin/AdminLogin';
-import AdminHome from './admin/Admin';
+import AdminLogin from './admin/AdminLogin.js';
+import AdminHome from './admin/Admin.js';
 import {ToastContainer} from 'react-toastify';
 //PrintPartner
-import PartnerLogin from './printingpartner/PartnerLogin';
-import PrintingPartner from './printingpartner/PrintingPartner';
-import ArtistHome from './ArtistPage'
+import PartnerLogin from './printingpartner/PartnerLogin.js';
+import PrintingPartner from './printingpartner/PrintingPartner.js';
+import ArtistHome from './ArtistPage/'
 import {StartingStore, Api} from './stores';
 
 const api = new Api();
@@ -73,7 +73,7 @@ class Routes extends React.Component {
         <Route exact path='/ShopByPrice' component={ShopByPrice} />
         <Route exact path='/ShopByCategory' component={ShopByCategory} />
 
-        <Route exact path='/Admin' component={Admin} />
+        <Route exact path='/Admin' component={AdminLogin} />
         <Route exact path='/AdminHome' component={AdminHome} />
         <Route exact path='/Order' component={Order} />
         <Route exact path='/PartnerLogin' component={PartnerLogin} />

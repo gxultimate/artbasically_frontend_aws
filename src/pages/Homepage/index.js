@@ -49,7 +49,8 @@ export class Homepage extends Component {
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
         listOfEmergingArtist,
-        getPrintSize
+        getPrintSize,
+        getNotif
       },
     } = this.props;
     if (listOfEmergingArtist) {
@@ -58,6 +59,7 @@ export class Homepage extends Component {
       getArtworkInfo();
       getArtists();
       getPrintSize()
+      getNotif()
     }
   }
 

@@ -133,7 +133,7 @@ function DCards(){
     return(
 
         <Fragment>
-        <Grid container spacing={3} >
+        <Grid container spacing={3} sm={12} xs={12}>
 
 <Grid item xs={4}>
 {/* <CardActionArea > */}

@@ -15,14 +15,9 @@ import {
   MDBBtn,
 } from 'mdbreact';
 
-// import Dashboard from './Dashboard';
-// import OrdersTab from './OrdersTab';
 import ArtworkTab from './ArtworkManagement';
-// import UserTab from './UserTab';
-// import ArtistTab from './ArtistTab';
-// import CategoryTab from './CategoryTab';
 import Notif from './Notification';
-// import Message from './sections/Message';
+
 import Settings from './AccountSetting'
 import Profile from './Profile'
 import '../css/admin.css';
@@ -36,20 +31,20 @@ class Admin extends Component {
   };
 
   componentDidMount(){
-    let logged = JSON.parse(sessionStorage.getItem('userData'))
+    // let logged = JSON.parse(sessionStorage.getItem('userData'))
 
-    if(logged === null || logged === undefined){
-      this.props.history.push('/Admin')
-    }
+    // if(logged === null || logged === undefined){
+    //   this.props.history.push('/Admin')
+    // }
 
-    let {startingStore:{getAccounts,getOrder,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
-    getAccounts()
-    getOrder()
-    getArtworkInfo();
-    getArtists();
-    getStyles();
-    getCategories();
-    getPrintSize()
+    // let {startingStore:{getAccounts,getOrder,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
+    // getAccounts()
+    // getOrder()
+    // getArtworkInfo();
+    // getArtists();
+    // getStyles();
+    // getCategories();
+    // getPrintSize()
   }
 
   toggleCollapse = (collapseID) => () => {

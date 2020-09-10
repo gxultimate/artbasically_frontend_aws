@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
-import GoogleLogin from 'react-google-login';
+import React, {Component,Fragment} from 'react';
+import GoogleLoginBtn from 'react-google-login';
 import {withRouter} from 'react-router-dom'
 import {inject,observer} from 'mobx-react'
 import moment from 'moment'
 import {message} from 'antd';
 
+import {
+  
+  MDBIcon
 
+} from 'mdbreact';
 import './../../css/style.css';
 import './../../css/normalize.css';
 import './../../css/printart.css';
@@ -22,73 +26,81 @@ class GmailLogin extends Component {
  
 
     if(response !== undefined || response != null){
-      console.log(response);
-      console.log(response.profileObj,);
+     
 
-      let { startingStore: {  account ,loginAccount ,getArtists,
+      let { startingStore: {  account ,loginEmail ,getArtists,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork} } = this.props;
 
 
+        account.setProperty("accEmailAddress", response.profileObj.email)
+        account.setProperty("accFname", response.profileObj.givenName)
 
 
-
-
-      loginAccount().then((res) => {
-        getArtworkInfo();
-        getEmergingArtistArtwork();
-        getArtists();
-        getArtistFollowArtwork(account.accEmailAddress);
-        if (res === true) {
-          const success = () => {
-            message
-              .loading('Signing in..', 1.2)
-              .then(() => message.error('Login Unsuccessful', 1));
-          };
-  
-          setTimeout(() => {
-            success();
-          }, 1000);
-          this.props.history.push('/');
-        } else if (res === 2) {
-          const success = () => {
-            message
-              .loading('Signing in..', 1.2)
-              .then(() => message.success('Successfully Login', 1));
-          };
-  
-          setTimeout(() => {
-            success();
-          }, 200);
-          this.props.history.push('/Home');
-        } else if 
-        // (typeof res === 'string')
-        ( res === 4)
-         {
-          const success = () => {
-            message
-              .loading('Signing in..', 1.2)
-              .then(() => message.success('Successfully Login', 1));
-          };
-  
-          setTimeout(() => {
-            success();
-          }, 200);
-          this.props.history.push(`/Home`);
-        } else {
-          const success = () => {
-            message
-              .loading('Signing in..', 1.2)
-              .then(() => message.error('Login Unsuccessful', 1));
-          };
-  
-          setTimeout(() => {
-            success();
-          }, 200);
-          this.props.history.push('/');
-        }
-      });
+        loginEmail().then((res) => {
+          getArtworkInfo();
+          getEmergingArtistArtwork();
+          getArtists();
+          getArtistFollowArtwork(account.accEmailAddress);
+          if (res === 1) {
+            const success = () => {
+              message
+                .loading('Signing in..', 1.2)
+                .then(() => message.error('Welcome to artBasically', 1));
+            };
+    
+            setTimeout(() => {
+              success();
+            }, 1000);
+            this.props.history.push('/ArtistHome');
+          } 
+          else if (res === 2){
+            const success = () => {
+              message
+                .loading('Signing in..', 1.2)
+                .then(() => message.error('Welcome to artBasically', 1));
+            };
+    
+       
+              success();
+              setTimeout(() => {
+            this.props.history.push('/Home');
+          }, 50);
+          } 
+          else if (res === 3){
+            const success = () => {
+              message
+                .loading('Signing in..', 1.2)
+                .then(() => message.error('Validating your account', 2));
+            };
+    
+            setTimeout(() => {
+              success();
+            }, 200);
+           
+            setTimeout(() => {
+              this.props.history.push('/');
+            }, 1000);
+          
+          }
+          
+          else {
+            const success = () => {
+              message
+                .loading('Signing in..', 1.2)
+                .then(() => message.error('No account registered', 1));
+            };
+    
+            setTimeout(() => {
+              success();
+            }, 200);
+           
+            setTimeout(() => {
+              this.props.history.push('/');
+            }, 1000);
+          }
+        });
     
 
     }
@@ -97,18 +109,25 @@ class GmailLogin extends Component {
     }
   };
   render() {
+
+    let googleContent = (
+      <GoogleLoginBtn
+      clientId='652149429118-9a2b3e9c3rcvr7ebaaf5kpamjro2akj5.apps.googleusercontent.com'
+      buttonText='Log in with Google'
+      onSuccess={this.responseGoogle}
+      onFailure={this.responseGoogle}
+      cookiePolicy={'single_host_origin'}
+    
+      icon={true}
+    />
+    );
+
+
     return (
-      <div>
-        <GoogleLogin
-          clientId='20336597669-2frj8irujj3t3dtdvvop9p7jip354cic.apps.googleusercontent.com'
-          buttonText='Log in with Google'
-          onSuccess={this.responseGoogle}
-          onFailure={this.responseGoogle}
-          cookiePolicy={'single_host_origin'}
-          className='GoogleLoginBtn'
-          icon={true}
-        />
-      </div>
+      <Fragment>
+        
+   {googleContent}
+      </Fragment>
     );
   }
 }

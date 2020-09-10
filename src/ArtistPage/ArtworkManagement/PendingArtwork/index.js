@@ -12,17 +12,7 @@ import { Grid } from '@material-ui/core';
      
     };
   
-     componentDidMount() {   
-      let {
-        startingStore: {getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize},
-      } = this.props;
-      getArtworkInfo();
-      getArtists();
-      getStyles();
-      getCategories();
-      getPrintSize()
-  
-    }
+   
     
   
     render() {
@@ -34,11 +24,7 @@ import { Grid } from '@material-ui/core';
         return { artworkDB,id,title,artist, style, date, price,action };
       }
   
-  let pArtworks = listOfArtworks.filter((art) => {
-              if (art.artworkStatus === 'Pending' && art.accID === mydata.accID) {
-                return art;
-              }
-            }).map(artworks =>{
+  let pArtworks = listOfArtworks.filter((art) => art.artworkStatus === 'Pending' && art.accID === mydata.accID).map(artworks =>{
               return(createData(
              artworks,artworks.artworkID,artworks.artName
              ,artworks.artistName,artworks.artStyle,artworks.dateAdded

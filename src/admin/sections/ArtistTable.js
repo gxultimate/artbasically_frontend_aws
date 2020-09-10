@@ -4,7 +4,8 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
   MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead} from 'mdbreact';
+  MDBTableHead,
+  MDBModalFooter} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
 import DownloadImage from './../sections/DownloadImage';
@@ -29,6 +30,11 @@ import {message} from 'antd';
   
 
   render() {
+    let close =()=>{
+      this.setState({
+        modal: false
+      });
+     }
     let { startingStore: {listOfUsers,editAccount, account}} = this.props;
 
     
@@ -53,7 +59,20 @@ let users = listOfUsers.filter((usr) => {
 
         let  moreinfo = (itm) => {
          
-       
+          account.setProperty('accFname',itm.accFname)
+          account.setProperty('accLname',itm.accLname)
+          account.setProperty('accAddress',itm.accAddress)
+          account.setProperty('birthYear',itm.birthYear)
+          account.setProperty('accInstitution',itm.accInstitution)
+          account.setProperty('artistDescription',itm.artistDescription)
+          account.setProperty('acc_Documents',itm.acc_Documents)
+          account.setProperty('profile_Img',itm.profile_Img)
+          account.setProperty('accEmailAddress',itm.accEmailAddress)
+          account.setProperty('password',itm.password)
+          this.setState({
+            modal: true
+          
+          });
           };
           let deactivate =(itm)=>{
             account.setProperty('_id',itm._id)
@@ -143,7 +162,73 @@ const ArtistsTable = () => {
       data={data}
     />
 
+<MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+          <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}> Artist's Profile</span></MDBModalHeader>
+        
+          <MDBModalBody>
 
+                <div className='artist'>
+            <div className='artistprofile clearfix'>
+              <div className='left'>
+                <div className='artistpp'>
+              
+                  
+                    <img 
+      src={account.profile_Img}
+      alt="profilePic"
+      />
+               
+                </div>
+                <div className='artistInfo'>
+                 <h2 className='title'>
+                      {`${account.accFname} ${account.accLname}`}
+                  
+                    </h2>
+               
+                
+                    <span className='bday'>
+                      {account.accAddress}, born{' '}
+                      {account.birthYear}
+                    </span>
+                 
+                  <span className='estart'>Established Artist</span>
+          
+                </div>
+              </div>
+              <div className='right'>
+                <ul>
+                  <li>
+                    489
+                    <span>Followers</span>
+                  </li>
+                  <li>
+                    4.8/5
+                    <span>528k Ratings</span>
+                  </li>
+                  <li>
+                    No. 1<span>Best Seller</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className='artistbio clearfix'>
+              <h4 className='paddh4'>Biography</h4>
+          
+                <p>{account.artistDescription}</p>
+            
+            </div>
+   
+          </div>
+      
+        
+      
+          </MDBModalBody>
+           
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={()=>close()}>Close</MDBBtn>
+            
+          </MDBModalFooter>
+        </MDBModal>
   </Fragment>
   );
 }

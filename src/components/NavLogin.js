@@ -208,7 +208,7 @@ class NavLogin extends Component {
               </MDBBtn>
             </form>
             <FbLogin />
-            {/* <GgLogin /> */}
+            <GgLogin />
             {/* <p className='reghere'>
               Don't have an Account?{' '}
               <a href='/UserRegistration'>Register Here.</a>

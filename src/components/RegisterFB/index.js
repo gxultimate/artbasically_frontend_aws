@@ -40,10 +40,25 @@ class FbReg extends Component {
   };
 
   responseFacebook = (response) => {
-    console.log(response,'ress');
+    let {startingStore:{listOfUsers}}=this.props;
+
+    let getEmail = listOfUsers.filter(usr=> usr.accEmailAddress === response.email).length;
 
     if (response.email === undefined || response.email === null){
     console.log('error')
+    }
+    else if (getEmail !== 0){
+      const success = () => {
+        message
+          .loading('Signing in..', 1.2)
+          .then(() => message.success('Account already registered', 1));
+      };
+
+      setTimeout(() => {
+        success();
+      }, 200);
+      this.props.history.push('/');
+    
     }
 else{
     this.setState({
@@ -148,12 +163,10 @@ else{
     }
   };
 
-  componentClicked = () => console.log('clicked');
-
   render() {
 
-    console.log(this.props.user,'user')
-    const { classes } = this.props;
+
+    
 
    
      
@@ -163,10 +176,8 @@ else{
           autoLoad={false}
           fields='name,email,picture'
           cssClass="FacebookReg"
-          FacebookIconProps={{
-            classes: { root: classes.facebookIcon }
-          }}
-          onClick={this.componentClicked}
+        
+        
           callback={this.responseFacebook}
           textButton="Sign up with Facebook"
           icon={<FacebookIcon className='fbicon' style={{color:'white'}}/>}

@@ -21,7 +21,7 @@ import Notif from './sections/Notif';
 import History from './History';
 import {inject, observer} from 'mobx-react';
 
-
+import MyAccount from './sections/AccountSetting/'
 import '../css/printart.css';
 import {withRouter} from 'react-router-dom'
 
@@ -37,11 +37,11 @@ class PrintingPartner extends Component {
       startingStore: {getOrders},
     } = this.props;
 
-    let logged = JSON.parse(sessionStorage.getItem('userData'))
+    // let logged = JSON.parse(sessionStorage.getItem('userData'))
 
-    if(logged === null || logged === undefined){
-      this.props.history.push('/PartnerLogin')
-    }
+    // if(logged === null || logged === undefined){
+    //   this.props.history.push('/PartnerLogin')
+    // }
 
     getOrders();
   }
@@ -211,7 +211,7 @@ class PrintingPartner extends Component {
               <CancelOrdertab />
             </MDBTabPane>
             <MDBTabPane tabId='6'>
-      
+      <MyAccount/>
             </MDBTabPane>
           </MDBTabContent>
         </div>

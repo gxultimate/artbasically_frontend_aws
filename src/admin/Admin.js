@@ -24,6 +24,7 @@ import CategoryTab from './CategoryTab';
 import Notif from './sections/Notif';
 // import Message from './sections/Message';
 import '../css/admin.css';
+import MyAccount from './sections/AccountSettings/'
 import {inject,observer} from 'mobx-react'
 import {withRouter} from 'react-router-dom'
 class Admin extends Component {
@@ -33,16 +34,16 @@ class Admin extends Component {
   };
 
   componentDidMount(){
-    let logged = JSON.parse(sessionStorage.getItem('userData'))
+    // let logged = JSON.parse(sessionStorage.getItem('userData'))
 
-    if(logged === null || logged === undefined){
-      this.props.history.push('/Admin')
-    }
+    // if(logged === null || logged === undefined){
+    //   this.props.history.push('/Admin')
+    // }
 
-    let {startingStore:{getOrders, getAccounts,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
+    let {startingStore:{getOrders, getAccounts,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize,getAllNotif}}=this.props;
     getAccounts();
     getOrders();
-
+    getAllNotif();
     getArtworkInfo();
     getArtists();
     getStyles();
@@ -92,7 +93,7 @@ class Admin extends Component {
         <div className='admin'>
           <MDBNavbar className='position-fixed' dark expand='md'>
             <MDBNav className='topnav'>
-              <a href='/Admin' className='logo-wrapper ablogo'>
+              <a href='/AdminHome' className='logo-wrapper ablogo'>
                 <img alt='MDB React Logo' className='img-fluid' src={logo} />{' '}
                 <p>ADMIN</p>
               </a>
@@ -220,6 +221,9 @@ class Admin extends Component {
             </MDBTabPane>
             <MDBTabPane tabId='6'>
               <CategoryTab />
+            </MDBTabPane>
+            <MDBTabPane tabId='7'>
+              <MyAccount />
             </MDBTabPane>
           </MDBTabContent>
         </div>

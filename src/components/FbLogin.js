@@ -16,11 +16,11 @@ class FbLogin extends Component {
   };
 
   responseFacebook = (response) => {
-    let { startingStore: { addAccount, account ,loginFBAccount ,getArtists,
+    let { startingStore: { addAccount, account ,loginEmail ,getArtists,
       getArtworkInfo,
       getEmergingArtistArtwork,
       getArtistFollowArtwork,listOfUsers} } = this.props;
-    console.log(response,'ress');
+    
     account.setProperty('accFname',response.name)
     account.setProperty('accEmailAddress',response.email)
     if (response.email === undefined || response.email === null ){
@@ -36,7 +36,7 @@ class FbLogin extends Component {
     });
   
       setTimeout(()=>{
-    loginFBAccount().then((res) => {
+    loginEmail().then((res) => {
      
       getArtworkInfo();
       getEmergingArtistArtwork();

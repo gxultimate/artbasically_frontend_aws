@@ -16,7 +16,7 @@ import {
   MDBBtn,
 } from 'mdbreact';
 import logo from '../images/logo.png';
-import CNotif from '../components/CNotif';
+import CNotif from './CNotif';
 import CMess from '../components/CMess';
 import NavLogin from '../components/NavLogin';
 import Search from '../components/Search';

@@ -33,7 +33,17 @@ import Grid from '@material-ui/core/Grid';
       }
     };
   
-   
+    componentDidMount() {   
+      let {
+        startingStore: {getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize},
+      } = this.props;
+      getArtworkInfo();
+      getArtists();
+      getStyles();
+      getCategories();
+      getPrintSize()
+  
+    }
   
     render() {
     

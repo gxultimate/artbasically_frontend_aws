@@ -83,8 +83,9 @@ class AddToBag extends Component {
   };
 
   addOrder = () => {
+    
     let {
-      startingStore: {order, addOrder},
+      startingStore: {order, addOrder,notif,addNotif},
     } = this.props;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
    
@@ -114,6 +115,14 @@ class AddToBag extends Component {
     order.setProperty('accID', userData);
     order.setProperty('artworkPaymentAmount',this.state.totalPrice)
     addOrder();
+
+    notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+    notif.setProperty('notifSender',userData.accID)
+    notif.setProperty('notifRecipient',)
+    notif.setProperty('notifSubject','Placed order')
+    notif.setProperty('notifMsg',)
+    notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
+    notif.setProperty('notifStatus','unread')
   };
 
   selectedCheck = (data) => {
@@ -123,6 +132,7 @@ class AddToBag extends Component {
   };
 
   render() {
+    console.log(this.state.selectedCheckBox,'selected')
     let {
       startingStore: {listOfUserCart},
     } = this.props;

@@ -18,15 +18,11 @@ import {withRouter} from 'react-router-dom'
     
    
   };
+componentDidMount(){
+  let{startingStore:{getAccounts}}=this.props;
+  getAccounts();
+}
 
-   componentDidMount() {   
-    let {
-      startingStore: {getAccounts},
-    } = this.props;
-    getAccounts();
- 
-
-  }
   
 
 
@@ -88,18 +84,46 @@ let users = listOfUsers.filter((usr) => {
        account.setProperty('_id',itm._id)
        account.setProperty('acc_Status','Active')
       
-editAccount()
-       const success = () => {
+// editAccount();
+//        const success = () => {
+//         message
+//           .loading('', 1)
+//           .then(() => message.success('Account Approved', 3));
+//       };
+
+//       setTimeout(() =>{
+//         success();
+//       },500)
+     
+//       this.props.history.push('/AdminHome');
+
+
+      editAccount().then((resp) => {
+        console.log(resp,'dsadfs')
+        if (resp === 'success') {
+                const success = () => {
         message
           .loading('', 1)
           .then(() => message.success('Account Approved', 3));
       };
 
       setTimeout(() =>{
-        success()
-        this.props.history.push('/AdminHome');
-      },1000)
-   
+        success();
+      },200)
+      setTimeout(() =>{
+            this.props.history.push('/AdminHome');
+          },2000)
+        } else {
+          const error = () => {
+            message
+            .loading('', 1)
+            .then(() => message.success('Try Again', 3));
+          };
+          setTimeout(() => {
+            error();
+          }, 200);
+        }
+      });
           }
 
          
@@ -176,25 +200,24 @@ const DeactivatedTable = () => {
         email: `${row.email}`,
         address: `${row.address}`,
         action:<div style={{maxWidth:'340px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.userDB)} color='approve'>More Info</MDBBtn>
-        <MDBBtn style={{float:'left'}}  onClick={()=>approve(row.userDB)} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>reject(row.userDB)} color='reject'> Reject</MDBBtn>
+        <MDBBtn style={{float:'left'}}  onClick={()=>{approve(row.userDB)}} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>{reject(row.userDB)}} color='reject'> Reject</MDBBtn>
         </div>,
       
-
+      
      }
      
      ) })
     ]
 
-  };
-
-  return (
+  }
+  return(
     <Fragment>
-    <MDBDataTable
-      striped
-      bordered
-      small
-      data={data}
-    />
+  <MDBDataTable
+  striped
+  bordered
+  small
+  data={data}
+/>
 
 <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
           <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}> Artist's Profile</span></MDBModalHeader>
@@ -206,7 +229,11 @@ const DeactivatedTable = () => {
               <div className='left'>
                 <div className='artistpp'>
               
-                    <img src={account.profile_Img} alt='' />
+                  
+                    <img 
+      src={account.profile_Img}
+      alt="profilePic"
+      />
                
                 </div>
                 <div className='artistInfo'>
@@ -259,13 +286,24 @@ const DeactivatedTable = () => {
             
           </MDBModalFooter>
         </MDBModal>
+        </Fragment>
+  )
+}
+
+  function PendingTable(){
+
+  return (
+    <Fragment>
+<DeactivatedTable/>
+
+
     
   </Fragment>
   );
-}
 
+}
 return (
-  <DeactivatedTable/>
+  <PendingTable/>
 )
 }
 }

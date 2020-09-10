@@ -1,30 +1,64 @@
-import React from "react";
+
 import { MDBIcon, MDBBadge, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 
+
+import React, { Component, Fragment } from 'react'
+
+import {inject,observer} from 'mobx-react'
+import moment from 'moment'
+class Notifications extends Component {
+
+
+
+  render() {
+let{startingStore:{listOfNotif,notif,editNotif}}=this.props;
+
+let notifNum = listOfNotif.filter(notif => notif.notifStatus === 'unread').length;
+
+let  notifClicked =(notifInfo)=>{
+  editNotif(notifInfo._id, 'read', notifInfo.notifID)
+ 
+}
+
+
+
+let notifData = listOfNotif.filter(notif => notif.notifStatus === 'unread').map((info,i) =>{
+  let dateToday = moment().format('MMM/DD/YY')
+  let dateNotif = '';
+  if (dateToday.slice(0,9) === info.notifDT.slice(0,9)){
+    dateNotif = `Today, ${info.notifDT.slice(10,20)}`
+  }else{
+    dateNotif = info.notifDT;
+  }
+  return(
+    <Fragment key={i}>
+   <MDBDropdownItem className="newnotif" onClick={()=>{notifClicked(info)}}>
+     {info.notifMsg}
+          <span className="time">{dateNotif}</span>
+        </MDBDropdownItem>
+    </Fragment>
+  )
+})
 const Notif = () => {
   return (
     <MDBDropdown className="topicons">
       <MDBDropdownToggle color="transparent">
         <MDBIcon icon="bell" className="mr-3" />
-        <MDBBadge color="danger" className="ml-2">4</MDBBadge>
+  <MDBBadge color="danger" className="ml-2">{notifNum}</MDBBadge>
       </MDBDropdownToggle>
-      <MDBDropdownMenu basic>
-        <div className="title">NOTIFICATIONS</div>
-        <MDBDropdownItem className="newnotif">Recieved an order from Jane Doe
-          <span className="time">just now</span>
-        </MDBDropdownItem>
-        <MDBDropdownItem className="newnotif">New art submission
-          <span className="time">2 seconds ago</span>
-        </MDBDropdownItem>
-        <MDBDropdownItem>Notif 3
-          <span className="time">13:28</span>
-        </MDBDropdownItem>
-        <MDBDropdownItem>Notif 4
-          <span className="time">15:01</span>
-        </MDBDropdownItem>
+      <MDBDropdownMenu basic >
+        <div className="title" style={{paddingLeft:'10px'}}>Notifications</div>
+     
+  {notifData}
       </MDBDropdownMenu>
     </MDBDropdown>
   );
 }
 
-export default Notif;
+return (
+  <Notif/>
+)
+}
+}
+
+export default inject('startingStore')(observer(Notifications))
