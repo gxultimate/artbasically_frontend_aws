@@ -80,7 +80,7 @@ import Navbar from '../../components/Navbar';
                     </Link>
                   </a>
                   <div className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
+                    <p>{image.artName}</p>
                     {/* <MDBBtn
                       className={this.state.condition ? 'followed' : 'ifollow'}
                       color='transparent'

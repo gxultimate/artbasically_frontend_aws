@@ -76,7 +76,7 @@ import Navbar from '../../components/Navbar';
     let type = filter !== false ? filter : sessionStorage.getItem('type');
     let h3Type = () => {
       if (type === 'discover') {
-        return <h3>Discover Emerging Artists </h3>;
+        return <h3>Shop by category </h3>;
       } else if (type === 'foryou') {
         return <h3>Recommended For You</h3>;
       } else if (type === 'latest') {
