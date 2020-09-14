@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../FbLogin';
 import GoogleLogin from '.././GoogleLogin/index';
-import logo from '../../images/adminlogo.png';
+
 import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
@@ -162,7 +162,7 @@ class Login extends Component {
               className='needs-validation animated zoomIn'
               onSubmit={this.submitHandler}
             >
-              <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
+              <img alt='Art, Basically Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />
               <div className='adloginpt clearfix'>
                 <MDBInput
                   type='email'

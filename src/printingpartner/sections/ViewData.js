@@ -9,7 +9,7 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from 'mdbreact';
-
+import {Image} from 'cloudinary-react';
 class ViewData extends Component {
   state = {
     modal14: false,
@@ -73,11 +73,7 @@ class ViewData extends Component {
                   {this.props.data.map((data) => (
                     <tr>
                       <td>
-                        <img
-                          style={{width: '100% ', height: 'auto'}}
-                          src={data.artworkImg}
-                          alt=''
-                        />
+                      <Image  src={data.artworkImg}  style={{width: '100% ', height: 'auto'}} secure="true"></Image>
                       </td>
                       <td>{data.artistName}</td>
                       <td> {data.artworkName}</td>

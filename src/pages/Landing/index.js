@@ -7,7 +7,7 @@ import Footer from '../../components/Footer';
 import AYLogin from '../../components/AddYoursLogin/index.js';
 import Login from '../../components/Login';
 import Navbar from '../../components/Navbar';
-
+import {Image} from 'cloudinary-react';
  class Landing extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +28,7 @@ import Navbar from '../../components/Navbar';
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     let {
       startingStore: {
      
@@ -76,7 +77,8 @@ import Navbar from '../../components/Navbar';
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <Image  src={image.artworkImg} secure="true"></Image>
+                    
                     </Link>
                   </a>
                   <div className='artistinfo clearfix pad10'>
@@ -133,7 +135,8 @@ import Navbar from '../../components/Navbar';
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                       <Image  src={image.artworkImg} secure="true"></Image>
+                    
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -250,7 +253,8 @@ import Navbar from '../../components/Navbar';
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <img src={image.artworkImg} alt='' />
+                          <Image  src={image.artworkImg} secure="true"></Image>
+                        
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>
@@ -295,7 +299,8 @@ import Navbar from '../../components/Navbar';
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <img src={image.artworkImg} alt='' />
+                           <Image  src={image.artworkImg} secure="true"></Image>
+                        
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>

@@ -7,7 +7,7 @@ import { inject, observer } from 'mobx-react';
 import { Skeleton, message } from 'antd';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-
+import {Image} from 'cloudinary-react';
 class SingleArtist extends Component {
 	constructor(props) {
 		super(props);
@@ -163,7 +163,7 @@ class SingleArtist extends Component {
 													pathname: `/Art/${art.artworkID}/${art.artistName}`
 												}}
 											>
-												<img src={art.artworkImg} alt="" />
+												 <Image  src={art.artworkImg} secure="true"></Image>
 											</Link>
 										</a>
 										<div className="artistinfo">
@@ -205,7 +205,7 @@ class SingleArtist extends Component {
 													pathname: `/Art/${art.artworkID}/${art.artistName}`
 												}}
 											>
-												<img src={art.artworkImg} alt="" />
+												 <Image  src={art.artworkImg} secure="true"></Image>
 											</Link>
 										</a>
 										<div className="artistinfo">

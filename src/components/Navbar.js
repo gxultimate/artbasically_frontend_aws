@@ -15,7 +15,7 @@ import {
   MDBIcon,
   MDBBtn,
 } from 'mdbreact';
-import logo from '../images/logo.png';
+
 import CNotif from './CNotif';
 import CMess from '../components/CMess';
 import NavLogin from '../components/NavLogin';
@@ -84,13 +84,13 @@ class Navbar extends Component {
         {userData !== null && userData !== undefined ? (
          <MDBNavbarBrand>
          <a href='/Home'>
-           <img src={logo} className='logo' alt='' />
+           <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
          </a>
        </MDBNavbarBrand>
             ) : (
               <MDBNavbarBrand>
               <a href='/'>
-                <img src={logo} className='logo' alt='' />
+                <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
               </a>
             </MDBNavbarBrand>
               )}

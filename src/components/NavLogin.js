@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../components/FbLogin';
 import GgLogin from '../components/GoogleLogin/';
-import logo from '../images/adminlogo.png';
+
 import {withRouter} from 'react-router-dom';
 
 
@@ -158,7 +158,7 @@ class NavLogin extends Component {
               className='needs-validation animated zoomIn'
               onSubmit={this.submitHandler}
             >
-              <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
+              <img alt='Art, Basically Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />
               <h3>LOGIN</h3>
               <div className='adloginpt clearfix'>
                 <MDBInput

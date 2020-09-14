@@ -7,7 +7,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
 import DownloadImage from '../../admin/sections/DownloadImage';
-
+import {Image} from 'cloudinary-react';
  class CompletedOrder extends Component {
   state = {
     modal: false,
@@ -154,11 +154,7 @@ const CompletedOrderTable = () => {
             {this.state.items.map((data,i) => (
               <tr key={i}>
                 <td>
-                  <img
-                    style={{width: '100% ', height: 'auto'}}
-                    src={data.artworkImg}
-                    alt=''
-                  />
+                <Image  src={data.artworkImg}  style={{width: '100% ', height: 'auto'}} secure="true"></Image>
                 </td>
                 <td>{data.artistName}</td>
                 <td>{data.artworkName}</td>

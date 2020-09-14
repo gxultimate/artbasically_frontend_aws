@@ -3,8 +3,8 @@ import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../FbLogin';
-import GoogleLogin from '.././GoogleLogin/index';
-import logo from '../../images/adminlogo.png';
+import GgLogin from '../../components/GoogleLogin/';
+
 import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
@@ -168,7 +168,7 @@ let btn = this.props.login;
               className='needs-validation animated zoomIn'
               onSubmit={this.submitHandler}
             >
-              <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
+              <img alt='Art, Basically Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />
               <div className='adloginpt clearfix'>
                 <MDBInput
                   type='email'
@@ -217,7 +217,7 @@ let btn = this.props.login;
               </MDBBtn>
             </form>
             <FbLogin />
-            {/* <GoogleLogin /> */}
+            <GgLogin/>
          
           </div>
         </MDBModal>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../images/adminlogo.png';
+
 import {
   MDBNav,
   MDBNavItem,
@@ -31,20 +31,9 @@ class Admin extends Component {
   };
 
   componentDidMount(){
-    // let logged = JSON.parse(sessionStorage.getItem('userData'))
+    let {startingStore:{getAllNotif}}=this.props
+    getAllNotif()
 
-    // if(logged === null || logged === undefined){
-    //   this.props.history.push('/Admin')
-    // }
-
-    // let {startingStore:{getAccounts,getOrder,getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize}}=this.props;
-    // getAccounts()
-    // getOrder()
-    // getArtworkInfo();
-    // getArtists();
-    // getStyles();
-    // getCategories();
-    // getPrintSize()
   }
 
   toggleCollapse = (collapseID) => () => {
@@ -90,7 +79,7 @@ class Admin extends Component {
           <MDBNavbar className='position-fixed' dark expand='md'>
             <MDBNav className='topnav'>
               <a href='/Admin' className='logo-wrapper ablogo'>
-                <img alt='MDB React Logo' className='img-fluid' src={logo} />{' '}
+                <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
                 <p>Artist</p>
               </a>
               <div className='topcon'>
@@ -143,7 +132,7 @@ class Admin extends Component {
                     My Artworks
                   </MDBNavLink>
                 </MDBNavItem>
-                <MDBNavItem>
+                {/* <MDBNavItem>
                   <MDBNavLink
                     to='#'
                     active={this.state.items['default'] === '3'}
@@ -152,7 +141,7 @@ class Admin extends Component {
                     <MDBIcon icon='coins' className='mr-3' />
                     Earnings
                   </MDBNavLink>
-                </MDBNavItem>
+                </MDBNavItem> */}
      
     
            

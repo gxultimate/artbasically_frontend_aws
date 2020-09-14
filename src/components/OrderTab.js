@@ -15,7 +15,7 @@ import {withRouter} from 'react-router-dom';
 import OrderDetails from './OrderDetails';
 import art from '../images/artworks/art1.png';
 import Cart from './Cart';
-
+import {Image} from 'cloudinary-react';
 class OrderTab extends Component {
   state = {
     activeItem: '1',
@@ -161,11 +161,8 @@ class OrderTab extends Component {
                           <MDBRow className='artlistorder'>
                             <MDBCol md='3' className='artimg colpad'>
                               {item.artworkImg ? (
-                                <img
-                                  class='item-image'
-                                  src={item.artworkImg}
-                                  alt=''
-                                />
+                                
+                                <Image  src={item.artworkImg}  className='item-image' secure="true"></Image>
                               ) : (
                                 ''
                               )}
@@ -288,11 +285,7 @@ class OrderTab extends Component {
                           <MDBRow className='artlistorder'>
                             <MDBCol md='3' className='artimg colpad'>
                               {item.artworkImg ? (
-                                <img
-                                  class='item-image'
-                                  src={item.artworkImg}
-                                  alt=''
-                                />
+                                <Image  src={item.artworkImg}  className='item-image' secure="true"></Image>
                               ) : (
                                 ''
                               )}
@@ -415,11 +408,7 @@ class OrderTab extends Component {
                           <MDBRow className='artlistorder'>
                             <MDBCol md='3' className='artimg colpad'>
                               {item.artworkImg ? (
-                                <img
-                                  class='item-image'
-                                  src={item.artworkImg}
-                                  alt=''
-                                />
+                                <Image  src={item.artworkImg}  className='item-image' secure="true"></Image>
                               ) : (
                                 ''
                               )}
@@ -539,11 +528,7 @@ class OrderTab extends Component {
                           <MDBRow className='artlistorder'>
                             <MDBCol md='3' className='artimg colpad'>
                               {item.artworkImg ? (
-                                <img
-                                  class='item-image'
-                                  src={item.artworkImg}
-                                  alt=''
-                                />
+                            <Image  src={item.artworkImg}  className='item-image' secure="true"></Image>
                               ) : (
                                 ''
                               )}

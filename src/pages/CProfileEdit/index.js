@@ -17,7 +17,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import OrderTab from '../../components/OrderTab';
 import art from '../../images/artworks/art1.png';
-
+import {Image} from 'cloudinary-react';
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -413,7 +413,7 @@ class CProfileEdit extends Component {
                             .map((art) => (
                               <li>
                                 <a href='#!' className='artlink'>
-                                  <img src={art.artworkImg} alt='' />
+                                <Image  src={art.artworkImg} secure="true"></Image>
                                 </a>
                                 <div className='artistinfo clearfix pad10'>
                                   <p>{art.artName}</p>
@@ -488,7 +488,7 @@ class CProfileEdit extends Component {
                             .map((art) => (
                               <li>
                                 <a href='#!' className='artlink'>
-                                  <img src={art.artworkImg} alt='' />
+                                <Image  src={art.artworkImg} secure="true"></Image>
                                 </a>
                                 <div className='artistinfo clearfix pad10'>
                                   <p>{art.artName}</p>

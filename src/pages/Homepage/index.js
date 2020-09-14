@@ -11,7 +11,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
-
+import {Image} from 'cloudinary-react';
 export class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -101,7 +101,8 @@ export class Homepage extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                       <Image  src={image.artworkImg} secure="true"></Image>
+                  
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -156,7 +157,7 @@ export class Homepage extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <Image  src={image.artworkImg} secure="true"></Image>
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -210,7 +211,7 @@ export class Homepage extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <Image  src={image.artworkImg} secure="true"></Image>
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -266,7 +267,7 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <img src={image.artworkImg} alt='' />
+                          <Image  src={image.artworkImg} secure="true"></Image>
                         </Link>
                       </a>
                       <a href='#!' className='artistinfo clearfix pad10'>
@@ -359,7 +360,7 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <img src={image.artworkImg} alt='' />
+                        <Image  src={image.artworkImg} secure="true"></Image>
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>
@@ -404,7 +405,7 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <img src={image.artworkImg} alt='' />
+                          <Image  src={image.artworkImg} secure="true"></Image>
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../images/adminlogo.png';
+
 import {
   MDBNav,
   MDBNavItem,
@@ -94,7 +94,7 @@ class Admin extends Component {
           <MDBNavbar className='position-fixed' dark expand='md'>
             <MDBNav className='topnav'>
               <a href='/AdminHome' className='logo-wrapper ablogo'>
-                <img alt='MDB React Logo' className='img-fluid' src={logo} />{' '}
+                <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
                 <p>ADMIN</p>
               </a>
               <div className='topcon'>

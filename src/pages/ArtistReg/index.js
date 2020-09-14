@@ -26,7 +26,7 @@ import Resizer from 'react-image-file-resizer';
     // this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       modal1: false,
-      profileImg: '',
+      profileImg: null,
       accID: '',
       selectedFile: null,
  
@@ -48,27 +48,27 @@ import Resizer from 'react-image-file-resizer';
   };
 
   onFileChange(e) {
+    let {
+      startingStore: { upload},
+    } = this.props;
     this.setState({selectedFile: e.target.files[0]});
-    this.setState({accID: this.getUniqueID()});
+   
+    const formData = new FormData();
+    formData.append('artworkImg',  e.target.files[0]);
+    formData.append('type', 'artist');
+    upload(formData, 'docu');
   }
   onFileChangeP(e) {
-    let {startingStore:{account}}=this.props;
-    this.setState({selectedFile: e.target.files[0]});
-    this.setState({accID: this.getUniqueID()});
-    Resizer.imageFileResizer(
-      e.target.files[0],
-      100,
-      100,
-      'JPEG',
-      100,
-      0,
-      uri => {
-        this.setState({profileImg:uri})
-        account.setProperty('profile_Img',uri)
-      },
-      'URI'
-     
-  )
+    let {
+      startingStore: { upload},
+    } = this.props;
+    this.setState({profileImg: e.target.files[0]});
+    
+    const formData2 = new FormData();
+    formData2.append('artworkImg',  e.target.files[0]);
+    formData2.append('type', 'artist');
+    upload(formData2, 'profile');
+
   }
 
   toggle = (nr) => () => {
@@ -93,10 +93,7 @@ import Resizer from 'react-image-file-resizer';
       startingStore: {addAccount,account, upload},
     } = this.props;
     event.target.className += ' was-validated';
-    const formData = new FormData();
-    formData.append('artworkImg', this.state.selectedFile);
-    formData.append('type', 'artist');
-    upload(formData, true);
+
     account.setProperty('acc_Status', 'Pending');
     account.setProperty('accessType', 'Artist');
     account.setProperty('accID', `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`);
@@ -104,7 +101,7 @@ import Resizer from 'react-image-file-resizer';
     account.setProperty('password',this.state.password)
     setTimeout(() => {
     addAccount();
-  }, 1000);
+  }, 4000);
     const success = () => {
     
       message.success('Successfully submitted registration', 1);
@@ -307,7 +304,7 @@ import Resizer from 'react-image-file-resizer';
                 </p>
               </div>
 
-              <img style={{marginBottom:'8px'}} src={this.state.profileImg} ></img>
+              {/* <img style={{marginBottom:'8px'}} src={this.state.profileImg} ></img> */}
               <div className='uploadreq clearfix'>
                 <input type='file' name='file' onChange={this.onFileChangeP} required/>
             

@@ -59,8 +59,8 @@ class AddArtwork extends Component {
     } = this.props;
     e.preventDefault();
     const data = new FormData();
-    
-    data.append('artworkImg', this.state.selectedFile);
+    console.log(this.state.selectedFile,'sdasd')
+    data.append('artworkImg',this.state.selectedFile);
     
     data.append('type', 'artwork');
     upload(data);
@@ -283,6 +283,7 @@ artwork.setProperty('artworkStatus','Pending')
                     <option value='Original'> Original </option>
                     <option value='Secondary'> Secondary </option>
                   </select>
+                  <img src={this.state.selectedFile}/>
                   <MDBInput
                   style={{width:'95%'}}
                     label='Quantity'

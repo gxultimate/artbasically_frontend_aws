@@ -35,7 +35,7 @@ class FbLogin extends Component {
       picture: response.picture.data.url,
     });
   
-      setTimeout(()=>{
+    
     loginEmail().then((res) => {
      
       getArtworkInfo();
@@ -99,7 +99,7 @@ class FbLogin extends Component {
         this.props.history.push('/');
       }
     });
-  },1000)
+  
   }
     
   };

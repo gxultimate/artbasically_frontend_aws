@@ -6,7 +6,7 @@ import {toJS} from 'mobx';
 import {inject, observer} from 'mobx-react';
 import {Pagination} from 'antd'; //new
 import art from '../images/artworks/art1.png';
-
+import {Image} from 'cloudinary-react';
 const numEachPage = 10;
 class ArtworkFilter extends Component {
   constructor(props) {
@@ -59,7 +59,8 @@ class ArtworkFilter extends Component {
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+               {/* <Image publicId={image.artworkImg} secure="true"></Image>    */}
+               <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
               <a href='#!' className='artistinfo clearfix pad10'>

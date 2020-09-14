@@ -3,8 +3,8 @@ import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import FbLogin from '../components/FbLogin';
-import GoogleLogin from './GoogleLogin/index';
-import logo from '../images/adminlogo.png';
+import GgLogin from '../components/GoogleLogin/';
+
 import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
@@ -156,7 +156,7 @@ class Login extends Component {
               className='needs-validation animated zoomIn'
               onSubmit={this.submitHandler}
             >
-              <img alt='Art, Basically Logo' className='img-fluid' src={logo} />
+              <img alt='Art, Basically Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />
               <div className='adloginpt clearfix'>
                 <MDBInput
                   type='email'
@@ -205,11 +205,7 @@ class Login extends Component {
               </MDBBtn>
             </form>
             <FbLogin />
-            {/* <GoogleLogin /> */}
-            <p className='reghere'>
-              Don't have an Account?{' '}
-              <a href='/UserRegistration'>Register Here.</a>
-            </p>
+            <GgLogin />
           </div>
         </MDBModal>
       </div>

@@ -117,9 +117,12 @@ class StartingStore {
           resolve(true);
         } else if (
           
-          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' ||
-          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' 
         ) {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(2);
+        }else if (
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'){
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(2);
         } else if (resp.data.accessType === 'PrintingPartner') {
@@ -145,19 +148,22 @@ class StartingStore {
 
   loginEmail = () => {
     return new Promise((resolve, reject) => {
-      this.api.loginemail(this.account).then((resp) => {
-       
-       
+     
+      this.api.loginemail(this.account)
+      .then((resp) => {
         if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(1);
         }else if (
           
-          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' ||
-          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' 
         ) {
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(2);
+        }else if (
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'){
+            sessionStorage.setItem('userData', JSON.stringify(resp.data))
+            resolve(2);
         }else if (resp.data.acc_Status === 'Pending'){
           resolve(3)
          
@@ -185,10 +191,12 @@ class StartingStore {
 
     return new Promise((resolve, reject) => {
       return this.api.upload(img).then((resp) => {
-    
-        if (documents === true) {
-          let arr = [];
+    console.log(resp.data,'dataaaa')
+        if (documents === 'docu') {
+         
           this.account.setProperty('acc_Documents', resp.data.url);
+        }else if(documents === 'profile'){
+          this.account.setProperty('profile_Img', resp.data.url);
         } else {
           this.artwork.setProperty('artworkImg', resp.data.url);
           this.account.setProperty('accImg', resp.data.url);
