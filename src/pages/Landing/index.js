@@ -8,6 +8,7 @@ import AYLogin from '../../components/AddYoursLogin/index.js';
 import Login from '../../components/Login';
 import Navbar from '../../components/Navbar';
 import {Image} from 'cloudinary-react';
+import CookieConsent, { Cookies } from "react-cookie-consent";
  class Landing extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,8 @@ import {Image} from 'cloudinary-react';
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    // Cookies.set('SameSite', 'Lax', { secure: true,sameSite:'strict' })
+
     let {
       startingStore: {
      
@@ -47,6 +50,7 @@ import {Image} from 'cloudinary-react';
   }
 
   render() {
+ 
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     let {
       startingStore: {listOfArtworks, listOfEmergingArtist},
@@ -82,23 +86,21 @@ import {Image} from 'cloudinary-react';
                     </Link>
                   </a>
                   <div className='artistinfo clearfix pad10'>
-                    <p>{image.artName}</p>
-                    {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
-                      color='transparent'
-                      floating
-                      rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: '/Artist/Cleon Peterson',
+                          state: {artistName:'Cleon Peterson'
+             
+                          }
+                        });
+                      }}
                     >
-                      {this.state.isToggleOn ? (
-                        <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
+                            <p>{image.artName}</p>
+                     
+                    </a>
                   </div>
                 </li>
               );
@@ -139,25 +141,24 @@ import {Image} from 'cloudinary-react';
                     
                     </Link>
                   </a>
-                  <a href='#!' className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
-                    {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
-                      color='transparent'
-                      floating
-                      rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                  <div className='artistinfo clearfix pad10'>
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
+                      }}
                     >
-                      {this.state.isToggleOn ? (
-                        <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
-                  </a>
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                 
+                  </div>
                 </li>
                 </Fragment>
               );
@@ -167,6 +168,21 @@ import {Image} from 'cloudinary-react';
     }
     return (
       <Fragment>
+        <CookieConsent
+        sameSite="none" 
+        Secure='true'
+        cookieSecurity={true}
+        location="bottom"
+        buttonText="Allow cookies"
+        cookieName="ABasicallyCookies"
+        cookieValue='true'
+      style={{ background: "#2B373B" }}
+      buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+      expires={999}
+        >
+          <h6 style={{color:'white'}}>Art, Basically uses cookies</h6>
+          <p style={{color:'white'}}>We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services</p>
+        </CookieConsent>
       <div className='home'>
         <Navbar />
         <div className='maincon con'>
@@ -197,22 +213,7 @@ import {Image} from 'cloudinary-react';
             <div className='title center'>
               <h2>
                 Cleon Peterson
-                {/* <MDBBtn
-                  className={this.state.condition ? 'followed' : 'ifollow'}
-                  color='transparent'
-                  floating
-                  rounded
-                  title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                  onClick={() =>
-                    this.handleClick(followArtist(listofArtistInfo._id))
-                  }
-                >
-                  {this.state.isToggleOn ? (
-                    <MDBIcon icon='plus' />
-                  ) : (
-                    'Following'
-                  )}
-                </MDBBtn> */}
+
               </h2>
               <p>ARTIST OF THE MONTH</p>
             </div>
@@ -235,9 +236,9 @@ import {Image} from 'cloudinary-react';
                 .filter((item) => item.artworkStatus !== 'Pending')
                 
                 .slice(0, 3)
-                .map((image) => {
+                .map((image,i) => {
                   return (
-                    <li>
+                    <li key={i}>
                       <a href='#!' className='artlink'>
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
@@ -258,8 +259,23 @@ import {Image} from 'cloudinary-react';
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>
-                        <p>{image.artistName}</p>
-                      </div>
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                 
+                  </div>
                     </li>
                   );
                 })}
@@ -303,9 +319,26 @@ import {Image} from 'cloudinary-react';
                         
                         </Link>
                       </a>
+                     
                       <div className='artistinfo clearfix pad10'>
-                        <p>{image.artistName}</p>
-                      </div>
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                 
+                  </div>
+                      
                     </li>
                   );
                 })}
