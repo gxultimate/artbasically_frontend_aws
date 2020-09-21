@@ -20,16 +20,18 @@ class AccountSettings extends Component {
         getAccounts()
     }
     render() {
-let{startingStore:{listOfUsers,account,editAccount}}=this.props;
+let{startingStore:{listOfUsers,account,editProfile}}=this.props;
 let mydata =JSON.parse(sessionStorage.getItem('userData'))
 function createData(fname,lname,contact,address,email,byear,institution,pass,action){
     return{fname,lname,contact,address,email,byear,institution,pass,action}
 }
 
 
-let edit =()=>{
+let edit =(accData)=>{
   
-    editAccount();
+  console.log(accData.accID)
+  account.setProperty('accID',accData.accID)
+    editProfile();
 
 }
 

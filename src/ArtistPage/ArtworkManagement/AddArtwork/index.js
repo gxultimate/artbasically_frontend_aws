@@ -67,7 +67,7 @@ class AddArtwork extends Component {
     const success = () => {
       message
         .loading('Submitting Artwork..', 1.3)
-        .then(() => message.success('Successfully added an Artwork', 1));
+        .then(() => message.success('Artwork submitted', 1));
     };
 
     setTimeout(() => {
@@ -119,9 +119,7 @@ artwork.setProperty('artworkStatus','Pending')
       let artSizeSelected = list.map((size) => size.printSize);
       artwork.setProperty('artSize', artSizeSelected);
     }
-    // let categoryList = listOfCategories.map ( (cat , index) => cat.catType )
-
-    // console.log(categoryList)
+ 
     return (
       <MDBContainer>
         <MDBBtn onClick={this.toggle(1)} color='transparent'>
@@ -198,7 +196,7 @@ artwork.setProperty('artworkStatus','Pending')
                     </div>
                   </MDBInput>
             
-                  {/* <SelectTheme theme = {categoryList} style = {styleList}/> */}
+              
                   <div  style={{width:'95%'}}>
                   <Multiselect
                  
@@ -208,9 +206,7 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     displayValue='catType'
                     onSelect={selectCategory}
-                    // onChange={(catType) =>
-                    // //   artwork.setProperty('catType', catType.target.value)
-                    // }
+               
                   />
                   </div>
                   
@@ -223,28 +219,12 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     onSelect={selectStyle}
                     displayValue='styleType'
-                    // onChange={(styleType) =>
-                    //   artwork.setProperty('styleType', styleType.target.value)
-                    // }
+                 
                   />
                    </div>
                 </MDBCol>
                 <MDBCol>
-                  {/* <MDBInput
-                  style={{width:'95%'}}
-                    label='Printing Size'
-                    type='text'
-                    onChange={(artSize) =>
-                      artwork.setProperty(
-                        'artSize',
-                        artSize.target.value
-                      )
-                    }
-                  >
-                    <div className='invalid-feedback'>
-                      Please provide a Institution / Company.
-                    </div>
-                  </MDBInput> */}
+              
                      <div  style={{width:'95%'}}>
                   <Multiselect
                  
@@ -254,9 +234,7 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     displayValue='printSize'
                     onSelect={selectArtSize}
-                    // onChange={(catType) =>
-                    // //   artwork.setProperty('catType', catType.target.value)
-                    // }
+              
                   />
                   </div>
                   <MDBInput
@@ -288,7 +266,7 @@ artwork.setProperty('artworkStatus','Pending')
                   style={{width:'95%'}}
                     label='Quantity'
                     type='text'
-                    // onChange={artPrice => artwork.setProperty("artPrice", artPrice.target.value)} required
+                 
                   >
                     <div className='invalid-feedback'>
                       Please provide Number of Quantity.

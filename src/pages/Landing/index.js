@@ -1,14 +1,15 @@
-import {BackTop} from 'antd';
-import {MDBIcon, MDBNavLink} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component, Fragment} from 'react';
-import {Link} from 'react-router-dom';
-import Footer from '../../components/Footer';
+import { BackTop } from 'antd';
+
+import { MDBIcon, MDBNavLink } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
+import CookieConsent from "react-cookie-consent";
+import { Link } from 'react-router-dom';
 import AYLogin from '../../components/AddYoursLogin/index.js';
+import Footer from '../../components/Footer';
 import Login from '../../components/Login';
 import Navbar from '../../components/Navbar';
-import {Image} from 'cloudinary-react';
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import {withRouter} from 'react-router-dom'
  class Landing extends Component {
   constructor(props) {
     super(props);
@@ -30,118 +31,77 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // Cookies.set('SameSite', 'Lax', { secure: true,sameSite:'strict' })
-
     let {
       startingStore: {
      
-        listOfEmergingArtist,
+       
         getArtworkInfo,
         getEmergingArtistArtwork,
-        getPrintSize
+        getPrintSize,
+        getAccounts,
+        getArtists,
+        getArtistFollowArtwork
+
       },
     } = this.props;
-    if (listOfEmergingArtist) {
+   
       getEmergingArtistArtwork();
       getArtworkInfo();
       getPrintSize()
+      getAccounts()
+      getArtists();
+      getArtistFollowArtwork();
      
-    }
+      
+     
+    
   }
 
   render() {
  
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     let {
-      startingStore: {listOfArtworks, listOfEmergingArtist},
+      startingStore: {listOfArtworks,listOfUsers},
     } = this.props;
 
+
+    let ArtistOftheMonth = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+    
     function MatchRoute() {
       return (
         <ul className='col3img clearfix'>
-          {listOfArtworks
-            .filter((item) => item.artistName === 'Cleon  Peterson')
-            .reverse()
-            .slice(0, 3)
-            .map((image) => {
-              return (
-                <li>
-                  <a href='#!' className='artlink'>
-                    <div className='artlabel'>
-                      <span className='new'>NEW</span>
-                      <span className='hot'>HOT</span>
-                      <span className='type'>
-                        {image.artType === 'Secondary'
-                          ? 'Second Edition'
-                          : 'Original'}
-                      </span>
-                    </div>
-                    <Link
-                      to={{
-                        pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                      }}
-                    >
-                      <Image  src={image.artworkImg} secure="true"></Image>
-                    
-                    </Link>
-                  </a>
-                  <div className='artistinfo clearfix pad10'>
-                  <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: '/Artist/Cleon Peterson',
-                          state: {artistName:'Cleon Peterson'
-             
-                          }
-                        });
-                      }}
-                    >
-                            <p>{image.artName}</p>
-                     
-                    </a>
+        {listOfArtworks
+          .filter((item) => item.artistName === 'Cleon Peterson')
+          .reverse()
+          .slice(0, 3)
+          .map((image,i) => {
+         
+          
+            return (
+              <li key={i}>
+                <a href='#!' className='artlink'>
+                  <div className='artlabel'>
+                    <span className='new'>NEW</span>
+                    <span className='hot'>HOT</span>
+                    <span className='type'>
+                      {image.artType === 'Secondary'
+                        ? 'Second Edition'
+                        : 'Original'}
+                    </span>
                   </div>
-                </li>
-              );
-            })}
-        </ul>
-      );
-    }
-
-    function MatchRouteEmergingArtist() {
-    
-      return (
-        <ul className='col3img clearfix'>
-          {listOfEmergingArtist
-            .filter((item) => item.artworkStatus !== 'Pending')
-            .reverse()
-            .slice(0, 3)
-            .map((image,i) => {
-            
-              return (
-                <Fragment key={i}>
-                <li >
-                  <a href='#!' className='artlink'>
-                    <div className='artlabel'>
-                      <span className='new'>NEW</span>
-                      <span className='hot'>HOT</span>
-                      <span className='type'>
-                        {image.artType === 'Secondary'
-                          ? 'Second Edition'
-                          : 'Original'}
-                      </span>
-                    </div>
-                    <Link
-                      to={{
-                        pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                      }}
-                    >
-                       <Image  src={image.artworkImg} secure="true"></Image>
-                    
-                    </Link>
-                  </a>
-                  <div className='artistinfo clearfix pad10'>
+                  <Link
+                    to={{
+                      pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                    }}
+                  >
+                    <img src={image.artworkImg} alt='artwork'/>
+                   
+                  
+                  </Link>
+                </a>
+               
+                <div className='artistinfo clearfix pad10'>
+           
                   <a
                       href=''
                     
@@ -154,18 +114,18 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p>{image.artName}</p>
                      
                     </a>
-                 
+           
                   </div>
-                </li>
-                </Fragment>
-              );
-            })}
-        </ul>
+              </li>
+            );
+          })}
+      </ul>
       );
     }
+
     return (
       <Fragment>
         <CookieConsent
@@ -175,6 +135,9 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
         location="bottom"
         buttonText="Allow cookies"
         cookieName="ABasicallyCookies"
+        cookieName="G_ENABLED_IDPS"
+        cookieName="G_AUTHUSER_H"
+        cookieName="SEARCH_SAMESITE"
         cookieValue='true'
       style={{ background: "#2B373B" }}
       buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
@@ -211,10 +174,26 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
           </div>
           <section className='artistofdmonth'>
             <div className='title center'>
-              <h2>
-                Cleon Peterson
+            <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${ArtistOftheMonth[0]}`,
+                          state: {artistName:ArtistOftheMonth[0]
+             
+                          }
+                        });
+                      }}
+                    >
+                         <h2>
+                {ArtistOftheMonth[0]}
 
               </h2>
+                     
+                    </a>
+
+             
               <p>ARTIST OF THE MONTH</p>
             </div>
             <MatchRoute />
@@ -254,7 +233,7 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <Image  src={image.artworkImg} secure="true"></Image>
+                            <img src={image.artworkImg} alt='artwork'/>
                         
                         </Link>
                       </a>
@@ -297,9 +276,9 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
                 .filter((item) => item.artworkStatus !== 'Pending')
                 .reverse()
                 .slice(0, 3)
-                .map((image) => {
+                .map((image,i) => {
                   return (
-                    <li>
+                    <li key={i}>
                       <a href='#!' className='artlink'>
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
@@ -315,7 +294,7 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                           <Image  src={image.artworkImg} secure="true"></Image>
+                             <img src={image.artworkImg} alt='artwork'/>
                         
                         </Link>
                       </a>
@@ -356,7 +335,7 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
             Add your work now
           </MDBNavLink>)
         : (<AYLogin login={'aywn'} />)}
-            <a href='/Upload' className='learnmore'>
+            <a href='/' className='learnmore' style={{color:'black'}}>
               Learn More <MDBIcon icon='caret-right' />{' '}
             </a>
           </div>
@@ -370,7 +349,58 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
               See More &nbsp;
               <MDBIcon icon='caret-right' />
             </a>
-            <MatchRouteEmergingArtist />
+            <ul className='col3img clearfix'>
+              {/*  */}
+              {listOfArtworks
+                .filter((item) => item.artworkStatus !== 'Pending')
+                .reverse()
+                .slice(0, 3)
+                .map((image,i) => {
+                  return (
+                    <li key={i}>
+                      <a href='#!' className='artlink'>
+                        <div className='artlabel'>
+                          <span className='new'>NEW</span>
+                          <span className='hot'>HOT</span>
+                          <span className='type'>
+                            {image.artType === 'Secondary'
+                              ? 'Second Edition'
+                              : 'Original'}
+                          </span>
+                        </div>
+                        <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          }}
+                        >
+                             <img src={image.artworkImg} alt='artwork'/>
+                        
+                        </Link>
+                      </a>
+                     
+                      <div className='artistinfo clearfix pad10'>
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                 
+                  </div>
+                      
+                    </li>
+                  );
+                })}
+            </ul>
           </section>
           <div className='bttop'>
          
@@ -379,9 +409,9 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
               Add Yours
             </MDBNavLink>)
         : (<AYLogin login={'ay'}/>)}
-            <BackTop>
-              {' '}
-              <a href='#!'>
+            <BackTop style={{margin:'auto'}}>
+              {'     '}
+              <a href='#!' style={{color:'black'}}>
                 Back to Top <MDBIcon icon='caret-right' />{' '}
               </a>{' '}
             </BackTop>
@@ -394,4 +424,4 @@ import CookieConsent, { Cookies } from "react-cookie-consent";
   }
 }
 
-export default inject('startingStore')(observer(Landing));
+export default withRouter(inject('startingStore')(observer(Landing)))

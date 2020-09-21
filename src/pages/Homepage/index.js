@@ -11,8 +11,10 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
-import {Image} from 'cloudinary-react';
-export class Homepage extends Component {
+
+import {message} from 'antd';
+import moment from 'moment';
+class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +43,6 @@ export class Homepage extends Component {
     //   this.props.history.push('/')
     // }
 
-
     let {
       startingStore: {
         getArtists,
@@ -50,7 +51,10 @@ export class Homepage extends Component {
         getArtistFollowArtwork,
         listOfEmergingArtist,
         getPrintSize,
-        getNotif
+        getNotif,
+        getToCart,getOrders,
+        getMyLists,
+        getAccounts,
       },
     } = this.props;
     if (listOfEmergingArtist) {
@@ -60,10 +64,15 @@ export class Homepage extends Component {
       getArtists();
       getPrintSize()
       getNotif()
+      getToCart()
+      getOrders()
+      getMyLists()
+      getAccounts()
     }
   }
 
   render() {
+       let logged = JSON.parse(sessionStorage.getItem('userData'))
     let {
       startingStore: {
         followArtist,
@@ -72,62 +81,123 @@ export class Homepage extends Component {
         listofFilteredUserArtworkCategories,
         listOfEmergingArtist,
         listOfArtistFollowed,
+        mylists,
+        addMyLists,
+        listOfMyLists,
+        listOfUsers
       },
     } = this.props;
 
+    let ArtistOftheMonth = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+ let addtoList=(rtwrk)=>{
+
+  let getmyList = listOfMyLists.filter( art => art.artworkID === rtwrk.artworkID).length
+
+if (getmyList === 0){
+   
+   mylists.setProperty('mylistsID',`${rtwrk.artworkID.slice(0,4)}-${Math.floor(1000 + Math.random() * 900)}`)
+   mylists.setProperty('accID',logged.accID)
+   mylists.setProperty('artworkID',rtwrk.artworkID)
+ 
+   mylists.setProperty('artName',rtwrk.artName)
+   mylists.setProperty('artTheme',rtwrk.artTheme)
+   mylists.setProperty('artStyle',rtwrk.artStyle)
+   mylists.setProperty('artPrice',rtwrk.artPrice)
+   mylists.setProperty('artistID',rtwrk.accID)
+   mylists.setProperty('artistName',rtwrk.artistName)
+   mylists.setProperty('artworkDateCreated',rtwrk.artworkDateCreated)
+   mylists.setProperty('artType',rtwrk.artType)
+   mylists.setProperty('artworkImg',rtwrk.artworkImg)
+   
+   addMyLists()
+
+   const success = () => {
+    message
+      .loading('', 0.5)
+      .then(() => message.success('Artwork added to your list', 3));
+  };
+  setTimeout(() =>{
+    success()
+  },500)
+}else{
+  const success = () => {
+    message
+      .loading('', 0.5)
+      .then(() => message.success('Artwork already on your list', 3));
+  };
+  setTimeout(() =>{
+    success()
+  },500)
+ 
+}
+ }
     function MatchRoute() {
       return (
         <ul className='col3img clearfix'>
-          {/*  */}
-          {listOfArtworks
-            .filter((item) => item.artistName === 'Cleon  Peterson')
-            .reverse()
-            .slice(0, 3)
-            .map((image) => {
-              return (
-                <li>
-                  <a href='#!' className='artlink'>
-                    <div className='artlabel'>
-                      <span className='new'>NEW</span>
-                      <span className='hot'>HOT</span>
-                      <span className='type'>
-                        {image.artType === 'Secondary'
-                          ? 'Second Edition'
-                          : 'Original'}
-                      </span>
-                    </div>
-                    <Link
-                      to={{
-                        pathname: `/Art/${image.artworkID}/${image.artistName}`,
+        {listOfArtworks
+          .filter((item) => item.artistName === 'Cleon Peterson')
+          .reverse()
+          .slice(0, 3)
+          .map((image,i) => {
+         
+          
+            return (
+              <li key={i}>
+                <a href='#!' className='artlink'>
+                  <div className='artlabel'>
+                    <span className='new'>NEW</span>
+                    <span className='hot'>HOT</span>
+                    <span className='type'>
+                      {image.artType === 'Secondary'
+                        ? 'Second Edition'
+                        : 'Original'}
+                    </span>
+                  </div>
+                  <Link
+                    to={{
+                      pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                    }}
+                  >
+                    <img src={image.artworkImg} alt='artwork'/>
+                   
+                  
+                  </Link>
+                </a>
+               
+                <div className='artistinfo clearfix pad10'>
+           
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
                       }}
                     >
-                       <Image  src={image.artworkImg} secure="true"></Image>
-                  
-                    </Link>
-                  </a>
-                  <a href='#!' className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
-                    {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
+                         <p>{image.artName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
                       color='transparent'
                       floating
                       rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
                     >
-                      {this.state.isToggleOn ? (
+                    
                         <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
-                  </a>
-                </li>
-              );
-            })}
-        </ul>
+                    
+                      </MDBBtn>
+                  </div>
+              </li>
+            );
+          })}
+      </ul>
       );
     }
 
@@ -157,27 +227,37 @@ export class Homepage extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <Image  src={image.artworkImg} secure="true"></Image>
+                        <img src={image.artworkImg} alt='artwork'/>
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
-                    {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+             
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
                       color='transparent'
                       floating
                       rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
                     >
-                      {this.state.isToggleOn ? (
+                    
                         <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
+                    
+                      </MDBBtn>
                   </a>
                 </li>
               );
@@ -211,28 +291,39 @@ export class Homepage extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <Image  src={image.artworkImg} secure="true"></Image>
+                        <img src={image.artworkImg} alt='artwork'/>
                     </Link>
                   </a>
-                  <a href='#!' className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
-                    {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
+                  <div className='artistinfo clearfix pad10'>
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+                               
+                   
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
                       color='transparent'
                       floating
                       rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
                     >
-                      {this.state.isToggleOn ? (
+                    
                         <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
-                  </a>
+                    
+                      </MDBBtn>
+                  </div>
                 </li>
               );
             })}
@@ -241,7 +332,7 @@ export class Homepage extends Component {
     }
 
     function MatchRouteArtistFollowed() {
-      console.log(listOfArtistFollowed, 'listOfArtistFollowed');
+
       return (
         <ul className='col3img clearfix'>
           {listOfArtistFollowed !== undefined
@@ -267,27 +358,41 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <Image  src={image.artworkImg} secure="true"></Image>
+                            <img src={image.artworkImg} alt='artwork'/>
                         </Link>
                       </a>
                       <a href='#!' className='artistinfo clearfix pad10'>
-                        <p>{image.artistName}</p>
-                        {/* <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
+                      <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+                               
+                            // "accImg": listofArtistInfo.artistImg,
+                            // "artistDescription": listofArtistInfo.accDescription,
+                            // "birthYear": listofArtistInfo.birthYear,
+                            // "accFollowers": listofArtistInfo.accFollowers
+                          },
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
                       color='transparent'
                       floating
                       rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
                     >
-                      {this.state.isToggleOn ? (
+                    
                         <MDBIcon icon='plus' />
-                      ) : (
-                        'Following'
-                      )}
-                    </MDBBtn> */}
+                    
+                      </MDBBtn>
                       </a>
                     </li>
                   );
@@ -304,7 +409,24 @@ export class Homepage extends Component {
           <section className='artistofdmonth'>
             <div className='title center'>
               <h2>
-                Cleon Peterson
+              <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${ArtistOftheMonth[0]}`,
+                          state: {artistName:ArtistOftheMonth[0]
+             
+                          }
+                        });
+                      }}
+                    >
+                         <h2>
+                {ArtistOftheMonth[0]}
+
+              </h2>
+                     
+                    </a>
                 <MDBBtn
                   className={this.state.condition ? 'followed' : 'ifollow'}
                   color='transparent'
@@ -342,9 +464,10 @@ export class Homepage extends Component {
                 .filter((item) => item.artworkStatus !== 'Pending')
                 
                 .slice(0, 3)
-                .map((image) => {
+                .map((image,i) => {
+                   
                   return (
-                    <li>
+                    <li key={i}>
                       <a href='#!' className='artlink'>
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
@@ -360,12 +483,40 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                        <Image  src={image.artworkImg} secure="true"></Image>
+                          <img src={image.artworkImg} alt='artwork'/>
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>
-                        <p>{image.artistName}</p>
+                    
+
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
                       </div>
+
+
                     </li>
                   );
                 })}
@@ -405,11 +556,35 @@ export class Homepage extends Component {
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
                           }}
                         >
-                          <Image  src={image.artworkImg} secure="true"></Image>
+                            <img src={image.artworkImg} alt='artwork'/>
                         </Link>
                       </a>
                       <div className='artistinfo clearfix pad10'>
-                        <p>{image.artistName}</p>
+                      <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
                       </div>
                     </li>
                   );
@@ -424,8 +599,9 @@ export class Homepage extends Component {
             <MDBNavLink to='#!' className='btnBlack'>
               Add your work now
             </MDBNavLink>
-            <a href='#1' className='learnmore'>
-              Learn More <MDBIcon icon='caret-right' />{' '}
+          
+            <a href='#1' className='learnmore' >
+             <span style={{color:'black'}}>Learn More</span>  <MDBIcon icon='caret-right' />{' '}
             </a>
           </div>
           <section className='latest'>
@@ -482,7 +658,7 @@ export class Homepage extends Component {
             </MDBNavLink>
             <BackTop>
               {' '}
-              <a href='#!'>
+              <a href='#!' style={{color:'black'}}>
                 Back to Top <MDBIcon icon='caret-right' />{' '}
               </a>{' '}
             </BackTop>

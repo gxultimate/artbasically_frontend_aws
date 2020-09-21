@@ -1,28 +1,21 @@
-import React, {Component} from 'react';
-
 import {
-  MDBNav,
-  MDBNavItem,
-  MDBIcon,
+  MDBBtn, MDBCollapse, MDBHamburgerToggler, MDBIcon, MDBNav,
+  MDBNavbar, MDBNavItem,
   MDBNavLink,
-  MDBNavbar,
   MDBTabContent,
-  MDBTabPane,
-  MDBHamburgerToggler,
-  MDBCollapse,
-  MDBNotification,
-  MDBContainer,
-  MDBBtn,
+  MDBTabPane
 } from 'mdbreact';
-
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import '../css/admin.css';
+import Settings from './AccountSetting';
 import ArtworkTab from './ArtworkManagement';
 import Notif from './Notification';
+import Profile from './Profile';
 
-import Settings from './AccountSetting'
-import Profile from './Profile'
-import '../css/admin.css';
-import {withRouter} from 'react-router-dom'
-import {inject,observer} from 'mobx-react'
+
+
 
 class Admin extends Component {
   state = {
@@ -78,7 +71,7 @@ class Admin extends Component {
         <div className='admin'>
           <MDBNavbar className='position-fixed' dark expand='md'>
             <MDBNav className='topnav'>
-              <a href='/Admin' className='logo-wrapper ablogo'>
+              <a href='/ArtistHome' className='logo-wrapper ablogo'>
                 <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
                 <p>Artist</p>
               </a>
@@ -132,7 +125,7 @@ class Admin extends Component {
                     My Artworks
                   </MDBNavLink>
                 </MDBNavItem>
-                {/* <MDBNavItem>
+                <MDBNavItem>
                   <MDBNavLink
                     to='#'
                     active={this.state.items['default'] === '3'}
@@ -141,7 +134,7 @@ class Admin extends Component {
                     <MDBIcon icon='coins' className='mr-3' />
                     Earnings
                   </MDBNavLink>
-                </MDBNavItem> */}
+                </MDBNavItem>
      
     
            

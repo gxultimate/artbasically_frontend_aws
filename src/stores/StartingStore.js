@@ -9,6 +9,8 @@ import Style from '../models/Style';
 import User from '../models/User';
 import PrintSize from './../models/PrintSize'
 import Notification from './../models/Notif'
+import MyLists from './../models/MyLists'
+import { get } from 'js-cookie';
 
 class StartingStore {
   account = new Account();
@@ -19,6 +21,8 @@ class StartingStore {
   order = new Order();
   printsize = new PrintSize();
   notif = new Notification();
+  mylists= new MyLists();
+  listOfMyLists =[];
   listOfNotif=[];
   listOfPrintSize =[];
   listOfOrders = [];
@@ -108,6 +112,24 @@ class StartingStore {
     });
   };
 
+  editProfile = () => {
+    let doc = this.listOfUsers.filter(data=> {
+   
+      if (data.accID === this.account.accID){
+        
+          return data._id
+      }
+    })
+   
+ 
+    this.api.editprofile(this.account , doc[0]._id)
+    .then(resp => {
+   
+      this.listOfUsers=resp.data
+    })
+  }
+
+
   loginAccount = () => {
     return new Promise((resolve, reject) => {
       this.api.loginaccount(this.account).then((resp) => {
@@ -151,6 +173,74 @@ class StartingStore {
      
       this.api.loginemail(this.account)
       .then((resp) => {
+       
+        if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(1);
+        }else if (
+          
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' 
+        ) {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(2);
+        }else if (
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'){
+            sessionStorage.setItem('userData', JSON.stringify(resp.data))
+            resolve(2);
+        }else if (resp.data.acc_Status === 'Pending'){
+          resolve(3)
+         
+        }else if (resp.data.acc_Status === 'Rejected'){
+          resolve(3)
+         
+        }
+         else{
+          resolve(false);
+        }
+      });
+    });
+  };
+
+
+  loginFB = () => {
+    return new Promise((resolve, reject) => {
+     
+      this.api.loginfb(this.account)
+     
+      .then((resp) => {
+       
+        if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(1);
+        }else if (
+          
+          resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' 
+        ) {
+          sessionStorage.setItem('userData', JSON.stringify(resp.data))
+          resolve(2);
+        }else if (
+          resp.data.accessType === 'Curator' && resp.data.acc_Status === 'Active'){
+            sessionStorage.setItem('userData', JSON.stringify(resp.data))
+            resolve(2);
+        }else if (resp.data.acc_Status === 'Pending'){
+          resolve(3)
+         
+        }else if (resp.data.acc_Status === 'Rejected'){
+          resolve(3)
+         
+        }
+         else{
+          resolve(false);
+        }
+      });
+    });
+  };
+  loginGoogle = () => {
+    return new Promise((resolve, reject) => {
+     
+      this.api.logingoogle(this.account)
+      .then((resp) => {
+       
         if (resp.data.accessType === 'Artist' && resp.data.acc_Status === 'Active') {
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(1);
@@ -191,7 +281,7 @@ class StartingStore {
 
     return new Promise((resolve, reject) => {
       return this.api.upload(img).then((resp) => {
-    console.log(resp.data,'dataaaa')
+   
         if (documents === 'docu') {
          
           this.account.setProperty('acc_Documents', resp.data.url);
@@ -201,7 +291,7 @@ class StartingStore {
           this.artwork.setProperty('artworkImg', resp.data.url);
           this.account.setProperty('accImg', resp.data.url);
         }
-        // console.log(resp.data, "data")
+  
         if (this.artwork.artName === '') {
           this.addAccount();
         } else {
@@ -214,7 +304,7 @@ class StartingStore {
   getArtwork = () => {
     this.api.getartwork().then((resp) => {
       this.img = this.arrayBufferToBase64(resp.data[0].img.data.data);
-      // console.log(,"aws")x
+ 
     });
   };
 
@@ -273,7 +363,7 @@ class StartingStore {
                 }
               });
             });
-          // console.log(listofUserCategoriesArtwork, 'dsdsd');
+       
           this.listofFilteredUserArtworkCategories = _.uniqBy(
             this.listofFilteredUserArtworkCategories,
             (a) => a.artName
@@ -377,7 +467,7 @@ class StartingStore {
   getCategories = () => {
     this.api.getCategories().then((resp) => {
       this.listOfCategories = resp.data;
-      // console.log(,"aws")x
+  
     });
   };
   getOrderUser = () => {
@@ -599,10 +689,10 @@ class StartingStore {
    
       return new Promise((resolve, reject) => {   
         let getId = JSON.parse(sessionStorage.getItem('userData'))
-        console.log(getId.accID,'idd')
+     
         this.api.getnotif(getId.accID)
         .then(resp => {    
-          console.log(resp.data,'notifresp')
+        
            this.listOfNotif = resp.data
      
            if (resp.data !== false ) {   
@@ -638,6 +728,61 @@ class StartingStore {
         });
       }
 
+      addMyLists = () => { 
+        return new Promise((resolve, reject) => {   
+          this.api.addmylists(this.mylists)
+          .then(resp => {    
+             this.listOfMyLists = resp.data
+       
+             if (resp.data !== false ) {   
+                      resolve(resp.data);       
+                      } 
+             else {         
+               resolve(false);      
+               }  
+               });
+              })
+        }
+
+        getMyLists = () => { 
+   
+          return new Promise((resolve, reject) => {   
+            let getId = JSON.parse(sessionStorage.getItem('userData'))
+         
+            this.api.getmylists(getId.accID)
+            .then(resp => {    
+          
+               this.listOfMyLists = resp.data
+         
+               if (resp.data !== false ) {   
+                        resolve(resp.data);       
+                        } 
+               else {         
+                 resolve(false);      
+                 }  
+                 });
+                })
+          }
+
+
+          deleteMyLists =() =>{
+            let mytoken =this.listOfMyLists.filter(data =>{
+            
+              if (data.mylistsID === this.mylists.mylistsID){
+                return data._id
+              }
+            })
+          
+            this.api.deletemylists(this.mylists ,mytoken[0]._id)
+            .then(resp => {
+
+              this.listOfMyLists=resp.data
+            })
+          }
+
+
+
+
 }
 
 decorate(StartingStore, {
@@ -651,6 +796,7 @@ decorate(StartingStore, {
   addAccount: action,
   getAccounts: action,
   editAccount: action,
+  editProfile: action,
   account: observable,
   listOfUsers: observable,
   addArtwork: action,
@@ -712,12 +858,19 @@ decorate(StartingStore, {
   editPrintSize:action,
   loginAccount:action,
   loginEmail:action,
+  loginFB:action,
+  loginGoogle:action,
   notif:observable,
   listOfNotif:observable,
   addNotif:action,
   getNotif:action,
   getAllNotif:action,
   editNotif:action,
+  mylists:observable,
+  listOfMyLists :observable,
+  addMyLists:action,
+  getMyLists:action,
+  deleteMyLists:action,
 });
 
 export default StartingStore;

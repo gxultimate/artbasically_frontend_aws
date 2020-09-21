@@ -86,6 +86,10 @@ export class Artworks extends Component {
         return <h3>Artist You Follow</h3>;
       } else if (type === 'bestseller') {
         return <h3>Best Sellers</h3>;
+      }else if (type === 'yourlists'){
+        return <h3>My Lists</h3>;
+      }else{
+        console.log('error')
       }
     };
     return (
@@ -321,9 +325,7 @@ export class Artworks extends Component {
                       </label>
                     </li>
                   </ul>
-                  {/* <MDBBtn color="none" className="btnYellow">
-										Apply
-									</MDBBtn> */}
+                
                 </form>
               </div>
             </div>
@@ -336,19 +338,6 @@ export class Artworks extends Component {
             </section>
           </div>
 
-          {/* <Pagination defaultCurrent={1} total={100} />
-
-					<div className="bttop clearfix">
-						<MDBNavLink to="/Upload" className="btnYellow">
-							Add Yours
-						</MDBNavLink>
-						<BackTop>
-							{' '}
-							<a href="#!">
-								Back to Top <MDBIcon icon="caret-right" />{' '}
-							</a>{' '}
-						</BackTop>
-					</div> */}
         </div>
         <Footer />
       </div>

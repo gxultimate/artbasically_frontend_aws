@@ -6,18 +6,15 @@ const CMess = () => {
     <MDBDropdown className="topicons cicon">
       <MDBDropdownToggle color="transparent" className="btnpadd">
         <MDBIcon far icon="envelope" className="mr-3 i" />
-        <MDBBadge color="danger" className="ml-2 bell">2</MDBBadge>
+        <MDBBadge color="danger" className="ml-2 bell">1</MDBBadge>
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
-        <div className="title">MESSAGES</div>
-        <MDBDropdownItem>Jane Doe: Just like this
-          <MDBBadge color="#FAE933" className="ml-2 newbadge">NEW</MDBBadge>
+        <div className="title">Messages</div>
+        <MDBDropdownItem>This feature is on development
+          {/* <MDBBadge color="#FAE933" className="ml-2 newbadge">NEW</MDBBadge> */}
         </MDBDropdownItem>
-        <MDBDropdownItem>John Doe: Just like this
-          <MDBBadge color="#FAE933" className="ml-2 newbadge">NEW</MDBBadge>
-        </MDBDropdownItem>
-        <MDBDropdownItem>Johnyy Doe: Just like this</MDBDropdownItem>
-        <MDBDropdownItem>Janeyy Doe: Just like this</MDBDropdownItem>
+      
+    
       </MDBDropdownMenu>
     </MDBDropdown>
   );

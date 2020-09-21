@@ -24,10 +24,10 @@ class UploadWork extends Component {
 
   componentDidMount() {
     let {
-      startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
+      startingStore: {getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize},
     } = this.props;
     getArtists();
-
+    getPrintSize()
     getStyles();
     getCategories();
     getArtworkInfo();
@@ -57,10 +57,10 @@ class UploadWork extends Component {
         console.log(error.message);
       });
 
-    console.log(image.size, 'img');
+
 
     this.setState({selectedFile: image});
-    // console.log( image, "Aws")
+   
   }
   onSubmit(e) {
     let {
@@ -69,12 +69,12 @@ class UploadWork extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append('artworkImg', this.state.selectedFile);
-    artwork.setProperty('artworkID', this.getUniqueID());
+ 
     data.append('type', 'artwork');
     upload(data);
     const success = () => {
       // message.then(() =>
-      message.success('Successfully submitted an Artwork', 1);
+      message.success('Artwork submitted', 1);
       // );
     };
 
@@ -92,7 +92,7 @@ class UploadWork extends Component {
     this.setState({
       [modalNumber]: !this.state[modalNumber],
     });
-  };
+  }
 
   submitHandler = (event) => {
     event.preventDefault();
@@ -100,10 +100,25 @@ class UploadWork extends Component {
   };
 
   render() {
-    let {
-      startingStore: {artwork, listOfArtists, listOfCategories, listOfStyles},
-    } = this.props;
 
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
+
+
+    let {
+      startingStore: {artwork, listOfArtists, listOfCategories, listOfStyles,listOfPrintSize},
+    } = this.props;
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
+    artwork.setProperty('accID',mydata.accID)
+    artwork.setProperty('artworkStatus','Pending')
     function selectCategory(list, listitem) {
       let artThemeSelected = list.map((cat) => cat.catType);
       artwork.setProperty('artTheme', artThemeSelected);
@@ -112,10 +127,10 @@ class UploadWork extends Component {
       let artStyleSelected = list.map((cat) => cat.styleType);
       artwork.setProperty('artStyle', artStyleSelected);
     }
-    // let categoryList = listOfCategories.map ( (cat , index) => cat.catType )
-
-    // console.log(categoryList);
-
+    function selectArtSize(list, listitem) {
+      let artSizeSelected = list.map((size) => size.printSize);
+      artwork.setProperty('artSize', artSizeSelected);
+    }
     return (
       <div className='home'>
         <Navbar />
@@ -132,9 +147,11 @@ class UploadWork extends Component {
                   <MDBInput
                     label='Title'
                     type='text'
-                    onChange={(artName) =>
+                    onChange={(artName) =>{
                       artwork.setProperty('artName', artName.target.value)
-                    }
+                      artwork.setProperty('artworkID',`${getHash(artName.target.value.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`
+                      )
+                    }}
                     required
                   >
                     <div className='invalid-feedback'>
@@ -187,9 +204,7 @@ class UploadWork extends Component {
                     showCheckbox={true}
                     displayValue='catType'
                     onSelect={selectCategory}
-                    // onChange={(catType) =>
-                    //   artwork.setProperty('catType', catType.target.value)
-                    // }
+              
                   />
                   <div className='invalid-feedback'>
                     Please provide atleast 1 art theme.
@@ -219,8 +234,8 @@ class UploadWork extends Component {
                   </div>
                 </div>
                 <div className='dim'>
-                  <span>Dimensions</span>
-                  <ul>
+                  <span>Artwork Size</span>
+                 {/*  <ul>
                     <li>
                       <p>Unit of Measure</p>
                       <select>
@@ -239,7 +254,17 @@ class UploadWork extends Component {
                         <option>in Centimeters</option>
                       </select>
                     </li>
-                  </ul>
+                  </ul> */}
+                         <Multiselect
+                 
+                 className='multsel'
+                 options={listOfPrintSize}
+                 placeholder='Printing Size'
+                 showCheckbox={true}
+                 displayValue='printSize'
+                 onSelect={selectArtSize}
+           
+               />
                 </div>
                 <div className='selcon'>
                   <span>Number of Copies</span>

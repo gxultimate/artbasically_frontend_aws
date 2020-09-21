@@ -21,6 +21,7 @@ import SubmitArt from './pages/SubmitArt/';
 
 import ShopByPrice from './pages/ShopByPrice/';
 import ShopByCategory from './pages/ShopByCategory/';
+import MyLists from './pages/MyLists/'
 //Admin
 import AdminLogin from './admin/AdminLogin.js';
 import AdminHome from './admin/Admin.js';
@@ -29,6 +30,7 @@ import {ToastContainer} from 'react-toastify';
 import PartnerLogin from './printingpartner/PartnerLogin.js';
 import PrintingPartner from './printingpartner/PrintingPartner.js';
 import ArtistHome from './ArtistPage/'
+
 import {StartingStore, Api} from './stores';
 
 const api = new Api();
@@ -69,6 +71,7 @@ class Routes extends React.Component {
         <Route exact path='/CProfileEdit/:id' component={CProfileEdit} />
         <Route exact path='/RegVerify' component={RegVerify} />
         <Route exact path='/SubmitArt' component={SubmitArt} />
+        <Route exact path='/MyLists' component={MyLists} />
 
         <Route exact path='/ShopByPrice' component={ShopByPrice} />
         <Route exact path='/ShopByCategory' component={ShopByCategory} />

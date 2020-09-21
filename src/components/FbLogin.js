@@ -4,6 +4,7 @@ import {inject,observer} from 'mobx-react'
 import {message} from 'antd';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import {withRouter} from 'react-router-dom'
+import CookieConsent, { Cookies } from "react-cookie-consent";
 
 class FbLogin extends Component {
 
@@ -16,15 +17,23 @@ class FbLogin extends Component {
   };
 
   responseFacebook = (response) => {
-    let { startingStore: { addAccount, account ,loginEmail ,getArtists,
+   
+    let { startingStore: {  account ,loginFB ,getArtists,
       getArtworkInfo,
       getEmergingArtistArtwork,
-      getArtistFollowArtwork,listOfUsers} } = this.props;
+      getArtistFollowArtwork} } = this.props;
     
-    account.setProperty('accFname',response.name)
-    account.setProperty('accEmailAddress',response.email)
+   
     if (response.email === undefined || response.email === null ){
-      console.log('error')
+      const success = () => {
+        message
+          .loading('Signing in..', 1.2)
+          .then(() => message.error('Please try again', 1));
+      };
+
+      setTimeout(() => {
+        success();
+      }, 500);
       }
   else{
     this.setState({
@@ -34,14 +43,18 @@ class FbLogin extends Component {
       email: response.email,
       picture: response.picture.data.url,
     });
-  
-    
-    loginEmail().then((res) => {
-     
+
+    account.setProperty('accFname',this.state.name)
+    account.setProperty('accEmailAddress',this.state.email)
+
+if (this.state.isLoggedIn === true){
+
+    loginFB().then((res) => {
+      let mydata = JSON.parse(sessionStorage.getItem('userData'))
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
-      getArtistFollowArtwork(account.accEmailAddress);
+      getArtistFollowArtwork(mydata.accEmailAddress);
       if (res === 1) {
         const success = () => {
           message
@@ -99,7 +112,17 @@ class FbLogin extends Component {
         this.props.history.push('/');
       }
     });
-  
+  }else{
+    const success = () => {
+      message
+        .loading('Signing in..', 1.2)
+        .then(() => message.error('Please try again', 1));
+    };
+
+    setTimeout(() => {
+      success();
+    }, 500);
+  }
   }
     
   };
@@ -141,31 +164,6 @@ class FbLogin extends Component {
     return (<div>{fbContent}</div>)
   }
 
-
-// const styles = {
-//   fontFamily: "sans-serif",
-//   textAlign: "center"
-// };
-
-// const responseFacebook = response => {
-//   console.log(response);
-// };
-
-// const FbLogin = () => (
-//   <div style={styles} className="fblogin">
-//     <FacebookLogin
-//       appId="1088597931155576"
-//       autoLoad={true}
-//       fields="name,email,picture"
-//       //onClick={componentClicked}
-//       callback={responseFacebook}
-//     />
-//   </div>
-// );
-
-// render(<FbLogin />, document.getElementById("root"));
-
-// export default FbLogin;
 }
 
 export default withRouter(inject('startingStore')(observer(FbLogin)))

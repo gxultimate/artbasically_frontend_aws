@@ -7,7 +7,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
 import DownloadImage from '../../admin/sections/DownloadImage';
-import {Image} from 'cloudinary-react';
+
  class CancelledOrder extends Component {
   state = {
     modal: false,
@@ -154,8 +154,8 @@ const CancelledOrderTable = () => {
             {this.state.items.map((data) => (
               <tr>
                 <td>
-                
-                    <Image  src={data.artworkImg}  style={{width: '100% ', height: 'auto'}} secure="true"></Image>
+                <img src={data.artworkImg} style={{width: '100% ', height: 'auto'}} alt='artwork'/>
+                    
                 </td>
                 <td>{data.artistName}</td>
                 <td>{data.artworkName}</td>

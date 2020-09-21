@@ -15,10 +15,9 @@ class GmailRegister extends Component {
  
 
     if(response !== undefined || response != null){
-      console.log(response);
-      console.log(response.profileObj,);
+   
 
-      let { startingStore: { addAccount, account ,loginEmail ,getArtists,
+      let { startingStore: { addAccount, account ,loginGoogle ,getArtists,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,listOfUsers} } = this.props;
@@ -46,15 +45,17 @@ if (fil === 0 || fil === null){
         
         if(res === true){
            
-          loginEmail().then((res) => {
+          loginGoogle().then((res) => {
+let mydata = JSON.parse(sessionStorage.getItem('userData'))
+
             getArtworkInfo();
             getEmergingArtistArtwork();
             getArtists();
-            getArtistFollowArtwork(account.accEmailAddress);
+            getArtistFollowArtwork(mydata.accEmailAddress);
             if (res === 1) {
               const success = () => {
                 message
-                  .loading('Signing in..', 1.2)
+                  .loading('Validating..', 1.2)
                   .then(() => message.error('Welcome to artBasically', 1));
               };
       
@@ -66,7 +67,7 @@ if (fil === 0 || fil === null){
             else if (res === 2){
               const success = () => {
                 message
-                  .loading('Signing in..', 1.2)
+                  .loading('Validating..', 1.2)
                   .then(() => message.error('Welcome to artBasically', 1));
               };
       
@@ -81,7 +82,7 @@ if (fil === 0 || fil === null){
             else {
               const success = () => {
                 message
-                  .loading('Registering..', 1.2)
+                  .loading('Validating..', 1.2)
                   .then(() => message.error('Account created', 1));
               };
       
@@ -104,7 +105,7 @@ if (fil === 0 || fil === null){
 
           const success = () => {
             message
-              .loading('Signing in..', 1.2)
+              .loading('Validating..', 1.2)
               .then(() => message.error('Email already taken!', 1));
           };
   
@@ -118,7 +119,15 @@ if (fil === 0 || fil === null){
 
     }
     else{
-      console.log('error')
+      const success = () => {
+        message
+          .loading('Signing in..', 1.2)
+          .then(() => message.error('Please try again', 1));
+      };
+
+      setTimeout(() => {
+        success();
+      }, 500);
     }
   };
   render() {

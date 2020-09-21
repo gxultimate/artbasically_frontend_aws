@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import {inject, observer} from 'mobx-react';
 import {Skeleton} from 'antd';
-import {Image} from 'cloudinary-react';
+
 class CProfile extends Component {
   componentDidMount() {
     let {
@@ -121,7 +121,7 @@ class CProfile extends Component {
                         <span className='new'>NEW</span>
                         <span className='hot'>HOT</span>
                       </div>
-                      <Image  src={art.artworkImg} secure="true"></Image>
+                      <img src={art.artworkImg} alt='artwork'/>
                     </a>
                     <div className='artistinfo'>
                       <p>{art.artName}</p>
@@ -149,7 +149,8 @@ class CProfile extends Component {
                         <span className='new'>NEW</span>
                         <span className='hot'>HOT</span>
                       </div>
-                      <Image  src={art.artworkImg} secure="true"></Image>
+                      <img src={art.artworkImg} alt='artwork'/>
+                      <img src={art.artworkImg} alt='artwork'/>
                     </a>
                     <div className='artistinfo'>
                       <p>{art.artName}</p>
@@ -177,7 +178,7 @@ class CProfile extends Component {
                         <span className='new'>NEW</span>
                         <span className='hot'>HOT</span>
                       </div>
-                      <Image  src={art.artworkImg} secure="true"></Image>
+                      <img src={art.artworkImg} alt='artwork'/>
                     </a>
                     <div className='artistinfo'>
                       <p>{art.artName}</p>
@@ -205,7 +206,7 @@ class CProfile extends Component {
                         <span className='new'>NEW</span>
                         <span className='hot'>HOT</span>
                       </div>
-                      <Image  src={art.artworkImg} secure="true"></Image>
+                      <img src={art.artworkImg} alt='artwork'/>
                     </a>
                     <div className='artistinfo'>
                       <p>{art.artName}</p>
@@ -233,7 +234,7 @@ class CProfile extends Component {
                         <span className='new'>NEW</span>
                         <span className='hot'>HOT</span>
                       </div>
-                      <Image  src={art.artworkImg} secure="true"></Image>
+                      <img src={art.artworkImg} alt='artwork'/>
                      
                     </a>
                     <div className='artistinfo'>

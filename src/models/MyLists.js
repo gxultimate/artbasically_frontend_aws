@@ -1,25 +1,27 @@
 import {decorate, observable} from 'mobx';
 import Model from './Model';
 
-class Artwork extends Model {
+class MyLists extends Model {
   constructor(props) {
     const defaults = {
       _id: '',
-      artworkPath: '',
-      artDescription: '',
+      mylistsID:'',
+      accID:'',
+     
       artworkID: '',
       artName: '',
       artTheme: '',
       artStyle: '',
       artPrice: '',
-      artDimension: '',
       artRating: '',
-      accID: '',
+      artistID: '',
       artistName: '',
       artworkDateCreated: '',
       artType: '',
       artworkImg: undefined,
-      artworkStatus: '',
+
+
+
     };
     super({...defaults, ...props});
   }
@@ -27,23 +29,24 @@ class Artwork extends Model {
 
 }
 
-decorate(Artwork, {
+decorate(MyLists, {
   _id: observable,
-  artworkPath: observable,
-  artDescription: observable,
+  mylistsID:observable,
+  accID:observable,
+ 
   artworkID: observable,
   artName: observable,
   artTheme: observable,
   artStyle: observable,
   artPrice: observable,
-  artDimension: observable,
   artRating: observable,
-  accID: observable,
+  artistID: observable,
   artistName: observable,
   artworkDateCreated: observable,
   artType: observable,
   artworkImg: observable,
-  artworkStatus: observable,
+
+
 });
 
-export default Artwork;
+export default MyLists;

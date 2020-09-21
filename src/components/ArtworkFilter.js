@@ -6,7 +6,7 @@ import {toJS} from 'mobx';
 import {inject, observer} from 'mobx-react';
 import {Pagination} from 'antd'; //new
 import art from '../images/artworks/art1.png';
-import {Image} from 'cloudinary-react';
+import {message} from 'antd';
 const numEachPage = 10;
 class ArtworkFilter extends Component {
   constructor(props) {
@@ -25,8 +25,13 @@ class ArtworkFilter extends Component {
       maxValue: value * numEachPage,
     });
   };
+  componentDidMount(){
+    let{startingStore:{getMyLists}}=this.props;
+    getMyLists()
+  }
 
   render() {
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
     let {
       startingStore: {
         listOfArtworks,
@@ -35,15 +40,40 @@ class ArtworkFilter extends Component {
         listofFilteredUserArtworkCategories,
         listOfEmergingArtist,
         listOfArtistFollowed,
+        listOfMyLists,
+        mylists,
+        deleteMyLists
       },
     } = this.props;
+
+    let removeToLists = (list)=>{
+
+mylists.setProperty('mylistsID',list.mylistsID)
+
+
+deleteMyLists()
+
+const success = () => {
+  message
+    .loading('', 0.5)
+    .then(() => message.success('Artwork removed to your list', 3));
+};
+setTimeout(() =>{
+  success()
+},100)
+
+setTimeout(()=>{
+  window.location.reload(false);
+},1500)
+    }
+
 
     let artworks = () => {
       if (this.props.type === 'foryou') {
         return toJS(listofFilteredUserArtworkCategories)
           .reverse()
-          .map((image) => (
-            <li>
+          .map((image,i) => (
+            <li key={i}>
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -63,8 +93,26 @@ class ArtworkFilter extends Component {
                <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
+              <div className='artistinfo clearfix pad10'>
+              
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+                               
+                   
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                
+                
                 <MDBBtn
                   className='ifollow'
                   color='transparent'
@@ -74,14 +122,14 @@ class ArtworkFilter extends Component {
                 >
                   <MDBIcon icon='plus' />
                 </MDBBtn>
-              </a>
+              </div>
             </li>
           ));
       } else if (this.props.type === 'bestseller') {
         return toJS(listOfArtworks)
           .reverse()
-          .map((image) => (
-            <li>
+          .map((image,i) => (
+            <li key={i}>
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -100,25 +148,47 @@ class ArtworkFilter extends Component {
                   <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
+              <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
                 >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
-              </a>
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+            <MDBBtn
+              className='ifollow'
+              color='transparent'
+              floating
+              rounded
+              onClick={() => followArtist(listofArtistInfo._id)}
+            >
+              <MDBIcon icon='plus' />
+            </MDBBtn>
+          </div>
             </li>
           ));
       } else if (this.props.type === 'discover') {
-        return toJS(listOfEmergingArtist)
-          .reverse()
-          .map((image) => (
-            <li>
+        return toJS(listOfArtworks)
+          
+          .map((image,i) => {
+            
+            return(
+
+            <li key={i}>
+            
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -137,8 +207,26 @@ class ArtworkFilter extends Component {
                   <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
+              <div className='artistinfo clearfix pad10'>
+              
+                  <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName
+                               
+                   
+                          }
+                        });
+                      }}
+                    >
+                         <p>{image.artistName}</p>
+                     
+                    </a>
+                
+                
                 <MDBBtn
                   className='ifollow'
                   color='transparent'
@@ -148,14 +236,14 @@ class ArtworkFilter extends Component {
                 >
                   <MDBIcon icon='plus' />
                 </MDBBtn>
-              </a>
+              </div>
             </li>
-          ));
+          )});
       } else if (this.props.type === 'categoriesfollow') {
         return toJS(listofFilteredUserArtworkCategories)
           .reverse()
-          .map((image) => (
-            <li>
+          .map((image,i) => (
+            <li key={i}>
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -174,25 +262,43 @@ class ArtworkFilter extends Component {
                   <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
+              <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
                 >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
-              </a>
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+            <MDBBtn
+              className='ifollow'
+              color='transparent'
+              floating
+              rounded
+              onClick={() => followArtist(listofArtistInfo._id)}
+            >
+              <MDBIcon icon='plus' />
+            </MDBBtn>
+          </div>
             </li>
           ));
       } else if (this.props.type === 'artistyoufollow') {
         return toJS(listOfArtistFollowed)
           .reverse()
-          .map((image) => (
-            <li>
+          .map((image,i) => (
+            <li key={i}>
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -211,25 +317,43 @@ class ArtworkFilter extends Component {
                   <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
+              <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
                 >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
-              </a>
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+            <MDBBtn
+              className='ifollow'
+              color='transparent'
+              floating
+              rounded
+              onClick={() => followArtist(listofArtistInfo._id)}
+            >
+              <MDBIcon icon='plus' />
+            </MDBBtn>
+          </div>
             </li>
           ));
       } else if (this.props.type === 'latest') {
         return toJS(listOfArtworks.filter(art=> art.artworkStatus === 'Approved'))
          .reverse()
-          .map((image) => (
-            <li>
+          .map((image,i) => (
+            <li key={i}>
               <a href='#!' className='artlink'>
                 <div className='artlabel'>
                   <span className='new'>NEW</span>
@@ -248,20 +372,95 @@ class ArtworkFilter extends Component {
                   <img src={image.artworkImg} alt='' />
                 </Link>
               </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>{image.artistName}</p>
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
+              <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
                 >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
-              </a>
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+            <MDBBtn
+              className='ifollow'
+              color='transparent'
+              floating
+              rounded
+              onClick={() => followArtist(listofArtistInfo._id)}
+            >
+              <MDBIcon icon='plus' />
+            </MDBBtn>
+          </div>
             </li>
           ));
+      }else if(this.props.type === 'yourlists'){
+        return toJS(listOfMyLists.filter(art=> art.accID === mydata.accID))
+        .reverse()
+         .map((image,i) => (
+           <li key={i}>
+             <a href='#!' className='artlink'>
+               <div className='artlabel'>
+                 <span className='new'>NEW</span>
+                 <span className='hot'>HOT</span>
+                 <span className='type'>
+                   {image.artType === 'Secondary'
+                     ? 'Second Edition'
+                     : 'Original'}
+                 </span>
+               </div>
+               <Link
+                 to={{
+                   pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                 }}
+               >
+                 <img src={image.artworkImg} alt='' />
+               </Link>
+             </a>
+             <div className='artistinfo clearfix pad10'>
+             
+             <a
+                 href=''
+               
+                 onClick={() => {
+                   this.props.history.push({
+                     pathname: `/Artist/${image.artistName}`,
+                     state: {artistName:image.artistName
+                          
+              
+                     }
+                   });
+                 }}
+               >
+                    <p>{image.artistName}</p>
+                
+               </a>
+           
+           
+           <MDBBtn
+             className='ifollow'
+             color='transparent'
+             floating
+             rounded
+             style={{color:'red'}}
+             onClick={() => removeToLists(image)}
+           >
+             
+             <MDBIcon icon='minus' style={{color:'red'}}/>
+           </MDBBtn>
+         </div>
+           </li>
+         ));
       }
     };
 
@@ -269,9 +468,9 @@ class ArtworkFilter extends Component {
       <div>
         {this.props.price.length !== 0 ? (
           <ul className='col3img clearfix'>
-            {this.props.price.map((image) => {
+            {this.props.price.map((image,i) => {
               return (
-                <li>
+                <li key={i}>
                   <a href='#!' className='artlink'>
                     <div className='artlabel'>
                       <span className='new'>NEW</span>
@@ -290,18 +489,36 @@ class ArtworkFilter extends Component {
                       <img src={image.artworkImg} alt='' />
                     </Link>
                   </a>
-                  <a href='#!' className='artistinfo clearfix pad10'>
-                    <p>{image.artistName}</p>
-                    <MDBBtn
-                      className='ifollow'
-                      color='transparent'
-                      floating
-                      rounded
-                      onClick={() => followArtist(listofArtistInfo._id)}
-                    >
-                      <MDBIcon icon='plus' />
-                    </MDBBtn>
-                  </a>
+                  <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
+                >
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+            <MDBBtn
+              className='ifollow'
+              color='transparent'
+              floating
+              rounded
+              onClick={() => followArtist(listofArtistInfo._id)}
+            >
+              <MDBIcon icon='plus' />
+            </MDBBtn>
+          </div>
                 </li>
               );
             })}
@@ -310,30 +527,6 @@ class ArtworkFilter extends Component {
           <ul className='col3img clearfix'>
             {artworks()}
 
-            <li>
-              <a href='#!' className='artlink'>
-                <div className='artlabel'>
-                  <span className='new'>NEW</span>
-                  <span className='hot'>HOT</span>
-                  <span className='type'>Secondary</span>
-                </div>
-                <Link to='!#'>
-                  <img src={art} alt='' />
-                </Link>
-              </a>
-              <a href='#!' className='artistinfo clearfix pad10'>
-                <p>Jane Doe</p>
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  // onClick={() => followArtist(listofArtistInfo._id)}
-                >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
-              </a>
-            </li>
           </ul>
         )}
 

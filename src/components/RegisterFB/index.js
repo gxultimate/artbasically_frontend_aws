@@ -50,7 +50,7 @@ class FbReg extends Component {
     else if (getEmail !== 0){
       const success = () => {
         message
-          .loading('Signing in..', 1.2)
+          .loading('Validating..', 1.2)
           .then(() => message.success('Account already registered', 1));
       };
 
@@ -74,7 +74,7 @@ else{
         console.log(response);
         console.log(response.profileObj,);
   
-        let { startingStore: { addAccount, account ,loginAccount ,getArtists,
+        let { startingStore: { addAccount, account ,loginFB ,getArtists,
           getArtworkInfo,
           getEmergingArtistArtwork,
           getArtistFollowArtwork,listOfUsers} } = this.props;
@@ -104,15 +104,16 @@ else{
         addAccount().then(res => {
           if(res === true){
              
-            loginAccount().then((res) => {
+            loginFB().then((res) => {
+              let mydata = JSON.parse(sessionStorage.getItem('userData'))
               getArtworkInfo();
               getEmergingArtistArtwork();
               getArtists();
-              getArtistFollowArtwork(account.accEmailAddress);
+              getArtistFollowArtwork(mydata.accEmailAddress);
             if (res === 2) {
                 const success = () => {
                   message
-                    .loading('Signing in..', 1.2)
+                    .loading('Validating..', 1.2)
                     .then(() => message.success('Welcome to artBasically', 1));
                 };
         
@@ -123,7 +124,7 @@ else{
               }  else {
                 const success = () => {
                   message
-                    .loading('Signing in..', 1.2)
+                    .loading('Validating..', 1.2)
                     .then(() => message.error('Registration Unsuccessful', 1));
                 };
         
@@ -143,7 +144,7 @@ else{
   
             const success = () => {
               message
-                .loading('Signing in..', 1.2)
+                .loading('Validating..', 1.2)
                 .then(() => message.error('Email already taken!', 1));
             };
     

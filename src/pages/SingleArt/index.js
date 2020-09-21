@@ -13,6 +13,7 @@ import ViewRoom from '../../components/ViewRoom';
 import art from '../../images/artworks/art1.png';
 import {Multiselect} from 'multiselect-react-dropdown';
 import LoginCart from './../../components/CartLogin/'
+import {withRouter} from 'react-router-dom'
 class SingleArt extends Component {
   constructor(props) {
     super(props);
@@ -204,10 +205,10 @@ class SingleArt extends Component {
                               listOfSingleArtwork[0] !== undefined
                                 ? listOfSingleArtwork[0].artistName
                                 : '',
-                            // "accImg": listofArtistInfo.artistImg,
-                            // "artistDescription": listofArtistInfo.accDescription,
-                            // "birthYear": listofArtistInfo.birthYear,
-                            // "accFollowers": listofArtistInfo.accFollowers
+                            "accImg": listofArtistInfo.artistImg,
+                            "artistDescription": listofArtistInfo.accDescription,
+                            "birthYear": listofArtistInfo.birthYear,
+                            "accFollowers": listofArtistInfo.accFollowers
                           },
                         });
                       }}
@@ -242,8 +243,8 @@ class SingleArt extends Component {
                       <option selected value=''>
                         Choose Material
                       </option>
-                      <option value='Cold Press Paper'>Cold Press Paper</option>
-                      <option value='Canvas'>Canvas</option>
+                      <option value='Sintra Board(Matte)'>Sintra Board(Matte)</option>
+                      <option value='Sintra Board(Glossy)'>Sintra Board(Glossy)</option>
                     </select>
                     <a className='bluelink' href=''>
                       What material is the best for you?
@@ -286,7 +287,7 @@ class SingleArt extends Component {
                       <option value='Rustic Barnwood Distressed Wood'>
                         Rustic Barnwood Distressed Wood
                       </option>
-                      <option value='TEST'>TEST 1</option>
+                      <option value='Natural Wood'>Natural Wood</option>
                     </select>
                     <a className='bluelink' href=''>
                       Which framing option is best for you?
@@ -534,4 +535,4 @@ class SingleArt extends Component {
   }
 }
 
-export default inject('startingStore')(observer(SingleArt));
+export default withRouter(inject('startingStore')(observer(SingleArt)))

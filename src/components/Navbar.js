@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
 import {
-  MDBNavbar,
-  MDBNavbarNav,
+  MDBCollapse,
+  MDBDropdown, MDBDropdownItem,
+  MDBDropdownMenu, MDBDropdownToggle,
+  MDBHamburgerToggler, MDBNavbar,
+  MDBNavbarBrand, MDBNavbarNav,
   MDBNavItem,
   MDBNavLink,
-  MDBDropdownToggle,
-  MDBDropdownItem,
-  MDBHamburgerToggler,
-  MDBCollapse,
-  MDBNavbarBrand,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBBadge,
-  MDBIcon,
-  MDBBtn,
+  MDBBtn
 } from 'mdbreact';
-
-import CNotif from './CNotif';
-import CMess from '../components/CMess';
-import NavLogin from '../components/NavLogin';
-import Search from '../components/Search';
-import NavLoginPost from './NavLoginPost'
 import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import OrderIcon from './../components/OrderIcon'
+import CMess from './CMess';
+import NavLogin from './NavLogin';
+import Search from './Search';
+import OrderIcon from './OrderIcon';
+import CNotif from './CNotif';
+import NavLoginPost from './NavLoginPost';
+
+
 
 class Navbar extends Component {
   state = {
@@ -43,23 +38,10 @@ class Navbar extends Component {
       [collapseId]: !this.state[collapseId],
     });
   };
-  componentDidMount(){
-    let {startingStore:{getToCart,getOrders}}=this.props;
-    getToCart()
-    getOrders()
-  }
+
 
   render() {
 
-    // let displogin = (isLogin) => 
-    //   isLogin ?
-    //     (<MDBNavLink
-    //       className='inlinelink rborder btnYellow navbtn'
-    //       to='/Upload'
-    //     >
-    //       Post, Basically
-    //     </MDBNavLink>)
-    //     : (<NavLogin />)
     function  logout() {
       sessionStorage.clear();
       window.location.href = '/';
@@ -156,21 +138,9 @@ class Navbar extends Component {
                 <MDBDropdownItem href='/ShopByCategory'>Category</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
-            {/* <MDBNavItem>
-              <MDBNavLink className='inlinelink rborder' to='#!'>
-                History
-              </MDBNavLink>
-            </MDBNavItem> */}
+       
             <MDBNavItem>
-              {/* {userData !== null && userData !== undefined ? (
-                <MDBNavLink
-                className='inlinelink rborder btnYellow navbtn'
-                to='/Upload'
-              >
-                Post, Basically
-              </MDBNavLink>
-          )}*/}
-            {/* {displogin(false)} */}
+    
             
                 {userData !== null && userData !== undefined ? (<MDBNavLink
           className='inlinelink rborder btnYellow navbtn'
@@ -183,9 +153,11 @@ class Navbar extends Component {
             </MDBNavItem> 
             
               <MDBNavItem>
-                <MDBNavLink className='inlinelink rborder' to='#!'>
+                <MDBBtn color='dark' style={{color:'white'}}>
+            
                   <Search />
-                </MDBNavLink>
+                 
+                </MDBBtn>
               </MDBNavItem>
               <MDBDropdown className='ddnav'>
                 {userData !== null && userData !== undefined ? (
@@ -223,22 +195,25 @@ class Navbar extends Component {
                   </MDBDropdownMenu>
                 ) : (
                     <MDBDropdownMenu basic className='ddnavMenu'>
-                      {/* <MDBDropdownItem >Account </MDBDropdownItem>
-                  <MDBDropdownItem > Profile </MDBDropdownItem>
-                  <MDBDropdownItem onClick={() => {
-                    sessionStorage.removeItem("userData")
-                  }}>
-                    <Link to={`/`}> Log Out</Link>
-                  </MDBDropdownItem> */}
+            
                     </MDBDropdownMenu>
                   )}
               </MDBDropdown>
               {userData !== null && userData !== undefined ? (
                 <div className='row lbtn'>
                   <MDBNavItem>
-                    <MDBNavLink className='inlinelink rborder' to='#!'>
-                      Your Lists
-                  </MDBNavLink>
+                  
+
+                  <MDBNavLink
+                  className='inlinelink rborder'
+                  to='/Artworks'
+                  onClick={() => {
+                    filterOn('yourlists');
+                  }}
+                >
+                  Your Lists
+                </MDBNavLink>
+
                   </MDBNavItem>
                   <MDBNavItem>
                     <CMess />
@@ -247,13 +222,7 @@ class Navbar extends Component {
                     <CNotif />
                   </MDBNavItem>
                   <MDBNavItem >
-              {/* <MDBBadge  style={{color:'#FAE933',float:'right'}} className="ml-5">{listOfUserCart.length}
-              </MDBBadge>
-                    <MDBNavLink
-                    style={{float:'left'}}
-                      className='inlinelink rborder ibag'
-                      to='/Order'
-                    /> */}
+           
                     
                      <OrderIcon/>
                   
@@ -263,7 +232,7 @@ class Navbar extends Component {
                 </div>
               ) : (
                   <MDBNavItem style={{ display: 'none' }}>
-                    {/* <MDBNavLink className="inlinelink rborder ibag" to="/Order"></MDBNavLink> */}
+                
                   </MDBNavItem>
                 )}
           </MDBNavbarNav>

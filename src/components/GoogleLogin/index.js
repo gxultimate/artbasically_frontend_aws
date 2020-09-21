@@ -22,31 +22,49 @@ class GmailLogin extends Component {
     getAccounts();
   }
 
-  responseGoogle = (response) => {
- 
+  state = {
+    isLoggedIn: false,
+    googleID: '',
+    name: '',
+    email: '',
+    picture: '',
+  };
 
-    if(response !== undefined || response != null){
+  responseGoogle = (response) => {
+ console.log(response,'respp')
+ let { startingStore: {  account ,loginGoogle ,getArtists,
+  getArtworkInfo,
+  getEmergingArtistArtwork,
+  getArtistFollowArtwork} } = this.props;
+
+    if(response !== undefined || response !== null){
+
+      this.setState({
+        isLoggedIn: true,
+        googleID: response.profileObj.googleId,
+        name: response.profileObj.givenName,
+        email: response.profileObj.email,
+        picture: response.profileObj.imageUrl,
+      });
      
 
-      let { startingStore: {  account ,loginEmail ,getArtists,
-        getArtworkInfo,
-        getEmergingArtistArtwork,
-        getArtistFollowArtwork} } = this.props;
+     
 
 
-        account.setProperty("accEmailAddress", response.profileObj.email)
-        account.setProperty("accFname", response.profileObj.givenName)
+        account.setProperty("accEmailAddress", this.state.email)
+        account.setProperty("accFname", this.state.name)
 
-
-        loginEmail().then((res) => {
+        if (this.state.isLoggedIn === true){
+        loginGoogle().then((res) => {
+          let mydata = JSON.parse(sessionStorage.getItem('userData'))
           getArtworkInfo();
           getEmergingArtistArtwork();
           getArtists();
-          getArtistFollowArtwork(account.accEmailAddress);
+          getArtistFollowArtwork(mydata.accEmailAddress);
           if (res === 1) {
             const success = () => {
               message
-                .loading('Signing in..', 1.2)
+                .loading('Validating..', 1.2)
                 .then(() => message.error('Welcome to artBasically', 1));
             };
     
@@ -58,7 +76,7 @@ class GmailLogin extends Component {
           else if (res === 2){
             const success = () => {
               message
-                .loading('Signing in..', 1.2)
+                .loading('Validating..', 1.2)
                 .then(() => message.error('Welcome to artBasically', 1));
             };
     
@@ -71,7 +89,7 @@ class GmailLogin extends Component {
           else if (res === 3){
             const success = () => {
               message
-                .loading('Signing in..', 1.2)
+                .loading('Validating..', 1.2)
                 .then(() => message.error('Validating your account', 2));
             };
     
@@ -88,7 +106,7 @@ class GmailLogin extends Component {
           else {
             const success = () => {
               message
-                .loading('Signing in..', 1.2)
+                .loading('Validating..', 1.2)
                 .then(() => message.error('No account registered', 1));
             };
     
@@ -101,11 +119,29 @@ class GmailLogin extends Component {
             }, 1000);
           }
         });
-    
+      }else{
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.error('Please try again', 1));
+        };
+  
+        setTimeout(() => {
+          success();
+        }, 500);
+      }
 
     }
     else{
-      console.log('error')
+      const success = () => {
+        message
+          .loading('Signing in..', 1.2)
+          .then(() => message.error('Please try again', 1));
+      };
+
+      setTimeout(() => {
+        success();
+      }, 500);
     }
   };
   render() {

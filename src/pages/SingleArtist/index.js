@@ -5,9 +5,9 @@ import Footer from '../../components/Footer';
 import art from '../../images/artworks/art1.png';
 import { inject, observer } from 'mobx-react';
 import { Skeleton, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link ,withRouter} from 'react-router-dom';
 import _ from 'lodash';
-import {Image} from 'cloudinary-react';
+
 class SingleArtist extends Component {
 	constructor(props) {
 		super(props);
@@ -27,6 +27,7 @@ class SingleArtist extends Component {
 	}
 
 	componentDidMount() {
+		window.scrollTo(0,0)
 		let { startingStore: { getSingleArtists, getArtistArtwork, getArtists, getArtworkInfo }} = this.props;
 		let userData = JSON.parse(sessionStorage.getItem('userData'));
 		getSingleArtists(this.props.match.params.name);
@@ -64,7 +65,7 @@ class SingleArtist extends Component {
 							<div className="left">
 								<div className="artistpp">
 									{listofArtistInfo !== undefined ? (
-										<img src={listofArtistInfo.accImg} alt="" />
+										<img src={listofArtistInfo.profile_Img} alt="" />
 									) : (
 										<Skeleton active />
 									)}
@@ -163,7 +164,7 @@ class SingleArtist extends Component {
 													pathname: `/Art/${art.artworkID}/${art.artistName}`
 												}}
 											>
-												 <Image  src={art.artworkImg} secure="true"></Image>
+												 <img src={art.artworkImg} alt='artwork'/>
 											</Link>
 										</a>
 										<div className="artistinfo">
@@ -205,7 +206,7 @@ class SingleArtist extends Component {
 													pathname: `/Art/${art.artworkID}/${art.artistName}`
 												}}
 											>
-												 <Image  src={art.artworkImg} secure="true"></Image>
+												 <img src={art.artworkImg} alt='artwork'/>
 											</Link>
 										</a>
 										<div className="artistinfo">
@@ -298,4 +299,4 @@ class SingleArtist extends Component {
 	}
 }
 
-export default inject('startingStore')(observer(SingleArtist));
+export default withRouter(inject('startingStore')(observer(SingleArtist)))
