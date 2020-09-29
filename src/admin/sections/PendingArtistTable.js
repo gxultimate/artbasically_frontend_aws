@@ -99,7 +99,7 @@ let users = listOfUsers.filter((usr) => {
 
 
       editAccount().then((resp) => {
-        console.log(resp,'dsadfs')
+       
         if (resp === 'success') {
                 const success = () => {
         message
@@ -109,10 +109,12 @@ let users = listOfUsers.filter((usr) => {
 
       setTimeout(() =>{
         success();
-      },200)
-      setTimeout(() =>{
-            this.props.history.push('/AdminHome');
-          },2000)
+      },1000)
+     
+    
+          setTimeout(()=>{
+            window.location.reload(false);
+          },1500)
         } else {
           const error = () => {
             message
@@ -121,7 +123,8 @@ let users = listOfUsers.filter((usr) => {
           };
           setTimeout(() => {
             error();
-          }, 200);
+          }, 200)
+      
         }
       });
           }
@@ -142,8 +145,11 @@ let users = listOfUsers.filter((usr) => {
 
             setTimeout(() =>{
               success()
-              this.props.history.push('/AdminHome');
+           
             },1000)
+            setTimeout(()=>{
+              window.location.reload(false);
+            },1500)
        
           }
         

@@ -12,7 +12,7 @@ class Notifications extends Component {
     let mydata =JSON.parse(sessionStorage.getItem('userData'))
    
    let notifCount = listOfNotif.filter(ntf => ntf.notifStatus === 'unread').length
-   console.log(listOfNotif,';dsfdsg')
+  
    let mynotif = listOfNotif.filter(ntf => ntf.notifStatus === 'unread').map((notifInfo,i) =>{
      return(
        <Fragment key={i}>

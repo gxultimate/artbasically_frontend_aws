@@ -14,7 +14,7 @@ export class User extends Component {
           <MDBCard>
             <MDBCardBody id="breadcrumb" className="d-flex align-items-center justify-content-between">
               <MDBBreadcrumb>
-                <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+                <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Customer</MDBBreadcrumbItem>
               </MDBBreadcrumb>
           

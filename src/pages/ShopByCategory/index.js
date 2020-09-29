@@ -17,11 +17,12 @@ import Navbar from '../../components/Navbar';
 
   componentDidMount() {
     let {
-      startingStore: {getArtists, getArtworkInfo, getCategories},
+      startingStore: {getArtists, getArtworkInfo, getCategories,getPrintSize},
     } = this.props;
     getArtworkInfo();
     getArtists();
     getCategories();
+    getPrintSize()
     this.selectedCheckboxes = new Set();
   }
   
@@ -68,11 +69,39 @@ import Navbar from '../../components/Navbar';
     }
   };
 
+  setPrintSize = (amt) => {
+    if (this.selectedCheckboxes.has(amt)) {
+      this.selectedCheckboxes.delete(amt);
+    } else {
+      this.selectedCheckboxes.add(amt);
+    }
+    let {
+      startingStore: {listOfArtworks},
+    } = this.props;
+    let arts = [];
+    if (amt === 'none' || this.selectedCheckboxes.length === 0) {
+      this.setState({price: listOfArtworks});
+    } else {
+      let newCategories = Array.from(this.selectedCheckboxes);
+      let filteredArtwork = listOfArtworks.filter((art) => {
+        newCategories.map((cat) => {
+          if (art.artSize.includes(cat)) {
+            arts.push(art);
+          }
+        });
+      });
+
+      this.setState({price: arts});
+    }
+  };
+
+
   render() {
     let {
-      startingStore: {listOfCategories, filter},
+      startingStore: {listOfCategories, filter,listOfPrintSize},
     } = this.props;
     let categoryList = listOfCategories.map((cat) => cat.catType);
+    let printSizeList = listOfPrintSize.map((size) => size.printSize);
     let type = filter !== false ? filter : sessionStorage.getItem('type');
     let h3Type = () => {
       if (type === 'discover') {
@@ -132,96 +161,39 @@ import Navbar from '../../components/Navbar';
 
           
 
-                  <h5>Orientation</h5>
+    
+                  <h5>Orientation/Size</h5>
                   <ul>
                     <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='anyorient'
-                      />
-                      <label class='custom-control-label' for='anyorient'>
-                        Any
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='portrait'
-                      />
-                      <label class='custom-control-label' for='portrait'>
-                        Portrait
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='landscape'
-                      />
-                      <label class='custom-control-label' for='landscape'>
-                        Landscape
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='square'
-                      />
-                      <label class='custom-control-label' for='square'>
-                        Square
-                      </label>
-                    </li>
-                  </ul>
-
-                  <h5>Size</h5>
-                  <ul>
-                    <li class='custom-control custom-checkbox'>
-                      <input
+                    <input
                         type='checkbox'
                         class='custom-control-input'
                         id='anysize'
+                        onChange={() => {
+                          this.setPrintSize('none');
+                        }}
                       />
                       <label class='custom-control-label' for='anysize'>
                         Any
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='small'
-                      />
-                      <label class='custom-control-label' for='small'>
-                        Small
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='medium'
-                      />
-                      <label class='custom-control-label' for='medium'>
-                        Medium
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='large'
-                      />
-                      <label class='custom-control-label' for='large'>
-                        Large
-                      </label>
-                    </li>
+                    {printSizeList.map((size) => (
+                      <li class='custom-control custom-checkbox'>
+                        <input
+                          type='checkbox'
+                          class='custom-control-input'
+                          id={size}
+                          onChange={() => {
+                            this.setPrintSize(size);
+                          }}
+                        />
+                        <label class='custom-control-label' for={size}>
+                          {size}
+                        </label>
+                      </li>
+                    ))}
                   </ul>
-                  {/* <MDBBtn color="none" className="btnYellow">
-										Apply
-									</MDBBtn> */}
+                 
                 </form>
               </div>
             </div>

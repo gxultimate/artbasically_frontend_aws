@@ -144,9 +144,9 @@ class Login extends Component {
           
           color='yellow'
           size='md'
-          style={{borderRadius: '50px'}}
+          style={{borderRadius: '50px',color:'black',fontWeight:'bold',fontSize:'15px'}}
          >
-         Add to Cart
+         Add to Bag
          </MDBBtn>
         
        

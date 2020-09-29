@@ -99,7 +99,7 @@ else{
         account.setProperty("accEmailAddress", response.email)
         account.setProperty('accID', `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`)
         account.setProperty("accFname", response.name)
-    
+        account.setProperty("profile_Img", response.picture.data.url)
         account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
         addAccount().then(res => {
           if(res === true){

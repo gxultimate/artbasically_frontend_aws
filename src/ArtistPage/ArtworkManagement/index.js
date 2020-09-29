@@ -57,7 +57,7 @@ import Grid from '@material-ui/core/Grid';
             className='d-flex align-items-center justify-content-between'
           >
             <MDBBreadcrumb>
-              <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+              <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
               <MDBBreadcrumbItem active>Artworks</MDBBreadcrumbItem>
             </MDBBreadcrumb>
       

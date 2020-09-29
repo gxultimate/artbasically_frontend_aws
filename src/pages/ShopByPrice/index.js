@@ -203,97 +203,8 @@ class Artworks extends Component {
                       </label>
                     </li>
                   </ul>
-
-                  <h5>Orientation</h5>
-                  <ul>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='anyorient'
-                      />
-                      <label class='custom-control-label' for='anyorient'>
-                        Any
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='portrait'
-                      />
-                      <label class='custom-control-label' for='portrait'>
-                        Portrait
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='landscape'
-                      />
-                      <label class='custom-control-label' for='landscape'>
-                        Landscape
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='square'
-                      />
-                      <label class='custom-control-label' for='square'>
-                        Square
-                      </label>
-                    </li>
-                  </ul>
-
-                  <h5>Size</h5>
-                  <ul>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='anysize'
-                      />
-                      <label class='custom-control-label' for='anysize'>
-                        Any
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='small'
-                      />
-                      <label class='custom-control-label' for='small'>
-                        Small
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='medium'
-                      />
-                      <label class='custom-control-label' for='medium'>
-                        Medium
-                      </label>
-                    </li>
-                    <li class='custom-control custom-checkbox'>
-                      <input
-                        type='checkbox'
-                        class='custom-control-input'
-                        id='large'
-                      />
-                      <label class='custom-control-label' for='large'>
-                        Large
-                      </label>
-                    </li>
-                  </ul>
-                  {/* <MDBBtn color="none" className="btnYellow">
-										Apply
-									</MDBBtn> */}
+         
+              
                 </form>
               </div>
             </div>
@@ -305,19 +216,7 @@ class Artworks extends Component {
             </section>
           </div>
 
-          {/* <Pagination defaultCurrent={1} total={100} />
 
-					<div className="bttop clearfix">
-						<MDBNavLink to="/Upload" className="btnYellow">
-							Add Yours
-						</MDBNavLink>
-						<BackTop>
-							{' '}
-							<a href="#!">
-								Back to Top <MDBIcon icon="caret-right" />{' '}
-							</a>{' '}
-						</BackTop>
-					</div> */}
         </div>
         <Footer />
       </div>

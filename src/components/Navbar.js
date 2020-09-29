@@ -87,7 +87,10 @@ class Navbar extends Component {
             <MDBNavItem>
               <MDBNavLink
                 className='inlinelink rborder '
-                to='/'
+                to='/OnSale'
+                onClick={() => {
+                  filterOn('onSale');
+                }}
               >
                 SALE
               </MDBNavLink>

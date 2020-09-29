@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import {MDBNavLink, MDBIcon, MDBCard} from 'mdbreact';
+import {MDBNavLink, MDBIcon, MDBCard, MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBCardBody} from 'mdbreact';
 
 import {inject, observer} from 'mobx-react';
 import {Skeleton} from 'antd';
@@ -7,10 +9,11 @@ import DCards from './../DCards'
 class ArtistProfile extends Component {
   componentDidMount() {
     let {
-      startingStore: {getAccounts,getArtwork},
+      startingStore: {getAccounts,getArtwork,getOrders},
     } = this.props;
     getAccounts()
     getArtwork()
+    getOrders()
    
   }
 
@@ -36,6 +39,22 @@ let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
 })
     return (
 <Fragment>
+<div className='adminbreadcrumb'>
+        <MDBCard>
+          <MDBCardBody
+            id='breadcrumb'
+            className='d-flex align-items-center justify-content-between'
+          >
+            <MDBBreadcrumb>
+              <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
+            
+            </MDBBreadcrumb>
+      
+          </MDBCardBody>
+        </MDBCard>
+      </div>
+
+
       {myprofile.map((row,index) => {
 
         return(

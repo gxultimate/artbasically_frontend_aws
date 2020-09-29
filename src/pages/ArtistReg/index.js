@@ -51,7 +51,8 @@ import Resizer from 'react-image-file-resizer';
     let {
       startingStore: { upload},
     } = this.props;
-    this.setState({selectedFile: e.target.files[0]});
+ 
+   
    
     const formData = new FormData();
     formData.append('artworkImg',  e.target.files[0]);
@@ -62,7 +63,9 @@ import Resizer from 'react-image-file-resizer';
     let {
       startingStore: { upload},
     } = this.props;
-    this.setState({profileImg: e.target.files[0]});
+    
+   
+    this.setState({profileImg: URL.createObjectURL(e.target.files[0])});
     
     const formData2 = new FormData();
     formData2.append('artworkImg',  e.target.files[0]);
@@ -87,11 +90,18 @@ import Resizer from 'react-image-file-resizer';
 
   submitHandler = (event) => {
     event.preventDefault();
+    let {startingStore:{listOfUsers,addAccount,account, upload}}=this.props;
+    
 
-    if (this.state.password === this.state.confPassword){
-    let {
-      startingStore: {addAccount,account, upload},
-    } = this.props;
+    let filAccounts = listOfUsers.filter(usr => usr.accContact === account.accContact && usr.accEmailAddress === account.accEmailAddress).length
+
+console.log(filAccounts)
+
+if (filAccounts === 0){
+
+
+    if (this.state.password === this.state.confPassword ){
+
     event.target.className += ' was-validated';
 
     account.setProperty('acc_Status', 'Pending');
@@ -130,7 +140,12 @@ import Resizer from 'react-image-file-resizer';
     
     }, 500);
   }
-  };
+
+}else{
+  console.log('err')
+}
+
+  }
 
   changeHandler = (event) => {
     this.setState({[event.target.name]: event.target.value});
@@ -293,7 +308,6 @@ import Resizer from 'react-image-file-resizer';
               </MDBInput>
             
         
-              
               <div className='uploadreq clearfix'>
                 <input type='file' name='file' onChange={this.onFileChange} required/>
                 <p className='req'>
@@ -304,11 +318,13 @@ import Resizer from 'react-image-file-resizer';
                 </p>
               </div>
 
-              {/* <img style={{marginBottom:'8px'}} src={this.state.profileImg} ></img> */}
+             
               <div className='uploadreq clearfix'>
+              {/* <img src={this.state.profileImg} style={{height:'100px',marginBottom:'6px'}}/> */}
                 <input type='file' name='file' onChange={this.onFileChangeP} required/>
             
               </div>
+
               <p className='req'>
                  Upload Profile Picture
                 </p>

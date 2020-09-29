@@ -41,11 +41,13 @@ class Login extends Component {
       },
     } = this.props;
     loginAccount().then((res) => {
+      let mydata = JSON.parse(sessionStorage.getItem('userData'))
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
-      getArtistFollowArtwork(account.accEmailAddress);
+     
       if (res === true) {
+      
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -57,6 +59,7 @@ class Login extends Component {
         }, 1000);
         this.props.history.push('/');
       } else if (res === 2) {
+        getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1)
@@ -75,6 +78,7 @@ class Login extends Component {
       // (typeof res === 'string')
       ( res === 4)
        {
+        getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1)

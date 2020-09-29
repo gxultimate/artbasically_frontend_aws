@@ -26,7 +26,6 @@ class Api {
 	};
 
 	editprofile = (data, docID) => {
-		console.log(data, docID, 'apiedit');
 		return this.api.put(`/editProfile/${docID}`, {
 			mode: 'cors',
 			data: data

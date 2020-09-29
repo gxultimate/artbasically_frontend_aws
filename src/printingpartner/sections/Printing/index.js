@@ -58,6 +58,9 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
             setTimeout(() =>{
               success()
             },1000)
+            setTimeout(()=>{
+              window.location.reload(false);
+            },1500)
             };
             let reject =(itm)=>{
               editOrder(itm._id, 'Rejected', itm.accID)
@@ -71,6 +74,9 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
               setTimeout(() =>{
                 success()
               },1000)
+              setTimeout(()=>{
+                window.location.reload(false);
+              },1500)
             }
           
   

@@ -47,10 +47,11 @@ class NavLogin extends Component {
       },
     } = this.props;
     loginAccount().then((res) => {
+      let mydata = JSON.parse(sessionStorage.getItem('userData'))
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
-      getArtistFollowArtwork(account.accEmailAddress);
+     
       if (res === true) {
         const success = () => {
           message
@@ -63,6 +64,7 @@ class NavLogin extends Component {
         }, 1000);
         this.props.history.push('/');
       } else if (res === 2) {
+        getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1)
@@ -81,6 +83,7 @@ class NavLogin extends Component {
       // (typeof res === 'string')
       ( res === 4)
        {
+        getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1)
@@ -209,10 +212,7 @@ class NavLogin extends Component {
             </form>
             <FbLogin />
             <GgLogin />
-            {/* <p className='reghere'>
-              Don't have an Account?{' '}
-              <a href='/UserRegistration'>Register Here.</a>
-            </p> */}
+        
           </div>
         </MDBModal>
       </div>

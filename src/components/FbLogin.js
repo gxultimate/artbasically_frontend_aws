@@ -4,7 +4,7 @@ import {inject,observer} from 'mobx-react'
 import {message} from 'antd';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import {withRouter} from 'react-router-dom'
-import CookieConsent, { Cookies } from "react-cookie-consent";
+
 
 class FbLogin extends Component {
 
@@ -27,7 +27,7 @@ class FbLogin extends Component {
     if (response.email === undefined || response.email === null ){
       const success = () => {
         message
-          .loading('Signing in..', 1.2)
+          .loading('', 1.2)
           .then(() => message.error('Please try again', 1));
       };
 
@@ -54,8 +54,9 @@ if (this.state.isLoggedIn === true){
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
-      getArtistFollowArtwork(mydata.accEmailAddress);
+    
       if (res === 1) {
+        getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -67,6 +68,7 @@ if (this.state.isLoggedIn === true){
         }, 1000);
         this.props.history.push('/ArtistHome');
       } else if (res === 2) {
+         getArtistFollowArtwork(mydata.accEmailAddress);
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -78,6 +80,7 @@ if (this.state.isLoggedIn === true){
         }, 200);
         this.props.history.push('/Home');
       }else if (res === 3) {
+        
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -89,6 +92,7 @@ if (this.state.isLoggedIn === true){
         }, 200);
         this.props.history.push('/Home');
       }else if (res === 4) {
+       
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -99,7 +103,7 @@ if (this.state.isLoggedIn === true){
           success();
         }, 200);
         this.props.history.push('/Home');
-      }  else {
+      } else if (res === false) {
         const success = () => {
           message
             .loading('Signing in..', 1.2)
@@ -110,6 +114,16 @@ if (this.state.isLoggedIn === true){
           success();
         }, 200);
         this.props.history.push('/');
+      }else {
+        const success = () => {
+          message
+            .loading('Signing in..', 1.2)
+            .then(() => message.error('Please try again', 1));
+        };
+    
+        setTimeout(() => {
+          success();
+        }, 500);
       }
     });
   }else{
@@ -140,11 +154,15 @@ if (this.state.isLoggedIn === true){
             margin: 'auto',
             background: '#f4f4f4',
             padding: '20px',
+           
           }}
         >
-         <div style={{textAlign:'center'}}><img src={this.state.picture} alt={this.state.name} /></div> 
-          <h6>Welcome {this.state.name}</h6>
-          Email: {this.state.email}
+         <div style={{textAlign:'center',marginBottom:'8px'}}><img src={this.state.picture} alt={this.state.name} /></div> 
+         <div style={{textAlign:'center',marginBottom:'8px'}}>
+          <h6>Welcome to Art, Basically</h6>
+          <p style={{fontSize:'18px'}}>{ this.state.name}</p>
+          <p style={{fontSize:'15px'}}>{this.state.email}</p>
+          </div>
         </div>
       );
     } else {
@@ -155,6 +173,7 @@ if (this.state.isLoggedIn === true){
           cssClass="LoginFb"
           fields='name,email,picture'
           onClick={this.componentClicked}
+          disableMobileRedirect={true}
           callback={this.responseFacebook}
           icon={<FacebookIcon className='fbicon' style={{color:'white'}}/>}
         />

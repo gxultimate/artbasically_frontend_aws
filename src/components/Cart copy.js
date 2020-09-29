@@ -96,7 +96,6 @@ class OrderTab extends Component {
     console.log(listOfOrder, 'order');
     // let totalPrice = listOfOrder.reduce((total , item) => total + parseFloat(item.artworkPaymentAmount) , 0)
 
-    console.log(listOfUserCart, 'usercart');
 
     return (
       <div className="login">

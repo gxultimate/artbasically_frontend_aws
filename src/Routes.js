@@ -22,6 +22,7 @@ import SubmitArt from './pages/SubmitArt/';
 import ShopByPrice from './pages/ShopByPrice/';
 import ShopByCategory from './pages/ShopByCategory/';
 import MyLists from './pages/MyLists/'
+import OnSale from './pages/Onsale'
 //Admin
 import AdminLogin from './admin/AdminLogin.js';
 import AdminHome from './admin/Admin.js';
@@ -75,6 +76,7 @@ class Routes extends React.Component {
 
         <Route exact path='/ShopByPrice' component={ShopByPrice} />
         <Route exact path='/ShopByCategory' component={ShopByCategory} />
+        <Route exact path='/OnSale' component={OnSale} />
 
         <Route exact path='/Admin' component={AdminLogin} />
         <Route exact path='/AdminHome' component={AdminHome} />

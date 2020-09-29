@@ -93,6 +93,9 @@ let pArtworks = listOfArtworks.filter((art) => {
           setTimeout(() =>{
             success()
           },1000)
+          setTimeout(()=>{
+            window.location.reload(false);
+          },1500)
           };
           let reject =(data)=>{
             artwork.setProperty('_id', data._id);
@@ -109,6 +112,9 @@ let pArtworks = listOfArtworks.filter((art) => {
             setTimeout(() =>{
               success()
             },1000)
+            setTimeout(()=>{
+              window.location.reload(false);
+            },1500)
           }
         
 

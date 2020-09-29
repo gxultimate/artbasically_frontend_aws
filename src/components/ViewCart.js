@@ -28,7 +28,7 @@ class ViewCart extends Component {
       0
     );
 
-    console.log(listOfUserCart, 'usercart');
+  
     return (
       <div className='btnmodal'>
         <MDBBtn

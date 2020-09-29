@@ -63,6 +63,9 @@ let Corder = listOfOrders.filter((Delivery) => {
             setTimeout(() =>{
               success()
             },1000)
+            setTimeout(()=>{
+              window.location.reload(false);
+            },1500)
           }
         
 

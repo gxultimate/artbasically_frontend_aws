@@ -11,16 +11,21 @@ class GmailRegister extends Component {
     getAccounts();
   }
 
+  state = {
+    isLoggedIn: false,
+    userID: '',
+    name: '',
+    email: '',
+    picture: '',
+  };
+
+
   responseGoogle = (response) => {
  
 
     if(response !== undefined || response != null){
    
-
-      let { startingStore: { addAccount, account ,loginGoogle ,getArtists,
-        getArtworkInfo,
-        getEmergingArtistArtwork,
-        getArtistFollowArtwork,listOfUsers} } = this.props;
+      let { startingStore: { addAccount, account ,loginGoogle,listOfUsers} } = this.props;
 
     let checkuser = listOfUsers.map(usr =>{
       return usr.accEmailAddress
@@ -48,10 +53,10 @@ if (fil === 0 || fil === null){
           loginGoogle().then((res) => {
 let mydata = JSON.parse(sessionStorage.getItem('userData'))
 
-            getArtworkInfo();
-            getEmergingArtistArtwork();
-            getArtists();
-            getArtistFollowArtwork(mydata.accEmailAddress);
+            // getArtworkInfo();
+            // getEmergingArtistArtwork();
+            // getArtists();
+            // getArtistFollowArtwork(response.profileObj.email);
             if (res === 1) {
               const success = () => {
                 message

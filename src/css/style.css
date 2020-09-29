@@ -520,6 +520,8 @@ textarea {
   margin: 0;
 }
 
+
+
 .inlinep a {
   padding: 0 5px;
   color: #323c8f;
@@ -789,6 +791,7 @@ h4 {
   border-radius: 50px;
   margin: 0 15px 15px 0;
   font-size: 14px;
+  color: black;
 }
 .upload {
   display: flex;
@@ -909,7 +912,9 @@ h4 {
 .bluelink {
   color: #323c8f;
   font-size: 12px;
+  
 }
+
 
 .blacklink {
   color: #231f20;
@@ -1149,6 +1154,7 @@ h4 {
   margin: 0 auto;
   display: block;
   padding: 5px 0;
+ 
 }
 
 .inlines {
@@ -1481,9 +1487,7 @@ h4 {
   width: 100%;
 }
 
-.clabel {
-  padding: 3px;
-}
+
 
 .ctab .nav-link {
   border: none;
@@ -1992,6 +1996,10 @@ h4 {
 .ordercon .artlist .colpad2 {
   padding: 0 0 10px 0 !important;
   background-color: transparent !important;
+}
+
+.colpad2 {
+ font-size: 12px;
 }
 
 .ordercon .artimg img {
@@ -2724,4 +2732,88 @@ form input[type='checkbox'] {
   .LoginFb,.GoogleLoginBtn{
     width: 100%
   }
+}
+
+
+
+
+.react-autosuggest__input {
+  width: 80%;
+  height: 40px;
+  padding: 10px 20px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.react-autosuggest__input:focus {
+  outline: none;
+}
+
+.react-autosuggest__container--open .react-autosuggest__input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__container--open .react-autosuggest__suggestions-container {
+  display: block;
+  position: absolute;
+  top: 51px;
+  width: 100%;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion:not(:first-child) {
+  border-top: 1px solid #ddd;
+}
+
+.react-autosuggest__suggestion--focused {
+  background-color: #0C7EAF;
+  color: #fff;
+}
+
+.suggestion-content {
+  display: flex;
+  align-items: center;
+  background-repeat: no-repeat;
+}
+
+
+.name {
+  margin-left: 68px;
+  line-height: 45px;
+}
+
+.highlight {
+  color: #ee0000;
+  font-weight: bold;
+}
+
+.react-autosuggest__suggestion--focused .highlight {
+  color: #120000;
 }

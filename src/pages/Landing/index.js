@@ -143,8 +143,8 @@ import {withRouter} from 'react-router-dom'
       buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
       expires={999}
         >
-          <h6 style={{color:'white'}}>Art, Basically uses cookies</h6>
-          <p style={{color:'white'}}>We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services</p>
+          <h6 style={{color:'white'}}>Cookies on Art, Basically</h6>
+          <p style={{color:'white'}}>We use cookies to personalize contents, to provide social media features and to ensure that we give you the best experience on our website. We also share information about your use of our site with our social media partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.</p>
         </CookieConsent>
       <div className='home'>
         <Navbar />

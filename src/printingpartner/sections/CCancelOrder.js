@@ -27,7 +27,7 @@ import DownloadImage from '../../admin/sections/DownloadImage';
     }
 
 let Corder = listOfOrders.filter((Delivery) => {
-            if (Delivery.orderStatus === 'Cancelled') {
+            if (Delivery.orderStatus === 'Cancelled' || Delivery.orderStatus === 'Rejected') {
               return Delivery;
             }
           }).map(orders =>{

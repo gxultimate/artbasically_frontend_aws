@@ -24,7 +24,7 @@ class OrdersTab extends Component {
               className='d-flex align-items-center justify-content-between'
             >
               <MDBBreadcrumb>
-                <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+                <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Orders</MDBBreadcrumbItem>
               </MDBBreadcrumb>
         

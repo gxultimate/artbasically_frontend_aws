@@ -29,7 +29,7 @@ const DashboardSection = () => {
             className='d-flex align-items-center justify-content-between'
           >
             <MDBBreadcrumb>
-              <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+            
               <MDBBreadcrumbItem active>Dashboard</MDBBreadcrumbItem>
             </MDBBreadcrumb>
             <MDBFormInline className='md-form m-0 adminsearch'>

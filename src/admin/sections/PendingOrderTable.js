@@ -60,6 +60,9 @@ let Corder = listOfOrders.filter((Delivery) => {
           setTimeout(() =>{
             success()
           },1000)
+          setTimeout(()=>{
+            window.location.reload(false);
+          },1500)
           };
           let reject =(itm)=>{
             editOrder(itm._id, 'Rejected', itm.accID)
@@ -73,6 +76,9 @@ let Corder = listOfOrders.filter((Delivery) => {
             setTimeout(() =>{
               success()
             },1000)
+            setTimeout(()=>{
+              window.location.reload(false);
+            },1500)
           }
         
 

@@ -3,11 +3,20 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
   MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,} from 'mdbreact';
+  MDBTableHead,
+  MDBCard,
+  MDBCardBody,
+    MDBNav,
+    MDBNavItem,
+
+    MDBBreadcrumb,
+    MDBBreadcrumbItem,
+    MDBTabContent,
+    MDBTabPane} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
-import DownloadImage from '../sections/DownloadImage';
- class CompletedOrder extends Component {
+import DownloadImage from './DownloadImage';
+ class Earnings extends Component {
   state = {
     modal: false,
     items:[]
@@ -18,15 +27,19 @@ import DownloadImage from '../sections/DownloadImage';
   
 
   render() {
+    let mydata =JSON.parse(sessionStorage.getItem('userData'))
     let { startingStore: {listOfOrders,listOfUsers}} = this.props;
 
-    
+   
     function createData(items,id, orderBy, date,orderStat, paymentStat,action) {
       return { items,id, orderBy, date,orderStat, paymentStat,action };
     }
 
+
 let Corder = listOfOrders.filter((Delivery) => {
-            if (Delivery.orderStatus === 'Approved' || Delivery.orderStatus === 'PendingPrint') {
+
+  
+            if (Delivery.orderItems.filter(ord => ord.accID === mydata.accID)) {
               return Delivery;
             }
           }).map(orders =>{
@@ -36,7 +49,11 @@ let Corder = listOfOrders.filter((Delivery) => {
             ))
           })
 
+          let myorder = listOfOrders.map( ord => ord.orderItems)
+       let a = myorder[0].map(ord => ord)
+   
 
+console.log(a[0],'dataa')
         let  toggle = (itm) => {
         
             this.setState({
@@ -74,15 +91,16 @@ const CompletedOrderTable = () => {
         sort: 'asc',
         width: 'auto'
       },
+     
       {
-        label: 'Order Stat',
-        field: 'orderStat',
+        label: 'Payment Stat',
+        field: 'paymentStat',
         sort: 'asc',
         width: 'auto'
       },
       {
-        label: 'Payment Stat',
-        field: 'paymentStat',
+        label: 'Amount',
+        field: 'amount',
         sort: 'asc',
         width: 'auto'
       },
@@ -96,33 +114,61 @@ const CompletedOrderTable = () => {
     ],
     rows: 
    
-    [...Corder.map((row,i) => (
+    [...Corder.map((row,i) => 
+      {
       
-     {
+        let total =row.items.filter(ord => ord.accID === '92420-650').reduce((sum, record) => parseInt(sum) + parseInt(record.artworkPaymentAmount) , 0)
+        
+        
+       
+      return(
+
+
+    
+       {
+ 
+
+
+
         id: `${row.id}`,
         orderBy: `${row.orderBy}`,
         date: `${row.date}`,
-        orderStat:`${row.orderStat}`,
         paymentStat: `${row.paymentStat}`,
+        amount:`${total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
         action: <MDBBtn  onClick={()=>toggle(row.items)} color='yellow'> Items</MDBBtn>,
       
 
      }
      
-     ))
+     )})
     ]
 
   };
 
   return (
     <Fragment>
+             <div className='adminbreadcrumb'>
+        <MDBCard>
+          <MDBCardBody
+            id='breadcrumb'
+            className='d-flex align-items-center justify-content-between'
+          >
+            <MDBBreadcrumb>
+              <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
+              <MDBBreadcrumbItem active>Earnings</MDBBreadcrumbItem>
+            </MDBBreadcrumb>
+      
+          </MDBCardBody>
+        </MDBCard>
+      </div>
+      <MDBCard>
     <MDBDataTable
       striped
       bordered
       small
       data={data}
     />
-
+</MDBCard>
     <MDBModal
     size='lg'
     isOpen={this.state.modal}
@@ -194,4 +240,4 @@ return (
 
 
 
-export default inject('startingStore')(observer(CompletedOrder))
+export default inject('startingStore')(observer(Earnings))

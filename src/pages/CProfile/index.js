@@ -7,6 +7,7 @@ import {Skeleton} from 'antd';
 
 class CProfile extends Component {
   componentDidMount() {
+    window.scrollTo(0,0)
     let {
       startingStore: {getSingleArtists, getArtistArtwork},
     } = this.props;

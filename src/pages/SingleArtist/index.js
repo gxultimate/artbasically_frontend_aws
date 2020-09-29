@@ -63,7 +63,7 @@ class SingleArtist extends Component {
 					<div className="artist">
 						<div className="artistprofile clearfix">
 							<div className="left">
-								<div className="artistpp">
+								<div className="artistpp" >
 									{listofArtistInfo !== undefined ? (
 										<img src={listofArtistInfo.profile_Img} alt="" />
 									) : (
@@ -74,16 +74,23 @@ class SingleArtist extends Component {
 									{listofArtistInfo.accFname !== undefined ? (
 										<h2 className="title">
 											{`${listofArtistInfo.accFname} ${listofArtistInfo.accLname}`}
-											<MDBBtn
-												className={followed  ? 'followed' : 'ifollow'}
-												color="transparent"
-												floating
-												rounded
-												// title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-												onClick={() => this.handleClick(followArtist(listofArtistInfo._id))}
-											>
-												{!followed ? <MDBIcon icon="plus" /> : 'Following'}
-											</MDBBtn>
+									        <MDBBtn
+           				    color='primary'
+               			   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px',marginLeft:'16px'}}
+              				  outline
+                		  floating
+                 
+               			   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
+              			    onClick={() =>
+                	    this.handleClick(followArtist(listofArtistInfo._id))
+              			    }
+            		    >
+              		    {this.state.isToggleOn ? (
+              			     <div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
+              			    ) : (
+              			      'Following'
+              				    )}
+              					  </MDBBtn>
 										</h2>
 									) : (
 										<Skeleton active />
@@ -129,7 +136,7 @@ class SingleArtist extends Component {
 						</div>
 						<div className="relatedcat clearfix">
 							<h4 className="paddh4">Related Categories</h4>
-							<div className="catlist">
+							<div className="catlist" style={{color:'black'}}>
 								{listofArtistCategories[0] !== [] || listofArtistCategories[0] !== undefined ? (
 									_.uniqBy(listofArtistCategories).map((cat) => (
 										<MDBNavLink to="#!">{cat}</MDBNavLink>
@@ -152,7 +159,7 @@ class SingleArtist extends Component {
 						</a>
 						<ul className="col3img clearfix">
 							{listofArtistArtwork !== undefined ? (
-								listofArtistArtwork.reverse().slice(0, 3).map((art) => (
+								listofArtistArtwork.slice(0, 3).map((art) => (
 									<li>
 										<a href="#!" className="artlink">
 											<div className="artlabel">
@@ -194,7 +201,7 @@ class SingleArtist extends Component {
 						</a>
 						<ul className="col3img clearfix">
 							{listofArtistArtwork !== undefined ? (
-								listofArtistArtwork.reverse().slice(0, 3).map((art) => (
+								listofArtistArtwork.slice(0, 3).map((art) => (
 									<li>
 										<a href="#!" className="artlink">
 											<div className="artlabel">

@@ -32,6 +32,7 @@ function beforeUpload(file) {
 
 class CProfileEdit extends Component {
   componentDidMount() {
+    window.scrollTo(0,0)
     let {
       startingStore: {
         getSingleArtists,
@@ -176,7 +177,7 @@ class CProfileEdit extends Component {
                         onClick={this.toggle('4')}
                         role='tab'
                       >
-                        Artworks
+                       My Artworks
                       </MDBNavLink>
                     </MDBNavItem>
                     {/* <MDBNavItem>
@@ -185,7 +186,7 @@ class CProfileEdit extends Component {
                       </MDBNavLink>
                     </MDBNavItem> */}
                     <MDBNavItem>
-                      <MDBNavLink
+                      {/* <MDBNavLink
                         link
                         to='#!'
                         active={this.state.activeItem === '6'}
@@ -193,7 +194,7 @@ class CProfileEdit extends Component {
                         role='tab'
                       >
                         Favorites
-                      </MDBNavLink>
+                      </MDBNavLink> */}
                     </MDBNavItem>
                     <MDBNavItem>
                       <MDBNavLink
@@ -408,7 +409,6 @@ class CProfileEdit extends Component {
                       <ul className='col3img rowart clearfix'>
                         {listofArtistArtwork !== undefined ? (
                           listofArtistArtwork
-                            .reverse()
                             .slice(0, 3)
                             .map((art) => (
                               <li>
@@ -428,7 +428,7 @@ class CProfileEdit extends Component {
                         ) : (
                           <Skeleton active />
                         )}
-                        <li>
+                        {/* <li>
                           <a href='#!' className='artlink'>
                             <img src={art} alt='' />
                           </a>
@@ -439,8 +439,8 @@ class CProfileEdit extends Component {
                               className='ifollow'
                             ></MDBNavLink>
                           </div>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                           <a href='#!' className='artlink'>
                             <img src={art} alt='' />
                           </a>
@@ -451,7 +451,7 @@ class CProfileEdit extends Component {
                               className='ifollow'
                             ></MDBNavLink>
                           </div>
-                        </li>
+                        </li> */}
                       </ul>
                     </MDBTabPane>
                     {/* <MDBTabPane tabId="5" role="tabpanel">

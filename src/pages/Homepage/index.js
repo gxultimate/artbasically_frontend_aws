@@ -7,7 +7,7 @@ import {
   MDBNotification,
 } from 'mdbreact';
 import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -35,7 +35,7 @@ class Homepage extends Component {
   }
 
   componentDidMount() {
-
+    window.scrollTo(0, 0);
 
     // let logged = JSON.parse(sessionStorage.getItem('userData'))
 
@@ -89,6 +89,9 @@ class Homepage extends Component {
     } = this.props;
 
     let ArtistOftheMonth = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+
+    let ArtistOftheMonthID = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr => usr._id)
+  
  let addtoList=(rtwrk)=>{
 
   let getmyList = listOfMyLists.filter( art => art.artworkID === rtwrk.artworkID).length
@@ -411,7 +414,7 @@ if (getmyList === 0){
               <h2>
               <a
                       href=''
-                    
+                     style={{marginRight:'8px'}}
                       onClick={() => {
                         this.props.history.push({
                           pathname: `/Artist/${ArtistOftheMonth[0]}`,
@@ -428,21 +431,23 @@ if (getmyList === 0){
                      
                     </a>
                 <MDBBtn
-                  className={this.state.condition ? 'followed' : 'ifollow'}
-                  color='transparent'
+               color='primary'
+                  style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px'}}
+                outline
                   floating
-                  rounded
+                 
                   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
                   onClick={() =>
-                    this.handleClick(followArtist(listofArtistInfo._id))
+                    this.handleClick(followArtist(ArtistOftheMonthID))
                   }
                 >
                   {this.state.isToggleOn ? (
-                    <MDBIcon icon='plus' />
+                   <div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
                   ) : (
                     'Following'
                   )}
                 </MDBBtn>
+                
               </h2>
               <p>ARTIST OF THE MONTH</p>
             </div>

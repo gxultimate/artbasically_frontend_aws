@@ -95,7 +95,7 @@ class OrderTab extends Component {
               onClick={this.toggle('1')}
               role='tab'
             >
-              My Cart
+              My Bag
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
@@ -207,10 +207,10 @@ class OrderTab extends Component {
                             </MDBCol>
                             <MDBCol md='3' className='colpad'>
                               <MDBRow className='sub'>
-                                <MDBCol md='6' className='colpad2'>
+                                <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                   Subtotal
                                 </MDBCol>
-                                <MDBCol md='6' className='colpad2'>
+                                <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                   {item.artworkPaymentAmount
                                     ? parseFloat(
                                         item.artworkPaymentAmount
@@ -333,10 +333,10 @@ class OrderTab extends Component {
                             </MDBCol>
                             <MDBCol md='3' className='colpad'>
                               <MDBRow className='sub'>
-                                <MDBCol md='6' className='colpad2'>
+                                <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                   Subtotal
                                 </MDBCol>
-                                <MDBCol md='6' className='colpad2'>
+                                <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                   {item.artworkPaymentAmount
                                     ? parseFloat(
                                         item.artworkPaymentAmount

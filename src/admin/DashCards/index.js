@@ -13,6 +13,8 @@ class DashCards extends Component {
 
   componentDidMount(){
     let{startingStore:{getAccounts,getOrderUser}}=this.props;
+    getAccounts()
+    getOrderUser()
   }
 
 
@@ -23,7 +25,7 @@ let activeArtists = listOfUsers.filter (usr => usr.accessType === 'Artist' && us
 let DeActArtists = listOfUsers.filter (usr => usr.accessType === 'Artist' && usr.acc_Status === 'Deactivated').length;
 
 let Orders = listofUserOrder.filter (ord => ord.orderStatus === 'PendingPrint' || ord.orderStatus === 'ForDelivery').length;
-let CancelledOrders = listofUserOrder.filter (ord => ord.orderStatus === 'Cancelled' || ord.orderStatus === 'Failed').length;
+let CancelledOrders = listofUserOrder.filter (ord => ord.orderStatus === 'Cancelled' || ord.orderStatus === 'Failed' || ord.orderStatus === 'Rejected').length;
 
 const useStyles = makeStyles(theme => ({
   root: {

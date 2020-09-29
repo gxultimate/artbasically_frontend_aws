@@ -17,7 +17,7 @@ import ArtworkTabs from './sections/ArtworkTab';
               className='d-flex align-items-center justify-content-between'
             >
               <MDBBreadcrumb>
-                <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+                <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
                 <MDBBreadcrumbItem active>Artworks</MDBBreadcrumbItem>
               </MDBBreadcrumb>
         

@@ -13,7 +13,7 @@ import Settings from './AccountSetting';
 import ArtworkTab from './ArtworkManagement';
 import Notif from './Notification';
 import Profile from './Profile';
-
+import EarningsTab from './Earnings'
 
 
 
@@ -164,7 +164,7 @@ class Admin extends Component {
               <ArtworkTab />
             </MDBTabPane>
             <MDBTabPane tabId='3'>
-              {/* <ArtworkTab /> */}
+              <EarningsTab />
             </MDBTabPane>
             <MDBTabPane tabId='4'>
               <Settings />

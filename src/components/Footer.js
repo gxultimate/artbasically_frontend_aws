@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {MDBIcon} from 'mdbreact';
-
-export class Footer extends Component {
+import moment from 'moment'
+ class Footer extends Component {
   render() {
+
     return (
       <div className='footer clearfix'>
         <div className='navfoot'>
@@ -28,7 +29,7 @@ export class Footer extends Component {
             </li>
             <li>
               <a href='#!'>
-                Sell Your Services on <br /> Art, Basically
+                Sell &nbsp;Your Services on <br /> Art, Basically
               </a>
             </li>
             <li>
@@ -44,7 +45,7 @@ export class Footer extends Component {
             <li>Let Us Help You</li>
             <li>
               <a href='#!'>
-                Track Your Packages or <br /> View Your Orders
+                Track&nbsp;Your Packages or <br /> View&nbsp;Your Orders
               </a>
             </li>
             <li>
@@ -63,7 +64,7 @@ export class Footer extends Component {
           </ul>
         </div>
         <div className='copyright'>
-          <p>Copyright © 2020 Art,Basically Inc. All rights reserved.</p>
+          <p>Copyright © {moment().format("YYYY")} Art,Basically Inc. All rights reserved.</p>
         </div>
       </div>
     );

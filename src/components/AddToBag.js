@@ -150,11 +150,11 @@ class AddToBag extends Component {
             this.toggle();
             this.addTocart();
           }}
-          color='yellow'
+       color='yellow'
           size='md'
-          style={{borderRadius: '50px'}}
+          style={{borderRadius: '50px',color:'black',fontWeight:'bold',fontSize:'15px'}}
         >
-          Add to Cart
+          Add to Bag
         </MDBBtn>
         <MDBModal
           isOpen={this.state.modal1}

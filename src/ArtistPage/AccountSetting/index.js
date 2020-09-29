@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
             className='d-flex align-items-center justify-content-between'
           >
             <MDBBreadcrumb>
-              <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
+              <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
               <MDBBreadcrumbItem active>Account</MDBBreadcrumbItem>
             </MDBBreadcrumb>
       

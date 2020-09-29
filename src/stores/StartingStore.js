@@ -213,7 +213,6 @@ class StartingStore {
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
           resolve(1);
         }else if (
-          
           resp.data.accessType === 'Standard' && resp.data.acc_Status === 'Active' 
         ) {
           sessionStorage.setItem('userData', JSON.stringify(resp.data))
@@ -226,7 +225,7 @@ class StartingStore {
           resolve(3)
          
         }else if (resp.data.acc_Status === 'Rejected'){
-          resolve(3)
+          resolve(4)
          
         }
          else{

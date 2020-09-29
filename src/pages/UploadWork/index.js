@@ -19,6 +19,8 @@ class UploadWork extends Component {
       profileImg: '',
       artID: '',
       selectedFile: null,
+      artImg:null,
+      ArtByMe:'',
     };
   }
 
@@ -43,7 +45,9 @@ class UploadWork extends Component {
 
   async onFileChange(event) {
     var imageFile = event.target.files[0];
-
+    this.setState({
+      profileImg: URL.createObjectURL(event.target.files[0])
+    })
     var options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
@@ -100,7 +104,7 @@ class UploadWork extends Component {
   };
 
   render() {
-
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
     function getHash(input){
       var hash = 0, len = input.length;
       for (var i = 0; i < len; i++) {
@@ -112,11 +116,14 @@ class UploadWork extends Component {
       return hash;
     }
 
+    let madeByMe= ()=>{
+     this.setState({ArtByMe:`${mydata.accFname} ${mydata.accLname}`})
+    }
 
     let {
       startingStore: {artwork, listOfArtists, listOfCategories, listOfStyles,listOfPrintSize},
     } = this.props;
-    let mydata = JSON.parse(sessionStorage.getItem('userData'))
+   
     artwork.setProperty('accID',mydata.accID)
     artwork.setProperty('artworkStatus','Pending')
     function selectCategory(list, listitem) {
@@ -143,8 +150,9 @@ class UploadWork extends Component {
             >
               <div className='left'>
                 <div>
-                  <span>Your Title</span>
+                  <span  style={{marginBottom:'-8px'}}>Your Title</span>
                   <MDBInput
+                      
                     label='Title'
                     type='text'
                     onChange={(artName) =>{
@@ -154,12 +162,15 @@ class UploadWork extends Component {
                     }}
                     required
                   >
-                    <div className='invalid-feedback'>
+                    <div className='invalid-feedback ' >
                       Please provide a valid email.
                     </div>
                   </MDBInput>
                 </div>
+                <div style={{marginBottom:'10px'}} class='custom-checkbox '>
+                <span>Artist</span>
                 <select
+                  value={this.state.ArtByMe}
                   onChange={(artistName) =>
                     artwork.setProperty('artistName', artistName.target.value)
                   }
@@ -174,8 +185,28 @@ class UploadWork extends Component {
                     );
                   })}
                 </select>
+
+                <p className='inlinep' style={{marginLeft:'20px',marginTop:'-22px',paddingBottom:'22px'}}>
+                            <input
+                              type='checkbox'
+                              class='custom-control-input '
+                              id='anycat'
+                              onChange={()=>{madeByMe()}}
+                              
+                            />
+                            <label
+                              class='custom-control-label clabel'
+                              for='anycat'
+                              style={{fontSize:'12px',paddingTop:'4px'}}
+                            >
+                              Is this artwork made by you?
+                            </label>
+                        </p> 
+                </div>
                 <div>
+                <span     style={{marginBottom:'-8px'}}>Year</span>
                   <MDBInput
+              
                     label='Year'
                     type='number'
                     onChange={(artworkDateCreated) =>
@@ -233,6 +264,19 @@ class UploadWork extends Component {
                     Please provide atleast 1 art style.
                   </div>
                 </div>
+                <div style={{marginBottom:'10px'}}>
+                <span>Art Type</span>
+                <select
+                  className='usertype'
+                  onChange={(artType) =>
+                    artwork.setProperty('artType', artType.target.value)
+                  }
+                >
+                  <option> Art Type </option>
+                  <option value='Original'> Original </option>
+                  <option value='Secondary'> Secondary </option>
+                </select>
+                </div>
                 <div className='dim'>
                   <span>Artwork Size</span>
                  {/*  <ul>
@@ -267,8 +311,8 @@ class UploadWork extends Component {
                />
                 </div>
                 <div className='selcon'>
-                  <span>Number of Copies</span>
-                  <p>How many copies of your artworks are you selling?</p>
+                  <span >Number of Copies</span>
+                  <p className='inlinep' style={{marginBottom:'-8px'}}>How many copies of your artworks are you selling?</p>
                   <MDBInput
                     label='Quantity'
                     type='number'
@@ -292,7 +336,7 @@ class UploadWork extends Component {
                   </select>
                 </div>
                 <div>
-                  <span>Price</span>
+                  <span style={{marginBottom:'-8px'}}>Price</span>
                   <MDBInput
                     label='Price'
                     type='number'
@@ -325,18 +369,20 @@ class UploadWork extends Component {
                     </div>
                   </MDBInput>
                 </div>
-                <select
-                  className='usertype'
-                  onChange={(artType) =>
-                    artwork.setProperty('artType', artType.target.value)
-                  }
-                >
-                  <option> Art Type </option>
-                  <option value='Original'> Original </option>
-                  <option value='Secondary'> Secondary </option>
-                </select>
+        
                 <div className='uploadreq clearfix'>
-                  <p className='req'>
+                
+                  <div className='upload' >
+                    {/* <label htmlFor='submitart' for='submitart' disabled>
+                      Coming Soon
+                    </label>
+                    <input type='submit' id='submitart' disabled /> */}
+                    <MDBBtn type='submit' color='#fae933' style={{fontWeight:'bold'}}>
+                      Upload Your Work
+                    </MDBBtn>
+                  </div>
+
+                  <p style={{textAlign:'center',fontSize:'12px'}}>
                     Your artwork will be sent to our team for review to see if
                     it meets our standards. We will send you a notification if
                     your artwork has already been uploaded to the site. Thank
@@ -345,15 +391,6 @@ class UploadWork extends Component {
                       We can help.
                     </MDBNavLink>
                   </p>
-                  <div className='upload'>
-                    {/* <label htmlFor='submitart' for='submitart' disabled>
-                      Coming Soon
-                    </label>
-                    <input type='submit' id='submitart' disabled /> */}
-                    <MDBBtn type='submit' color='#fae933'>
-                      Submit
-                    </MDBBtn>
-                  </div>
                 </div>
               </div>
               <div className='right'>
@@ -366,13 +403,14 @@ class UploadWork extends Component {
                       We can help.
                     </MDBNavLink>
                   </p>
+                  <img src={this.state.profileImg} style={{width:'500px',marginBottom:'16px'}}/>
                   <div className='uploadreq clearfix'>
                     <input
                       type='file'
                       name='file'
                       onChange={this.onFileChange}
                     />
-                    <img src={this.state.selectedFile} alt='' />
+                   
                     <p className='req'>
                       Please upload a high resolution photo.
                     </p>

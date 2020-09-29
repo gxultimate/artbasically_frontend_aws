@@ -26,11 +26,18 @@ class ArtworkFilter extends Component {
     });
   };
   componentDidMount(){
-    let{startingStore:{getMyLists}}=this.props;
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
+
+if (mydata === null){
+
+}else{
+  let{startingStore:{getMyLists}}=this.props;
     getMyLists()
+  }
   }
 
   render() {
+   
     let mydata = JSON.parse(sessionStorage.getItem('userData'))
     let {
       startingStore: {
@@ -42,9 +49,57 @@ class ArtworkFilter extends Component {
         listOfArtistFollowed,
         listOfMyLists,
         mylists,
-        deleteMyLists
+        deleteMyLists,
+        addMyLists,
+     
       },
     } = this.props;
+
+
+
+    let addtoList=(rtwrk)=>{
+
+      let getmyList = listOfMyLists.filter( art => art.artworkID === rtwrk.artworkID).length
+    
+    if (getmyList === 0){
+       
+       mylists.setProperty('mylistsID',`${rtwrk.artworkID.slice(0,4)}-${Math.floor(1000 + Math.random() * 900)}`)
+       mylists.setProperty('accID',mydata.accID)
+       mylists.setProperty('artworkID',rtwrk.artworkID)
+     
+       mylists.setProperty('artName',rtwrk.artName)
+       mylists.setProperty('artTheme',rtwrk.artTheme)
+       mylists.setProperty('artStyle',rtwrk.artStyle)
+       mylists.setProperty('artPrice',rtwrk.artPrice)
+       mylists.setProperty('artistID',rtwrk.accID)
+       mylists.setProperty('artistName',rtwrk.artistName)
+       mylists.setProperty('artworkDateCreated',rtwrk.artworkDateCreated)
+       mylists.setProperty('artType',rtwrk.artType)
+       mylists.setProperty('artworkImg',rtwrk.artworkImg)
+       
+       addMyLists()
+    
+       const success = () => {
+        message
+          .loading('', 0.5)
+          .then(() => message.success('Artwork added to your list', 3));
+      };
+      setTimeout(() =>{
+        success()
+      },500)
+    }else{
+      const success = () => {
+        message
+          .loading('', 0.5)
+          .then(() => message.success('Artwork already on your list', 3));
+      };
+      setTimeout(() =>{
+        success()
+      },500)
+     
+    }
+     }
+
 
     let removeToLists = (list)=>{
 
@@ -67,6 +122,8 @@ setTimeout(()=>{
 },1500)
     }
 
+
+    
 
     let artworks = () => {
       if (this.props.type === 'foryou') {
@@ -113,15 +170,18 @@ setTimeout(()=>{
                     </a>
                 
                 
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
-                >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
+                    <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
               </div>
             </li>
           ));
@@ -168,15 +228,18 @@ setTimeout(()=>{
                 </a>
             
             
-            <MDBBtn
-              className='ifollow'
-              color='transparent'
-              floating
-              rounded
-              onClick={() => followArtist(listofArtistInfo._id)}
-            >
-              <MDBIcon icon='plus' />
-            </MDBBtn>
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
           </div>
             </li>
           ));
@@ -226,16 +289,18 @@ setTimeout(()=>{
                      
                     </a>
                 
-                
-                <MDBBtn
-                  className='ifollow'
-                  color='transparent'
-                  floating
-                  rounded
-                  onClick={() => followArtist(listofArtistInfo._id)}
-                >
-                  <MDBIcon icon='plus' />
-                </MDBBtn>
+                    <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
               </div>
             </li>
           )});
@@ -282,15 +347,18 @@ setTimeout(()=>{
                 </a>
             
             
-            <MDBBtn
-              className='ifollow'
-              color='transparent'
-              floating
-              rounded
-              onClick={() => followArtist(listofArtistInfo._id)}
-            >
-              <MDBIcon icon='plus' />
-            </MDBBtn>
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
           </div>
             </li>
           ));
@@ -336,16 +404,18 @@ setTimeout(()=>{
                  
                 </a>
             
-            
-            <MDBBtn
-              className='ifollow'
-              color='transparent'
-              floating
-              rounded
-              onClick={() => followArtist(listofArtistInfo._id)}
-            >
-              <MDBIcon icon='plus' />
-            </MDBBtn>
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
           </div>
             </li>
           ));
@@ -392,15 +462,18 @@ setTimeout(()=>{
                 </a>
             
             
-            <MDBBtn
-              className='ifollow'
-              color='transparent'
-              floating
-              rounded
-              onClick={() => followArtist(listofArtistInfo._id)}
-            >
-              <MDBIcon icon='plus' />
-            </MDBBtn>
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
           </div>
             </li>
           ));
@@ -461,6 +534,67 @@ setTimeout(()=>{
          </div>
            </li>
          ));
+      }else if (this.props.type === 'onSale') {
+        console.log(listOfArtworks,'aaa')
+        let a =listOfArtworks.filter(art=> art.artworkStatus === 'onSale')
+        return toJS(listOfArtworks.filter(art=> art.artworkStatus === 'onSale'))
+         
+          .map((image,i) => (
+            <li key={i}>
+              <a href='#!' className='artlink'>
+                <div className='artlabel'>
+                  
+                  <span className='hot'>On Sale</span>
+                  <span className='new'>20% Off</span>
+                  <span className='type'>
+                    {image.artType === 'Secondary'
+                      ? 'Second Edition'
+                      : 'Original'}
+                  </span>
+                </div>
+                <Link
+                  to={{
+                    pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                  }}
+                >
+                  <img src={image.artworkImg} alt='' />
+                </Link>
+              </a>
+              <div className='artistinfo clearfix pad10'>
+              
+              <a
+                  href=''
+                
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName
+                           
+               
+                      }
+                    });
+                  }}
+                >
+                     <p>{image.artistName}</p>
+                 
+                </a>
+            
+            
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
+          </div>
+            </li>
+          ));
       }
     };
 
@@ -509,15 +643,18 @@ setTimeout(()=>{
                 </a>
             
             
-            <MDBBtn
-              className='ifollow'
-              color='transparent'
-              floating
-              rounded
-              onClick={() => followArtist(listofArtistInfo._id)}
-            >
-              <MDBIcon icon='plus' />
-            </MDBBtn>
+                <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
           </div>
                 </li>
               );

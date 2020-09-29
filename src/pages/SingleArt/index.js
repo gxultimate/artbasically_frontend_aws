@@ -223,14 +223,14 @@ class SingleArt extends Component {
                 <h2>
                   Customize your <br /> order.
                 </h2>
-                <p className='inlinep'>
+                <p className='inlinep' style={{marginTop:'-25px',paddingBottom:'16px'}}>
                   Can't Decide? <MDBNavLink to='#!'>We can help.</MDBNavLink>
                 </p>
                 <form
                   onSubmit={this.submitHandler}
                   className='regform uploadform custform'
                 >
-                  <div>
+                  <div style={{marginBottom:'16px'}}>
                     <span>Material</span>
                     <select
                       onChange={(artworkMaterial) =>
@@ -243,14 +243,14 @@ class SingleArt extends Component {
                       <option selected value=''>
                         Choose Material
                       </option>
-                      <option value='Sintra Board(Matte)'>Sintra Board(Matte)</option>
-                      <option value='Sintra Board(Glossy)'>Sintra Board(Glossy)</option>
+                      <option value='Print on Sintra (Matte)'>Print on Sintra (Matte)</option>
+                      <option value='Print on Sintra (Glossy)'>Print on Sintra (Glossy)</option>
                     </select>
                     <a className='bluelink' href=''>
                       What material is the best for you?
                     </a>
                   </div>
-                  <div >
+                  <div  style={{marginBottom:'16px'}} >
                     <span>Size</span>
             
                     <select
@@ -271,7 +271,7 @@ class SingleArt extends Component {
                       Which size best fits your needs?
                     </a>
                   </div>
-                  <div>
+                  <div  style={{marginBottom:'16px'}}>
                     <span>Framing Options</span>
                     <select
                       onChange={(artworkFramingOptions) =>
@@ -293,7 +293,7 @@ class SingleArt extends Component {
                       Which framing option is best for you?
                     </a>
                   </div>
-                  <div>
+                  <div  style={{marginBottom:'16px'}}>
                     <span>Quantity</span>
                     {listOfSingleArtwork.artType === 'Original' ? (
                       <select
@@ -357,7 +357,7 @@ class SingleArt extends Component {
                         }
                       />)}
                     
-                      <ViewCart cartData={listOfSingleArtwork[0]} />
+                      {/* <ViewCart cartData={listOfSingleArtwork[0]} /> */}
                      
                     </div>
                   </div>
