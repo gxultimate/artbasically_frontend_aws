@@ -1,333 +1,325 @@
 import axios from 'axios';
-import {action, decorate} from 'mobx';
+import { action, decorate } from 'mobx';
 
 class Api {
-  api = axios.create({
-    baseURL: 'http://localhost:5000/',
-  });
+	api = axios.create({
+		baseURL: '/api'
+	});
 
-  // ACCOUNT
-  addaccount = (data) => {
-    return this.api.post('accountsRoute/addAccounts', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	// ACCOUNT
+	addaccount = (data) => {
+		return this.api.post('/addAccounts', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getaccounts = () => {
-    return this.api.get('accountsRoute/getAccounts');
-  };
+	getaccounts = () => {
+		return this.api.get('/getAccounts');
+	};
 
-  editAccount = (data) => {
-    return this.api.post('accountsRoute/editAccount', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	editAccount = (data) => {
+		return this.api.post('/editAccount', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  editprofile = (data ,docID)=>{
-    console.log(data,docID,'apiedit')
-    return this.api.put(`accountsRoute/editProfile/${docID}`,{
-    mode:'cors',
-    data:data,
-  })
-  }
-  
-  addOrder = (data) => {
-    return this.api.post('orderRoute/addOrder', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	editprofile = (data, docID) => {
+		console.log(data, docID, 'apiedit');
+		return this.api.put(`/editProfile/${docID}`, {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  loginaccount = async (data) => {
-    return this.api.post('accountsRoute/loginAccounts', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	addOrder = (data) => {
+		return this.api.post('/addOrder', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  loginemail = async (data) => {
-   
-    return this.api.post('accountsRoute/loginEmail', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	loginaccount = async (data) => {
+		return this.api.post('/loginAccounts', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  
-  loginfb = async (data) => {
-   
-    return this.api.post('accountsRoute/loginFB', {
-      mode: 'cors',
-      data: data,
-    });
-  };
-  
-  logingoogle = async (data) => {
-   
-    return this.api.post('accountsRoute/loginGoogle', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	loginemail = async (data) => {
+		return this.api.post('/loginEmail', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getOrder = (id) => {
-    return this.api.get(`orderRoute/getOrder/${id}`, {
-      mode: 'cors',
-    });
-  };
+	loginfb = async (data) => {
+		return this.api.post('/loginFB', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  // ARTWORK
-  addartwork = (data) => {
-    return this.api.post('artworkRoute/addArtwork', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	logingoogle = async (data) => {
+		return this.api.post('/loginGoogle', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getartwork = () => {
-    return this.api.get('artworkRoute/getArtworks');
-  };
+	getOrder = (id) => {
+		return this.api.get(`/getOrder/${id}`, {
+			mode: 'cors'
+		});
+	};
 
-  getartworkInfo = () => {
-    return this.api.get('artworkRoute/getArtworkInfo');
-  };
+	// ARTWORK
+	addartwork = (data) => {
+		return this.api.post('/addArtwork', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getsingleartworkinfo = (id) => {
-    return this.api.get(`artworkRoute/getSingleArtworkInfo/${id}`);
-  };
+	getartwork = () => {
+		return this.api.get('/getArtworks');
+	};
 
-  editArtwork = (data) => {
-    return this.api.post('artworkRoute/editArtwork', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getartworkInfo = () => {
+		return this.api.get('/getArtworkInfo');
+	};
 
-  getArtistArtwork = (id) => {
-    return this.api.get(`artworkRoute/getArtistArtwork/${id}`);
-  };
+	getsingleartworkinfo = (id) => {
+		return this.api.get(`/getSingleArtworkInfo/${id}`);
+	};
 
-  getRelatedWorkByCategory = (category) => {
-    return this.api.get(`artworkRoute/getRelatedWorkByCategory/${category}`);
-  };
+	editArtwork = (data) => {
+		return this.api.post('/editArtwork', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  // CATEGORY
-  addCategory = (data) => {
-    return this.api.post('categoryRoute/addCategory', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getArtistArtwork = (id) => {
+		return this.api.get(`/getArtistArtwork/${id}`);
+	};
 
-  editCategory = (data) => {
-    return this.api.post('categoryRoute/editCategory', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getRelatedWorkByCategory = (category) => {
+		return this.api.get(`/getRelatedWorkByCategory/${category}`);
+	};
 
-  getCategories = () => {
-    return this.api.get('categoryRoute/getCategories');
-  };
+	// CATEGORY
+	addCategory = (data) => {
+		return this.api.post('/addCategory', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  // STYLES
-  addStyle = (data) => {
-    return this.api.post('categoryRoute/addStyle', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	editCategory = (data) => {
+		return this.api.post('/editCategory', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  editStyle = (data) => {
-    return this.api.post('categoryRoute/editStyle', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getCategories = () => {
+		return this.api.get('/getCategories');
+	};
 
-  getStyles = () => {
-    return this.api.get('categoryRoute/getStyles');
-  };
+	// STYLES
+	addStyle = (data) => {
+		return this.api.post('/addStyle', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  //Print Size
-  addprintsize = (data) => {
-    return this.api.post('categoryRoute/addprintSize', {
-      mode: 'cors',
-      data: data,
-    });
-  };
-  getprintsize = () => {
-    return this.api.get('categoryRoute/getprintSize');
-  };
-  editprintsize =(data)=>{
-    return this.api.post('categoryRoute/editprintSize'),{
-      mode:'cors',
-      data:data,
-    }
-  }
+	editStyle = (data) => {
+		return this.api.post('/editStyle', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  //ARTIST
-  getArtists = () => {
-    return this.api.get('accountsRoute/getArtists');
-  };
+	getStyles = () => {
+		return this.api.get('/getStyles');
+	};
 
-  getSingleArtists = (id) => {
-    return this.api.get(`accountsRoute/getSingleArtists/${id}`);
-  };
+	//Print Size
+	addprintsize = (data) => {
+		return this.api.post('/addprintSize', {
+			mode: 'cors',
+			data: data
+		});
+	};
+	getprintsize = () => {
+		return this.api.get('/getprintSize');
+	};
+	editprintsize = (data) => {
+		return (
+			this.api.post('/editprintSize'),
+			{
+				mode: 'cors',
+				data: data
+			}
+		);
+	};
 
-  // CART
+	//ARTIST
+	getArtists = () => {
+		return this.api.get('/getArtists');
+	};
 
-  addToCart = (data) => {
-    return this.api.post('transactionRoute/addToCart', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getSingleArtists = (id) => {
+		return this.api.get(`/getSingleArtists/${id}`);
+	};
 
-  getToCart = (data) => {
-    return this.api.post('transactionRoute/getToCart', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	// CART
 
-  editToCart = (id) => {
-    return this.api.delete(`transactionRoute/editToCart/${id}`, {
-      mode: 'cors',
-    });
-  };
+	addToCart = (data) => {
+		return this.api.post('/addToCart', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  upload = (img) => {
-    return this.api.post('/upload', img, {
-      mode: 'cors',
-    });
-  };
+	getToCart = (data) => {
+		return this.api.post('/getToCart', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getOrders = () => {
-    return this.api.get('orderRoute/getAllOrders', {
-      mode: 'cors',
-    });
-  };
+	editToCart = (id) => {
+		return this.api.delete(`/editToCart/${id}`, {
+			mode: 'cors'
+		});
+	};
 
-  followAccount = (data, id) => {
-    return this.api.post(`accountsRoute/followAccount/${id}`, {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	upload = (img) => {
+		return this.api.post('/upload', img, {
+			mode: 'cors'
+		});
+	};
 
-  editOrder = (data) => {
-    return this.api.put('orderRoute/editOrder', {
-      mode: 'cors',
-      data: data,
-    });
-  };
+	getOrders = () => {
+		return this.api.get('/getAllOrders', {
+			mode: 'cors'
+		});
+	};
 
-  getEmergingArtist = () => {
-    return this.api.get('artworkRoute/getEmergingArtistArtwork', {
-      mode: 'cors',
-    });
-  };
+	followAccount = (data, id) => {
+		return this.api.post(`/followAccount/${id}`, {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getArtistFollowArtwork = (email) => {
-    return this.api.get(`artworkRoute/getArtistFollowArtwork/${email}`, {
-      mode: 'cors',
-    });
-  };
-  addnotif = (data) => {
-    
-    return this.api.post('notifRoute/addNotif', {
-      mode: 'cors',
-      data: data,
-    });
-  }
-  getnotif = (id) => {
-    return this.api.get(`notifRoute/getNotif/${id}`);
-  };
+	editOrder = (data) => {
+		return this.api.put('/editOrder', {
+			mode: 'cors',
+			data: data
+		});
+	};
 
-  getallnotif = () => {
-    return this.api.get(`notifRoute/getAllNotif`);
-  };
+	getEmergingArtist = () => {
+		return this.api.get('/getEmergingArtistArtwork', {
+			mode: 'cors'
+		});
+	};
 
-  editnotif = (data) => {
-    return this.api.put('notifRoute/editNotif', {
-      mode: 'cors',
-      data: data,
-    });
-  }
+	getArtistFollowArtwork = (email) => {
+		return this.api.get(`/getArtistFollowArtwork/${email}`, {
+			mode: 'cors'
+		});
+	};
+	addnotif = (data) => {
+		return this.api.post('/addNotif', {
+			mode: 'cors',
+			data: data
+		});
+	};
+	getnotif = (id) => {
+		return this.api.get(`/getNotif/${id}`);
+	};
 
+	getallnotif = () => {
+		return this.api.get(`/getAllNotif`);
+	};
 
-addmylists = (data) => {
- 
-  return this.api.post('mylistsRoute/addMyLists', {
-    mode: 'cors',
-    data: data,
-  });
+	editnotif = (data) => {
+		return this.api.put('/editNotif', {
+			mode: 'cors',
+			data: data
+		});
+	};
+
+	addmylists = (data) => {
+		return this.api.post('/addMyLists', {
+			mode: 'cors',
+			data: data
+		});
+	};
+
+	getmylists = (id) => {
+		return this.api.get(`/getMyLists/${id}`, {
+			mode: 'cors'
+		});
+	};
+
+	deletemylists = (data, id) => {
+		return this.api.delete(`/deleteMyLists/${id}`, {
+			data: data
+		});
+	};
 }
-
-getmylists = (id) => {
- 
-  return this.api.get(`mylistsRoute/getMyLists/${id}`, {
-    mode: 'cors',
-  });
-};
-
-deletemylists = (data,id) =>{
-  return this.api.delete(`mylistsRoute/deleteMyLists/${id}`,{
-    data:data,
-  })
-}
-
-}
-
-
 
 decorate(Api, {
-  getUsers: action,
-  addaccount: action,
-  getaccounts: action,
-  loginaccount: action,
-  loginemail: action,
-  loginfb: action,
-  logingoogle: action,
-  editAccount: action,
-  editprofile: action,
-  addartwork: action,
-  getartwork: action,
-  editArtwork: action,
-  getartworkInfo: action,
-  addCategory: action,
-  editCategory: action,
-  getCategories: action,
-  getArtists: action,
-  addToCart: action,
-  getToCart: action,
-  editToCart: action,
-  addStyle: action,
-  addprintsize:action,
-  getprintsize:action,
-  editprintsize:action,
-  getStyles: action,
-  editStyle: action,
-  getsingleartworkinfo: action,
-  getSingleArtists: action,
-  getArtistArtwork: action,
-  upload: action,
-  getOrders: action,
-  getOrder: action,
-  followAccount: action,
-  addOrder: action,
-  editOrder: action,
-  getEmergingArtist: action,
-  getArtistFollowArtwork: action,
-  addnotif:action,
-  getnotif:action,
-  editnotif:action,
-  addmylists:action,
-  getmylists:action,
-  deletemylists:action,
+	getUsers: action,
+	addaccount: action,
+	getaccounts: action,
+	loginaccount: action,
+	loginemail: action,
+	loginfb: action,
+	logingoogle: action,
+	editAccount: action,
+	editprofile: action,
+	addartwork: action,
+	getartwork: action,
+	editArtwork: action,
+	getartworkInfo: action,
+	addCategory: action,
+	editCategory: action,
+	getCategories: action,
+	getArtists: action,
+	addToCart: action,
+	getToCart: action,
+	editToCart: action,
+	addStyle: action,
+	addprintsize: action,
+	getprintsize: action,
+	editprintsize: action,
+	getStyles: action,
+	editStyle: action,
+	getsingleartworkinfo: action,
+	getSingleArtists: action,
+	getArtistArtwork: action,
+	upload: action,
+	getOrders: action,
+	getOrder: action,
+	followAccount: action,
+	addOrder: action,
+	editOrder: action,
+	getEmergingArtist: action,
+	getArtistFollowArtwork: action,
+	addnotif: action,
+	getnotif: action,
+	editnotif: action,
+	addmylists: action,
+	getmylists: action,
+	deletemylists: action
 });
 
 export default Api;
