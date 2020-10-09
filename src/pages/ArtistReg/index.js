@@ -8,13 +8,14 @@ import FBReg from '../../components/RegisterFB/'
 import GmailReg from './../../components/RegisterGmail/'
 import moment from 'moment'
 import Resizer from 'react-image-file-resizer';
+
  class ArtistReg extends Component {
    
   state ={
    
     password:'',
     confPassword:'',
-   
+ 
 
   }
 
@@ -26,11 +27,13 @@ import Resizer from 'react-image-file-resizer';
     // this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       modal1: false,
-      profileImg: null,
+      profileImg: 'https://res.cloudinary.com/startupprojectph/image/upload/v1602125547/Webimg/Ea3jz_1WoAANHhD_jtefyt.png',
       accID: '',
       selectedFile: null,
+    
  
     };
+   
   }
 
 
@@ -109,6 +112,7 @@ if (filAccounts === 0){
     account.setProperty('accID', `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`);
     account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'));
     account.setProperty('password',this.state.password)
+    account.setProperty('regType','LocalAccount')
     setTimeout(() => {
     addAccount();
   }, 4000);
@@ -152,6 +156,7 @@ if (filAccounts === 0){
   };
 
   render() {
+
     let {
       startingStore: {account},
     } = this.props;
@@ -166,8 +171,31 @@ if (filAccounts === 0){
                 Artist <br /> Registration
               </h2>
               <p>Fill up the form and start sharing your artworks!</p>
+
+
             </div>
             <form onSubmit={this.submitHandler} className='regform formbtn'>
+
+
+
+            <div className="page req clearfix">
+<div className="container">
+					{/* <h6 className="heading">Profile Picture</h6> */}
+					<div className="img-holder">
+						<img src={this.state.profileImg} alt="" id="img" className="img" />
+					</div>
+					<input type="file" accept="image/*" name="image-upload" id="input" onChange={this.onFileChangeP} required></input>
+					<div className="label">
+          <label className="image-upload btnYellow" style={{backgroundColor:'#FAE933',border:'1px solid black'}} htmlFor="input">
+			
+						Choose your photo
+					</label>
+          </div>
+				</div>
+        </div>
+
+
+
               <MDBInput
                 label='First Name'
                
@@ -318,19 +346,37 @@ if (filAccounts === 0){
                 </p>
               </div>
 
-             
-              <div className='uploadreq clearfix'>
-              {/* <img src={this.state.profileImg} style={{height:'100px',marginBottom:'6px'}}/> */}
+              {/* <div className='uploadreq clearfix'>
+       
+                    <img src={this.state.profileImg} style={{height:'100px',marginBottom:'6px'}}/>
                 <input type='file' name='file' onChange={this.onFileChangeP} required/>
             
               </div>
 
               <p className='req'>
                  Upload Profile Picture
-                </p>
+                </p> */}
+{/* 
+<span>Profile Picture</span>
+                <div className='artsingle' style={{textAlign:"center",margin:'auto'}}>
+        
+                  <img src={this.state.profileImg} style={{width:'100px',marginBottom:'12px'}}/>
+                  <div className='uploadreq clearfix'>
+                    <input
+                      type='file'
+                      name='file'
+                      onChange={this.onFileChangeP}
+                    />
+                   
+                    <p className='req'>
+                      Please upload a high resolution photo.
+                    </p>
+                  </div>
+              
+                </div> */}
 
-              <FBReg user='Artist'/>
-              <GmailReg user='Artist'/>
+              {/* <FBReg user='Artist'/>
+              <GmailReg user='Artist'/> */}
               <MDBBtn
                 className='submitreg clearfix'
                 type='submit'

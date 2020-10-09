@@ -1,22 +1,15 @@
-import React from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBIcon,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBFormInline,
-  MDBBtn,
-} from 'mdbreact';
-//import ArtistTable from './sections/ArtistTable';
-//import CustomerOrders from './sections/CustomerOrders';
-import CPendingOrders from './sections/CPendingOrders';
-import CCompletedOrder from './sections/CCompletedOrder';
-import CCancelOrder from './sections/CCancelOrder';
-import COrderDeli from './sections/COrderDeli';
-import History from './sections/History';
-import DashCards from './DashCards';
 import { Grid, Paper } from '@material-ui/core';
+import {
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBCard,
+  MDBCardBody
+} from 'mdbreact';
+import React from 'react';
+import DashCards from './DashCards';
+import FinishedProd from './sections/COrderDeli';
+
+import CPendingOrders from './sections/CPendingOrders';
+import OngoingProd from './sections/OngoingOrders';
 
 const pDashboardSection = () => {
   return (
@@ -41,7 +34,7 @@ const pDashboardSection = () => {
       </div>
 
 
-      <Grid container xs={12} sm={12}>
+      <Grid container  xs={12} sm={12}>
       <Grid item xs={12} sm={12}>
       <Paper>
       <div class='p-2 '>
@@ -50,12 +43,28 @@ const pDashboardSection = () => {
       </div>
       </Paper>
       </Grid>
+
+      <Grid item xs={12} sm={12} style={{marginTop:'25px'}}>
+      <Paper>
+      <div class='p-2 '>
+ <h3>Ongoing Production</h3>
+ <OngoingProd />
+      </div>
+      </Paper>
+      </Grid>
+
+      
+      <Grid item xs={12} sm={12} style={{marginTop:'25px'}}>
+      <Paper>
+      <div class='p-2 '>
+ <h3>Finished Production</h3>
+ <FinishedProd />
+      </div>
+      </Paper>
+      </Grid>
+
       </Grid>  
-    
-      {/* <COrderDeli />
-      <CCompletedOrder />
-      <CCancelOrder />
-      <History /> */}
+
     </div>
   );
 };

@@ -22,26 +22,30 @@ class OrderDetails extends Component {
     steps: 0,
   };
   checkSteps = (status) => {
-    console.log(status);
+   
     if (status === 'Pending') {
       this.setState({
         steps: 1,
       });
-    } else if (status === 'PendingPrint' || status === 'Printing') {
+    } else if (status === 'PendingPrint') {
       this.setState({
         steps: 2,
       });
-    } else if (status === 'ForDelivery') {
+    }else if ( status === 'Printing') {
       this.setState({
         steps: 3,
       });
-    } else if (status === 'Completed' || status === 'Received') {
+    } else if (status === 'ForDelivery') {
       this.setState({
         steps: 4,
       });
+    } else if (status === 'Completed' || status === 'Received') {
+      this.setState({
+        steps: 5
+      });
     } else if (status === 'PrintRejected' || status === 'Rejected') {
       this.setState({
-        steps: 5,
+        steps: 6,
       });
     }
   };
@@ -59,12 +63,13 @@ class OrderDetails extends Component {
     return (
       <div className='orderdetails'>
         <MDBBtn
+          color='#fae933'
           size='sm'
-          className='det'
+          className='recieve'
           onClick={() => this.toggle(1)}
           color='#fae933'
         >
-          Order Details
+          Track order
         </MDBBtn>
         <MDBModal
           isOpen={this.state.modal1}
@@ -73,7 +78,7 @@ class OrderDetails extends Component {
           centered
         >
           <MDBModalHeader toggle={() => this.toggle(1)}>
-            Order Details
+            Track order
           </MDBModalHeader>
           <MDBModalBody>
             <div className='float-right'>
@@ -85,17 +90,17 @@ class OrderDetails extends Component {
               </p>
             </div>
 
-            {this.state.steps === 5 ? (
+            {this.state.steps === 6 ? (
               <Steps progressDot current={3}>
                 <Step
                   status={this.state.steps >= 1 ? 'finish' : 'wait'}
                   title='Order Placed'
-                  description='04-20-2020 09:20'
+                  // description='04-20-2020 09:20'
                 />
                 <Step
                   status={this.state.steps >= 1 ? 'finish' : 'wait'}
                   title='Order Rejected'
-                  description='04-20-2020 09:20'
+                  // description='04-20-2020 09:20'
                 />
               </Steps>
             ) : (
@@ -103,20 +108,25 @@ class OrderDetails extends Component {
                 <Step
                   status={this.state.steps >= 1 ? 'finish' : 'wait'}
                   title='Order Placed'
-                  description='04-20-2020 09:20'
+                  // description='04-20-2020 09:20'
                 />
                 <Step
                   status={this.state.steps >= 2 ? 'finish' : 'wait'}
                   title='Verified'
-                  description='04-20-2020 09:20'
+                  // description='04-20-2020 09:20'
                 />
                 <Step
                   status={this.state.steps >= 3 ? 'finish' : 'wait'}
-                  title='Shipped'
-                  description='04-20-2020 09:20'
+                  title='Printing'
+                  // description='04-20-2020 09:20'
                 />
                 <Step
-                  status={this.state.steps === 4 ? 'finish' : 'wait'}
+                  status={this.state.steps >= 4 ? 'finish' : 'wait'}
+                  title='Shipped'
+                  // description='04-20-2020 09:20'
+                />
+                <Step
+                  status={this.state.steps === 5 ? 'finish' : 'wait'}
                   title='Completed'
                 />
               </Steps>

@@ -55,6 +55,7 @@ import GmailReg from './../../components/RegisterGmail/'
     account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
     account.setProperty('accID',  `${moment().format('MDYY')}-${ Math.floor(100 + Math.random() * 900)}`)
     account.setProperty('password',this.state.password)
+    account.setProperty('regType','LocalAccount')
     if (this.state.password === this.state.confPassword){
     addAccount();
 

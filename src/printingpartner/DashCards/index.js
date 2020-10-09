@@ -10,13 +10,32 @@ import React, { Component, Fragment } from 'react';
 import {observer,inject} from 'mobx-react'
 class DashCards extends Component {
   componentDidMount(){
-    let{startingStore:{getAccounts}}=this.props;
+    let{startingStore:{getAccounts,getOrders,getOrderUser}}=this.props;
+    getOrders()
+    getOrderUser()
+    getAccounts()
   }
 
     render() {
-      let {startingStore:{listofUserOrder,listOfUsers}}=this.props;
-      let Orders = listofUserOrder.filter (ord => ord.orderStatus === 'PendingPrint' || ord.orderStatus === 'ForDelivery' || ord.orderStatus === 'Printing').length;
-      let CancelledOrders = listofUserOrder.filter (ord => ord.orderStatus === 'Cancelled' || ord.orderStatus === 'Failed').length;
+      let {startingStore:{listOfOrders,listOfUsers}}=this.props;
+      let Orders = listOfOrders.filter (ord => ord.orderStatus === 'PendingPrint' || ord.orderStatus === 'ForDelivery' || ord.orderStatus === 'Printing').length;
+      let CancelledOrders = listOfOrders.filter (ord => ord.orderStatus === 'Cancelled' || ord.orderStatus === 'Failed').length;
+
+
+      let salesYTD =  listOfOrders.map(product => {
+  
+        return (
+      
+          listOfOrders.filter((amount) => (amount.orderStatus === 'Completed' && amount.paymentStatus === 'Paid'))
+          .reduce((sum, record) => parseInt(sum) + parseInt(record.totalAmount) , 0)
+      
+      
+      
+          );
+      
+       })
+       const sales = `${salesYTD.pop()}`;
+     
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -131,21 +150,26 @@ function DCards(){
 {/* <CardActionArea > */}
 <Card className={classes.card}>
 <CardContent>
-<Typography className={classes.title}  gutterBottom style={{float:"right"}}>
+
+
+<Grid container xs={12} sm={12}>
+
+<Grid item xs={6} sm={6}>
+<Typography variant="h5"  style={{textAlign:"left"}} >
+
+<MonetizationOnOutlinedIcon style={{fontSize:"3.5em"}}/>
+</Typography>
+</Grid>
+  <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
+ 
+<Typography className={classes.title}   >
 Sales YTD
 </Typography>
-<Typography variant="h5"  style={{textAlign:"left"}} >
-<MonetizationOnOutlinedIcon style={{fontSize:"3.5em",color:"white"}}/>
-{/* <span style={{textAlign:"right",color:"white"}}> &#8369;{sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span> */}
-</Typography>
+<div class='mt-1'>
+<Typography className={classes.value}>{sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+</Grid>
 
-<Typography variant="body2" component="p">
-
-
-
-</Typography>
-
-
+</Grid>
 
 </CardContent>
 </Card>

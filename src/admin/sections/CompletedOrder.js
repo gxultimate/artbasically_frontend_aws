@@ -6,7 +6,7 @@
   MDBTableHead,} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
-import DownloadImage from '../sections/DownloadImage';
+import DownloadImage from './DownloadImage';
  class CompletedOrder extends Component {
   state = {
     modal: false,

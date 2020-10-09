@@ -1253,15 +1253,17 @@ h4 {
 }
 
 .living-con {
-  background-image: url('../images/living.png');
+  background-image: url('https://res.cloudinary.com/startupprojectph/image/upload/v1601875455/Webimg/living_zgcu7x.png');
   background-position: center;
   background-size: cover;
-  height: 90%;
+  height: 100%;
   padding: 8% 0 0 0;
 }
 
 .frame {
-  width: 100px;
+  /* width: 100px; */
+  height: 100%;
+  width: 100%;
   display: block;
   margin: 0 auto;
 }
@@ -2090,7 +2092,7 @@ h4 {
 }
 
 .pending .actsbtn {
-  min-width: 241px;
+  /* min-width: 241px; */
   /* right: 20px; */
 }
 
@@ -2816,4 +2818,66 @@ form input[type='checkbox'] {
 
 .react-autosuggest__suggestion--focused .highlight {
   color: #120000;
+}
+
+.artistname:hover{
+  color: #FAE933;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+
+.page{
+  /* height: 100vh;*/
+  /* background-color: #512da8;  */
+  padding: 0;
+  
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.container{
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  
+}
+
+.img-holder{
+  margin: auto;
+  width: 82px;
+  height: 82px;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin-top: .3rem;
+}
+.img{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+#input[type="file"] {
+	display: none;
+}
+.label{
+  width: 100%;
+  margin-top: .6rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+.image-upload{
+  margin: auto;
+  width: 200px;
+	height: 28px;
+  /* color: white; */
+  border-radius: 20px;
+  background-color: black;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 4px;
 }

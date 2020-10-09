@@ -46,6 +46,7 @@ if (fil === 0 || fil === null){
       account.setProperty("accFname", response.profileObj.givenName)
       account.setProperty("accLname", response.profileObj.familyName)
       account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'));
+      account.setProperty('regType','GmailAccount')
       addAccount().then(res => {
         
         if(res === true){

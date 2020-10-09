@@ -24,6 +24,7 @@ class Account extends Model {
       dateAdded: '',
       acc_Status: '',
       acc_Documents: '',
+      regType: '',
     };
     super({...defaults, ...props});
   }
@@ -72,6 +73,7 @@ decorate(Account, {
   dateAdded: observable,
   acc_Status: observable,
   acc_Documents: observable,
+  regType: observable,
 });
 
 export default Account;

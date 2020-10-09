@@ -101,6 +101,7 @@ else{
         account.setProperty("accFname", response.name)
         account.setProperty("profile_Img", response.picture.data.url)
         account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
+        account.setProperty('regType','FBAccount')
         addAccount().then(res => {
           if(res === true){
              

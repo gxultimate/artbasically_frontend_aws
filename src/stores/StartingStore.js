@@ -10,7 +10,7 @@ import User from '../models/User';
 import PrintSize from './../models/PrintSize'
 import Notification from './../models/Notif'
 import MyLists from './../models/MyLists'
-import { get } from 'js-cookie';
+
 
 class StartingStore {
   account = new Account();
@@ -617,7 +617,7 @@ class StartingStore {
 
   getToCart = () => {
     let userData = JSON.parse(sessionStorage.getItem('userData'));
-    let dar = [];
+   
     this.api.getToCart(userData).then((resp) => {
       if (resp.data !== false) {
         this.listOfUserCart = resp.data.filter(

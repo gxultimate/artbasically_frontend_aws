@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {Skeleton} from 'antd';
-import {MDBIcon, MDBNavLink, MDBBtn} from 'mdbreact';
+import {MDBIcon, MDBNavLink, MDBBtn, MDBLink} from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
@@ -32,11 +32,20 @@ class SingleArt extends Component {
       isMounted: false,
       condition: false,
       isToggleOn: true,
+      selectedSize:'AP - portrait, 1.5x2',
+    height:'2cm',
+    width:'1.5cm',
     };
+  
     this.handleClick = this.handleClick.bind(this);
 
     
   }
+  // state={
+  //   selectedSize:'AP - portrait, 1.5x2',
+  //   height:'2cm',
+  //   width:'1.5cm',
+  // }
 
   handleClick() {
     this.setState(function (prevState) {
@@ -56,7 +65,8 @@ class SingleArt extends Component {
         getSingleArtists,
         getSingleArtworkInfo,
         getToCart,
-        getPrintSize
+        getPrintSize,
+        getMyLists,
       },
     } = this.props;
     getSingleArtworkInfo(this.props.match.params.id);
@@ -64,6 +74,7 @@ class SingleArt extends Component {
     getArtistArtwork(this.props.match.params.name);
     getToCart();
     getPrintSize()
+    getMyLists()
     //   .then(response => {
 
     //  })
@@ -86,6 +97,7 @@ class SingleArt extends Component {
   };
 
   render() {
+    let logged = JSON.parse(sessionStorage.getItem('userData'))
     let {
       startingStore: {
         cart,
@@ -94,7 +106,10 @@ class SingleArt extends Component {
         listofArtistArtwork,
         followArtist,
         listRelatedWorkByCategory,
+        listOfMyLists,
         listOfPrintSize,
+        addMyLists,
+        mylists
        
       },
     } = this.props;
@@ -105,6 +120,80 @@ class SingleArt extends Component {
     }
 
     let mydata =JSON.parse(sessionStorage.getItem('userData'))
+
+    let changeSize =(size)=>{
+    let {height,width,selectedSize}=this.state;
+    console.log(size,'aa')
+      cart.setProperty('artworkSize',size)
+
+      if (size === 'AP - portrait, 1.5x2'){
+        this.setState({height:'2cm',width:'1.5cm',selectedSize:'AP - portrait, 1.5x2'})
+      }else if( size === 'AP - portrait, 3x4'){
+        this.setState({height:'4cm',width:'3cm',selectedSize:'AP - portrait, 3x4'})
+      }else if( size === 'B - square, 2x2'){
+        this.setState({height:'2cm',width:'2cm',selectedSize:'B - square, 2x2'})
+      }else if( size === 'B - square, 4x4'){
+        this.setState({height:'4cm',width:'4cm',selectedSize:'B - square, 4x4'})
+      }else if( size === 'CP - portrait, 2x3'){
+        this.setState({height:'3cm',width:'2cm',selectedSize:'CP - portrait, 2x3'})
+      }else if( size === 'CP - portrait, 4x6'){
+        this.setState({height:'6cm',width:'4cm',selectedSize:'CP - portrait, 4x6'})
+      }else if( size === 'DL - landscape, 2x1.5'){
+        this.setState({height:'1.5cm',width:'2cm',selectedSize:'DL - landscape, 2x1.5'})
+      }else if( size === 'DL - landscape, 4x3'){
+        this.setState({height:'3cm',width:'4cm',selectedSize:'DL - landscape, 4x3'})
+      }else if( size === 'EL - landscape, 3x2'){
+        this.setState({height:'2cm',width:'3cm',selectedSize:'EL - landscape, 3x2'})
+      }else if( size === 'EL - landscape, 6x4'){
+        this.setState({height:'4cm',width:'6cm',selectedSize:'EL - landscape, 6x4'})
+      }
+
+
+    }
+
+    let addtoList=(rtwrk)=>{
+
+      let getmyList = listOfMyLists.filter( art => art.artworkID === rtwrk.artworkID).length
+    
+      console.log(getmyList,'out')
+    if (getmyList === 0){
+       
+       mylists.setProperty('mylistsID',`${rtwrk.artworkID.slice(0,4)}-${Math.floor(1000 + Math.random() * 900)}`)
+       mylists.setProperty('accID',logged.accID)
+       mylists.setProperty('artworkID',rtwrk.artworkID)
+     
+       mylists.setProperty('artName',rtwrk.artName)
+       mylists.setProperty('artTheme',rtwrk.artTheme)
+       mylists.setProperty('artStyle',rtwrk.artStyle)
+       mylists.setProperty('artPrice',rtwrk.artPrice)
+       mylists.setProperty('artistID',rtwrk.accID)
+       mylists.setProperty('artistName',rtwrk.artistName)
+       mylists.setProperty('artworkDateCreated',rtwrk.artworkDateCreated)
+       mylists.setProperty('artType',rtwrk.artType)
+       mylists.setProperty('artworkImg',rtwrk.artworkImg)
+       
+       addMyLists()
+    
+       const success = () => {
+        message
+          .loading('', 0.5)
+          .then(() => message.success('Artwork added to your list', 3));
+      };
+      setTimeout(() =>{
+        success()
+      },500)
+    }else if(getmyList === 1){
+      const success = () => {
+        message
+          .loading('', 0.5)
+          .then(() => message.success('Artwork already on your list', 3));
+      };
+      setTimeout(() =>{
+        success()
+      },500)
+     
+    }
+     }
 
     return (
       <div className='home'>
@@ -168,10 +257,10 @@ class SingleArt extends Component {
                       <ul className='artOpt'>
                         {' '}
                         <li>
-                          <a href=''>Add to List</a>
+                          <MDBLink to='#' onClick={()=>{addtoList(listOfSingleArtwork[0])}}>Add to List</MDBLink>
                         </li>
                         <li>
-                          <ViewRoom img={listOfSingleArtwork[0].artworkImg} />
+                          <ViewRoom img={listOfSingleArtwork[0].artworkImg}  Aheight={this.state.height} Awidth={this.state.width} selectedsize = {this.state.selectedSize}/>
                         </li>
                         <li>
                           <a href=''>Share</a>
@@ -221,9 +310,12 @@ class SingleArt extends Component {
               </div>
               <div className='right'>
                 <h2>
-                  Customize your <br /> order.
+                  Customize your  <br/> order.
                 </h2>
-                <p className='inlinep' style={{marginTop:'-25px',paddingBottom:'16px'}}>
+                
+               
+              
+                <p className='inlinep' style={{marginTop:'-10px',paddingBottom:'22px'}}>
                   Can't Decide? <MDBNavLink to='#!'>We can help.</MDBNavLink>
                 </p>
                 <form
@@ -254,12 +346,7 @@ class SingleArt extends Component {
                     <span>Size</span>
             
                     <select
-                      onChange={(artworkSize) =>
-                        cart.setProperty(
-                          'artworkSize',
-                          artworkSize.target.value
-                        )
-                      }
+                      onChange={(Asize) => changeSize(Asize.target.value)}
                     >
                       {listOfPrintSize.map((sizes) => (
                           <option key={sizes.printSize} value={sizes.printSize}>

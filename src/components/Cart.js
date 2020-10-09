@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import Notification from './Notif';
 import moment from 'moment'
-
+import {message} from 'antd';
 class OrderTab extends Component {
   state = {
     selected: [],
@@ -88,9 +88,10 @@ class OrderTab extends Component {
     order.setProperty('orderStatus', 'Pending');
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
-    order.setProperty('artworkPaymentAmount',this.state.totalPrice)
+    order.setProperty('totalAmount',this.state.totalPrice)
+    
     addOrder();
-    console.log(userData.accFname.slice(0,3),'Slice')
+    
     let recipient = this.state.selected.map( ntf =>  (ntf.accID))
     notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
     notif.setProperty('notifSender',userData.accID)
@@ -105,7 +106,14 @@ addNotif();
         editToCart(item);
      
         Notification('success', 'Checkout Successfully');
-     
+        const success = () => {
+          message
+            .loading('', 0.1)
+            .then(() => message.success('Cancellation of order will be disabled if your order is already on printing or delivery process', 3));
+        };
+        setTimeout(() =>{
+          success()
+        },500)
            setTimeout(() => {
         this.props.history.push('/Order')
            }, 1000);
@@ -114,7 +122,14 @@ addNotif();
       editToCart(this.state.selected[0]);
 
       Notification('success', 'Checkout Successfully');
-
+      const success = () => {
+        message
+          .loading('', 0.1)
+          .then(() => message.success('Cancellation of order will be disabled if your order is already on printing or delivery process', 3));
+      };
+      setTimeout(() =>{
+        success()
+      },500)
       setTimeout(() => {
         this.props.history.push('/Order')
            }, 1000);
@@ -278,7 +293,7 @@ addNotif();
                         this.addOrder();
                       }}
                     >
-                      Checkouts
+                      Checkout
                     </MDBBtn>
                   </div>
                 </MDBCol>

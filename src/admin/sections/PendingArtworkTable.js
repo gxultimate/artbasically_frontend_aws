@@ -200,7 +200,7 @@ const PendingArtworkTable = () => {
     />
   
   <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
-          <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
+          <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}>Artwork Information</span></MDBModalHeader>
           <MDBModalBody>
             <Grid container direction='row' xs={12}>
             <Grid item xs={12}>

@@ -181,9 +181,10 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artName}</p>
+                         <p className='artistname'>{image.artName}</p>
                      
                     </a>
+                    
                     <MDBBtn
                       className='ifollow'
                       color='transparent'
@@ -246,7 +247,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname'>{image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -311,7 +312,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname'>{image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -381,7 +382,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname'>{image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -424,7 +425,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <h2>
+                         <h2 className='artistname'>
                 {ArtistOftheMonth[0]}
 
               </h2>
@@ -504,7 +505,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname'>{image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -575,7 +576,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname'>{image.artistName}</p>
                      
                     </a>
                     <MDBBtn

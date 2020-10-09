@@ -20,14 +20,14 @@ import Grid from '@material-ui/core/Grid';
    
   };
 
-  componentDidMount() {
-    let {
-      startingStore: {getOrders, getAccounts},
-    } = this.props;
+  // componentDidMount() {
+  //   let {
+  //     startingStore: {getOrders, getAccounts},
+  //   } = this.props;
    
-    getAccounts();
-    getOrders();
-  }
+  //   getAccounts();
+  //   getOrders();
+  // }
   
 
   render() {
@@ -80,7 +80,21 @@ let Corder = listOfOrders.filter((Delivery) => {
               window.location.reload(false);
             },1500)
           }
+    
+          let  toggle = (itm) => {
         
+            this.setState({
+              modal: !this.state.modal,
+              items:itm
+            });
+          
+          };
+          let close =()=>{
+            this.setState({
+              modal: false,
+            
+            });
+          }
 
 const PendingOrderTable = () => {
   const data = {
@@ -129,19 +143,8 @@ const PendingOrderTable = () => {
       
         paymentStat: `${row.paymentStat}`,
         action:
-        <Grid container  xs={10}  sm={10} direction='row' justify='center' alignItems='center'>
-        <Grid item xs={5} sm={5}>
-        <MDBBtn  onClick={()=>approve(row.orderDB)} color='approve'> Approve</MDBBtn>
-        </Grid>
-        <Grid item xs={5} sm={5}>
-        <MDBBtn style={{float:'left'}} onClick={()=>reject(row.orderDB)} color='reject'> Reject</MDBBtn>
-        </Grid>
-        </Grid>
-        
-        
-        
-        
-      
+        <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn style={{float:'left'}} onClick={()=>toggle(row.orderDB)} color='yellow'> Items</MDBBtn> <MDBBtn style={{float:'left'}} onClick={()=>approve(row.orderDB)} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>reject(row.orderDB)} color='reject'> Reject</MDBBtn></div>,
+
 
      }
      
@@ -161,7 +164,65 @@ const PendingOrderTable = () => {
       data={data}
     />
 
+ <MDBModal
+    size='lg'
+    isOpen={this.state.modal}
+    toggle={()=>close()}
+    centered
+    className='singleModal'
+  >
+    <MDBModalHeader
+      toggle={()=>{close()}}
+      className='mhead'
+    ></MDBModalHeader>
+    <MDBModalBody>
+      <div className='imagecom'>
+        <h3>Order Items</h3>
+        <MDBTable hover className='tablescroll'>
+          <MDBTableHead color='blue-grey lighten-4'>
+            <tr>
+              <th>Artwork</th>
+              <th>Artist Name </th>
+              <th>Artwork Name</th>
+              <th>Artwork Size</th>
+              <th>Payment Amount</th>
+              <th>Artwork Material</th>
+              <th>Framing Options</th>
+              <th>Price Per Piece</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </MDBTableHead>
 
+          <MDBTableBody>
+
+            {this.state.items.map((data) => (
+              <tr>
+                <td>
+                  <img
+                    style={{width: '100% ', height: 'auto'}}
+                    src={data.artworkImg}
+                    alt=''
+                  />
+                </td>
+                <td>{data.artistName}</td>
+                <td>{data.artworkName}</td>
+                <td>{data.artworkSize}</td>
+                <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkMaterial}</td>
+                <td>{data.artworkFramingOptions}</td>
+                <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkQuantity}</td>
+                <td className='actions'>
+                  <DownloadImage data={data.artworkImg} />
+                </td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </div>
+    </MDBModalBody>
+  </MDBModal>
   </Fragment>
   );
 }

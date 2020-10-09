@@ -25,6 +25,7 @@ class UploadWork extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0,0)
     let {
       startingStore: {getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize},
     } = this.props;
@@ -73,8 +74,8 @@ class UploadWork extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append('artworkImg', this.state.selectedFile);
- 
     data.append('type', 'artwork');
+    
     upload(data);
     const success = () => {
       // message.then(() =>

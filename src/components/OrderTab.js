@@ -13,8 +13,8 @@ import {inject, observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import OrderDetails from './OrderDetails';
-import art from '../images/artworks/art1.png';
 import Cart from './Cart';
+import {message} from 'antd';
 
 class OrderTab extends Component {
   state = {
@@ -32,6 +32,7 @@ class OrderTab extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0,0)
     let {
       startingStore: {getOrderUser, getToCart},
     } = this.props;
@@ -44,6 +45,7 @@ class OrderTab extends Component {
   };
 
   render() {
+    let mydata = JSON.parse(sessionStorage.getItem('userData'))
     let {
       startingStore: {
         listOfSingleArtwork,
@@ -69,19 +71,48 @@ class OrderTab extends Component {
     });
 
     let listOfOrderReceived = listOfOrders.filter((Received) => {
-      if (Received.orderStatus === 'Completed') {
+      if (Received.orderStatus === 'Completed' && Received.accID === mydata._id) {
         return Received;
       }
     });
 
     let listOfOrderCancelled = listOfOrders.filter((Rejected) => {
       if (
-        Rejected.orderStatus === 'Rejected' ||
-        Rejected.orderStatus === 'PrintRejected'
+        Rejected.orderStatus === 'Rejected' && Rejected.accID === mydata._id ||
+        Rejected.orderStatus === 'PrintRejected' && Rejected.accID === mydata._id
+        ||
+        Rejected.orderStatus === 'Cancelled' && Rejected.accID === mydata._id
       ) {
         return Rejected;
       }
     });
+
+
+    let cancelOrder =( myorder) =>{
+      let filOrder = listofUserOrder.filter( ord => ord.orderID === myorder.orderID && ord.orderStatus === 'Printing' || ord.orderID === myorder.orderID && ord.orderStatus === 'ForDelivery').length
+
+      if (filOrder === 0){
+          editOrder(myorder._id, 'Cancelled', myorder.accID)
+          const success = () => {
+            message
+              .loading('', 0.5)
+              .then(() => message.success('Order cancelled', 3));
+          };
+          setTimeout(() =>{
+            success()
+          },500)
+      }else{
+        const success = () => {
+          message
+            .loading('', 0.5)
+            .then(() => message.success('Cant cancel order. Your order is already on printing or delivery.', 3));
+        };
+        setTimeout(() =>{
+          success()
+        },500)
+      }
+   
+    }
 
     return (
       <div className='ordercon'>
@@ -106,7 +137,7 @@ class OrderTab extends Component {
               onClick={this.toggle('2')}
               role='tab'
             >
-              Pending
+              Orders
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
@@ -211,14 +242,8 @@ class OrderTab extends Component {
                                   Subtotal
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
-                                  {item.artworkPaymentAmount
-                                    ? parseFloat(
-                                        item.artworkPaymentAmount
-                                      ).toLocaleString('en-GB', {
-                                        style: 'currency',
-                                        currency: 'PHP',
-                                      })
-                                    : ''}
+                                &#8369;
+                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -252,21 +277,21 @@ class OrderTab extends Component {
                         }
                       </MDBCol>
                       <MDBCol>
-                        <div className='actsbtn'>
+                      <div className='actsbtn'>
                           <MDBBtn
-                            color='#fae933'
+                            color='red'
                             size='sm'
-                            className='recieve'
-                            onClick={() =>
-                              editOrder(items._id, 'Received', items.accID)
-                            }
+                            className='det'
+                            onClick={() =>cancelOrder(items) }
                           >
-                            Order Received
+                            Cancel order
                           </MDBBtn>
                           <OrderDetails
+                     
                             pendingOrders={items}
                             steps={items.orderStatus}
                           />
+                         
                         </div>
                       </MDBCol>
                     </MDBRow>
@@ -318,14 +343,7 @@ class OrderTab extends Component {
                               </p>
                               <p>
                                 &#8369;
-                                {item.artworkPrice
-                                  ? Number(
-                                      parseFloat(item.artworkPrice)
-                                    ).toLocaleString('en-GB', {
-                                      style: 'currency',
-                                      currency: 'PHP',
-                                    })
-                                  : ''}
+                                {item.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                               </p>
                             </MDBCol>
                             <MDBCol md='1' className='quan colpad'>
@@ -337,14 +355,8 @@ class OrderTab extends Component {
                                   Subtotal
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
-                                  {item.artworkPaymentAmount
-                                    ? parseFloat(
-                                        item.artworkPaymentAmount
-                                      ).toLocaleString('en-GB', {
-                                        style: 'currency',
-                                        currency: 'PHP',
-                                      })
-                                    : ''}
+                                &#8369;
+                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -364,14 +376,16 @@ class OrderTab extends Component {
                         TOTAL
                       </MDBCol>
                       <MDBCol md='7' className='total'>
-                        &#8369;
-                        {
-                          +items.orderItems.reduce(
+                      {
+                          (+items.orderItems.reduce(
                             (a, b) =>
                               parseFloat(a) +
                               parseFloat(b.artworkPaymentAmount),
                             0
-                          )
+                          )).toLocaleString('en-GB', {
+                            style: 'currency',
+                            currency: 'PHP',
+                          })
                         }
                       </MDBCol>
                       <MDBCol>
@@ -390,6 +404,7 @@ class OrderTab extends Component {
                             pendingOrders={items}
                             steps={items.orderStatus}
                           />
+                         
                         </div>
                       </MDBCol>
                     </MDBRow>
@@ -457,14 +472,8 @@ class OrderTab extends Component {
                                   Subtotal
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2'>
-                                  {item.artworkPaymentAmount
-                                    ? parseFloat(
-                                        item.artworkPaymentAmount
-                                      ).toLocaleString('en-GB', {
-                                        style: 'currency',
-                                        currency: 'PHP',
-                                      })
-                                    : ''}
+                                &#8369;
+                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -484,14 +493,16 @@ class OrderTab extends Component {
                         TOTAL
                       </MDBCol>
                       <MDBCol md='7' className='total'>
-                        &#8369;
-                        {
-                          +items.orderItems.reduce(
+                      {
+                          (+items.orderItems.reduce(
                             (a, b) =>
                               parseFloat(a) +
                               parseFloat(b.artworkPaymentAmount),
                             0
-                          )
+                          )).toLocaleString('en-GB', {
+                            style: 'currency',
+                            currency: 'PHP',
+                          })
                         }
                       </MDBCol>
                       <MDBCol>

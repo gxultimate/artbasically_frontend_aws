@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {MDBBtn, MDBModal} from 'mdbreact';
 
 class ViewRoom extends Component {
+
   state = {
     modal14: false,
+
   };
 
   toggle = (nr) => () => {
@@ -14,6 +16,7 @@ class ViewRoom extends Component {
   };
 
   render() {
+    
     return (
       <div className='viewroom'>
         <a
@@ -31,9 +34,15 @@ class ViewRoom extends Component {
           className='room'
         >
           <div className='living-con'>
-            <div className='frame'>
-              <img src={this.props.img} alt='' />
+            <div className='frame' >
+            <p>{this.props.selectedsize}</p>
+              <img src={this.props.img} alt=''   
+              style={{margin:'auto',width:this.props.Awidth,height:this.props.Aheight}}
+          
+              />
+           
             </div>
+       
           </div>
           <MDBBtn
             onClick={this.toggle(14)}

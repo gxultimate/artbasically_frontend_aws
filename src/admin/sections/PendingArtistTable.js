@@ -8,7 +8,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
 } from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
-import DownloadImage from './../sections/DownloadImage';
+import ViewDocu from './ViewDocument/';
 import {message} from 'antd';
 import {withRouter} from 'react-router-dom'
 
@@ -260,17 +260,7 @@ const DeactivatedTable = () => {
               </div>
               <div className='right'>
                 <ul>
-                  <li>
-                    489
-                    <span>Followers</span>
-                  </li>
-                  <li>
-                    4.8/5
-                    <span>528k Ratings</span>
-                  </li>
-                  <li>
-                    No. 1<span>Best Seller</span>
-                  </li>
+                <ViewDocu data={account.acc_Documents} />
                 </ul>
               </div>
             </div>

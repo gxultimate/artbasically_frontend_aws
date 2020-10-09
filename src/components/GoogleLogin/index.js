@@ -60,8 +60,9 @@ class GmailLogin extends Component {
           getArtworkInfo();
           getEmergingArtistArtwork();
           getArtists();
-          getArtistFollowArtwork(mydata.accEmailAddress);
+   
           if (res === 1) {
+          
             const success = () => {
               message
                 .loading('Validating..', 1.2)
@@ -74,6 +75,7 @@ class GmailLogin extends Component {
             this.props.history.push('/ArtistHome');
           } 
           else if (res === 2){
+            getArtistFollowArtwork(mydata.accEmailAddress);
             const success = () => {
               message
                 .loading('Validating..', 1.2)
@@ -89,8 +91,8 @@ class GmailLogin extends Component {
           else if (res === 3){
             const success = () => {
               message
-                .loading('Validating..', 1.2)
-                .then(() => message.error('Validating your account', 2));
+                .loading('', 1)
+                .then(() => message.error('Admin is validating your account', 2));
             };
     
             setTimeout(() => {

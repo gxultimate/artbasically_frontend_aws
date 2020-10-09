@@ -4,13 +4,15 @@ import Model from './Model';
 class Order extends Model {
   constructor(props) {
     const defaults = {
+      accID: '',
       orderID: '',
       modeOfPayment: '',
       orderDate: '',
       orderItems: '',
       orderStatus: '',
       paymentStatus: '',
-      accID: '',
+      totalAmount:'',
+      
     };
     super({...defaults, ...props});
   }
@@ -46,6 +48,7 @@ decorate(Order, {
   orderItems: observable,
   orderStatus: observable,
   paymentStatus: observable,
+  totalAmount:observable,
 });
 
 export default Order;

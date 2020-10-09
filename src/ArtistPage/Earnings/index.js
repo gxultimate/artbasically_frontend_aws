@@ -1,20 +1,17 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+import {
+
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBBtn,
+  MDBCard,
+  MDBCardBody, MDBDataTable, MDBModal,
   MDBModalBody,
   MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBCard,
-  MDBCardBody,
-    MDBNav,
-    MDBNavItem,
-
-    MDBBreadcrumb,
-    MDBBreadcrumbItem,
-    MDBTabContent,
-    MDBTabPane} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
+  MDBTableHead
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
 import DownloadImage from './DownloadImage';
  class Earnings extends Component {
   state = {
@@ -50,10 +47,10 @@ let Corder = listOfOrders.filter((Delivery) => {
           })
 
           let myorder = listOfOrders.map( ord => ord.orderItems)
-       let a = myorder[0].map(ord => ord)
+      //  let a = myorder[0].map(ord => ord)
    
 
-console.log(a[0],'dataa')
+// console.log(a[0],'dataa')
         let  toggle = (itm) => {
         
             this.setState({
