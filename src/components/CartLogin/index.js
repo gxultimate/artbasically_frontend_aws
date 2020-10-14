@@ -211,7 +211,7 @@ class Login extends Component {
               </MDBBtn>
             </form>
             <FbLogin />
-            {/* <GoogleLogin /> */}
+            <GoogleLogin />
          
           </div>
         </MDBModal>

@@ -10,6 +10,7 @@ class OrderTab extends Component {
     selected: [],
     selectedCheckBox: [],
     totalPrice: 0,
+    partnerPercentage:30,
   };
 
   componentDidMount() {
@@ -62,6 +63,9 @@ class OrderTab extends Component {
     editToCart(item);
   };
 
+   
+    
+
   addOrder = () => {
 
     function getHash(input){
@@ -74,11 +78,17 @@ class OrderTab extends Component {
             
       return hash;
     }
+   let perctodec = this.state.partnerPercentage/100;
+   
     let date = new Date();
 
     let {
       startingStore: {order, addOrder, editToCart,notif,addNotif},
     } = this.props;
+
+  
+    let totalValue = perctodec * this.state.totalPrice;
+    console.log(perctodec,this.state.totalPrice,totalValue,'perc')
     let userData = JSON.parse(sessionStorage.getItem('userData'));
     
     order.setProperty('orderID',`${moment().format('YY')}-${ Math.floor(100 + Math.random() * 900)}`)
@@ -89,7 +99,8 @@ class OrderTab extends Component {
     order.setProperty('paymentStatus', 'Pending');
     order.setProperty('accID', userData);
     order.setProperty('totalAmount',this.state.totalPrice)
-    
+    order.setProperty('partnerEarnings',totalValue)
+  
     addOrder();
     
     let recipient = this.state.selected.map( ntf =>  (ntf.accID))

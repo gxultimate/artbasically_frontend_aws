@@ -22,6 +22,7 @@ import UserTab from './UserTab';
 import ArtistTab from './ArtistTab';
 import CategoryTab from './CategoryTab';
 import Notif from './sections/Notif';
+import Feedback from './FeedbackTab'
 // import Message from './sections/Message';
 import '../css/admin.css';
 import MyAccount from './sections/AccountSettings/'
@@ -183,7 +184,17 @@ class Admin extends Component {
                     onClick={this.togglePills('default', '6')}
                   >
                     <MDBIcon icon='th-large' className='mr-3' />
-                    Art Categories
+                    Categories
+                  </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink
+                    to='#'
+                    active={this.state.items['default'] === '8'}
+                    onClick={this.togglePills('default', '8')}
+                  >
+                    <MDBIcon icon='comment-alt' className='mr-3' />
+                    Feedback
                   </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
@@ -221,6 +232,9 @@ class Admin extends Component {
             </MDBTabPane>
             <MDBTabPane tabId='6'>
               <CategoryTab />
+            </MDBTabPane>
+            <MDBTabPane tabId='8'>
+              <Feedback />
             </MDBTabPane>
             <MDBTabPane tabId='7'>
               <MyAccount />

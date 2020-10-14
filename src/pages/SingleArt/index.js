@@ -66,7 +66,7 @@ class SingleArt extends Component {
         getSingleArtworkInfo,
         getToCart,
         getPrintSize,
-        getMyLists,
+        
       },
     } = this.props;
     getSingleArtworkInfo(this.props.match.params.id);
@@ -74,7 +74,7 @@ class SingleArt extends Component {
     getArtistArtwork(this.props.match.params.name);
     getToCart();
     getPrintSize()
-    getMyLists()
+    
     //   .then(response => {
 
     //  })

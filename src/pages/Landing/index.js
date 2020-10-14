@@ -1,5 +1,4 @@
 import { BackTop } from 'antd';
-
 import { MDBIcon, MDBNavLink } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
@@ -34,13 +33,14 @@ import {withRouter} from 'react-router-dom'
     let {
       startingStore: {
      
-       
+        listOfEmergingArtist,
         getArtworkInfo,
         getEmergingArtistArtwork,
         getPrintSize,
         getAccounts,
         getArtists,
-        getArtistFollowArtwork
+        
+        
 
       },
     } = this.props;
@@ -50,7 +50,8 @@ import {withRouter} from 'react-router-dom'
       getPrintSize()
       getAccounts()
       getArtists();
-      getArtistFollowArtwork();
+      
+   
      
       
      
@@ -196,7 +197,58 @@ import {withRouter} from 'react-router-dom'
              
               <p>ARTIST OF THE MONTH</p>
             </div>
-            <MatchRoute />
+            <ul className='col3img clearfix'>
+              {/*  */}
+              {listOfArtworks
+                .filter((item) => item.artistName === 'Cleon Peterson')
+                
+                .slice(0, 3)
+                .map((image,i) => {
+                   
+                  return (
+                    <li key={i}>
+                      <a href='#!' className='artlink'>
+                        <div className='artlabel'>
+                          <span className='new'>NEW</span>
+                          <span className='hot'>HOT</span>
+                          <span className='type'>
+                            {image.artType === 'Secondary'
+                              ? 'Second Edition'
+                              : 'Original'}
+                          </span>
+                        </div>
+                        <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          }}
+                        >
+                          <img src={image.artworkImg} alt='artwork'/>
+                        </Link>
+                      </a>
+                      <div className='artistinfo clearfix pad10'>
+                    
+
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname:  `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+          
+                      </div>
+
+
+                    </li>
+                  );
+                })}
+            </ul>
           </section>
           <section className='bestsellers'>
             <h3>Best Sellers</h3>

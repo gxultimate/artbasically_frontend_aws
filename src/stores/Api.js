@@ -274,6 +274,17 @@ class Api {
 			data: data
 		});
 	};
+
+	addfeedback = (data) => {
+		return this.api.post('/addFeedback', {
+			mode: 'cors',
+			data: data
+		});
+	};
+
+	getfeedback = () => {
+		return this.api.get('/getFeedback');
+	};
 }
 
 decorate(Api, {
@@ -319,7 +330,9 @@ decorate(Api, {
 	editnotif: action,
 	addmylists: action,
 	getmylists: action,
-	deletemylists: action
+	deletemylists: action,
+	addfeedback: action,
+	getfeedback: action
 });
 
 export default Api;

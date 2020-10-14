@@ -15,6 +15,7 @@ import {withRouter} from 'react-router-dom';
 import OrderDetails from './OrderDetails';
 import Cart from './Cart';
 import {message} from 'antd';
+import Feedback from './Feedback/'
 
 class OrderTab extends Component {
   state = {
@@ -400,6 +401,7 @@ class OrderTab extends Component {
                           >
                             Order Received
                           </MDBBtn> */}
+                                 <Feedback  orderInfo={items}/>
                           <OrderDetails
                             pendingOrders={items}
                             steps={items.orderStatus}
@@ -637,10 +639,12 @@ class OrderTab extends Component {
                           >
                             Order Received
                           </MDBBtn> */}
+                   
                           <OrderDetails
                             pendingOrders={items}
                             steps={items.orderStatus}
                           />
+
                         </div>
                       </MDBCol>
                     </MDBRow>

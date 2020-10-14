@@ -173,6 +173,7 @@ if (getmyList === 0){
                       href=''
                     
                       onClick={() => {
+                        console.log(image.artistName,'aa')
                         this.props.history.push({
                           pathname: `/Artist/${image.artistName}`,
                           state: {artistName:image.artistName
@@ -452,7 +453,69 @@ if (getmyList === 0){
               </h2>
               <p>ARTIST OF THE MONTH</p>
             </div>
-            <MatchRoute />
+            <ul className='col3img clearfix'>
+              {/*  */}
+              {listOfArtworks
+                .filter((item) => item.artistName === 'Cleon Peterson')
+                
+                .slice(0, 3)
+                .map((image,i) => {
+                   
+                  return (
+                    <li key={i}>
+                      <a href='#!' className='artlink'>
+                        <div className='artlabel'>
+                          <span className='new'>NEW</span>
+                          <span className='hot'>HOT</span>
+                          <span className='type'>
+                            {image.artType === 'Secondary'
+                              ? 'Second Edition'
+                              : 'Original'}
+                          </span>
+                        </div>
+                        <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          }}
+                        >
+                          <img src={image.artworkImg} alt='artwork'/>
+                        </Link>
+                      </a>
+                      <div className='artistinfo clearfix pad10'>
+                    
+
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+                    <MDBBtn
+                      className='ifollow'
+                      color='transparent'
+                      floating
+                      rounded
+                      title='Add To My Lists' 
+                     onClick={()=>{addtoList(image)}}
+                    >
+                    
+                        <MDBIcon icon='plus' />
+                    
+                      </MDBBtn>
+                      </div>
+
+
+                    </li>
+                  );
+                })}
+            </ul>
           </section>
           <section className='latest'>
             <h3>Best Sellers</h3>

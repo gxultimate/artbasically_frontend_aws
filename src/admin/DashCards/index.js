@@ -1,13 +1,11 @@
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
-import {  makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
-import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
-import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
-import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 import SmsFailedOutlinedIcon from '@material-ui/icons/SmsFailedOutlined';
+import { MDBIcon } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import {observer,inject} from 'mobx-react'
 class DashCards extends Component {
 
 
@@ -20,11 +18,11 @@ class DashCards extends Component {
 
 
     render() {
-let {startingStore:{listofUserOrder,listOfUsers,listOfOrders}}=this.props;
+let {startingStore:{listOfUsers,listOfOrders}}=this.props;
 
 let activeArtists = listOfUsers.filter (usr => usr.accessType === 'Artist' && usr.acc_Status === 'Active').length;
-let DeActArtists = listOfUsers.filter (usr => usr.accessType === 'Artist' && usr.acc_Status === 'Deactivated').length;
 
+let artEnthu = listOfUsers.filter (usr => usr.accessType === 'Standard' && usr.acc_Status === 'Active').length;
 let Orders = listOfOrders.filter (ord => ord.orderStatus === 'PendingPrint' || ord.orderStatus === 'ForDelivery').length;
 let CancelledOrders = listOfOrders.filter (ord => ord.orderStatus === 'Cancelled' || ord.orderStatus === 'Failed' || ord.orderStatus === 'Rejected').length;
 
@@ -188,21 +186,21 @@ Sales YTD
 <Card className={classes.card2}>
 <CardContent>
 
-  <Grid container xs={12} sm={12}>
+<Grid container xs={12} sm={12}>
 
-  <Grid item xs={6} sm={6}>
+<Grid item xs={6} sm={6}>
 <Typography variant="h5"  style={{textAlign:"left"}} >
-<LocalShippingOutlinedIcon style={{fontSize:"3.5em"}}/>
-
+{/* <PersonAddDisabledIcon style={{fontSize:"3.5em"}}/> */}
+<MDBIcon icon="users" style={{fontSize:"3.5em"}}/>
 </Typography>
 </Grid>
-    <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
-   
+  <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
+ 
 <Typography className={classes.title}   >
-Ongoing Orders
+Art Enthusiasts
 </Typography>
 <div class='mt-1'>
-<Typography className={classes.value}>{Orders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<Typography className={classes.value}>{artEnthu.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
 </Grid>
 
 </Grid>
@@ -221,14 +219,14 @@ Ongoing Orders
 
   <Grid item xs={6} sm={6}>
 <Typography variant="h5"  style={{textAlign:"left"}} >
-<PeopleAltOutlinedIcon style={{fontSize:"3.5em"}}/>
 
+<MDBIcon icon="user-tie" style={{fontSize:"3.3em"}}/>
 </Typography>
 </Grid>
     <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
    
 <Typography className={classes.title}   >
-Active Artists
+Artists
 </Typography>
 <div class='mt-1'>
 <Typography className={classes.value}>{activeArtists.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
@@ -247,26 +245,27 @@ Active Artists
 {/* <CardActionArea > */}
 <Card className={classes.card2}>
 <CardContent>
+
+
+
 <Grid container xs={12} sm={12}>
 
-<Grid item xs={5} sm={5}>
+<Grid item xs={6} sm={6}>
 <Typography variant="h5"  style={{textAlign:"left"}} >
-<CollectionsBookmarkOutlinedIcon style={{fontSize:"3.5em"}}/>
 
+<MDBIcon icon="clipboard-list" style={{fontSize:"3.3em"}}/>
 </Typography>
 </Grid>
-  <Grid item xs={7} sm={7} style={{textAlign:'right'}}>
+  <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
  
 <Typography className={classes.title}   >
-Completed Orders
+Ongoing Orders
 </Typography>
 <div class='mt-1'>
-<Typography className={classes.value}>{CompletedOrders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<Typography className={classes.value}>{Orders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
 </Grid>
 
 </Grid>
-
-
 </CardContent>
 </Card>
 {/* </CardActionArea > */}
@@ -310,26 +309,27 @@ Cancelled Orders
 <Card className={classes.card2}>
 <CardContent>
 
-
-
 <Grid container xs={12} sm={12}>
 
-<Grid item xs={6} sm={6}>
+<Grid item xs={5} sm={5}>
 <Typography variant="h5"  style={{textAlign:"left"}} >
-<PersonAddDisabledIcon style={{fontSize:"3.5em"}}/>
+<CollectionsBookmarkOutlinedIcon style={{fontSize:"3.5em"}}/>
 
 </Typography>
 </Grid>
-  <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
+  <Grid item xs={7} sm={7} style={{textAlign:'right'}}>
  
 <Typography className={classes.title}   >
-Inactive Artists
+Completed Orders
 </Typography>
 <div class='mt-1'>
-<Typography className={classes.value}>{DeActArtists.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<Typography className={classes.value}>{CompletedOrders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
 </Grid>
 
 </Grid>
+
+
+
 </CardContent>
 </Card>
 {/* </CardActionArea> */}

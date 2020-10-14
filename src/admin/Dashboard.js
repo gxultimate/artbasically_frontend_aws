@@ -33,15 +33,15 @@ const DashboardSection = () => {
               <MDBBreadcrumbItem active>Dashboard</MDBBreadcrumbItem>
             </MDBBreadcrumb>
             <MDBFormInline className='md-form m-0 adminsearch'>
-              <input
+              {/* <input
                 className='form-control form-control-sm'
                 type='search'
                 placeholder='Type your query'
                 aria-label='Search'
-              />
-              <MDBBtn size='sm' color='#FAE933' className='my-0' type='submit'>
+              /> */}
+              {/* <MDBBtn size='sm' color='#FAE933' className='my-0' type='submit'>
                 <MDBIcon icon='search' />
-              </MDBBtn>
+              </MDBBtn> */}
             </MDBFormInline>
           </MDBCardBody>
         </MDBCard>

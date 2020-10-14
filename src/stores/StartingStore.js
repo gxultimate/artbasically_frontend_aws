@@ -10,7 +10,7 @@ import User from '../models/User';
 import PrintSize from './../models/PrintSize'
 import Notification from './../models/Notif'
 import MyLists from './../models/MyLists'
-
+import Feedback from './../models/Feedback'
 
 class StartingStore {
   account = new Account();
@@ -22,6 +22,8 @@ class StartingStore {
   printsize = new PrintSize();
   notif = new Notification();
   mylists= new MyLists();
+  feedback = new Feedback();
+  listOfFeedback = [];
   listOfMyLists =[];
   listOfNotif=[];
   listOfPrintSize =[];
@@ -431,7 +433,7 @@ class StartingStore {
   };
 
   addOrder = () => {
- 
+ console.log(this.order,'aaaa')
     this.api.addOrder(this.order).then((resp) => {
       if (resp.data !== false) {
         this.listOfOrder = resp.data;
@@ -551,17 +553,26 @@ class StartingStore {
   };
 
   getSingleArtists = (id) => {
+
     let userData = JSON.parse(sessionStorage.getItem('userData'));
+    console.log(userData,'dataaa')
     return new Promise((resolve, reject) => {
       this.api.getSingleArtists(id).then((resp) => {
        
-        if (userData !== null) {
+        if (userData !== null ) {
           this.listofArtistInfo = resp.data[0];
           if (resp.data[0].accFollowers.includes(userData.accEmailAddress)) {
             this.followed = true;
           }
           resolve(resp.data);
-        } else {
+         
+        }else if(userData === null ){
+          this.listofArtistInfo = resp.data[0];
+          console.log(resp.data,'dataaaaa')
+          resolve(resp.data);
+        }
+        
+        else {
       
           resolve(false);
         }
@@ -779,6 +790,32 @@ class StartingStore {
             })
           }
 
+          addFeedback = () => { 
+            console.log(this.feedback,'start')
+            return new Promise((resolve, reject) => {   
+              this.api.addfeedback(this.feedback)
+              .then(resp => {    
+                 this.listOfFeedback = resp.data
+           
+                 if (resp.data !== false ) {   
+                          resolve(resp.data);       
+                          } 
+                 else {         
+                   resolve(false);      
+                   }  
+                   });
+                  })
+            }
+
+
+        
+            getFeedback = () => {
+              this.api.getfeedback().then((resp) => {
+                this.listOfFeedback = resp.data;
+              
+              });
+            };
+
 
 
 
@@ -870,6 +907,10 @@ decorate(StartingStore, {
   addMyLists:action,
   getMyLists:action,
   deleteMyLists:action,
+  feedback:observable,
+  listOfFeedback:observable,
+  addFeedback:action,
+  getFeedback:action,                                                        
 });
 
 export default StartingStore;

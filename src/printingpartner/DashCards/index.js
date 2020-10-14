@@ -8,6 +8,7 @@ import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 import SmsFailedOutlinedIcon from '@material-ui/icons/SmsFailedOutlined';
 import React, { Component, Fragment } from 'react';
 import {observer,inject} from 'mobx-react'
+import { number } from 'joi';
 class DashCards extends Component {
   componentDidMount(){
     let{startingStore:{getAccounts,getOrders,getOrderUser}}=this.props;
@@ -27,7 +28,7 @@ class DashCards extends Component {
         return (
       
           listOfOrders.filter((amount) => (amount.orderStatus === 'Completed' && amount.paymentStatus === 'Paid'))
-          .reduce((sum, record) => parseInt(sum) + parseInt(record.totalAmount) , 0)
+          .reduce((sum, record) => parseInt(sum) + parseInt(record.partnerEarnings) , 0)
       
       
       
@@ -35,7 +36,9 @@ class DashCards extends Component {
       
        })
        const sales = `${salesYTD.pop()}`;
-     
+    //  let percent = 30;
+    //  let perctodec = percent/100;
+    //  let totalValue = perctodec * sales;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -163,7 +166,7 @@ function DCards(){
   <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
  
 <Typography className={classes.title}   >
-Sales YTD
+Earnings YTD
 </Typography>
 <div class='mt-1'>
 <Typography className={classes.value}>{sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
