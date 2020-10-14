@@ -442,7 +442,7 @@ class StartingStore {
   };
 
   editArtwork = () => {
-   
+   console.log(this.artwork,'editdata')
     this.api.editArtwork(this.artwork).then((resp) => {
       this.listOfArtworks = resp.data;
      

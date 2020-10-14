@@ -152,20 +152,34 @@ setTimeout(()=>{
               </a>
               <div className='artistinfo clearfix pad10'>
               
-                  <a
+              <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
                       href=''
                     
                       onClick={() => {
                         this.props.history.push({
                           pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-                               
-                   
-                          }
+                          state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                 
@@ -211,21 +225,35 @@ setTimeout(()=>{
               <div className='artistinfo clearfix pad10'>
               
               <a
-                  href=''
-                
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: `/Artist/${image.artistName}`,
-                      state: {artistName:image.artistName
-                           
-               
-                      }
-                    });
-                  }}
-                >
-                     <p>{image.artistName}</p>
-                 
-                </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
             
             
                 <MDBBtn
@@ -272,20 +300,34 @@ setTimeout(()=>{
               </a>
               <div className='artistinfo clearfix pad10'>
               
-                  <a
+              <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
                       href=''
                     
                       onClick={() => {
                         this.props.history.push({
                           pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-                               
-                   
-                          }
+                          state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p>{image.artistName}</p>
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                 
@@ -330,21 +372,35 @@ setTimeout(()=>{
               <div className='artistinfo clearfix pad10'>
               
               <a
-                  href=''
-                
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: `/Artist/${image.artistName}`,
-                      state: {artistName:image.artistName
-                           
-               
-                      }
-                    });
-                  }}
-                >
-                     <p>{image.artistName}</p>
-                 
-                </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
             
             
                 <MDBBtn
@@ -388,21 +444,35 @@ setTimeout(()=>{
               <div className='artistinfo clearfix pad10'>
               
               <a
-                  href=''
-                
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: `/Artist/${image.artistName}`,
-                      state: {artistName:image.artistName
-                           
-               
-                      }
-                    });
-                  }}
-                >
-                     <p>{image.artistName}</p>
-                 
-                </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
             
                 <MDBBtn
                       className='ifollow'
@@ -445,21 +515,35 @@ setTimeout(()=>{
               <div className='artistinfo clearfix pad10'>
               
               <a
-                  href=''
-                
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: `/Artist/${image.artistName}`,
-                      state: {artistName:image.artistName
-                           
-               
-                      }
-                    });
-                  }}
-                >
-                     <p>{image.artistName}</p>
-                 
-                </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
             
             
                 <MDBBtn
@@ -501,23 +585,36 @@ setTimeout(()=>{
                </Link>
              </a>
              <div className='artistinfo clearfix pad10'>
-             
              <a
-                 href=''
-               
-                 onClick={() => {
-                   this.props.history.push({
-                     pathname: `/Artist/${image.artistName}`,
-                     state: {artistName:image.artistName
-                          
-              
-                     }
-                   });
-                 }}
-               >
-                    <p>{image.artistName}</p>
-                
-               </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
            
            
            <MDBBtn
@@ -563,21 +660,35 @@ setTimeout(()=>{
               <div className='artistinfo clearfix pad10'>
               
               <a
-                  href=''
-                
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: `/Artist/${image.artistName}`,
-                      state: {artistName:image.artistName
-                           
-               
-                      }
-                    });
-                  }}
-                >
-                     <p>{image.artistName}</p>
-                 
-                </a>
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                     
+                    </a>
             
             
                 <MDBBtn

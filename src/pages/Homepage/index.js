@@ -241,14 +241,29 @@ if (getmyList === 0){
                     
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-             
-                          }
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p className='artistname'>{image.artistName}</p>
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -305,15 +320,29 @@ if (getmyList === 0){
                     
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-                               
-                   
-                          }
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p className='artistname'>{image.artistName}</p>
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -372,18 +401,29 @@ if (getmyList === 0){
                     
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-                               
-                            // "accImg": listofArtistInfo.artistImg,
-                            // "artistDescription": listofArtistInfo.accDescription,
-                            // "birthYear": listofArtistInfo.birthYear,
-                            // "accFollowers": listofArtistInfo.accFollowers
-                          },
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p className='artistname'>{image.artistName}</p>
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Artist/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -558,6 +598,23 @@ if (getmyList === 0){
                       <div className='artistinfo clearfix pad10'>
                     
 
+                      <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
                         <a
                       href=''
                     
@@ -568,7 +625,7 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <p className='artistname'>{image.artistName}</p>
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                     <MDBBtn
@@ -634,12 +691,29 @@ if (getmyList === 0){
                     
                       onClick={() => {
                         this.props.history.push({
+                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          state: {artistName:image.artistName}
+                        });
+                      }}
+                    >
+                         <p className='artistname'>{image.artName}</p>
+                     
+                    </a>
+
+                    
+                    <br/>
+                       
+                        <a
+                      href=''
+                    
+                      onClick={() => {
+                        this.props.history.push({
                           pathname: `/Artist/${image.artistName}`,
                           state: {artistName:image.artistName}
                         });
                       }}
                     >
-                         <p className='artistname'>{image.artistName}</p>
+                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
                     </a>
                     <MDBBtn
