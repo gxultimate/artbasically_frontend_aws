@@ -145,6 +145,7 @@ let mydata = JSON.parse(sessionStorage.getItem('userData'))
           buttonText='Sign up with Google'
           onSuccess={this.responseGoogle}
           onFailure={this.responseGoogle}
+          disableMobileRedirect={true}
           cookiePolicy={'single_host_origin'}
           className='btnGoogle'
           icon={true}

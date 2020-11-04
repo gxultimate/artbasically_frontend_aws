@@ -17,6 +17,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import OrderTab from '../../components/OrderTab';
 import art from '../../images/artworks/art1.png';
+import { autorun } from 'mobx';
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -35,23 +36,42 @@ class CProfileEdit extends Component {
     window.scrollTo(0,0)
     let {
       startingStore: {
-        getSingleArtists,
-        getArtistArtwork,
+        getSingleEnthusiast,
         getOrder,
-        listofArtistArtwork,
+       
       },
     } = this.props;
-    if (listofArtistArtwork.length === 0) {
-      getSingleArtists(this.props.match.params.id);
-      getArtistArtwork(this.props.match.params.id);
+   
+     
+    getSingleEnthusiast(this.props.match.params.id);
       getOrder();
-    }
+    
   }
 
   state = {
     activeItem: '1',
     loading: false,
   };
+
+
+  constructor(props) {
+    super(props);
+
+   
+    this.onFileChangeP = this.onFileChangeP.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      modal1: false,
+      profileImg: 'https://res.cloudinary.com/startupprojectph/image/upload/v1602125547/Webimg/Ea3jz_1WoAANHhD_jtefyt.png',
+      accID: '',
+      selectedFile: null,
+    
+ 
+    };
+   
+  }
+
+
 
   toggle = (tab) => (e) => {
     if (this.state.activeItem !== tab) {
@@ -86,21 +106,20 @@ class CProfileEdit extends Component {
     this.setState({[event.target.name]: event.target.value});
   };
 
-  // handleChange = (info) => {
-  //   if (info.file.status === 'uploading') {
-  //     this.setState({loading: true});
-  //     return;
-  //   }
-  //   if (info.file.status === 'done') {
-  //     // Get this url from response in real world.
-  //     getBase64(info.file.originFileObj, (imageUrl) =>
-  //       this.setState({
-  //         imageUrl,
-  //         loading: false,
-  //       })
-  //     );
-  //   }
-  // };
+  onFileChangeP(e) {
+    let {
+      startingStore: { upload},
+    } = this.props;
+    
+   
+    this.setState({profileImg: URL.createObjectURL(e.target.files[0])});
+    
+    const formData2 = new FormData();
+    formData2.append('artworkImg',  e.target.files[0]);
+    formData2.append('type', 'artist');
+    upload(formData2, 'profile');
+
+  }
 
   render() {
     let {
@@ -218,38 +237,7 @@ class CProfileEdit extends Component {
                     <MDBTabPane tabId='1' role='tabpanel'>
                       {userData !== undefined ? (
                         <form onSubmit={this.submitHandler}>
-                          <MDBInput
-                            label='First Name'
-                            type='text'
-                            // hint={listofArtistInfo.accFname}
-                            valueDefault={`${userData.accFname}`}
-                            onChange={(accFname) =>
-                              account.setProperty(
-                                'accFname',
-                                accFname.target.value
-                              )
-                            }
-                          >
-                            <div className='invalid-feedback'>
-                              Please provide a valid first name.
-                            </div>
-                          </MDBInput>
-                          <MDBInput
-                            label='Last Name'
-                            type='text'
-                            // hint={userData.accLname}
-                            valueDefault={userData.accLname}
-                            onChange={(accLname) =>
-                              account.setProperty(
-                                'accLname',
-                                accLname.target.value
-                              )
-                            }
-                          >
-                            <div className='invalid-feedback'>
-                              Please provide a valid last name.
-                            </div>
-                          </MDBInput>
+                         
                           <MDBInput
                             label='Email Address'
                             type='email'
@@ -261,7 +249,7 @@ class CProfileEdit extends Component {
                                 accEmailAddress.target.value
                               )
                             }
-                            disabled
+                            
                           >
                             <a href='#!' class='changee'>
                               Change Email-Address
@@ -333,14 +321,14 @@ class CProfileEdit extends Component {
                     </MDBTabPane>
                     <MDBTabPane tabId='2' role='tabpanel'>
                       <h4>Update Profile Picture</h4>
-                      <Upload
+                      {/* <Upload
                         name='avatar'
                         listType='picture-card'
                         className='avatar-uploader cpup clearfix'
                         showUploadList={false}
                         action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                         beforeUpload={beforeUpload}
-                        onChange={this.handleChange}
+                        onChange={this.onFileChangeP}
                       >
                         {imageUrl ? (
                           <img
@@ -351,9 +339,65 @@ class CProfileEdit extends Component {
                         ) : (
                           uploadButton
                         )}
-                      </Upload>
+                      </Upload> */}
+
+
+					{/* <h6 className="heading">Profile Picture</h6> */}
+        <div  className='regform formbtn'>
+          <div className="page req clearfix" >
+<div className="container">
+					{/* <h6 className="heading">Profile Picture</h6> */}
+					<div className="img-holder">
+						<img src={this.state.profileImg} alt="" id="img" className="img" />
+					</div>
+					<input type="file" accept="image/*" name="image-upload" id="input" onChange={this.onFileChangeP} required></input>
+					<div className="label">
+          <label className="image-upload btnYellow" style={{backgroundColor:'#FAE933',border:'1px solid black'}} htmlFor="input">
+			
+						Choose your photo
+					</label>
+          </div>
+				</div>
+        </div>
+        </div>
+        
+			
                       <div>
                         <h4>Personal Information</h4>
+
+                        <MDBInput
+                            label='First Name'
+                            type='text'
+                            // hint={listofArtistInfo.accFname}
+                            valueDefault={`${userData.accFname}`}
+                            onChange={(accFname) =>
+                              account.setProperty(
+                                'accFname',
+                                accFname.target.value
+                              )
+                            }
+                          >
+                            <div className='invalid-feedback'>
+                              Please provide a valid first name.
+                            </div>
+                          </MDBInput>
+                          <MDBInput
+                            label='Last Name'
+                            type='text'
+                            // hint={userData.accLname}
+                            valueDefault={userData.accLname}
+                            onChange={(accLname) =>
+                              account.setProperty(
+                                'accLname',
+                                accLname.target.value
+                              )
+                            }
+                          >
+                            <div className='invalid-feedback'>
+                              Please provide a valid last name.
+                            </div>
+                          </MDBInput>
+
                         <MDBInput
                           label='Address'
                           type='text'
@@ -365,34 +409,32 @@ class CProfileEdit extends Component {
                             Please provide a valid address.
                           </div>
                         </MDBInput>
-                        <MDBInput
+                        {/* <MDBInput
                           type='textarea'
                           label='Bio'
                           rows='5'
-                          // hint={listofArtistInfo.artistDescription}
-                        />
-                        <MDBInput
+                          
+                        /> */}
+                        {/* <MDBInput
                           label='Facebook'
                           type='text'
                           hint='e.g. https://www.facebook.com/artbasically'
-                          // valueDefault={this.props.data.accEmailAddress}
-                          // onChange={accEmailAddress => account.setProperty("accEmailAddress", accEmailAddress.target.value)}
+                       
                         >
                           <div className='invalid-feedback'>
                             Please provide a valid facebook url.
                           </div>
-                        </MDBInput>
-                        <MDBInput
+                        </MDBInput> */}
+                        {/* <MDBInput
                           label='Instagram'
                           type='text'
                           hint='e.g. https://www.instagram.com/artbasically'
-                          // valueDefault={this.props.data.accEmailAddress}
-                          // onChange={accEmailAddress => account.setProperty("accEmailAddress", accEmailAddress.target.value)}
+                        
                         >
                           <div className='invalid-feedback'>
                             Please provide a valid instagram url.
                           </div>
-                        </MDBInput>
+                        </MDBInput> */}
                       </div>
                       <MDBBtn
                         className='submitreg clearfix btnYellow'

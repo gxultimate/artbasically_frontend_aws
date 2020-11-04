@@ -284,7 +284,6 @@ class StartingStore {
       return this.api.upload(img).then((resp) => {
    
         if (documents === 'docu') {
-         
           this.account.setProperty('acc_Documents', resp.data.url);
         }else if(documents === 'profile'){
           this.account.setProperty('profile_Img', resp.data.url);
@@ -433,7 +432,7 @@ class StartingStore {
   };
 
   addOrder = () => {
- console.log(this.order,'aaaa')
+ 
     this.api.addOrder(this.order).then((resp) => {
       if (resp.data !== false) {
         this.listOfOrder = resp.data;
@@ -442,7 +441,7 @@ class StartingStore {
   };
 
   editArtwork = () => {
-   console.log(this.artwork,'editdata')
+   
     this.api.editArtwork(this.artwork).then((resp) => {
       this.listOfArtworks = resp.data;
      
@@ -555,7 +554,7 @@ class StartingStore {
   getSingleArtists = (id) => {
 
     let userData = JSON.parse(sessionStorage.getItem('userData'));
-    console.log(userData,'dataaa')
+   
     return new Promise((resolve, reject) => {
       this.api.getSingleArtists(id).then((resp) => {
        
@@ -568,7 +567,6 @@ class StartingStore {
          
         }else if(userData === null ){
           this.listofArtistInfo = resp.data[0];
-          console.log(resp.data,'dataaaaa')
           resolve(resp.data);
         }
         
@@ -579,6 +577,33 @@ class StartingStore {
       });
     });
   };
+
+
+  getSingleEnthusiast = (id) => {
+
+    let userData = JSON.parse(sessionStorage.getItem('userData'));
+   
+    return new Promise((resolve, reject) => {
+      this.api.getSingleArtists(id).then((resp) => {
+       
+        if (userData !== null ) {
+          this.listofArtistInfo = resp.data[0];
+        
+          resolve(resp.data);
+         
+        }else if(userData === null ){
+          this.listofArtistInfo = resp.data[0];
+          resolve(resp.data);
+        }
+        
+        else {
+      
+          resolve(false);
+        }
+      });
+    });
+  };
+
 
   getArtistArtwork = (id) => {
     return new Promise((resolve, reject) => {
@@ -791,7 +816,7 @@ class StartingStore {
           }
 
           addFeedback = () => { 
-            console.log(this.feedback,'start')
+         
             return new Promise((resolve, reject) => {   
               this.api.addfeedback(this.feedback)
               .then(resp => {    
@@ -910,7 +935,8 @@ decorate(StartingStore, {
   feedback:observable,
   listOfFeedback:observable,
   addFeedback:action,
-  getFeedback:action,                                                        
+  getFeedback:action,
+  getSingleEnthusiast:action,                                                        
 });
 
 export default StartingStore;

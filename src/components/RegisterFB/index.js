@@ -178,7 +178,7 @@ else{
           autoLoad={false}
           fields='name,email,picture'
           cssClass="FacebookReg"
-        
+          disableMobileRedirect={true}
         
           callback={this.responseFacebook}
           textButton="Sign up with Facebook"

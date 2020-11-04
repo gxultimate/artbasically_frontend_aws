@@ -66,8 +66,16 @@ import {withRouter} from 'react-router-dom'
     } = this.props;
 
 
-    let ArtistOftheMonth = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+    let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+
+
+
+    let AOMid = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accID}`)})
+  
     
+   
+
+   
     function MatchRoute() {
       return (
         <ul className='col3img clearfix'>
@@ -188,7 +196,7 @@ import {withRouter} from 'react-router-dom'
                       }}
                     >
                          <h2>
-                {ArtistOftheMonth[0]}
+                {ArtistOftheMonth.pop()}
 
               </h2>
                      
@@ -199,11 +207,7 @@ import {withRouter} from 'react-router-dom'
             </div>
             <ul className='col3img clearfix'>
               {/*  */}
-              {listOfArtworks
-                .filter((item) => item.artistName === 'Cleon Peterson')
-                
-                .slice(0, 3)
-                .map((image,i) => {
+              {listOfArtworks.filter(fil => fil.accID === AOMid.pop()).slice(0,3).map((image,i) => {
                    
                   return (
                     <li key={i}>

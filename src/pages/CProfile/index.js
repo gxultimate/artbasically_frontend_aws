@@ -9,18 +9,15 @@ class CProfile extends Component {
   componentDidMount() {
     window.scrollTo(0,0)
     let {
-      startingStore: {getSingleArtists, getArtistArtwork},
+      startingStore: {getAccounts},
     } = this.props;
-    getSingleArtists(this.props.match.params.id);
-    getArtistArtwork(this.props.match.params.id);
+    getAccounts()
   }
 
   render() {
     let {
       startingStore: {
-        listofArtistInfo,
-        listofArtistArtwork,
-        listofArtistCategories,
+        listofUsers
       },
     } = this.props;
 
@@ -33,17 +30,17 @@ class CProfile extends Component {
               <div className='left'>
                 <div className='artistpp'>
                   {/* <img src={this.props.location.state.accImg} /> */}
-                  {listofArtistInfo !== undefined ? (
+                  {/* {listofArtistInfo !== undefined ? (
                     <img src={listofArtistInfo.accImg} alt='' />
                   ) : (
                     <Skeleton active />
-                  )}
+                  )} */}
                 </div>
                 <div className='artistInfo'>
-                  {listofArtistInfo.accFname !== undefined ? (
+                  {/* {listofArtistInfo.accFname !== undefined ? (
                     <h2 className='title'>
                       {`${listofArtistInfo.accFname} ${listofArtistInfo.accLname}`}
-                      {/* <MDBNavLink to="#!" className="ifollow"></MDBNavLink> */}
+                   
                     </h2>
                   ) : (
                     <Skeleton active />
@@ -55,7 +52,7 @@ class CProfile extends Component {
                     </span>
                   ) : (
                     <Skeleton active />
-                  )}
+                  )} */}
                   <span className='estart'>Established Artist</span>
                   <MDBNavLink
                     to={`/CProfileEdit/${this.props.match.params.id}`}
@@ -83,23 +80,23 @@ class CProfile extends Component {
             </div>
             <div className='artistbio clearfix'>
               <h4 className='paddh4'>Biography</h4>
-              {listofArtistInfo !== undefined ? (
+              {/* {listofArtistInfo !== undefined ? (
                 <p>{listofArtistInfo.artistDescription}</p>
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </div>
             <div className='relatedcat clearfix'>
               <h4 className='paddh4'>Related Categories</h4>
               <div className='catlist'>
-                {listofArtistCategories[0] !== [] ||
+                {/* {listofArtistCategories[0] !== [] ||
                 listofArtistCategories[0] !== undefined ? (
                   listofArtistCategories.map((cat) => (
                     <MDBNavLink to='#!'>{cat}</MDBNavLink>
                   ))
                 ) : (
                   <MDBNavLink to='#!'>No Categories</MDBNavLink>
-                )}
+                )} */}
               </div>
               <a href='#!' className='seemore'>
                 See More &nbsp;
@@ -114,7 +111,7 @@ class CProfile extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listofArtistArtwork !== undefined ? (
+              {/* {listofArtistArtwork !== undefined ? (
                 listofArtistArtwork.map((art) => (
                   <li>
                     <a href='#!' className='artlink'>
@@ -132,7 +129,7 @@ class CProfile extends Component {
                 ))
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </ul>
           </section>
           <section className='latestwork'>
@@ -142,7 +139,7 @@ class CProfile extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listofArtistArtwork !== undefined ? (
+              {/* {listofArtistArtwork !== undefined ? (
                 listofArtistArtwork.map((art) => (
                   <li>
                     <a href='#!' className='artlink'>
@@ -161,7 +158,7 @@ class CProfile extends Component {
                 ))
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </ul>
           </section>
           <section className='latestwork'>
@@ -171,7 +168,7 @@ class CProfile extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listofArtistArtwork !== undefined ? (
+              {/* {listofArtistArtwork !== undefined ? (
                 listofArtistArtwork.map((art) => (
                   <li>
                     <a href='#!' className='artlink'>
@@ -189,7 +186,7 @@ class CProfile extends Component {
                 ))
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </ul>
           </section>
           <section className='latestwork'>
@@ -199,7 +196,7 @@ class CProfile extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listofArtistArtwork !== undefined ? (
+              {/* {listofArtistArtwork !== undefined ? (
                 listofArtistArtwork.map((art) => (
                   <li>
                     <a href='#!' className='artlink'>
@@ -217,7 +214,7 @@ class CProfile extends Component {
                 ))
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </ul>
           </section>
           <section className='latestwork'>
@@ -227,7 +224,7 @@ class CProfile extends Component {
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {listofArtistArtwork !== undefined ? (
+              {/* {listofArtistArtwork !== undefined ? (
                 listofArtistArtwork.map((art) => (
                   <li>
                     <a href='#!' className='artlink'>
@@ -246,7 +243,7 @@ class CProfile extends Component {
                 ))
               ) : (
                 <Skeleton active />
-              )}
+              )} */}
             </ul>
           </section>
         </div>

@@ -180,14 +180,14 @@ class Navbar extends Component {
                       Account
                     </Link>
                     </MDBDropdownItem>
-                    <MDBDropdownItem>
+                    {/* <MDBDropdownItem>
                       <Link
                         to={`/CProfile/${userData.accFname} ${userData.accLname}`}
                       >
                         {' '}
                       Profile
                     </Link>
-                    </MDBDropdownItem>
+                    </MDBDropdownItem> */}
                     <MDBDropdownItem
                       onClick={() => logout()
                       }

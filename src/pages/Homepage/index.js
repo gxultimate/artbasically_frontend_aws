@@ -88,9 +88,11 @@ class Homepage extends Component {
       },
     } = this.props;
 
-    let ArtistOftheMonth = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+    let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
 
-    let ArtistOftheMonthID = listOfUsers.filter(usr => usr.accFname === 'Cleon').map(usr => usr._id)
+
+
+    let AOMid = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accID}`)})
   
  let addtoList=(rtwrk)=>{
 
@@ -467,7 +469,7 @@ if (getmyList === 0){
                       }}
                     >
                          <h2 className='artistname'>
-                {ArtistOftheMonth[0]}
+                         {ArtistOftheMonth.pop()}
 
               </h2>
                      
@@ -480,7 +482,7 @@ if (getmyList === 0){
                  
                   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
                   onClick={() =>
-                    this.handleClick(followArtist(ArtistOftheMonthID))
+                    this.handleClick(followArtist(AOMid.pop()))
                   }
                 >
                   {this.state.isToggleOn ? (
@@ -496,7 +498,7 @@ if (getmyList === 0){
             <ul className='col3img clearfix'>
               {/*  */}
               {listOfArtworks
-                .filter((item) => item.artistName === 'Cleon Peterson')
+                .filter(fil => fil.accID === AOMid.pop())
                 
                 .slice(0, 3)
                 .map((image,i) => {
