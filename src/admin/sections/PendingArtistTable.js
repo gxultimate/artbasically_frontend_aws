@@ -83,19 +83,7 @@ let users = listOfUsers.filter((usr) => {
         
        account.setProperty('_id',itm._id)
        account.setProperty('acc_Status','Active')
-      
-// editAccount();
-//        const success = () => {
-//         message
-//           .loading('', 1)
-//           .then(() => message.success('Account Approved', 3));
-//       };
 
-//       setTimeout(() =>{
-//         success();
-//       },500)
-     
-//       this.props.history.push('/AdminHome');
 
 
       editAccount().then((resp) => {
@@ -260,14 +248,25 @@ const DeactivatedTable = () => {
               </div>
               <div className='right'>
                 <ul>
-                <ViewDocu data={account.acc_Documents} />
+          
                 </ul>
               </div>
             </div>
-            <div className='artistbio clearfix'>
+            <div className=' clearfix'>
               <h4 className='paddh4'>Biography</h4>
           
                 <p>{account.artistDescription}</p>
+            
+            </div>
+
+            <div className='artistbio clearfix'>
+              <h4 className='paddh4'>Document</h4>
+          
+              <img 
+      src={account.acc_Documents}
+      alt="profilePic"
+      style={{width:'100%',maxWidth:'900px',height:'100%'}}
+      />
             
             </div>
    

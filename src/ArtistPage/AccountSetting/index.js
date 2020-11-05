@@ -1,4 +1,3 @@
-
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +10,7 @@ import {
 import TextField from '@material-ui/core/TextField';
 import React, { Component, Fragment } from 'react';
 import {inject,observer} from 'mobx-react'
-
+import {message} from 'antd';
 class AccountSettings extends Component {
 
 
@@ -29,15 +28,38 @@ function createData(fname,lname,contact,address,email,byear,institution,pass,act
 
 let edit =(accData)=>{
   
-  console.log(accData.accID)
+  
   account.setProperty('accID',accData.accID)
-    editProfile();
+  account.setProperty('_id',accData._id)
+    editProfile().then(data=>{
+      if (data === 'true'){
+        const success = () => {
+          message
+            .loading('', 1)
+            .then(() => message.success('Changes saved', 1));
+        };
+    
+        setTimeout(() => {
+          success();
+        }, 0);
+      }else{
+        const success = () => {
+          message
+            .loading('', 1)
+            .then(() => message.success('Try again', 1));
+        };
+    
+        setTimeout(() => {
+          success();
+        }, 0);
+      }
+    })
 
 }
 
 let getMyData = listOfUsers.filter(usr => usr.accID === mydata.accID).map(data => {
     return (createData(
-        data.accFname,data.accLname,data.accContact,data.accAddress,data.accEmailAddress,data.birthYear,data.accInstitution,data.password,<div><MDBBtn color='yellow' onClick={()=>edit(data)}> Edit Info</MDBBtn></div>
+        data.accFname,data.accLname,data.accContact,data.accAddress,data.accEmailAddress,data.birthYear,data.accInstitution,data.password,<div><MDBBtn color='yellow' onClick={()=>edit(data)}> Save Changes</MDBBtn></div>
     ))
 })
 const useStyles = makeStyles((theme) => ({
@@ -110,10 +132,10 @@ const useStyles = makeStyles((theme) => ({
           <h6>Security and Login</h6>
         </Grid>
         <Grid item xs={8} >
-        <Paper className={classes.paper}><span style={{marginRight:'70px'}}>Email :</span> <TextField type='text' defaultValue={row.email} onChange={accEmailAddress=>{account.setProperty('accEmailAddress',accEmailAddress.target.value)}}> </TextField></Paper>
+        <Paper className={classes.paper}><span style={{marginRight:'70px'}}>Email :</span> <TextField type='text' style={{minWidth:'300px'}} defaultValue={row.email} onChange={accEmailAddress=>{account.setProperty('accEmailAddress',accEmailAddress.target.value)}}> </TextField></Paper>
         </Grid>
         <Grid item xs={8} >
-          <Paper className={classes.paper}><span style={{marginRight:'50px'}}>Password :</span> <TextField type='password' defaultValue={row.pass} onChange={password=>{account.setProperty('password',password.target.value)}}> </TextField></Paper>
+          <Paper className={classes.paper}><span style={{marginRight:'50px'}}>Password :</span> <TextField type='password' style={{minWidth:'300px'}} defaultValue={row.pass} onChange={password=>{account.setProperty('password',password.target.value)}}> </TextField></Paper>
         </Grid>
         <Grid item xs={8} >
         {row.action}

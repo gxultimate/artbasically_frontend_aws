@@ -152,7 +152,7 @@ const CompletedOrderTable = () => {
           >
             <MDBBreadcrumb>
               <MDBBreadcrumbItem>Dashboard</MDBBreadcrumbItem>
-              <MDBBreadcrumbItem active>Earnings</MDBBreadcrumbItem>
+              <MDBBreadcrumbItem active>Sold Artworks</MDBBreadcrumbItem>
             </MDBBreadcrumb>
       
           </MDBCardBody>

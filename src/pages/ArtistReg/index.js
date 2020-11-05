@@ -84,26 +84,22 @@ import Resizer from 'react-image-file-resizer';
     });
   };
 
-  // handleConfirmPassword = (event) => {
-  //   if (event.target.value !== this.state.password) {
-  //     message.error('error');
-  //     this.setState({confirmPassword: event.target.value});
-  //   }
-  // };
 
   submitHandler = (event) => {
     event.preventDefault();
     let {startingStore:{listOfUsers,addAccount,account, upload}}=this.props;
     
 
-    let filAccounts = listOfUsers.filter(usr => usr.accContact === account.accContact && usr.accEmailAddress === account.accEmailAddress).length
+    let filAccounts = listOfUsers.filter(usr => usr.accContact === account.accContact && account.acc_Status === 'Active' || usr.accEmailAddress === account.accEmailAddress && account.acc_Status === 'Active').length
 
-console.log(filAccounts)
+
 
 if (filAccounts === 0){
 
 
     if (this.state.password === this.state.confPassword ){
+
+
 
     event.target.className += ' was-validated';
 
@@ -127,7 +123,7 @@ if (filAccounts === 0){
       this.props.history.push('/RegVerify');
     }, 1000);
     
-    // this.onSubmit();
+    
 
     setTimeout(() => {
       this.props.history.push('/');
@@ -146,7 +142,15 @@ if (filAccounts === 0){
   }
 
 }else{
-  console.log('err')
+      const error = () => {
+    
+      message.error('Your email or contact number is already taken', 2);
+ 
+    };
+    setTimeout(() => {
+      error();
+    
+    }, 500);
 }
 
   }
@@ -180,7 +184,7 @@ if (filAccounts === 0){
 
             <div className="page req clearfix">
 <div className="container">
-					{/* <h6 className="heading">Profile Picture</h6> */}
+	
 					<div className="img-holder">
 						<img src={this.state.profileImg} alt="" id="img" className="img" />
 					</div>
@@ -308,9 +312,7 @@ if (filAccounts === 0){
               <MDBInput
                 label='Password'
                 type='password'
-                // onChange={(password) =>
-                //   account.setProperty('password', password.target.value)
-                // }
+             
                 onChange={this.handleChange('password')}
                 required
               >
@@ -321,12 +323,7 @@ if (filAccounts === 0){
               <MDBInput
                 label='Confirm Password'
                 type='password'
-                // onChange={(confirmPassword) =>
-                //   account.setProperty(
-                //     'confirmPassword',
-                //     confirmPassword.target.value
-                //   )
-                // }
+           
                 onChange={this.handleChange('confPassword')}
                 required
               >
@@ -346,37 +343,7 @@ if (filAccounts === 0){
                 </p>
               </div>
 
-              {/* <div className='uploadreq clearfix'>
-       
-                    <img src={this.state.profileImg} style={{height:'100px',marginBottom:'6px'}}/>
-                <input type='file' name='file' onChange={this.onFileChangeP} required/>
-            
-              </div>
 
-              <p className='req'>
-                 Upload Profile Picture
-                </p> */}
-{/* 
-<span>Profile Picture</span>
-                <div className='artsingle' style={{textAlign:"center",margin:'auto'}}>
-        
-                  <img src={this.state.profileImg} style={{width:'100px',marginBottom:'12px'}}/>
-                  <div className='uploadreq clearfix'>
-                    <input
-                      type='file'
-                      name='file'
-                      onChange={this.onFileChangeP}
-                    />
-                   
-                    <p className='req'>
-                      Please upload a high resolution photo.
-                    </p>
-                  </div>
-              
-                </div> */}
-
-              {/* <FBReg user='Artist'/>
-              <GmailReg user='Artist'/> */}
               <MDBBtn
                 className='submitreg clearfix'
                 type='submit'

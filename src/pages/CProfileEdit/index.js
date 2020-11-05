@@ -401,9 +401,7 @@ class CProfileEdit extends Component {
                         <MDBInput
                           label='Address'
                           type='text'
-                          // hint={userData.accAddress}
-                          // valueDefault={listofArtistInfo.accAddress}
-                          // onChange={accEmailAddress => account.setProperty("accEmailAddress", accEmailAddress.target.value)}
+                     
                         >
                           <div className='invalid-feedback'>
                             Please provide a valid address.

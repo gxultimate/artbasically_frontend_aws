@@ -122,7 +122,7 @@ class Admin extends Component {
                     onClick={this.togglePills('default', '2')}
                   >
                     <MDBIcon icon='paint-brush' className='mr-3' />
-                    My Artworks
+                    Artworks
                   </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
@@ -132,7 +132,7 @@ class Admin extends Component {
                     onClick={this.togglePills('default', '3')}
                   >
                     <MDBIcon icon='coins' className='mr-3' />
-                    Earnings
+                    Sold Artworks
                   </MDBNavLink>
                 </MDBNavItem>
      

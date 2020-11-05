@@ -28,28 +28,19 @@ import GmailReg from './../../components/RegisterGmail/'
 
 
 
-
-
-
-    function getHash(input){
-      var hash = 0, len = input.length;
-      for (var i = 0; i < len; i++) {
-        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
-        hash |= 0; // to 32bit integer
-      }
-    
-              
-
-      return hash;
-    }
-    let date = new Date();
-
     event.preventDefault();
-    event.target.className += ' was-validated';
+   
 
     let {
-      startingStore: {addAccount, account},
+      startingStore: {listOfUsers,addAccount, account},
     } = this.props;
+
+
+    let filAccounts = listOfUsers.filter(usr => usr.accContact === account.accContact && account.acc_Status === 'Active' || usr.accEmailAddress === account.accEmailAddress && account.acc_Status === 'Active').length
+
+
+    if (filAccounts === 0){
+
     account.setProperty('accessType', 'Standard')
     account.setProperty('acc_Status', 'Active')
     account.setProperty('dateAdded', moment().format('MMM/DD/YYYY'))
@@ -57,6 +48,7 @@ import GmailReg from './../../components/RegisterGmail/'
     account.setProperty('password',this.state.password)
     account.setProperty('regType','LocalAccount')
     if (this.state.password === this.state.confPassword){
+      event.target.className += 'was-validated';
     addAccount();
 
     const success = () => {
@@ -83,6 +75,22 @@ import GmailReg from './../../components/RegisterGmail/'
     
     }, 500);
   }
+
+}else{
+  const error = () => {
+
+  message.error('Your email or contact number is already taken', 2);
+
+};
+setTimeout(() => {
+  error();
+
+}, 500);
+}
+
+
+
+
   };
 
   changeHandler = (event) => {

@@ -115,6 +115,10 @@ class StartingStore {
   };
 
   editProfile = () => {
+    return new Promise((resolve,reject) =>{
+
+   
+
     let doc = this.listOfUsers.filter(data=> {
    
       if (data.accID === this.account.accID){
@@ -122,14 +126,27 @@ class StartingStore {
           return data._id
       }
     })
-   
+
+
+ 
  
     this.api.editprofile(this.account , doc[0]._id)
     .then(resp => {
-   
+ 
       this.listOfUsers=resp.data
+      resolve('true')
     })
+
+  })
   }
+
+  // editProfile = () => {
+   
+  //   this.api.editprofile(this.account).then((resp) => {
+  //     this.listOfUsers = resp.data;
+     
+  //   });
+  // };
 
 
   loginAccount = () => {

@@ -217,6 +217,17 @@ const ArtistsTable = () => {
                 <p>{account.artistDescription}</p>
             
             </div>
+
+            <div className='artistbio clearfix'>
+              <h4 className='paddh4'>Document</h4>
+          
+              <img 
+      src={account.acc_Documents}
+      alt="profilePic"
+      style={{width:'100%',maxWidth:'900px',height:'100%'}}
+      />
+            
+            </div>
    
           </div>
       
