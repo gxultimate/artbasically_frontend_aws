@@ -55,6 +55,7 @@ class Homepage extends Component {
         getToCart,getOrders,
         getMyLists,
         getAccounts,
+        getFollow,
       },
     } = this.props;
     if (listOfEmergingArtist) {
@@ -68,8 +69,11 @@ class Homepage extends Component {
       getOrders()
       getMyLists()
       getAccounts()
+      getFollow()
     }
   }
+
+
 
   render() {
        let logged = JSON.parse(sessionStorage.getItem('userData'))
@@ -84,15 +88,25 @@ class Homepage extends Component {
         mylists,
         addMyLists,
         listOfMyLists,
-        listOfUsers
+        listOfUsers,
+        addFollow,
+        userfollow,
+        listOfFollowing,
+        deleteFollow,
+        addNotif,
+        notif,
+        
       },
     } = this.props;
 
+    
+
     let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
-
-
-
     let AOMid = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accID}`)})
+    
+
+
+   
   
  let addtoList=(rtwrk)=>{
 
@@ -136,6 +150,83 @@ if (getmyList === 0){
  
 }
  }
+
+ function getHash(input){
+  var hash = 0, len = input.length;
+  for (var i = 0; i < len; i++) {
+    hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+    hash |= 0; // to 32bit integer
+  }
+
+        
+  return hash;
+}
+
+ let follow =(following)=>{
+  let getFollowing = listOfFollowing.filter(data =>  data.followingID === AOMid && data.followerID === logged.accID)
+   if (getFollowing.length === 0){
+    userfollow.setProperty('followID', `${Math.floor(1000 + Math.random() * 9000)}`)
+    userfollow.setProperty('followerID',logged.accID)
+    userfollow.setProperty('followingID',following)
+    addFollow()
+  
+    this.setState(function (prevState) {
+      return {
+        isToggleOn: false,
+        condition: !this.state.condition,
+      };
+    });
+
+
+
+
+    notif.setProperty('notifID',`${getHash(logged.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+    notif.setProperty('notifSender',logged.accID)
+    notif.setProperty('notifRecipient',following)
+    notif.setProperty('notifSubject','Placed order')
+    notif.setProperty('notifMsg',`${logged.accFname } started following you`)
+    notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
+    notif.setProperty('notifStatus','unread')
+
+    addNotif()
+
+    const success = () => {
+      message
+        .loading('', 0.5)
+        .then(() => message.success('Following', 3));
+    };
+    setTimeout(() =>{
+      success()
+    },500)
+
+   }else{
+    userfollow.setProperty('followerID',logged.accID)
+    userfollow.setProperty('followingID',following)
+    deleteFollow();
+    const success = () => {
+      message
+        .loading('', 0.5)
+        .then(() => message.success('Unfollow', 3));
+    };
+    setTimeout(() =>{
+      success()
+    },50)
+   }
+   setTimeout(()=>{
+    window.location.reload(false);
+  },1500)
+
+   this.setState(function (prevState) {
+    return {
+      isToggleOn: true,
+      condition: !this.state.condition,
+    };
+  });
+ 
+
+ }
+
+
     function MatchRoute() {
       return (
         <ul className='col3img clearfix'>
@@ -448,7 +539,9 @@ if (getmyList === 0){
         </ul>
       );
     }
+    let getFollowing = listOfFollowing.filter(data =>  data.followingID === AOMid && data.followerID === logged.accID)
 
+    let AOM = ArtistOftheMonth.pop()
     return (
       <div className='home'>
         <Navbar />
@@ -461,15 +554,15 @@ if (getmyList === 0){
                      style={{marginRight:'8px'}}
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${ArtistOftheMonth[0]}`,
-                          state: {artistName:ArtistOftheMonth[0]
+                          pathname: `/Artist/${AOM}`,
+                          state: {artistName:AOM
              
                           }
                         });
                       }}
                     >
                          <h2 className='artistname'>
-                         {ArtistOftheMonth.pop()}
+                         {AOM}
 
               </h2>
                      
@@ -480,12 +573,14 @@ if (getmyList === 0){
                 outline
                   floating
                  
-                  title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
+                  title={getFollowing === '0' ? 'Follow' : 'Unfollow'}
                   onClick={() =>
-                    this.handleClick(followArtist(AOMid.pop()))
+                    // this.handleClick(followArtist(AOMid.pop()))
+                    follow(AOMid.pop())
                   }
                 >
-                  {this.state.isToggleOn ? (
+               
+                  {getFollowing.length === 0 ? (
                    <div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
                   ) : (
                     'Following'

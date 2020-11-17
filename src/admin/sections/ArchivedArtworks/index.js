@@ -3,12 +3,12 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
     MDBModalHeader,
     MDBTable,
     MDBTableBody,
-    MDBTableHead,} from 'mdbreact';
+    MDBTableHead, MDBModalFooter} from 'mdbreact';
   import {inject, observer} from 'mobx-react';
   import React, { Component, Fragment } from 'react'
   import DownloadImage from './../../sections/DownloadImage';
   import {message} from 'antd';
-  
+  import { Grid } from '@material-ui/core';
   
    class PendingArtwork extends Component {
     state = {
@@ -51,12 +51,35 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
   
   
           let  moreInfo = (itm) => {
-            editArtwork(itm._id, 'Approved', itm.accID)
+            artwork.setProperty('artStyle',itm.artStyle)
+        
+            artwork.setProperty('artTheme',itm.artTheme)
+            artwork.setProperty('artSize',itm.artSize)
+            artwork.setProperty('artCategory',itm.artCategory)
+            artwork.setProperty('artworkID',itm.artworkID)
+            artwork.setProperty('artName',itm.artName)
+            artwork.setProperty('artDescription',itm.artDescription)
+            artwork.setProperty('artPrice',itm.artPrice)
+            artwork.setProperty('artistName',itm.artistName)
+            artwork.setProperty('artworkDateCreated',itm.artworkDateCreated)
+            artwork.setProperty('artDimension',itm.artDimension)
+            artwork.setProperty('artType',itm.artType)
+            artwork.setProperty('dateAdded',itm.dateAdded)
+            artwork.setProperty('artworkImg',itm.artworkImg)
+            this.setState({
+              modal: !this.state.modal
+            });
          
             };
+
+            let  close = () => {
+              this.setState({
+                modal: false
+              });
+              };
             let restore =(data)=>{
               artwork.setProperty('_id', data._id);
-              artwork.setProperty('artworkStatus','Archived');
+              artwork.setProperty('artworkStatus','Active');
     
               editArtwork();
   
@@ -148,6 +171,40 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
       />
   
   
+  <MDBModal isOpen={this.state.modal} centered>
+          <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}>Artwork Information</span></MDBModalHeader>
+          <MDBModalBody>
+            <Grid container direction='row' xs={12}>
+            <Grid item xs={12}>
+            <span className='arttitle'>
+{artwork.artName}, {artwork.artworkDateCreated}
+      </span>
+       </Grid>
+       <Grid item xs={4}  >
+       <div className='artImg'  >
+                    <img
+                
+                      src={artwork.artworkImg}/></div>
+</Grid>
+<Grid item xs={8}  >
+<div style={{padding:'10px'}}>
+    <h6>Theme : {artwork.artTheme}</h6>
+
+                    <h6>Style : {artwork.artStyle} </h6>
+    <h6>Size : {artwork.artSize}</h6>
+    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Description : </h6>
+    <p>{artwork.artDescription}</p>
+                    </div>
+                    </Grid>
+                    </Grid>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={()=>close()}>Close</MDBBtn>
+         
+          </MDBModalFooter>
+        </MDBModal>
+
     </Fragment>
     );
   }

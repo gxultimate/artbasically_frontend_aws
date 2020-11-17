@@ -68,13 +68,11 @@ class CProfile extends Component {
                     489
                     <span>Followers</span>
                   </li>
-                  <li>
+                  {/* <li>
                     4.8/5
                     <span>528k Ratings</span>
-                  </li>
-                  <li>
-                    No. 1<span>Best Seller</span>
-                  </li>
+                  </li> */}
+                 
                 </ul>
               </div>
             </div>

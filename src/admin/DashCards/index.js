@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
   
   },
   pos: {
@@ -170,7 +170,15 @@ function DCards(){
 Sales YTD
 </Typography>
 <div class='mt-1'>
-<Typography className={classes.value}>{sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<Typography className={classes.value}>
+  {sales === 'undefined' ?(
+    '0'
+  ):(
+  sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+  )
+
+}
+  </Typography></div>
 </Grid>
 
 </Grid>

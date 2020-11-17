@@ -23,6 +23,7 @@ import ArtistTab from './ArtistTab';
 import CategoryTab from './CategoryTab';
 import Notif from './sections/Notif';
 import Feedback from './FeedbackTab'
+import Messaging from './MessagingTab'
 // import Message from './sections/Message';
 import '../css/admin.css';
 import MyAccount from './sections/AccountSettings/'
@@ -93,10 +94,10 @@ class Admin extends Component {
       <div>
         <div className='admin'>
           <MDBNavbar className='position-fixed' dark expand='md'>
-            <MDBNav className='topnav'>
+            <MDBNav className='topnav'  style={{backgroundColor:'#231F20'}}>
               <a href='/AdminHome' className='logo-wrapper ablogo'>
                 <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
-                <p>ADMIN</p>
+                <p style={{color:'white'}}>Admin</p>
               </a>
               <div className='topcon'>
                 {/* <MDBNavItem>
@@ -187,6 +188,18 @@ class Admin extends Component {
                     Categories
                   </MDBNavLink>
                 </MDBNavItem>
+
+                <MDBNavItem>
+                  <MDBNavLink
+                    to='#'
+                    active={this.state.items['default'] === '9'}
+                    onClick={this.togglePills('default', '9')}
+                  >
+                    <MDBIcon icon='envelope' className='mr-3' />
+                    Messaging
+                  </MDBNavLink>
+                </MDBNavItem>
+
                 <MDBNavItem>
                   <MDBNavLink
                     to='#'
@@ -238,6 +251,9 @@ class Admin extends Component {
             </MDBTabPane>
             <MDBTabPane tabId='7'>
               <MyAccount />
+            </MDBTabPane>
+            <MDBTabPane tabId='9'>
+              <Messaging />
             </MDBTabPane>
           </MDBTabContent>
         </div>

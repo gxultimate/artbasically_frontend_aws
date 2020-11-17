@@ -162,7 +162,7 @@ const ArtistsTable = () => {
       data={data}
     />
 
-<MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+<MDBModal isOpen={this.state.modal} centered>
           <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}> Artist's Profile</span></MDBModalHeader>
         
           <MDBModalBody>
@@ -201,13 +201,11 @@ const ArtistsTable = () => {
                     489
                     <span>Followers</span>
                   </li>
-                  <li>
+                  {/* <li>
                     4.8/5
                     <span>528k Ratings</span>
-                  </li>
-                  <li>
-                    No. 1<span>Best Seller</span>
-                  </li>
+                  </li> */}
+                 
                 </ul>
               </div>
             </div>

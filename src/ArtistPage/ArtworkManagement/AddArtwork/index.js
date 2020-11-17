@@ -265,7 +265,7 @@ artwork.setProperty('artworkStatus','Pending')
                   <MDBInput
                   style={{width:'95%'}}
                     label='Quantity'
-                    type='text'
+                    type='number'
                  
                   >
                     <div className='invalid-feedback'>

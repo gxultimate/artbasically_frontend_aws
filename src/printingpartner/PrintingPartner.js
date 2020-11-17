@@ -24,6 +24,7 @@ import {inject, observer} from 'mobx-react';
 import MyAccount from './sections/AccountSetting/'
 import '../css/printart.css';
 import {withRouter} from 'react-router-dom'
+import MessageTab from './MessageTab'
 
 class PrintingPartner extends Component {
   state = {
@@ -85,10 +86,10 @@ class PrintingPartner extends Component {
     return (
       <div className='admin'>
         <MDBNavbar className='position-fixed' dark expand='md'>
-          <MDBNav className='topnav'>
+          <MDBNav className='topnav' style={{backgroundColor:'#231F20'}}>
             <a href='/PrintingPartner' className='logo-wrapper ablogo'>
               <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
-              <p>Printing</p>
+              <p style={{color:'white'}}>Printing</p>
             </a>
             <div className='topcon'>
               {/* <MDBNavItem>
@@ -181,10 +182,20 @@ class PrintingPartner extends Component {
               </MDBNavItem> */}
 
               <MDBNavItem>
-                  <MDBNavLink
+
+              <MDBNavLink
                     to='#'
                     active={this.state.items['default'] === '6'}
                     onClick={this.togglePills('default', '6')}
+                  >
+                    <MDBIcon icon='envelope' className='mr-3' />
+                    Messaging
+                  </MDBNavLink>
+
+                  <MDBNavLink
+                    to='#'
+                    active={this.state.items['default'] === '7'}
+                    onClick={this.togglePills('default', '7')}
                   >
                     <MDBIcon icon='cog' className='mr-3' />
                     Account
@@ -211,6 +222,9 @@ class PrintingPartner extends Component {
               <CancelOrdertab />
             </MDBTabPane>
             <MDBTabPane tabId='6'>
+      <MessageTab/>
+            </MDBTabPane>
+            <MDBTabPane tabId='7'>
       <MyAccount/>
             </MDBTabPane>
           </MDBTabContent>

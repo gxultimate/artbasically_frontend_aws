@@ -73,7 +73,7 @@ class SingleArt extends Component {
     getSingleArtists(this.props.match.params.name);
     getArtistArtwork(this.props.match.params.name);
     getToCart();
-    getPrintSize()
+    getPrintSize();
     
     //   .then(response => {
 
@@ -155,7 +155,7 @@ class SingleArt extends Component {
 
       let getmyList = listOfMyLists.filter( art => art.artworkID === rtwrk.artworkID).length
     
-      console.log(getmyList,'out')
+     
     if (getmyList === 0){
        
        mylists.setProperty('mylistsID',`${rtwrk.artworkID.slice(0,4)}-${Math.floor(1000 + Math.random() * 900)}`)
@@ -194,6 +194,8 @@ class SingleArt extends Component {
      
     }
      }
+     let artworkList = listofArtistArtwork.map(data => data.artSize)
+
 
     return (
       <div className='home'>
@@ -350,7 +352,14 @@ class SingleArt extends Component {
                     >
                       {listOfPrintSize.map((sizes) => (
                           <option key={sizes.printSize} value={sizes.printSize}>
-                            {sizes.printSize}
+                            {  sizes.printSize == artworkList[0] ? 
+                           ( 
+                             `${sizes.printSize} Recommended`
+                            ):(
+                              sizes.printSize
+                            )
+                           
+                            }
                           </option>
                         ))}
                     </select>

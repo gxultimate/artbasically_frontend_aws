@@ -59,7 +59,10 @@ let users = listOfUsers.filter((usr) => {
 
 
           let  info = (itm) => {
-       
+            this.setState({
+              modal: true
+            
+            });
   
               account.setProperty('accFname',itm.accFname)
               account.setProperty('accLname',itm.accLname)
@@ -71,10 +74,7 @@ let users = listOfUsers.filter((usr) => {
               account.setProperty('profile_Img',itm.profile_Img)
               account.setProperty('accEmailAddress',itm.accEmailAddress)
               account.setProperty('password',itm.password)
-              this.setState({
-                modal: true
-              
-              });
+            
         
            
           }
@@ -213,7 +213,7 @@ const DeactivatedTable = () => {
   data={data}
 />
 
-<MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+<MDBModal isOpen={this.state.modal}  centered>
           <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}> Artist's Profile</span></MDBModalHeader>
         
           <MDBModalBody>

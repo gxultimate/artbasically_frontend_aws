@@ -14,8 +14,8 @@ import ArtworkTab from './ArtworkManagement';
 import Notif from './Notification';
 import Profile from './Profile';
 import EarningsTab from './Earnings'
-
-
+import Messages from './Messaging'
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 class Admin extends Component {
   state = {
@@ -26,7 +26,6 @@ class Admin extends Component {
   componentDidMount(){
     let {startingStore:{getAllNotif}}=this.props
     getAllNotif()
-
   }
 
   toggleCollapse = (collapseID) => () => {
@@ -68,12 +67,17 @@ class Admin extends Component {
   }
     return (
       <div>
+     <MessengerCustomerChat
+    pageId="301933277234280"
+    appId="216207193165878"
+  />
+
         <div className='admin'>
           <MDBNavbar className='position-fixed' dark expand='md'>
-            <MDBNav className='topnav'>
+            <MDBNav className='topnav' style={{backgroundColor:'#231F20'}}>
               <a href='/ArtistHome' className='logo-wrapper ablogo'>
                 <img alt='MDB React Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />{' '}
-                <p>Artist</p>
+                <p style={{color:'white'}}>Artist</p>
               </a>
               <div className='topcon'>
                 {/* <MDBNavItem>
@@ -139,10 +143,21 @@ class Admin extends Component {
     
            
                 <MDBNavItem>
-                  <MDBNavLink
+
+
+                <MDBNavLink
                     to='#'
                     active={this.state.items['default'] === '4'}
                     onClick={this.togglePills('default', '4')}
+                  >
+                    <MDBIcon icon='envelope' className='mr-3' />
+                    Messaging
+                  </MDBNavLink>
+
+                  <MDBNavLink
+                    to='#'
+                    active={this.state.items['default'] === '5'}
+                    onClick={this.togglePills('default', '5')}
                   >
                     <MDBIcon icon='cog' className='mr-3' />
                     Account
@@ -167,6 +182,9 @@ class Admin extends Component {
               <EarningsTab />
             </MDBTabPane>
             <MDBTabPane tabId='4'>
+              <Messages/>
+            </MDBTabPane>
+            <MDBTabPane tabId='5'>
               <Settings />
             </MDBTabPane>
          

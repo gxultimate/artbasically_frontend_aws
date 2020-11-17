@@ -11,7 +11,7 @@ import React, { Component, Fragment } from 'react'
 import DownloadImage from '../sections/DownloadImage';
 import {message} from 'antd';
 import Grid from '@material-ui/core/Grid';
-
+import moment from 'moment'
 
  class PendingOrder extends Component {
   state = {
@@ -31,8 +31,19 @@ import Grid from '@material-ui/core/Grid';
   
 
   render() {
-    let { startingStore: {listOfOrders,listOfUsers, editOrder}} = this.props;
-
+    let { startingStore: {listOfOrders,listOfUsers, editOrder,notif,addNotif}} = this.props;
+    let userData = JSON.parse(sessionStorage.getItem('userData')) 
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
+    let date = new Date();
     
     function createData(orderDB,items,id, orderBy, date, paymentStat,action) {
       return { orderDB,items,id, orderBy, date, paymentStat,action };
@@ -57,6 +68,17 @@ let Corder = listOfOrders.filter((Delivery) => {
               .loading('', 1)
               .then(() => message.success('Order Approved', 3));
           };
+
+
+          notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+          notif.setProperty('notifSender','admin-001')
+          notif.setProperty('notifRecipient','print-001')
+          notif.setProperty('notifSubject','Printing')
+          notif.setProperty('notifMsg','New item to print')
+          notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
+          notif.setProperty('notifStatus','unread')
+addNotif()
+
           setTimeout(() =>{
             success()
           },1000)
@@ -72,6 +94,16 @@ let Corder = listOfOrders.filter((Delivery) => {
                 .loading('', 1)
                 .then(() => message.success('Order Rejected', 3));
             };
+
+
+            notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+            notif.setProperty('notifSender','admin-001')
+            notif.setProperty('notifRecipient',userData.accID)
+            notif.setProperty('notifSubject','Order')
+            notif.setProperty('notifMsg','Order Rejected')
+            notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
+            notif.setProperty('notifStatus','unread')
+  addNotif()
 
             setTimeout(() =>{
               success()

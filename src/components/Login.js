@@ -37,7 +37,9 @@ class Login extends Component {
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
-        account
+        
+        getFollow,
+
       },
     } = this.props;
     loginAccount().then((res) => {
@@ -45,6 +47,7 @@ class Login extends Component {
       getArtworkInfo();
       getEmergingArtistArtwork();
       getArtists();
+      getFollow();
      
       if (res === true) {
       

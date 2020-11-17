@@ -9,7 +9,7 @@ import DCards from './../DCards'
 class ArtistProfile extends Component {
   componentDidMount() {
     let {
-      startingStore: {getAccounts,getArtwork,getOrders},
+      startingStore: {getAccounts,getArtwork,getOrders,getFollow},
     } = this.props;
     getAccounts()
     getArtwork()
@@ -20,7 +20,7 @@ class ArtistProfile extends Component {
   render() {
     let {
       startingStore: {
-        listOfUsers
+        listOfUsers,listOfFollowing
       },
     } = this.props;
 let mydata = JSON.parse(sessionStorage.getItem('userData'));
@@ -37,6 +37,9 @@ let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
   )
   )
 })
+
+
+let myFollowers = listOfFollowing.filter(data => data.followingID === mydata.accID).length;
     return (
 <Fragment>
 <div className='adminbreadcrumb'>
@@ -64,7 +67,7 @@ let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
           <Fragment>
 
    
-      <MDBCard style={{marginTop:'20px',marginBottom:'20px'}}>
+      <MDBCard style={{marginTop:'15px',marginBottom:'20px'}}>
     
           <div className='artist'>
             <div className='artistprofile clearfix'>
@@ -106,16 +109,18 @@ let myprofile = listOfUsers.filter(pp => pp.accID === mydata.accID).map(info =>{
               <div className='right'>
                 <ul>
                   <li>
-                    489
+                    {myFollowers === 0 ? (
+                      '0'
+                    ):(
+                      {myFollowers}
+                    )}
                     <span>Followers</span>
                   </li>
-                  <li>
+                  {/* <li>
                     4.8/5
                     <span>528k Ratings</span>
-                  </li>
-                  <li>
-                    No. 1<span>Best Seller</span>
-                  </li>
+                  </li> */}
+                 
                 </ul>
               </div>
 

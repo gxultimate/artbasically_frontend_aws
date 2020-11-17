@@ -11,6 +11,7 @@ import PrintSize from './../models/PrintSize'
 import Notification from './../models/Notif'
 import MyLists from './../models/MyLists'
 import Feedback from './../models/Feedback'
+import UserFollow from './../models/UserFollow'
 
 class StartingStore {
   account = new Account();
@@ -23,6 +24,8 @@ class StartingStore {
   notif = new Notification();
   mylists= new MyLists();
   feedback = new Feedback();
+  userfollow = new UserFollow();
+  listOfFollowing = [];
   listOfFeedback = [];
   listOfMyLists =[];
   listOfNotif=[];
@@ -343,57 +346,57 @@ class StartingStore {
   };
 
   getArtworkInfo = () => {
-    return new Promise((resolve, reject) => {
-      this.api.getartworkInfo().then((resp) => {
-        let userData = JSON.parse(sessionStorage.getItem('userData'));
-        let artCategories = [];
-        let categories = [];
+    // return new Promise((resolve, reject) => {
+    //   this.api.getartworkInfo().then((resp) => {
+    //     let userData = JSON.parse(sessionStorage.getItem('userData'));
+    //     let artCategories = [];
+    //     let categories = [];
 
-        this.listOfArtworks = resp.data.map((art) => {
-          artCategories.push(art.artTheme[0]);
-          return art;
-        });
+    //     this.listOfArtworks = resp.data.map((art) => {
+    //       artCategories.push(art.artTheme[0]);
+    //       return art;
+    //     });
 
-        let cat = artCategories.filter((art) => {
-          if (art === '' || categories.includes(art)) {
-          } else {
-            categories.push(art);
-          }
-        });
+    //     let cat = artCategories.filter((art) => {
+    //       if (art === '' || categories.includes(art)) {
+    //       } else {
+    //         categories.push(art);
+    //       }
+    //     });
 
-        if (userData === null || userData === false) {
-          let listofUserCategoriesArtwork = resp.data
-            .filter((item) => item.artworkStatus !== 'Pending')
-            .map((art) => {
-              this.listofFilteredUserArtworkCategories.push(art);
-              return art;
-            });
-        } else {
-          let listofUserCategoriesArtwork = resp.data
-            .filter((item) => item.artworkStatus !== 'Pending')
-            .filter((art) => {
-              userData['accCategories'].map((cat) => {
-                if (art.artTheme.includes(cat)) {
-                  this.listofFilteredUserArtworkCategories.push(art);
+    //     if (userData === null || userData === false) {
+    //       let listofUserCategoriesArtwork = resp.data
+    //         .filter((item) => item.artworkStatus !== 'Pending')
+    //         .map((art) => {
+    //           this.listofFilteredUserArtworkCategories.push(art);
+    //           return art;
+    //         });
+    //     } else {
+    //       let listofUserCategoriesArtwork = resp.data
+    //         .filter((item) => item.artworkStatus !== 'Pending')
+    //         .filter((art) => {
+    //           userData['accCategories'].map((cat) => {
+    //             if (art.artTheme.includes(cat)) {
+    //               this.listofFilteredUserArtworkCategories.push(art);
 
-                  return art;
-                }
-              });
-            });
+    //               return art;
+    //             }
+    //           });
+    //         });
        
-          this.listofFilteredUserArtworkCategories = _.uniqBy(
-            this.listofFilteredUserArtworkCategories,
-            (a) => a.artName
-          );
-        }
+    //       this.listofFilteredUserArtworkCategories = _.uniqBy(
+    //         this.listofFilteredUserArtworkCategories,
+    //         (a) => a.artName
+    //       );
+    //     }
 
-        if (resp.data !== false) {
-          resolve(resp.data);
-        } else {
-          resolve(false);
-        }
-      });
-    });
+    //     if (resp.data !== false) {
+    //       resolve(resp.data);
+    //     } else {
+    //       resolve(false);
+    //     }
+    //   });
+    // });
   };
 
   getSingleArtworkInfo = (id) => {
@@ -860,6 +863,98 @@ class StartingStore {
 
 
 
+            addFollow = () => { 
+         
+              return new Promise((resolve, reject) => {   
+                this.api.addfollow(this.userfollow)
+                .then(resp => {    
+                   this.listOfFollowing = resp.data
+             
+                   if (resp.data !== false ) {   
+                            resolve(resp.data);       
+                            } 
+                   else {         
+                     resolve(false);      
+                     }  
+                     });
+                    })
+              }
+
+
+              
+          deleteFollow =() =>{
+            return new Promise((resolve, reject) => {   
+
+             let getuserId = JSON.parse(sessionStorage.getItem('userData'))
+            let follow =this.listOfFollowing.filter(data =>{
+            
+              if (data.followerID === this.userfollow.followerID && data.followingID === this.userfollow.followingID){
+                return data._id
+              }
+            })
+
+            let follow_ID =this.listOfFollowing.filter(data =>{
+            
+              if (data.followerID === this.userfollow.followerID && data.followingID === this.userfollow.followingID){
+                return data.followID
+              }
+            })
+           
+          
+            this.api.deletefollow(this.userfollow ,follow[0]._id,follow_ID[0].followID)
+            .then(resp => {
+
+              resolve('deleted')
+            })
+
+          })
+          }
+
+    
+
+
+
+          // getFollow = () => { 
+   
+          //   return new Promise((resolve, reject) => {   
+          //     let getId = JSON.parse(sessionStorage.getItem('userData'))
+         
+          //     this.api.getfollow(getId.accID)
+          //     .then(resp => {    
+          //   console.log(resp.data,'aaa')
+          //        this.listOfFollowing = resp.data
+           
+          //        if (resp.data !== false ) {   
+          //                 resolve(resp.data);       
+          //                 } 
+          //        else {         
+          //          resolve(false);      
+          //          }  
+          //          });
+          //         })
+          //   }
+
+              
+            getFollow = () => {
+              this.api.getfollow().then((resp) => {
+                this.listOfFollowing = resp.data;
+              
+              });
+            };
+
+            getAllArtworks = () => {
+              return new Promise((resolve, reject) => {
+              this.api.getallartworks().then((resp) => {
+        
+                this.listOfArtworks = resp.data;
+                  
+              });
+            })
+            };
+
+
+
+
 
 }
 
@@ -953,7 +1048,13 @@ decorate(StartingStore, {
   listOfFeedback:observable,
   addFeedback:action,
   getFeedback:action,
-  getSingleEnthusiast:action,                                                        
+  getSingleEnthusiast:action,  
+  userfollow:observable,
+  listOfFollowing:observable,    
+  addFollow:action,   
+  deleteFollow:action,   
+  getFollow:action,        
+  getAllArtworks:action,                                    
 });
 
 export default StartingStore;

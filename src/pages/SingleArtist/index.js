@@ -28,12 +28,13 @@ class SingleArtist extends Component {
 
 	componentDidMount() {
 		window.scrollTo(0,0)
-		let { startingStore: { getSingleArtists, getArtistArtwork, getArtists, getArtworkInfo }} = this.props;
-		let userData = JSON.parse(sessionStorage.getItem('userData'));
+		let { startingStore: { getFollow,getSingleArtists, getArtistArtwork, getArtists, getArtworkInfo }} = this.props;
+	
 		getSingleArtists(this.props.match.params.name);
 		getArtistArtwork(this.props.match.params.name);
 		getArtworkInfo();
 		getArtists();
+		getFollow()
 	}
 
 	checkFollower = (follower) => {
@@ -52,10 +53,12 @@ class SingleArtist extends Component {
 	};
 
 	render() {
+		let userData = JSON.parse(sessionStorage.getItem('userData'));
 		let {
-			startingStore: { listofArtistInfo, listofArtistArtwork, listofArtistCategories, followArtist, followed }
+			startingStore: { listOfFollowing,listofArtistInfo, listofArtistArtwork, listofArtistCategories, followArtist, followed }
 		} = this.props;
 
+		let getFollowers = listOfFollowing.filter(data => data.followingID === this.props.artistid).length
 		return (
 			<div className="home">
 				<Navbar />
@@ -74,23 +77,28 @@ class SingleArtist extends Component {
 									{listofArtistInfo.accFname !== undefined ? (
 										<h2 className="title">
 											{`${listofArtistInfo.accFname} ${listofArtistInfo.accLname}`}
-									        <MDBBtn
-           				    color='primary'
-               			   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px',marginLeft:'16px'}}
-              				  outline
-                		  floating
-                 
-               			   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-              			    onClick={() =>
-                	    this.handleClick(followArtist(listofArtistInfo._id))
-              			    }
-            		    >
-              		    {this.state.isToggleOn ? (
-              			     <div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
-              			    ) : (
-              			      'Following'
-              				    )}
-              					  </MDBBtn>
+											{userData === null || userData === undefined ?(
+												<p></p>
+											):(
+												<MDBBtn
+												color='primary'
+											   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px',marginLeft:'16px'}}
+												 outline
+										   floating
+								  
+											   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
+											   onClick={() =>
+										 this.handleClick(followArtist(listofArtistInfo._id))
+											   }
+										 >
+										   {this.state.isToggleOn ? (
+												<div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
+											   ) : (
+												 'Following'
+												   )}
+													 </MDBBtn>
+											)}
+									    
 										</h2>
 									) : (
 										<Skeleton active />
@@ -108,21 +116,19 @@ class SingleArtist extends Component {
 							<div className="right">
 								<ul>
 									<li>
-										{listofArtistInfo !== undefined ? (
-											this.checkFollower(listofArtistInfo.accFollowers)
-										) : (
+										{getFollowers === 0 ? (
 											0
+										) : (
+											getFollowers
 										)}
 
 										<span>Followers</span>
 									</li>
-									<li>
+									{/* <li>
 										4.8/5
 										<span>528k Ratings</span>
-									</li>
-									<li>
-										No. 1<span>Best Seller</span>
-									</li>
+									</li> */}
+								
 								</ul>
 							</div>
 						</div>

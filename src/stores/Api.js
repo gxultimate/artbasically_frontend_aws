@@ -300,6 +300,37 @@ getfeedback = () => {
   return this.api.get('feedbackRoute/getFeedback');
 };
 
+
+
+addfollow = (data) => {
+  return this.api.post('userfollowRoute/addFollow', {
+    mode: 'cors',
+    data: data,
+  });
+}
+
+// getfollow = (id) => {
+// console.log(id,'bbb')
+//   return this.api.get(`userfollowRoute/getFollow/${id}`, {
+//     mode: 'cors',
+//   });
+// };
+
+getfollow = () => {
+  return this.api.get('userfollowRoute/getFollow');
+};
+
+deletefollow = (data,id,followid) =>{
+ 
+  return this.api.delete(`userfollowRoute/deleteFollow/${id}/${followid}`,{
+    data:data,
+  })
+}
+
+getallartworks = () => {
+  return this.api.get('artworkRoute/getAllArtworks');
+};
+
 }
 
 
@@ -351,6 +382,10 @@ decorate(Api, {
   deletemylists:action,
   addfeedback:action,
   getfeedback:action,
+  addfollow:action,
+  getfollow:action,
+  deletefollow:action,
+  getallartworks:action,
 });
 
 export default Api;

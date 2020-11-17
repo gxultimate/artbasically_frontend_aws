@@ -118,11 +118,13 @@ class AddToBag extends Component {
 
     notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
     notif.setProperty('notifSender',userData.accID)
-    notif.setProperty('notifRecipient',)
-    notif.setProperty('notifSubject','Placed order')
-    notif.setProperty('notifMsg',)
+    notif.setProperty('notifRecipient','admin-001')
+    notif.setProperty('notifSubject','Order')
+    notif.setProperty('notifMsg',`${userData.accFname} placed an order`)
     notif.setProperty('notifDT',moment().format('MMM/DD/YY,h:mm:ssa'))
     notif.setProperty('notifStatus','unread')
+
+    addNotif();
   };
 
   selectedCheck = (data) => {

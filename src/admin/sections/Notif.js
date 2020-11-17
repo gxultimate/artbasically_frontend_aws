@@ -43,7 +43,7 @@ const Notif = () => {
   return (
     <MDBDropdown className="topicons">
       <MDBDropdownToggle color="transparent">
-        <MDBIcon icon="bell" className="mr-3" />
+        <MDBIcon icon="bell" className="mr-3" style={{color:'white'}}/>
   <MDBBadge color="danger" className="ml-2">{notifNum}</MDBBadge>
       </MDBDropdownToggle>
       <MDBDropdownMenu basic >

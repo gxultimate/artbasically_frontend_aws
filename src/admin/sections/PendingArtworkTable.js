@@ -19,9 +19,10 @@ import { Grid } from '@material-ui/core';
 
    componentDidMount() {   
     let {
-      startingStore: {getArtworkInfo, getArtists, getStyles, getCategories},
+      startingStore: {getAllArtworks, getArtists, getStyles, getCategories},
     } = this.props;
-    getArtworkInfo();
+    
+    getAllArtworks();
     getArtists();
     getStyles();
     getCategories();
@@ -32,22 +33,23 @@ import { Grid } from '@material-ui/core';
   render() {
     let { startingStore: {listOfArtworks, editArtwork, artwork}} = this.props;
 
-    
+ 
     function createData(artworkDB,id,title,artist, style, date, price,action) {
       return { artworkDB,id,title,artist, style, date, price,action };
     }
 
-let pArtworks = listOfArtworks.filter((art) => {
-            if (art.artworkStatus === 'Pending') {
-              return art;
-            }
-          }).map(artworks =>{
+let filArtworks = listOfArtworks.filter((art) => art.artworkStatus === 'Pending')
+
+
+let pArtworks = filArtworks.map(artworks =>{
             return(createData(
            artworks,artworks.artworkID,artworks.artName
            ,artworks.artistName,artworks.artStyle,artworks.dateAdded
            ,artworks.artPrice
             ))
           })
+
+
 
           let  info = (itm) => {
             artwork.setProperty('artStyle',itm.artStyle)
@@ -81,7 +83,8 @@ let pArtworks = listOfArtworks.filter((art) => {
 
 
           artwork.setProperty('_id', data._id);
-          artwork.setProperty('artworkStatus','Approved');
+          artwork.setProperty('accID',data.accID)
+          artwork.setProperty('artworkStatus','Active');
 
           editArtwork();
 
@@ -99,6 +102,7 @@ let pArtworks = listOfArtworks.filter((art) => {
           };
           let reject =(data)=>{
             artwork.setProperty('_id', data._id);
+            artwork.setProperty('accID',data.accID)
             artwork.setProperty('artworkStatus','Rejected');
   
             editArtwork();
@@ -157,6 +161,11 @@ const PendingArtworkTable = () => {
         field: 'price',
         sort: 'asc',
         width: 'auto'
+      }, {
+        label: 'Date Added',
+        field: 'date',
+        sort: 'asc',
+        width: 'auto'
       },
       {
         label: 'Action',
@@ -180,6 +189,7 @@ const PendingArtworkTable = () => {
       
         style: `${row.style}`,
         price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+        date:`${row.date}`,
         action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'> Info</MDBBtn><MDBBtn style={{float:'left'}}  onClick={()=>approve(row.artworkDB)} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>reject(row.artworkDB)} color='reject'> Reject</MDBBtn></div>,
       
 
@@ -199,7 +209,7 @@ const PendingArtworkTable = () => {
       data={data}
     />
   
-  <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+  <MDBModal isOpen={this.state.modal} centered>
           <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}>Artwork Information</span></MDBModalHeader>
           <MDBModalBody>
             <Grid container direction='row' xs={12}>

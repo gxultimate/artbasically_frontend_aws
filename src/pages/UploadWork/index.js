@@ -7,6 +7,7 @@ import {inject, observer} from 'mobx-react';
 import {message} from 'antd';
 import {Multiselect} from 'multiselect-react-dropdown';
 import imageCompression from 'browser-image-compression';
+import moment from 'moment';
 
 class UploadWork extends Component {
   constructor(props) {
@@ -68,8 +69,9 @@ class UploadWork extends Component {
    
   }
   onSubmit(e) {
+    let userData= JSON.parse(sessionStorage.getItem('userData'))
     let {
-      startingStore: {upload, artwork},
+      startingStore: {upload, artwork,addNotif,notif},
     } = this.props;
     e.preventDefault();
     const data = new FormData();
@@ -90,6 +92,30 @@ class UploadWork extends Component {
     setTimeout(() => {
       this.props.history.push('/Upload');
     }, 4000);
+
+
+
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
+
+
+notif.setProperty('notifID',`${getHash(userData.accFname.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+notif.setProperty('notifSender',userData.accID)
+notif.setProperty('notifRecipient','admin-001')
+notif.setProperty('notifSubject','Artwork')
+notif.setProperty('notifMsg',`${userData.accFname} ${userData.accLname} submitted and artwork`)
+notif.setProperty('notifDT',moment().format('MMM/DD/YYYY'))
+notif.setProperty('notifStatus','unread')
+
+addNotif()
   }
 
   toggle = (nr) => () => {

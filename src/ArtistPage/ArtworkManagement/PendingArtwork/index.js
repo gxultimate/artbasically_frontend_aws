@@ -124,7 +124,7 @@ import { Grid } from '@material-ui/core';
         
           style: `${row.style}`,
           price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
-          action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'>More Info</MDBBtn></div>,
+          action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'>More Info</MDBBtn></div>
         
   
        }
@@ -137,14 +137,13 @@ import { Grid } from '@material-ui/core';
     return (
       <Fragment>
       <MDBDataTable
-        striped
-        
+        striped  
         bordered
         small
         data={data}
       />
   
-  <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+  <MDBModal isOpen={this.state.modal}  centered>
           <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
           <MDBModalBody>
             <Grid container direction='row' xs={12}>

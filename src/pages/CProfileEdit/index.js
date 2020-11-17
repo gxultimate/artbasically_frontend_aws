@@ -51,6 +51,8 @@ class CProfileEdit extends Component {
   state = {
     activeItem: '1',
     loading: false,
+    pass:'',
+    confPass:'',
   };
 
 
@@ -139,6 +141,52 @@ class CProfileEdit extends Component {
     );
     const {imageUrl} = this.state;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
+
+
+    let AccountInfo = ()=>{
+        
+
+          if (this.state.pass === this.state.confPass){
+
+         
+      account.setProperty('_id', userData._id);
+      account.setProperty('password',this.state.pass)
+      editAccount().then(resp=>{
+        if (resp === 'success'){
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Changes saved', 1));
+          };
+      
+          setTimeout(() => {
+            success();
+          }, 0);
+        }else{
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Try again', 1));
+          };
+      
+          setTimeout(() => {
+            success();
+          }, 0);
+        }
+      });
+
+    }else{
+      const success = () => {
+        message
+          .loading('', 1.2)
+          .then(() => message.success('Check your password', 1));
+      };
+  
+      setTimeout(() => {
+        success();
+      }, 1000);
+    }
+    }
 
     return (
       <div className='home'>
@@ -264,10 +312,7 @@ class CProfileEdit extends Component {
                             // hint={userData.password}
                             // valueDefault={userData.password}
                             onChange={(password) =>
-                              account.setProperty(
-                                'password',
-                                password.target.value
-                              )
+                              this.setState({pass:password.target.value})
                             }
                           >
                             <div className='invalid-feedback'>
@@ -279,11 +324,8 @@ class CProfileEdit extends Component {
                             type='password'
                             // hint={userData.password}
                             // valueDefault={userData.password}s
-                            onChange={(password) =>
-                              account.setProperty(
-                                'password',
-                                password.target.value
-                              )
+                            onChange={(confpassword) =>
+                            this.setState({confPass:confpassword.target.value})
                             }
                           >
                             <div className='invalid-feedback'>
@@ -306,13 +348,9 @@ class CProfileEdit extends Component {
                           <MDBBtn
                             className='submitreg clearfix btnYellow'
                             color='#FAE933'
-                            onClick={() => {
-                              account.setProperty('_id', userData._id);
-                              editAccount();
-                            }}
-                            // type='submit'
+                            onClick={() => {AccountInfo()}}
                           >
-                            SAVE
+                            Save Changes
                           </MDBBtn>
                         </form>
                       ) : (
@@ -401,7 +439,13 @@ class CProfileEdit extends Component {
                         <MDBInput
                           label='Address'
                           type='text'
-                     
+                          valueDefault={userData.accAddress}
+                          onChange={(accAddress) =>
+                            account.setProperty(
+                              'accAddress',
+                              accAddress.target.value
+                            )
+                          }
                         >
                           <div className='invalid-feedback'>
                             Please provide a valid address.
@@ -437,9 +481,35 @@ class CProfileEdit extends Component {
                       <MDBBtn
                         className='submitreg clearfix btnYellow'
                         color='#FAE933'
-                        type='submit'
+                        // type='submit'
+                        onClick={() => {
+                          account.setProperty('_id', userData._id);
+                          editAccount().then(resp=>{
+                            if (resp === 'success'){
+                              const success = () => {
+                                message
+                                  .loading('', 1)
+                                  .then(() => message.success('Changes saved', 1));
+                              };
+                          
+                              setTimeout(() => {
+                                success();
+                              }, 0);
+                            }else{
+                              const success = () => {
+                                message
+                                  .loading('', 1)
+                                  .then(() => message.success('Try again', 1));
+                              };
+                          
+                              setTimeout(() => {
+                                success();
+                              }, 0);
+                            }
+                          });
+                        }}
                       >
-                        SAVE
+                        Save Changes
                       </MDBBtn>
                     </MDBTabPane>
                     <MDBTabPane tabId='3' role='tabpanel'>

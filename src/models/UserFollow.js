@@ -4,7 +4,7 @@ import Model from './Model';
 class UserFollow extends Model {
   constructor(props) {
     const defaults = {
-      _id: '',
+      _id: undefined,
       followID:'',
       followerID:'',
       followingID:'',

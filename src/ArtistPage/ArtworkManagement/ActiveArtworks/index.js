@@ -163,7 +163,7 @@ import { Grid } from '@material-ui/core';
         data={data}
       />
   
-  <MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+  <MDBModal isOpen={this.state.modal}  centered>
           <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
           <MDBModalBody>
             <Grid container direction='row' xs={12}>

@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
   },
   pos: {
     marginBottom: 12,

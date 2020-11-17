@@ -11,7 +11,7 @@ import {
 import TextField from '@material-ui/core/TextField';
 import React, { Component, Fragment } from 'react';
 import {inject,observer} from 'mobx-react'
-
+import {message} from 'antd';
 class AccountSettings extends Component {
 
 
@@ -20,24 +20,14 @@ class AccountSettings extends Component {
         getAccounts()
     }
     render() {
-let{startingStore:{listOfUsers,account,editAccount}}=this.props;
+let{startingStore:{listOfUsers,account,editProfile}}=this.props;
 let mydata =JSON.parse(sessionStorage.getItem('userData'))
 function createData(fname,lname,contact,address,email,byear,institution,pass,action){
     return{fname,lname,contact,address,email,byear,institution,pass,action}
 }
 
 
-let edit =()=>{
-  
-    editAccount();
 
-}
-
-let getMyData = listOfUsers.filter(usr => usr.accID === mydata.accID).map(data => {
-    return (createData(
-        data.accFname,data.accLname,data.accContact,data.accAddress,data.accEmailAddress,data.birthYear,data.accInstitution,data.password,<div><MDBBtn color='yellow' onClick={()=>edit(data)}> Edit Info</MDBBtn></div>
-    ))
-})
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -52,6 +42,60 @@ const useStyles = makeStyles((theme) => ({
 
  function SettingGrid() {
   const classes = useStyles();
+  const [pass,setPass]=React.useState('')
+  const [confPass,setConfPass]=React.useState('')
+
+
+  let edit =(accData)=>{
+  
+    if (pass === confPass){
+  
+    
+  
+    account.setProperty('accID',accData.accID)
+    account.setProperty('password',pass)
+    account.setProperty('_id',accData._id)
+      editProfile().then(data=>{
+        if (data === 'true'){
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Changes saved', 1));
+          };
+      
+          setTimeout(() => {
+            success();
+          }, 0);
+        }else{
+          const success = () => {
+            message
+              .loading('', 1)
+              .then(() => message.success('Try again', 1));
+          };
+      
+          setTimeout(() => {
+            success();
+          }, 0);
+        }
+      })
+    }else{
+      const success = () => {
+        message
+          .loading('', 1.2)
+          .then(() => message.success('Check your password', 1));
+      };
+  
+      setTimeout(() => {
+        success();
+      }, 1000);
+    }
+  }
+  
+  let getMyData = listOfUsers.filter(usr => usr.accID === mydata.accID).map(data => {
+      return (createData(
+          data.accFname,data.accLname,data.accContact,data.accAddress,data.accEmailAddress,data.birthYear,data.accInstitution,data.password,<div><MDBBtn color='yellow' onClick={()=>edit(data)}>Save Changes</MDBBtn></div>
+      ))
+  })
 
   return (
     <div className={classes.root}>
@@ -100,9 +144,7 @@ const useStyles = makeStyles((theme) => ({
         <Grid item xs={8} >
           <Paper className={classes.paper}><span style={{marginRight:'40px'}}>Birth Year :</span>  <TextField type='text' defaultValue={row.byear} onChange={birthYear=>{account.setProperty('birthYear',birthYear.target.value)}}> </TextField></Paper>
         </Grid>
-        <Grid item xs={8} >
-          <Paper className={classes.paper}><span style={{marginRight:'40px'}}>Institution :</span>   <TextField type='text' defaultValue={row.institution}> </TextField></Paper>
-        </Grid>
+   
         
         <Grid item xs={12} >
           <h6>Security and Login</h6>
@@ -111,7 +153,14 @@ const useStyles = makeStyles((theme) => ({
         <Paper className={classes.paper}><span style={{marginRight:'70px'}}>Email :</span> <TextField type='text' defaultValue={row.email} onChange={accEmailAddress=>{account.setProperty('accEmailAddress',accEmailAddress.target.value)}}> </TextField></Paper>
         </Grid>
         <Grid item xs={8} >
-          <Paper className={classes.paper}><span style={{marginRight:'50px'}}>Password :</span> <TextField type='password' defaultValue={row.pass} onChange={password=>{account.setProperty('password',password.target.value)}}> </TextField></Paper>
+          <Paper className={classes.paper}><span style={{marginRight:'50px'}}>Password :</span> <TextField type='password'  onChange={(password) =>
+                              setPass(password.target.value)
+                            }> </TextField></Paper>
+        </Grid>
+        <Grid item xs={8} >
+          <Paper className={classes.paper}><span style={{marginRight:'10px'}}>Confirm Password :</span> <TextField type='password'  onChange={(confpassword) =>
+                            setConfPass(confpassword.target.value)
+                            }> </TextField></Paper>
         </Grid>
         <Grid item xs={8} >
         {row.action}

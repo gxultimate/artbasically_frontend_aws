@@ -49,13 +49,7 @@ import {withRouter} from 'react-router-dom'
       getArtworkInfo();
       getPrintSize()
       getAccounts()
-      getArtists();
-      
-   
-     
-      
-     
-    
+      getArtists(); 
   }
 
   render() {
@@ -66,6 +60,7 @@ import {withRouter} from 'react-router-dom'
     } = this.props;
 
 
+
     let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
 
 
@@ -74,7 +69,7 @@ import {withRouter} from 'react-router-dom'
   
     
    
-
+    let AOM = ArtistOftheMonth.pop()
    
     function MatchRoute() {
       return (
@@ -160,7 +155,7 @@ import {withRouter} from 'react-router-dom'
         <div className='maincon con'>
           <div className='welcome'>
             <h2>Welcome to Art, Basically</h2>
-            <p>Create an account with us and start sharing your artworks!</p>
+            <p style={{marginTop:'-10px'}}>Create an account with us and start sharing your artworks!</p>
             <h2 className='paddh4'>But first, are you</h2>
             <div className='signinOpt'>
               {/* <ArtistReg/>
@@ -188,15 +183,15 @@ import {withRouter} from 'react-router-dom'
                     
                       onClick={() => {
                         this.props.history.push({
-                          pathname: `/Artist/${ArtistOftheMonth[0]}`,
-                          state: {artistName:ArtistOftheMonth[0]
+                          pathname: `/Artist/${AOM}`,
+                          state: {artistName:AOM ,artistid:AOMid
              
                           }
                         });
                       }}
                     >
                          <h2>
-                {ArtistOftheMonth.pop()}
+                {AOM}
 
               </h2>
                      

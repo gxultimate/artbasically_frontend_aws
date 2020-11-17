@@ -9,7 +9,7 @@ import {
   MDBBtn
 } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import CMess from './CMess';
 import NavLogin from './NavLogin';
@@ -17,7 +17,7 @@ import Search from './Search';
 import OrderIcon from './OrderIcon';
 import CNotif from './CNotif';
 import NavLoginPost from './NavLoginPost';
-
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
 class Navbar extends Component {
@@ -57,6 +57,8 @@ class Navbar extends Component {
       filterArtwork(type);
     };
     return (
+      <Fragment>
+     
       <MDBNavbar dark expand='md' className='navcon'>
 
     
@@ -234,6 +236,12 @@ class Navbar extends Component {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
+
+      <MessengerCustomerChat
+    pageId="301933277234280"
+    appId="216207193165878"
+  />
+      </Fragment>
     );
   }
 }

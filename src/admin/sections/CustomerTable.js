@@ -162,7 +162,7 @@ const CustomerTable = () => {
       data={data}
     />
 
-<MDBModal isOpen={this.state.modal} toggle={()=>close()} centered>
+<MDBModal isOpen={this.state.modal}  centered>
           <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',textAlign:'center'}}><span style={{color:'white'}}> Artist's Profile</span></MDBModalHeader>
         
           <MDBModalBody>
