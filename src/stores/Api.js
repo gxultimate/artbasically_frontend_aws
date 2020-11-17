@@ -303,7 +303,7 @@ getfeedback = () => {
 
 
 addfollow = (data) => {
-  return this.api.post('userfollowRoute/addFollow', {
+  return this.api.post('/addFollow', {
     mode: 'cors',
     data: data,
   });
@@ -311,24 +311,24 @@ addfollow = (data) => {
 
 // getfollow = (id) => {
 // console.log(id,'bbb')
-//   return this.api.get(`userfollowRoute/getFollow/${id}`, {
+//   return this.api.get(`/getFollow/${id}`, {
 //     mode: 'cors',
 //   });
 // };
 
 getfollow = () => {
-  return this.api.get('userfollowRoute/getFollow');
+  return this.api.get('/getFollow');
 };
 
 deletefollow = (data,id,followid) =>{
  
-  return this.api.delete(`userfollowRoute/deleteFollow/${id}/${followid}`,{
+  return this.api.delete(`/deleteFollow/${id}/${followid}`,{
     data:data,
   })
 }
 
 getallartworks = () => {
-  return this.api.get('artworkRoute/getAllArtworks');
+  return this.api.get('/getAllArtworks');
 };
 
 }
