@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Routes from './Routes';
 import './css/style.css';

@@ -34,7 +34,7 @@ class SingleArtist extends Component {
 		getArtistArtwork(this.props.match.params.name);
 		getArtworkInfo();
 		getArtists();
-		getFollow()
+		getFollow();
 	}
 
 	checkFollower = (follower) => {

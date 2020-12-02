@@ -561,13 +561,11 @@ if (getmyList === 0){
                         });
                       }}
                     >
-                         <h2 className='artistname'>
-                         {AOM}
-
-              </h2>
+               { (listOfArtworks.length == 0 ) ? (<p></p>):(  <h2 className='artistname'>{AOM}      </h2>)}
                      
                     </a>
-                <MDBBtn
+                    { (listOfArtworks.length == 0 ) ? (<p></p>):( 
+                    <MDBBtn
                color='primary'
                   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px'}}
                 outline
@@ -585,7 +583,8 @@ if (getmyList === 0){
                   ) : (
                     'Following'
                   )}
-                </MDBBtn>
+                </MDBBtn> )}
+               
                 
               </h2>
               <p>ARTIST OF THE MONTH</p>

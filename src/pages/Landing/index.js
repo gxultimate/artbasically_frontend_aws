@@ -1,4 +1,4 @@
-import { BackTop } from 'antd';
+import { BackTop,Skeleton } from 'antd';
 import { MDBIcon, MDBNavLink } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
@@ -70,66 +70,6 @@ import {withRouter} from 'react-router-dom'
     
    
     let AOM = ArtistOftheMonth.pop()
-   
-    function MatchRoute() {
-      return (
-        <ul className='col3img clearfix'>
-        {listOfArtworks
-          .filter((item) => item.artistName === 'Cleon Peterson')
-          .reverse()
-          .slice(0, 3)
-          .map((image,i) => {
-         
-          
-            return (
-              <li key={i}>
-                <a href='#!' className='artlink'>
-                  <div className='artlabel'>
-                    <span className='new'>NEW</span>
-                    <span className='hot'>HOT</span>
-                    <span className='type'>
-                      {image.artType === 'Secondary'
-                        ? 'Second Edition'
-                        : 'Original'}
-                    </span>
-                  </div>
-                  <Link
-                    to={{
-                      pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                    }}
-                  >
-                    <img src={image.artworkImg} alt='artwork'/>
-                   
-                  
-                  </Link>
-                </a>
-               
-                <div className='artistinfo clearfix pad10'>
-           
-                  <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-             
-                          }
-                        });
-                      }}
-                    >
-                         <p>{image.artName}</p>
-                     
-                    </a>
-           
-                  </div>
-              </li>
-            );
-          })}
-      </ul>
-      );
-    }
-
     return (
       <Fragment>
         <CookieConsent
@@ -150,6 +90,7 @@ import {withRouter} from 'react-router-dom'
           <h6 style={{color:'white'}}>Cookies on Art, Basically</h6>
           <p style={{color:'white'}}>We use cookies to personalize contents, to provide social media features and to ensure that we give you the best experience on our website. We also share information about your use of our site with our social media partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.</p>
         </CookieConsent>
+
       <div className='home'>
         <Navbar />
         <div className='maincon con'>
@@ -158,8 +99,7 @@ import {withRouter} from 'react-router-dom'
             <p style={{marginTop:'-10px'}}>Create an account with us and start sharing your artworks!</p>
             <h2 className='paddh4'>But first, are you</h2>
             <div className='signinOpt'>
-              {/* <ArtistReg/>
-                <ArtGalReg/> */}
+            
               <MDBNavLink to='/ArtistRegistration' className='btnYellow'>
                 Artist
               </MDBNavLink>
@@ -190,10 +130,12 @@ import {withRouter} from 'react-router-dom'
                         });
                       }}
                     >
-                         <h2>
-                {AOM}
+                        
+                         
+                        { (listOfArtworks.length == 0 ) ? (<p></p>):(  <h2>{AOM}      </h2>)}
+               
 
-              </h2>
+        
                      
                     </a>
 
@@ -205,6 +147,7 @@ import {withRouter} from 'react-router-dom'
               {listOfArtworks.filter(fil => fil.accID === AOMid.pop()).slice(0,3).map((image,i) => {
                    
                   return (
+                    
                     <li key={i}>
                       <a href='#!' className='artlink'>
                         <div className='artlabel'>
@@ -259,16 +202,18 @@ import {withRouter} from 'react-router-dom'
               See More &nbsp;
               <MDBIcon icon='caret-right' />
             </a>
-            {/* <MatchRoute /> */}
+         
             <ul className='col3img clearfix'>
-              {/*  */}
               {listOfArtworks
-                .filter((item) => item.artworkStatus !== 'Pending')
-                
+                .filter((item) => item.artworkStatus !== 'Pending')         
                 .slice(0, 3)
                 .map((image,i) => {
                   return (
-                    <li key={i}>
+
+                   (image !== null || image !== undefined)?(
+                      <Skeleton/>
+                   ):(
+                      <li key={i}>
                       <a href='#!' className='artlink'>
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
@@ -322,6 +267,8 @@ import {withRouter} from 'react-router-dom'
                  
                   </div>
                     </li>
+                   )
+                   
                   );
                 })}
             </ul>
@@ -343,6 +290,7 @@ import {withRouter} from 'react-router-dom'
                 .reverse()
                 .slice(0, 3)
                 .map((image,i) => {
+                  
                   return (
                     <li key={i}>
                       <a href='#!' className='artlink'>

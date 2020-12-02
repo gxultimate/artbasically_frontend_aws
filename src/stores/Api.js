@@ -33,12 +33,6 @@ class Api {
   })
   }
 
-  // editprofile = (data) => {
-  //   return this.api.post('/editProfile', {
-  //     mode: 'cors',
-  //     data: data,
-  //   });
-  // };
   
   addOrder = (data) => {
     return this.api.post('/addOrder', {

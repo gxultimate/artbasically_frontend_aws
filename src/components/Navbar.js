@@ -11,7 +11,6 @@ import {
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import CMess from './CMess';
 import NavLogin from './NavLogin';
 import Search from './Search';
 import OrderIcon from './OrderIcon';
@@ -60,16 +59,13 @@ class Navbar extends Component {
       <Fragment>
      
       <MDBNavbar dark expand='md' className='navcon'>
-
-    
-        
-
-
         {userData !== null && userData !== undefined ? (
          <MDBNavbarBrand>
+           <div>
          <a href='/Home'>
            <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
          </a>
+         </div>
        </MDBNavbarBrand>
             ) : (
               <MDBNavbarBrand>
@@ -165,6 +161,7 @@ class Navbar extends Component {
                 </MDBBtn>
               </MDBNavItem>
               <MDBDropdown className='ddnav'>
+
                 {userData !== null && userData !== undefined ? (
                   <MDBDropdownToggle color='transparent'>
                     Hello, {userData.accFname}
@@ -172,7 +169,9 @@ class Navbar extends Component {
                 ) : (
                     <NavLogin />
                   )}
+                  
                 {userData !== null && userData !== undefined ? (
+
                   <MDBDropdownMenu basic className='ddnavMenu'>
                     <MDBDropdownItem>
                       <Link
@@ -190,13 +189,18 @@ class Navbar extends Component {
                     >
                 Log Out
                     </MDBDropdownItem>
+
                   </MDBDropdownMenu>
                 ) : (
                     <MDBDropdownMenu basic className='ddnavMenu'>
-            
+                       <MDBDropdownItem>
+                 
+                    </MDBDropdownItem>
                     </MDBDropdownMenu>
+                   
                   )}
               </MDBDropdown>
+              
               {userData !== null && userData !== undefined ? (
                 <div className='row lbtn'>
                   <MDBNavItem>
@@ -213,9 +217,7 @@ class Navbar extends Component {
                 </MDBNavLink>
 
                   </MDBNavItem>
-                  <MDBNavItem>
-                    <CMess />
-                  </MDBNavItem>
+                
                   <MDBNavItem>
                     <CNotif />
                   </MDBNavItem>
@@ -240,6 +242,8 @@ class Navbar extends Component {
       <MessengerCustomerChat
     pageId="301933277234280"
     appId="216207193165878"
+    shouldShowDialog={true}
+    loggedInGreeting="Hi! How can we help you?"
   />
       </Fragment>
     );

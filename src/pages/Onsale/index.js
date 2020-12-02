@@ -1,4 +1,4 @@
-import {MDBBtn} from 'mdbreact';
+
 import {inject, observer} from 'mobx-react';
 import React, {Component} from 'react';
 import ArtworkFilter from '../../components/ArtworkFilter';

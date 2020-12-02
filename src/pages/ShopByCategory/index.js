@@ -205,19 +205,7 @@ import Navbar from '../../components/Navbar';
             </section>
           </div>
 
-          {/* <Pagination defaultCurrent={1} total={100} />
-
-					<div className="bttop clearfix">
-						<MDBNavLink to="/Upload" className="btnYellow">
-							Add Yours
-						</MDBNavLink>
-						<BackTop>
-							{' '}
-							<a href="#!">
-								Back to Top <MDBIcon icon="caret-right" />{' '}
-							</a>{' '}
-						</BackTop>
-					</div> */}
+     
         </div>
         <Footer />
       </div>

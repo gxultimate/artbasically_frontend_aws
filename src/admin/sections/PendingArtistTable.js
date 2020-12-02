@@ -8,7 +8,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
 } from 'mdbreact';
 import {inject, observer} from 'mobx-react';
 import React, { Component, Fragment } from 'react'
-import ViewDocu from './ViewDocument/';
+
 import {message} from 'antd';
 import {withRouter} from 'react-router-dom'
 
