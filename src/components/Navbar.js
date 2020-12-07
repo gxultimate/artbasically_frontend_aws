@@ -18,7 +18,6 @@ import CNotif from './CNotif';
 import NavLoginPost from './NavLoginPost';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
-
 class Navbar extends Component {
   state = {
     collapse1: false,
@@ -61,11 +60,9 @@ class Navbar extends Component {
       <MDBNavbar dark expand='md' className='navcon'>
         {userData !== null && userData !== undefined ? (
          <MDBNavbarBrand>
-           <div>
          <a href='/Home'>
            <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
          </a>
-         </div>
        </MDBNavbarBrand>
             ) : (
               <MDBNavbarBrand>
@@ -161,7 +158,6 @@ class Navbar extends Component {
                 </MDBBtn>
               </MDBNavItem>
               <MDBDropdown className='ddnav'>
-
                 {userData !== null && userData !== undefined ? (
                   <MDBDropdownToggle color='transparent'>
                     Hello, {userData.accFname}
@@ -169,9 +165,7 @@ class Navbar extends Component {
                 ) : (
                     <NavLogin />
                   )}
-                  
                 {userData !== null && userData !== undefined ? (
-
                   <MDBDropdownMenu basic className='ddnavMenu'>
                     <MDBDropdownItem>
                       <Link
@@ -189,18 +183,13 @@ class Navbar extends Component {
                     >
                 Log Out
                     </MDBDropdownItem>
-
                   </MDBDropdownMenu>
                 ) : (
                     <MDBDropdownMenu basic className='ddnavMenu'>
-                       <MDBDropdownItem>
-                 
-                    </MDBDropdownItem>
+            
                     </MDBDropdownMenu>
-                   
                   )}
               </MDBDropdown>
-              
               {userData !== null && userData !== undefined ? (
                 <div className='row lbtn'>
                   <MDBNavItem>
@@ -242,8 +231,10 @@ class Navbar extends Component {
       <MessengerCustomerChat
     pageId="301933277234280"
     appId="216207193165878"
-    shouldShowDialog={true}
+    shouldShowDialog="true"
     loggedInGreeting="Hi! How can we help you?"
+
+    
   />
       </Fragment>
     );
