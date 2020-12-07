@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/media/UniversRoman.dbae71bf.otf"
   },
   {
-    "revision": "cccadc7252465d2245792da76f0b5ce3",
-    "url": "/static/media/UniversBold.cccadc72.otf"
-  },
-  {
     "revision": "12a83fcaf5f5651ea425de6c80029528",
     "url": "/static/media/UniversRegular.12a83fca.ttf"
+  },
+  {
+    "revision": "cccadc7252465d2245792da76f0b5ce3",
+    "url": "/static/media/UniversBold.cccadc72.otf"
   },
   {
     "revision": "70749c9d9966d53c9dffa4641f2de04c",
@@ -44,6 +44,10 @@ self.__precacheManifest = [
     "url": "/static/media/fa-brands-400.f075c50f.woff2"
   },
   {
+    "revision": "8300bd7f30e0a313c1d772b49d96cb8e",
+    "url": "/static/media/fa-brands-400.8300bd7f.ttf"
+  },
+  {
     "revision": "e2ca6541bff3a3e9f4799ee327b28c58",
     "url": "/static/media/fa-brands-400.e2ca6541.eot"
   },
@@ -52,16 +56,12 @@ self.__precacheManifest = [
     "url": "/static/media/fa-brands-400.ad527cc5.woff"
   },
   {
-    "revision": "8300bd7f30e0a313c1d772b49d96cb8e",
-    "url": "/static/media/fa-brands-400.8300bd7f.ttf"
+    "revision": "b01516c1808be557667befec76cd6318",
+    "url": "/static/media/fa-regular-400.b01516c1.eot"
   },
   {
     "revision": "4a74738e7728e93c4394b8604081da62",
     "url": "/static/media/fa-regular-400.4a74738e.woff2"
-  },
-  {
-    "revision": "b01516c1808be557667befec76cd6318",
-    "url": "/static/media/fa-regular-400.b01516c1.eot"
   },
   {
     "revision": "3c6879c4f342203d099bdd66dce6d396",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/media/fa-solid-900.4451e1d8.woff"
   },
   {
-    "revision": "2f12242375edd68e9013ecfb59c672e9",
-    "url": "/static/media/fa-brands-400.2f122423.svg"
-  },
-  {
     "revision": "205f07b3883c484f27f40d21a92950d4",
     "url": "/static/media/fa-solid-900.205f07b3.ttf"
+  },
+  {
+    "revision": "2f12242375edd68e9013ecfb59c672e9",
+    "url": "/static/media/fa-brands-400.2f122423.svg"
   },
   {
     "revision": "664de3932dd6291b4b8a8c0ddbcb4c61",
