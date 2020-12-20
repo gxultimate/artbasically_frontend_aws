@@ -1,14 +1,13 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
-    MDBModalBody,
-    MDBModalHeader,
-    MDBTable,
-    MDBTableBody,
-    MDBTableHead, MDBModalFooter} from 'mdbreact';
-  import {inject, observer} from 'mobx-react';
-  import React, { Component, Fragment } from 'react'
-  import DownloadImage from './../../sections/DownloadImage';
-  import {message} from 'antd';
-  import { Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
+  MDBModalBody,
+
+  MDBModalFooter, MDBModalHeader
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
   
    class PendingArtwork extends Component {
     state = {
@@ -184,7 +183,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
        <div className='artImg'  >
                     <img
                 
-                      src={artwork.artworkImg}/></div>
+                      src={artwork.artworkImg} alt='artwork'/></div>
 </Grid>
 <Grid item xs={8}  >
 <div style={{padding:'10px'}}>
@@ -192,7 +191,7 @@ import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
 
                     <h6>Style : {artwork.artStyle} </h6>
     <h6>Size : {artwork.artSize}</h6>
-    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Price : &#8369;{artwork.artPrice}</h6>
     <h6>Description : </h6>
     <p>{artwork.artDescription}</p>
                     </div>

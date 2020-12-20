@@ -18,6 +18,7 @@ import CNotif from './CNotif';
 import NavLoginPost from './NavLoginPost';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
+
 class Navbar extends Component {
   state = {
     collapse1: false,
@@ -61,13 +62,13 @@ class Navbar extends Component {
         {userData !== null && userData !== undefined ? (
          <MDBNavbarBrand>
          <a href='/Home'>
-           <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
+           <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='logo' />
          </a>
        </MDBNavbarBrand>
             ) : (
               <MDBNavbarBrand>
               <a href='/'>
-                <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='' />
+                <img src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009259/Webimg/logo_itryl9.png' className='logo' alt='logo' />
               </a>
             </MDBNavbarBrand>
               )}
@@ -185,9 +186,7 @@ class Navbar extends Component {
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 ) : (
-                    <MDBDropdownMenu basic className='ddnavMenu'>
-            
-                    </MDBDropdownMenu>
+                   <p></p>
                   )}
               </MDBDropdown>
               {userData !== null && userData !== undefined ? (
@@ -231,7 +230,7 @@ class Navbar extends Component {
       <MessengerCustomerChat
     pageId="301933277234280"
     appId="216207193165878"
-    shouldShowDialog="true"
+    shouldShowDialog={true}
     loggedInGreeting="Hi! How can we help you?"
 
     

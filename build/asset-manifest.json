@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.963d1a05.chunk.css",
-    "main.js": "/static/js/main.4c78b63b.chunk.js",
-    "main.js.map": "/static/js/main.4c78b63b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.62010f80.js",
-    "runtime-main.js.map": "/static/js/runtime-main.62010f80.js.map",
-    "static/css/2.7e2c5472.chunk.css": "/static/css/2.7e2c5472.chunk.css",
-    "static/js/2.28c6143e.chunk.js": "/static/js/2.28c6143e.chunk.js",
-    "static/js/2.28c6143e.chunk.js.map": "/static/js/2.28c6143e.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.7e2c5472.chunk.css.map": "/static/css/2.7e2c5472.chunk.css.map",
-    "static/css/main.963d1a05.chunk.css.map": "/static/css/main.963d1a05.chunk.css.map",
-    "static/js/2.28c6143e.chunk.js.LICENSE.txt": "/static/js/2.28c6143e.chunk.js.LICENSE.txt",
-    "static/media/style.css": "/static/media/UniversRoman.5e1f1326.otf",
-    "static/media/admin.css": "/static/media/adminbg.69e09600.jpg",
-    "static/media/mdb.css": "/static/media/arrow_right.0897f985.svg",
-    "static/media/art1.87a26908.png": "/static/media/art1.87a26908.png",
-    "static/media/all.min.css": "/static/media/fa-solid-900.46fdbd2d.woff"
+    "main.css": "./static/css/main.00a20aed.chunk.css",
+    "main.js": "./static/js/main.bc8ba2c1.chunk.js",
+    "main.js.map": "./static/js/main.bc8ba2c1.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.218b2b5b.js",
+    "runtime-main.js.map": "./static/js/runtime-main.218b2b5b.js.map",
+    "static/css/2.4ac16c32.chunk.css": "./static/css/2.4ac16c32.chunk.css",
+    "static/js/2.c6c27e6e.chunk.js": "./static/js/2.c6c27e6e.chunk.js",
+    "static/js/2.c6c27e6e.chunk.js.map": "./static/js/2.c6c27e6e.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.4ac16c32.chunk.css.map": "./static/css/2.4ac16c32.chunk.css.map",
+    "static/css/main.00a20aed.chunk.css.map": "./static/css/main.00a20aed.chunk.css.map",
+    "static/js/2.c6c27e6e.chunk.js.LICENSE.txt": "./static/js/2.c6c27e6e.chunk.js.LICENSE.txt",
+    "static/media/style.css": "./static/media/UniversRoman.5e1f1326.otf",
+    "static/media/admin.css": "./static/media/adminbg.69e09600.jpg",
+    "static/media/mdb.css": "./static/media/arrow_right.0897f985.svg",
+    "static/media/art1.87a26908.png": "./static/media/art1.87a26908.png",
+    "static/media/all.min.css": "./static/media/fa-solid-900.46fdbd2d.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.62010f80.js",
-    "static/css/2.7e2c5472.chunk.css",
-    "static/js/2.28c6143e.chunk.js",
-    "static/css/main.963d1a05.chunk.css",
-    "static/js/main.4c78b63b.chunk.js"
+    "static/js/runtime-main.218b2b5b.js",
+    "static/css/2.4ac16c32.chunk.css",
+    "static/js/2.c6c27e6e.chunk.js",
+    "static/css/main.00a20aed.chunk.css",
+    "static/js/main.bc8ba2c1.chunk.js"
   ]
 }

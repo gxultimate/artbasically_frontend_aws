@@ -1,9 +1,9 @@
 
+import { Grid } from '@material-ui/core';
 import { message } from 'antd';
-import { MDBBtn, MDBDataTable , MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter} from 'mdbreact';
+import { MDBBtn, MDBDataTable, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import { Grid } from '@material-ui/core';
   
    class PendingArtwork extends Component {
     state = {
@@ -142,7 +142,7 @@ import { Grid } from '@material-ui/core';
           artist: `${row.artist}`,
         
           style: `${row.style}`,
-          price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+          price: `${row.price}`,
           action:<div><MDBBtn  onClick={()=>moreInfo(row.artworkDB)} color='approve'> More Info</MDBBtn>
           <MDBBtn  onClick={()=>archive(row.artworkDB)} color='reject'> Archive</MDBBtn></div>,
         
@@ -164,9 +164,9 @@ import { Grid } from '@material-ui/core';
       />
   
   <MDBModal isOpen={this.state.modal}  centered>
-          <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
+  <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',color:'white'}}><span style={{color:'white'}}>Artwork Information</span></MDBModalHeader>
           <MDBModalBody>
-            <Grid container direction='row' xs={12}>
+            <Grid container direction='row' >
             <Grid item xs={12}>
             <span className='arttitle'>
 {artwork.artName}, {artwork.artworkDateCreated}
@@ -176,7 +176,7 @@ import { Grid } from '@material-ui/core';
        <div className='artImg'  >
                     <img
                 
-                      src={artwork.artworkImg}/></div>
+                      src={artwork.artworkImg} alt='artwork' /></div>
 </Grid>
 <Grid item xs={8}  >
 <div style={{padding:'10px'}}>
@@ -184,7 +184,7 @@ import { Grid } from '@material-ui/core';
     <h6>Category : {artwork.artCategory}</h6>
                     <h6>Style : {artwork.artStyle} </h6>
     <h6>Size : {artwork.artSize}</h6>
-    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Price : &#8369;{artwork.artPrice}</h6>
     <h6>Description : {artwork.artDescription}</h6>
                     </div>
                     </Grid>

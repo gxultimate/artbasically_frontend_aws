@@ -1,17 +1,18 @@
 
 
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
   MDBModalBody,
   MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
+  MDBTableHead
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import moment from 'moment';
+import React, { Component, Fragment } from 'react';
 import DownloadImage from '../sections/DownloadImage';
-import {message} from 'antd';
-import Grid from '@material-ui/core/Grid';
-import moment from 'moment'
 
  class PendingOrder extends Component {
   state = {
@@ -43,7 +44,7 @@ import moment from 'moment'
             
       return hash;
     }
-    let date = new Date();
+   
     
     function createData(orderDB,items,id, orderBy, date, paymentStat,action) {
       return { orderDB,items,id, orderBy, date, paymentStat,action };
@@ -234,16 +235,16 @@ const PendingOrderTable = () => {
                   <img
                     style={{width: '100% ', height: 'auto'}}
                     src={data.artworkImg}
-                    alt=''
+                    alt='artwork'
                   />
                 </td>
                 <td>{data.artistName}</td>
                 <td>{data.artworkName}</td>
                 <td>{data.artworkSize}</td>
-                <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkPaymentAmount}</td>
                 <td>{data.artworkMaterial}</td>
                 <td>{data.artworkFramingOptions}</td>
-                <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkPrice}</td>
                 <td>{data.artworkQuantity}</td>
                 <td className='actions'>
                   <DownloadImage data={data.artworkImg} />

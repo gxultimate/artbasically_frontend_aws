@@ -1,9 +1,5 @@
+import { MDBBreadcrumb, MDBBreadcrumbItem, MDBCard, MDBCardBody } from 'mdbreact';
 import React, { Component } from 'react';
-import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
-} from 'mdbreact';
-import { Grid, Paper } from '@material-ui/core';
  class Orders extends Component {
   render() {
     return (

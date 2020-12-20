@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
-import FbLogin from '../FbLogin';
+import { message } from 'antd';
+import { MDBBtn, MDBInput, MDBModal, MDBModalHeader } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import GoogleLogin from '.././GoogleLogin/index';
+import FbLogin from '../FbLogin';
 
-import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
   state = {
@@ -199,10 +199,10 @@ class Login extends Component {
               <div className='rem custom-control custom-checkbox'>
                 <input
                   type='checkbox'
-                  class='custom-control-input'
+                  className='custom-control-input'
                   id='rempass'
                 />
-                <label class='custom-control-label' for='rempass' style={{marginBottom:'10px'}}> 
+                <label className='custom-control-label' htmlFor='rempass' style={{marginBottom:'10px'}}> 
                   Remember me
                 </label>
               </div>

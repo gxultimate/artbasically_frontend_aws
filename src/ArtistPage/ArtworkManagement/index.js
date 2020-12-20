@@ -1,22 +1,23 @@
+import Grid from '@material-ui/core/Grid';
 import {
-    MDBCard,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBCard,
   MDBCardBody,
-    MDBNav,
-    MDBNavItem,
-    MDBNavLink,
-    MDBBreadcrumb,
-    MDBBreadcrumbItem,
-    MDBTabContent,
-    MDBTabPane
+  MDBNav,
+  MDBNavItem,
+  MDBNavLink,
+
+
+  MDBTabContent,
+  MDBTabPane
 } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import Artworks from './ActiveArtworks';
+import AddArtwork from './AddArtwork';
 import ArchivedArtwors from './ArchivedArtworks';
 import Pending from './PendingArtwork';
-import AddArtwork from './AddArtwork'
-import Grid from '@material-ui/core/Grid';
   
   class ArtwrkTab extends Component {
     state = {
@@ -35,9 +36,9 @@ import Grid from '@material-ui/core/Grid';
   
     componentDidMount() {   
       let {
-        startingStore: {getArtworkInfo, getArtists, getStyles, getCategories,getPrintSize},
+        startingStore: {getAllArtworks, getArtists, getStyles, getCategories,getPrintSize},
       } = this.props;
-      getArtworkInfo();
+      getAllArtworks();
       getArtists();
       getStyles();
       getCategories();

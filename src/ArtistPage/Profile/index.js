@@ -1,18 +1,20 @@
-import React, {Component, Fragment} from 'react';
-import {MDBNavLink, MDBIcon, MDBCard, MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBCardBody} from 'mdbreact';
+import {
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBCard,
 
-import {inject, observer} from 'mobx-react';
-import {Skeleton} from 'antd';
-import DCards from './../DCards'
+  MDBCardBody
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
+import DCards from './../DCards';
+
 class ArtistProfile extends Component {
   componentDidMount() {
     let {
-      startingStore: {getAccounts,getArtwork,getOrders,getFollow},
+      startingStore: {getAccounts,getAllArtworks,getOrders,getFollow},
     } = this.props;
     getAccounts()
-    getArtwork()
+    getAllArtworks()
     getOrders()
    
   }

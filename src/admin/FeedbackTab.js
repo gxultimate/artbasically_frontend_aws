@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
 import {
-  MDBCard,
-  MDBCardBody,
- 
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
 
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBCard,
+  MDBCardBody
 } from 'mdbreact';
-import Feedback from './sections/UserFeedback'
+import React, { Component } from 'react';
+import Feedback from './sections/UserFeedback';
 
 class FeedbackTab extends Component {
   render() {

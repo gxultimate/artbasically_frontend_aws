@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import { message } from 'antd';
 import {
-  MDBInput,
+  MDBBtn, MDBInput,
   MDBModal,
   MDBModalBody,
-  MDBModalHeader,
-  MDBBtn,
+  MDBModalHeader
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 
 class EditStyle extends Component {
   state = {

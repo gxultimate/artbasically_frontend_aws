@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
-} from 'mdbreact';
-import COrderDeli from './sections/COrderDeli';
 import { Grid, Paper } from '@material-ui/core';
+import { MDBBreadcrumb, MDBBreadcrumbItem, MDBCard, MDBCardBody } from 'mdbreact';
+import React, { Component } from 'react';
+import COrderDeli from './sections/COrderDeli';
 
 export class Orders extends Component {
   render() {
@@ -27,7 +24,7 @@ export class Orders extends Component {
       <Grid container xs={12} sm={12}>
       <Grid item xs={12} sm={12}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Orders to delivery</h3>
  <COrderDeli />
       </div>

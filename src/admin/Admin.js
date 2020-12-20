@@ -1,34 +1,32 @@
-import React, {Component} from 'react';
-
 import {
-  MDBNav,
-  MDBNavItem,
-  MDBIcon,
-  MDBNavLink,
-  MDBNavbar,
-  MDBTabContent,
-  MDBTabPane,
-  MDBHamburgerToggler,
-  MDBCollapse,
-  MDBNotification,
-  MDBContainer,
-  MDBBtn,
-} from 'mdbreact';
+  MDBBtn, MDBCollapse, MDBHamburgerToggler, MDBIcon, MDBNav,
 
-import Dashboard from './Dashboard';
-import OrdersTab from './OrdersTab';
-import ArtworkTab from './ArtworkTab';
-import UserTab from './UserTab';
-import ArtistTab from './ArtistTab';
-import CategoryTab from './CategoryTab';
-import Notif from './sections/Notif';
-import Feedback from './FeedbackTab'
-import Messaging from './MessagingTab'
+
+
+  MDBNavbar, MDBNavItem,
+
+  MDBNavLink,
+
+  MDBTabContent,
+  MDBTabPane
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 // import Message from './sections/Message';
 import '../css/admin.css';
-import MyAccount from './sections/AccountSettings/'
-import {inject,observer} from 'mobx-react'
-import {withRouter} from 'react-router-dom'
+import ArtistTab from './ArtistTab';
+import ArtworkTab from './ArtworkTab';
+import CategoryTab from './CategoryTab';
+import Dashboard from './Dashboard';
+import Feedback from './FeedbackTab';
+import OrdersTab from './OrdersTab';
+import MyAccount from './sections/AccountSettings/';
+import Notif from './sections/Notif';
+import Shares from './SharesTab';
+import UserTab from './UserTab';
+
+
 class Admin extends Component {
   state = {
     collapse1: false,
@@ -195,8 +193,8 @@ class Admin extends Component {
                     active={this.state.items['default'] === '9'}
                     onClick={this.togglePills('default', '9')}
                   >
-                    <MDBIcon icon='envelope' className='mr-3' />
-                    Messaging
+                    <MDBIcon icon='bullhorn' className='mr-3' />
+                    Shares
                   </MDBNavLink>
                 </MDBNavItem>
 
@@ -253,7 +251,7 @@ class Admin extends Component {
               <MyAccount />
             </MDBTabPane>
             <MDBTabPane tabId='9'>
-              <Messaging />
+              <Shares />
             </MDBTabPane>
           </MDBTabContent>
         </div>

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { MDBIcon, MDBBadge, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import {inject,observer} from 'mobx-react'
+import { MDBBadge, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon } from "mdbreact";
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
 
 
 

@@ -1,23 +1,21 @@
-import React, {Component} from 'react';
+import { Icon, message, Skeleton } from 'antd';
 import {
-  MDBTabPane,
-  MDBTabContent,
-  MDBNav,
-  MDBRow,
-  MDBCol,
+  MDBBtn, MDBCol,
+
+
+  MDBInput, MDBNav,
+
+
   MDBNavItem,
-  MDBNavLink,
-  MDBInput,
-  MDBBtn,
+  MDBNavLink, MDBRow, MDBTabContent, MDBTabPane
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import {message, Skeleton, Upload, Icon} from 'antd';
-import {Link} from 'react-router-dom';
-import Navbar from '../../components/Navbar';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 import OrderTab from '../../components/OrderTab';
 import art from '../../images/artworks/art1.png';
-import { autorun } from 'mobx';
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -299,7 +297,7 @@ class CProfileEdit extends Component {
                             }
                             
                           >
-                            <a href='#!' class='changee'>
+                            <a href='#!' className='changee'>
                               Change Email-Address
                             </a>
                             <div className='invalid-feedback'>
@@ -332,15 +330,15 @@ class CProfileEdit extends Component {
                               Please provide a valid password.
                             </div>
                           </MDBInput>
-                          <div class='custom-control custom-checkbox'>
+                          <div className='custom-control custom-checkbox'>
                             <input
                               type='checkbox'
-                              class='custom-control-input'
+                              className='custom-control-input'
                               id='anycat'
                             />
                             <label
-                              class='custom-control-label clabel'
-                              for='anycat'
+                              className='custom-control-label clabel'
+                              htmlFor='anycat'
                             >
                               Allow viewing of adult related content.
                             </label>

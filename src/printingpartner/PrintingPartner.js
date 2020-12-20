@@ -1,30 +1,29 @@
-import React, {Component} from 'react';
-
 import {
-  MDBNav,
-  MDBNavItem,
-  MDBIcon,
-  MDBNavLink,
-  MDBNavbar,
-  MDBTabContent,
-  MDBTabPane,
-  MDBHamburgerToggler,
-  MDBCollapse,
-  MDBBtn,
-} from 'mdbreact';
-import Dashboard from './Dashboard';
-import PrintingTab from './PrintingTab';
-import OrderDeliverytab from './OrderDeliverytab';
-import CompletedOrderTab from './CompletedOrderTab';
-import CancelOrdertab from './CancelOrdertab';
-import Notif from './sections/Notif';
-import History from './History';
-import {inject, observer} from 'mobx-react';
+  MDBBtn, MDBCollapse, MDBHamburgerToggler, MDBIcon, MDBNav,
 
-import MyAccount from './sections/AccountSetting/'
+
+
+  MDBNavbar, MDBNavItem,
+
+  MDBNavLink,
+
+  MDBTabContent,
+  MDBTabPane
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import '../css/printart.css';
-import {withRouter} from 'react-router-dom'
-import MessageTab from './MessageTab'
+import CancelOrdertab from './CancelOrdertab';
+import CompletedOrderTab from './CompletedOrderTab';
+import Dashboard from './Dashboard';
+import MessageTab from './MessageTab';
+import OrderDeliverytab from './OrderDeliverytab';
+import PrintingTab from './PrintingTab';
+import MyAccount from './sections/AccountSetting/';
+import Notif from './sections/Notif';
+
+
 
 class PrintingPartner extends Component {
   state = {

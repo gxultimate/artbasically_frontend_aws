@@ -1,19 +1,17 @@
-import {BackTop} from 'antd';
+import { BackTop, message } from 'antd';
 import {
   MDBBtn,
   MDBContainer,
   MDBIcon,
-  MDBNavLink,
-  MDBNotification,
+  MDBNavLink
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component, Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import moment from 'moment';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
-import {message} from 'antd';
-import moment from 'moment';
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -47,6 +45,7 @@ class Homepage extends Component {
       startingStore: {
         getArtists,
         getArtworkInfo,
+        getAllArtworks,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
         listOfEmergingArtist,
@@ -62,6 +61,7 @@ class Homepage extends Component {
       getArtistFollowArtwork();
       getEmergingArtistArtwork();
       getArtworkInfo();
+      getAllArtworks()
       getArtists();
       getPrintSize()
       getNotif()
@@ -252,6 +252,7 @@ if (getmyList === 0){
                   <Link
                     to={{
                       pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                      state: {artistName:image.artistName}
                     }}
                   >
                     <img src={image.artworkImg} alt='artwork'/>
@@ -266,12 +267,10 @@ if (getmyList === 0){
                       href=''
                     
                       onClick={() => {
-                        console.log(image.artistName,'aa')
+                      
                         this.props.history.push({
                           pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName
-             
-                          }
+                          state: {artistName:image.artistName }
                         });
                       }}
                     >
@@ -323,6 +322,7 @@ if (getmyList === 0){
                     <Link
                       to={{
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                        state: {artistName:image.artistName}
                       }}
                     >
                         <img src={image.artworkImg} alt='artwork'/>
@@ -402,6 +402,7 @@ if (getmyList === 0){
                     <Link
                       to={{
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                        state: {artistName:image.artistName}
                       }}
                     >
                         <img src={image.artworkImg} alt='artwork'/>
@@ -483,6 +484,7 @@ if (getmyList === 0){
                         <Link
                           to={{
                             pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
                           }}
                         >
                             <img src={image.artworkImg} alt='artwork'/>
@@ -599,7 +601,14 @@ if (getmyList === 0){
                    
                   return (
                     <li key={i}>
-                      <a href='#!' className='artlink'>
+                  
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
+                          }}
+                          className='artlink'
+                        >
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -609,30 +618,26 @@ if (getmyList === 0){
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                      
                           <img src={image.artworkImg} alt='artwork'/>
                         </Link>
-                      </a>
+                      
                       <div className='artistinfo clearfix pad10'>
                     
 
-                        <a
-                      href=''
                     
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                          
+                       
                           state: {artistName:image.artistName}
-                        });
+                        
                       }}
                     >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                    </Link>
                     <MDBBtn
                       className='ifollow'
                       color='transparent'
@@ -673,7 +678,15 @@ if (getmyList === 0){
                    
                   return (
                     <li key={i}>
-                      <a href='#!' className='artlink'>
+                    
+                      <Link
+                    
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
+                          }}
+                          className='artlink'
+                        >
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -683,47 +696,38 @@ if (getmyList === 0){
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                      
                           <img src={image.artworkImg} alt='artwork'/>
                         </Link>
-                      </a>
+                      
                       <div className='artistinfo clearfix pad10'>
                     
 
-                      <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
-                      }}
-                    >
+                 
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
+                          }}
+                         
+                        >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                    </Link>
 
                     
                     <br/>
                        
-                        <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                    <Link
+                          to={{
                           pathname: `/Artist/${image.artistName}`,
                           state: {artistName:image.artistName}
-                        });
+                        
                       }}
                     >
                          <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
-                    </a>
+                    </Link>
                     <MDBBtn
                       className='ifollow'
                       color='transparent'
@@ -763,7 +767,14 @@ if (getmyList === 0){
                 .map((image) => {
                   return (
                     <li>
-                      <a href='#!' className='artlink'>
+                      
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
+                          }}
+                          className='artlink'
+                        >
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -773,45 +784,33 @@ if (getmyList === 0){
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                      
                             <img src={image.artworkImg} alt='artwork'/>
                         </Link>
-                      </a>
+                     
                       <div className='artistinfo clearfix pad10'>
-                      <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
-                      }}
-                    >
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName}
+                          }}
+                        >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                         </Link>
 
                     
                     <br/>
                        
-                        <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                    <Link to={{
                           pathname: `/Artist/${image.artistName}`,
                           state: {artistName:image.artistName}
-                        });
+                        
                       }}
                     >
                          <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
-                    </a>
+                    </Link>
                     <MDBBtn
                       className='ifollow'
                       color='transparent'

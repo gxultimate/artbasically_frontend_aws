@@ -242,6 +242,13 @@ select {
   padding: 5px 10px;
 }
 
+.btnBlack :hover {
+  background-color: #231f20;
+  color: #fff!important;
+  border-radius: 50px;
+  padding: 5px 10px;
+}
+
 .title {
   padding: 0 0 10px 0;
 }
@@ -505,7 +512,7 @@ textarea {
 .btnmodal {
   /* width: 100%; */
   max-width: 220px;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 15px 15px 20px;
   margin: 0 auto;
 }
 
@@ -540,7 +547,7 @@ textarea {
 }
 
 .login {
-  padding: 20px 50px;
+  padding: 20px 30px;
 }
 
 .login h3 {
@@ -599,10 +606,15 @@ textarea {
   margin: 10px auto;
 }
 
+.loginbtn:hover {
+  color: white;
+ 
+}
+
 .modalform {
   /* width: 100%; */
-  max-width: 600px;
-  padding: 20px;
+  max-width: 580px;
+  padding: 18px;
 }
 
 .modalbtn {
@@ -1209,18 +1221,21 @@ h4 {
 .artOpt {
   /* display: none; */
   display: flex;
-  justify-content: space-around !important;
+  
+  /* justify-content: space-around !important; */
   /* padding: 20px 10px; */
   max-width: 500px;
 }
 
 .artOpt li {
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #fff;
   width: 100%;
   text-align: center;
   background-color: #f1f1f1;
   transition: 0.5s;
+  border:1px solid grey;
+  height: 45px;
 }
 
 .artOpt li:hover {
@@ -2715,7 +2730,7 @@ form input[type='checkbox'] {
 .LoginFb { 
   width: '100%';
   height:50px;  
-
+  
   border-radius: 4px;
   background: #3b5998!important;
   color:white!important;
@@ -2893,4 +2908,7 @@ form input[type='checkbox'] {
   text-align: center;
   cursor: pointer;
   padding-top: 4px;
+}
+.fpassBtn{
+  border:1px solid red;
 }

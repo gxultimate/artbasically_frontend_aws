@@ -1,13 +1,8 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead,} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
+import { message } from 'antd';
+import { MDBBtn, MDBDataTable } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
 
-import {message} from 'antd';
 
 
  class ForDelivery extends Component {

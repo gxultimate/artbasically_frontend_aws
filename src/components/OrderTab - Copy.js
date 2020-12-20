@@ -100,7 +100,7 @@ class OrderTab extends Component {
 															<MDBRow>
 																<MDBCol md="3" className="flex-center">
 																	{item.artworkImg !== '' ? (
-																		<img class="item-image" src={item.artworkImg} />
+																		<img className="item-image" src={item.artworkImg} alt='artwork'/>
 																	) : (
 																		''
 																	)}
@@ -140,7 +140,7 @@ class OrderTab extends Component {
 									{/* <MDBRow className="cart-items-details">
                  <MDBCol className="cart-item"> 
                     <div className="item-container">
-                        <img src={art} class="item-image"></img>
+                        <img src={art} className="item-image"></img>
                     </div>
                     <div className="item-details">
                         <MDBRow>Artist One <span className="item-quantity">x1</span><span className="item-price">&#8369; 5,000</span></MDBRow>

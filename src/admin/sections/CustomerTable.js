@@ -1,15 +1,11 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
   MDBModalBody,
-  MDBModalHeader,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead,
-  MDBModalFooter
+  MDBModalFooter, MDBModalHeader
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
-import DownloadImage from '../sections/DownloadImage';
-import {message} from 'antd';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
 
 
  class Customer extends Component {

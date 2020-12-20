@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {MDBInput, MDBBtn} from 'mdbreact';
+import { message } from 'antd';
+import { MDBBtn, MDBInput } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
-import {withRouter} from 'react-router-dom';
 class PartnerLogin extends Component {
   submitHandler = (event) => {
     event.preventDefault();
@@ -92,13 +92,13 @@ class PartnerLogin extends Component {
             </MDBInput>
           </div>
           <ul className='clearfix'>
-            <li class='custom-control custom-checkbox'>
+            <li className='custom-control custom-checkbox'>
               <input
                 type='checkbox'
-                class='custom-control-input'
+                className='custom-control-input'
                 id='rempass'
               />
-              <label class='custom-control-label' htmlFor='rempass'>
+              <label className='custom-control-label' htmlFor='rempass'>
                 Remember me
               </label>
             </li>

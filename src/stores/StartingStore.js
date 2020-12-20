@@ -12,6 +12,7 @@ import Notification from './../models/Notif'
 import MyLists from './../models/MyLists'
 import Feedback from './../models/Feedback'
 import UserFollow from './../models/UserFollow'
+import ArtShare from './../models/ArtShares'
 
 class StartingStore {
   account = new Account();
@@ -25,6 +26,7 @@ class StartingStore {
   mylists= new MyLists();
   feedback = new Feedback();
   userfollow = new UserFollow();
+  artshare = new ArtShare()
   listOfFollowing = [];
   listOfFeedback = [];
   listOfMyLists =[];
@@ -53,6 +55,7 @@ class StartingStore {
   listofUserStyleArtwork = [];
   followed = false;
   listRelatedWorkByCategory = [];
+  listOfArtShare =[];
 
   img = undefined;
   api = undefined;
@@ -953,7 +956,33 @@ class StartingStore {
             }
 
 
-            
+            addArtShare = () => { 
+        
+              return new Promise((resolve, reject) => {   
+                this.api.addartshare(this.artshare)
+                .then(resp => {    
+                   this.listOfArtShare = resp.data
+             
+                   if (resp.data !== false ) {   
+                            resolve(resp.data);       
+                            } 
+                   else {         
+                     resolve(false);      
+                     }  
+                     });
+                    })
+              }
+
+
+              getArtShare  = () => {
+                return new Promise((resolve, reject) => {
+                this.api.getartshare().then((resp) => {
+          
+                  this.listOfArtShare = resp.data;
+                    
+                });
+              })
+              }
 
 
 
@@ -1057,7 +1086,11 @@ decorate(StartingStore, {
   addFollow:action,   
   deleteFollow:action,   
   getFollow:action,        
-  getAllArtworks:action,                                    
+  getAllArtworks:action,        
+  artshare:observable,
+  listOfArtShare:observable,      
+  addArtShare:action,    
+  getArtShare:action,                  
 });
 
 export default StartingStore;

@@ -1,18 +1,23 @@
-import React, {Component} from 'react';
+import { message } from 'antd';
 import {
-  MDBContainer,
-  MDBInput,
+  MDBBtn,
+  MDBCol, MDBContainer,
+
+
+
+
+  MDBIcon, MDBInput,
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBIcon,
-  MDBBtn,
-  MDBCol,
-  MDBRow,
+
+
+
+  MDBRow
 } from 'mdbreact';
-import {Multiselect} from 'multiselect-react-dropdown';
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
+import { inject, observer } from 'mobx-react';
+import { Multiselect } from 'multiselect-react-dropdown';
+import React, { Component } from 'react';
 
 class AddUser extends Component {
   componentDidMount() {

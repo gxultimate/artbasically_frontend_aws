@@ -1,21 +1,18 @@
 import {
-    MDBCol,
-    MDBIcon,
-    MDBNav,
-    MDBNavItem,
-    MDBNavLink,
-    MDBRow,
-    MDBTabContent,
-    MDBTabPane,
-    MDBBtn,
-  } from 'mdbreact';
-  import {inject, observer} from 'mobx-react';
-  import React, {Component} from 'react';
-  import {withRouter} from 'react-router-dom';
-  import Pending from './../PendingOrderTable'
-  import Orders from './../OrderTable'
-  import Completed from './../CompletedOrder'
-  import Cancelled from './../CancelledOrders'
+  MDBNav,
+  MDBNavItem,
+  MDBNavLink,
+
+  MDBTabContent,
+  MDBTabPane
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Cancelled from './../CancelledOrders';
+import Completed from './../CompletedOrder';
+import Orders from './../OrderTable';
+import Pending from './../PendingOrderTable';
 
   
   class OrderTab extends Component {
@@ -46,44 +43,7 @@ import {
     };
   
     render() {
-      let {
-        startingStore: {
-          listOfSingleArtwork,
-          listOfUserCart,
-          listOfOrder,
-          listofUserOrder,
-          editOrder,
-          listOfOrders,
-        },
-      } = this.props;
-      let totalPrice = listOfUserCart.reduce(
-        (total, item) => total + parseFloat(item.artworkPaymentAmount),
-        0
-      );
-  
-      let pendingOrders = listofUserOrder.filter((items) => {
-        if (
-          items.orderStatus === 'Delivery' ||
-          items.orderStatus.includes('Pending')
-        ) {
-          return items;
-        }
-      });
-  
-      let listOfOrderReceived = listOfOrders.filter((Received) => {
-        if (Received.orderStatus === 'Received') {
-          return Received;
-        }
-      });
-  
-      let listOfOrderCancelled = listOfOrders.filter((Rejected) => {
-        if (
-          Rejected.orderStatus === 'Rejected' ||
-          Rejected.orderStatus === 'PrintRejected'
-        ) {
-          return Rejected;
-        }
-      });
+
   
       return (
         <div className='orderconAdmin'>

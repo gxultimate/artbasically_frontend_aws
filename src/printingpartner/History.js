@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
 import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
+  MDBBreadcrumb, MDBBreadcrumbItem,
+  MDBBtn, MDBCard, MDBCardBody,
+  MDBFormInline, MDBIcon
 } from 'mdbreact';
+import React, { Component } from 'react';
 import History from './sections/CHistory';
 
 export class Orders extends Component {

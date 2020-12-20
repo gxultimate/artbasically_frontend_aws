@@ -1,8 +1,5 @@
+import { MDBBreadcrumb, MDBBreadcrumbItem, MDBCard, MDBCardBody } from 'mdbreact';
 import React, { Component } from 'react';
-import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
-} from 'mdbreact';
 import AddCat from './sections/AddCat';
 import CatTable from './sections/CatTable';
 

@@ -1,11 +1,8 @@
+import { MDBBreadcrumb, MDBBreadcrumbItem, MDBCard, MDBCardBody } from 'mdbreact';
 import React, { Component } from 'react';
-import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
-} from 'mdbreact';
 import AddArtist from './sections/AddArtist';
+import ArtistsTab from './sections/ArtistsTab';
 
-import ArtistsTab from './sections/ArtistsTab'
 export class ArtistTab extends Component {
   render () {
     return (

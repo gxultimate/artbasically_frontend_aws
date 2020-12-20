@@ -1,17 +1,10 @@
-import React, {Component} from 'react';
 import {
-  MDBCard,
-  MDBCardBody,
-  MDBIcon,
   MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBFormInline,
-  MDBBtn,
+  MDBBreadcrumbItem, MDBCard,
+  MDBCardBody
 } from 'mdbreact';
-import OrderTable from './sections/OrderTable';
-import PendingOrderTable from './sections/PendingOrderTable';
-import Completed from './sections/CompletedOrder'
-import OrderTabs from './sections/OrderTab'
+import React, { Component } from 'react';
+import OrderTabs from './sections/OrderTab';
 
 class OrdersTab extends Component {
   render() {

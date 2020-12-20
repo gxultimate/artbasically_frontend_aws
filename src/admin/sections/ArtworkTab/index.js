@@ -1,20 +1,17 @@
 import {
-    MDBCol,
-    MDBIcon,
-    MDBNav,
-    MDBNavItem,
-    MDBNavLink,
-    MDBRow,
-    MDBTabContent,
-    MDBTabPane,
-    MDBBtn,
-  } from 'mdbreact';
-  import {inject, observer} from 'mobx-react';
-  import React, {Component} from 'react';
-  import {withRouter} from 'react-router-dom';
-  import Pending from './../PendingArtworkTable';
-  import Artworks from './../ArtworkTable'
-  import ArchivedArtwors from './../ArchivedArtworks'
+  MDBNav,
+  MDBNavItem,
+  MDBNavLink,
+
+  MDBTabContent,
+  MDBTabPane
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import ArchivedArtwors from './../ArchivedArtworks';
+import Artworks from './../ArtworkTable';
+import Pending from './../PendingArtworkTable';
 
   
   class ArtwrkTab extends Component {

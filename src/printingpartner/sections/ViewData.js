@@ -80,7 +80,7 @@ class ViewData extends Component {
                       <td> {data.artworkName}</td>
                       <td> {data.dateOfTransaction}</td>
                       <td> {data.artworkSize}</td>
-                      <td> {data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                      <td> {data.artworkPaymentAmount}</td>
                       <td>{data.artworkMaterial}</td>
                       <td>{data.artworkFramingOptions}</td>
                       <td>{data.artworkQuantity}</td>

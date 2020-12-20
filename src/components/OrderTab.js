@@ -214,7 +214,7 @@ class OrderTab extends Component {
                             <MDBCol md='3' className='artimg colpad'>
                               {item.artworkImg ? (
 
-                                <img src={item.artworkImg} alt='artwork'/>
+                                <img src={item.artworkImg} alt='artwork' />
                               
                               ) : (
                                 ''
@@ -264,7 +264,7 @@ class OrderTab extends Component {
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                 &#8369;
-                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                                  {item.artworkPaymentAmount}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -382,7 +382,7 @@ class OrderTab extends Component {
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2'>
                                 &#8369;
-                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                                  {item.artworkPaymentAmount}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -482,7 +482,7 @@ class OrderTab extends Component {
                               </p>
                               <p>
                                 &#8369;
-                                {item.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                                {item.artworkPrice}
                               </p>
                             </MDBCol>
                             <MDBCol md='1' className='quan colpad'>
@@ -495,7 +495,7 @@ class OrderTab extends Component {
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2' style={{fontSize:'12px'}}>
                                 &#8369;
-                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                                  {item.artworkPaymentAmount}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>
@@ -613,7 +613,7 @@ class OrderTab extends Component {
                                 </MDBCol>
                                 <MDBCol md='6' className='colpad2'>
                                 &#8369;
-                                  {item.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                                  {item.artworkPaymentAmount}
                                 </MDBCol>
                               </MDBRow>
                             </MDBCol>

@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
 import {
   MDBCard,
   MDBCardBody,
-  MDBTable,
+  MDBCol, MDBRow, MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
+  MDBTableHead
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import ViewData from '../sections/ViewData';
 
 class CHistory extends Component {

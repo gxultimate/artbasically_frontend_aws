@@ -154,10 +154,10 @@ if (this.state.isLoggedIn === true){
             margin: 'auto',
             background: '#f4f4f4',
             padding: '20px',
-           
+         
           }}
         >
-         <div style={{textAlign:'center',marginBottom:'8px'}}><img src={this.state.picture} alt={this.state.name} /></div> 
+         <div style={{textAlign:'center',marginBottom:'8px'}}><img src={this.state.picture} alt={this.state.name} alt='profileimg'/></div> 
          <div style={{textAlign:'center',marginBottom:'8px'}}>
           <h6>Welcome to Art, Basically</h6>
           <p style={{fontSize:'18px'}}>{ this.state.name}</p>

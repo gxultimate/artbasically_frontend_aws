@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {MDBModal, MDBModalBody, MDBModalHeader, MDBIcon} from 'mdbreact';
+import { MDBIcon, MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import React, { Component } from 'react';
 
 class ViewImage extends Component {
   state = {
@@ -32,7 +32,7 @@ class ViewImage extends Component {
           ></MDBModalHeader>
           <MDBModalBody>
             <div className='imagecom'>
-              <img src={this.props.data} alt='' className='artimg' />
+              <img src={this.props.data} alt='artwork' className='artimg' />
             </div>
           </MDBModalBody>
         </MDBModal>

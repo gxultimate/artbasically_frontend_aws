@@ -1,15 +1,30 @@
-import React, {Component} from 'react';
-import {MDBInput, MDBModal, MDBModalHeader, MDBBtn} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
-import FbLogin from '../FbLogin';
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import { message } from 'antd';
+import { MDBBtn, MDBInput, MDBModal, MDBModalHeader } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import GgLogin from '../../components/GoogleLogin/';
+import FbLogin from '../FbLogin';
 
-import {withRouter} from 'react-router-dom';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class Login extends Component {
   state = {
     modal1: false,
+    open: false,
+    verify: true,
+    newpass:'',
+    confpass:'',
   };
 
   toggle = (nr) => () => {
@@ -37,7 +52,7 @@ class Login extends Component {
         getArtworkInfo,
         getEmergingArtistArtwork,
         getArtistFollowArtwork,
-        account
+        
       },
     } = this.props;
     loginAccount().then((res) => {
@@ -135,9 +150,67 @@ class Login extends Component {
 
   render() {
     let {
-      startingStore: {account},
+      startingStore: {account,editAccount,listOfUsers},
     } = this.props;
 let btn = this.props.login;
+
+
+
+let handleClickOpen = () => {
+  this.setState({
+    modal1: false,
+    open: true,
+  });
+};
+
+let ChangePass= () => {
+let getuser = listOfUsers.filter(data => data.accEmailAddress === account.accEmailAddress && data.accContact === account.accContact).map(acc => acc._id)
+
+  if (this.state.newpass === this.state.confpass){
+    account.setProperty('_id',getuser)
+    account.setProperty('password',this.state.newpass)
+      editAccount()
+
+      const success = () => {
+        message
+          .loading("", 1)
+          .then(() =>
+            message.error("Password successfully modified", 2)
+          );
+      };
+      success()
+      setTimeout(() => {
+        this.setState({
+          modal14: false,
+          open: false,
+        });
+      },400)
+  }else{
+    const error = () => {
+      message
+        .loading("", 1)
+        .then(() =>
+          message.error("Please check your password", 2)
+        );
+    };
+    error()
+  }
+
+
+
+  // this.setState({
+  //   open: false,
+  // });
+};
+
+let handleClose= () => {
+
+  this.setState({
+    open: false,
+  });
+};
+
+
 
     return (
       <div className='btnmodal'>
@@ -167,63 +240,171 @@ let btn = this.props.login;
         >
           <MDBModalHeader toggle={this.toggle(1)}></MDBModalHeader>
           <div className='login'>
-            <form
-              className='needs-validation animated zoomIn'
+          <form
+              className="needs-validation animated zoomIn"
               onSubmit={this.submitHandler}
             >
-              <img alt='Art, Basically Logo' className='img-fluid' src='https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png' />
-              <div className='adloginpt clearfix'>
+              <img
+                alt="Art, Basically Logo"
+                className="img-fluid"
+                src="https://res.cloudinary.com/startupprojectph/image/upload/v1600009464/Webimg/adminlogo_ht6qah.png"
+              />
+              <div className="adloginpt clearfix">
                 <MDBInput
-                  type='email'
-                  label='Email Address'
-                  className='loginadmin'
+                  type="email"
+                  label="Email Address"
+                  className="loginadmin"
                   required
                   onChange={(accEmailAddress) =>
                     account.setProperty(
-                      'accEmailAddress',
+                      "accEmailAddress",
                       accEmailAddress.target.value
                     )
                   }
                 >
-                  <div className='invalid-feedback'>
+                  <div className="invalid-feedback">
                     Please provide a valid email.
                   </div>
                 </MDBInput>
               </div>
-              <div className='adloginpt clearfix'>
+              <div className="adloginpt clearfix">
                 <MDBInput
-                  type='password'
-                  label='Password'
-                  className='loginadmin'
+                  type="password"
+                  label="Password"
+                  className="loginadmin"
                   required
                   onChange={(password) =>
-                    account.setProperty('password', password.target.value)
+                    account.setProperty("password", password.target.value)
                   }
                 >
-                  <div className='invalid-feedback'>
+                  <div className="invalid-feedback">
                     Please provide a valid password.
                   </div>
                 </MDBInput>
               </div>
-              <div className='rem custom-control custom-checkbox'>
+              <div
+                className="rem custom-control custom-checkbox"
+                style={{ float: "left" }}
+              >
                 <input
-                  type='checkbox'
-                  class='custom-control-input'
-                  id='rempass'
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="rempass"
                 />
-                <label class='custom-control-label' for='rempass'>
+                <label className="custom-control-label" htmlFor="rempass">
                   Remember me
                 </label>
               </div>
-              <MDBBtn type='submit' className='admloginbtn' color='transparent'>
+              <label
+                onClick={handleClickOpen}
+                style={{ color: "#e74c3c", float: "right" }}
+              >
+                Forgot password?
+              </label>
+
+              <MDBBtn type="submit" className="admloginbtn" color="transparent">
                 LOGIN
               </MDBBtn>
+
+              <div style={{ marginTop: "-30px" }}>
+                <FbLogin />
+              </div>
+              <div style={{ marginTop: "-30px" }}>
+                <GgLogin />
+              </div>
+              {/* <MDBNavLink to='#' onClick={handleClickOpen} style={{fontSize:'10px',padding:3}}>Forgot password?</MDBNavLink> */}
             </form>
-            <FbLogin />
-            <GgLogin/>
-         
           </div>
         </MDBModal>
+
+
+
+
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            Forgot Password?
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              <MDBInput
+                label="Email"
+                
+                type="text"
+                style={{ width: "95%" }}
+                onChange={(email) =>
+                  account.setProperty("accEmailAddress", email.target.value)
+                }
+                required
+              >
+                <div className="invalid-feedback">
+                  Please enter your email address.
+                </div>
+              </MDBInput>
+
+              <MDBInput
+                label="Contact No."
+                type="number"
+                style={{ width: "95%" }}
+                onChange={(contact) => {
+                  account.setProperty("accContact", contact.target.value);
+                  if (
+                    listOfUsers.filter(
+                      (acc) =>
+                        acc.accEmailAddress === account.accEmailAddress &&
+                        acc.accContact === account.accContact
+                    ).length != 0
+                  ) {
+                    this.setState({
+                      verify: false,
+                    });
+                  } else {
+                    console.log('false');
+                  }
+                }}
+                required
+              >
+                <div className="invalid-feedback">
+                  Please enter your contact number.
+                </div>
+              </MDBInput>
+
+              <MDBInput
+                label="New Password"
+                type="password"
+                style={{ width: "95%" }}
+                disabled={this.state.verify}
+                required
+                onChange={(e)=>{this.setState({newpass: e.target.value })}}
+              ></MDBInput>
+
+              <MDBInput
+                label="Confirm password"
+                type="password"
+                style={{ width: "95%" }}
+                disabled={this.state.verify}
+                onChange={(e)=>{this.setState({confpass: e.target.value })}}
+                required
+              ></MDBInput>
+
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={()=>ChangePass()}
+              style={{ color: "white", backgroundColor: "#FAE933" }}
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
     );
   }

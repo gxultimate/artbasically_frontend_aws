@@ -1,4 +1,5 @@
-import {message} from 'antd';
+import { message } from 'antd';
+import imageCompression from 'browser-image-compression';
 import {
   MDBBtn,
   MDBCol,
@@ -8,20 +9,18 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBRow,
+  MDBRow
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import moment from 'moment'
+import { inject, observer } from 'mobx-react';
+import { Multiselect } from 'multiselect-react-dropdown';
+import React, { Component } from 'react';
 
-import {Multiselect} from 'multiselect-react-dropdown';
-import imageCompression from 'browser-image-compression';
-import React, {Component} from 'react';
 class AddArtwork extends Component {
   constructor(props) {
     super(props);
 
     this.onFileChange = this.onFileChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       modal1: false,
       profileImg: '',
@@ -53,27 +52,7 @@ class AddArtwork extends Component {
     this.setState({selectedFile: image});
     
   }
-  onSubmit(e) {
-    let {
-      startingStore: {upload, artwork},
-    } = this.props;
-    e.preventDefault();
-    const data = new FormData();
-    console.log(this.state.selectedFile,'sdasd')
-    data.append('artworkImg',this.state.selectedFile);
-    
-    data.append('type', 'artwork');
-    upload(data);
-    const success = () => {
-      message
-        .loading('Submitting Artwork..', 1.3)
-        .then(() => message.success('Artwork submitted', 1));
-    };
 
-    setTimeout(() => {
-      success();
-    }, 1500);
-  }
 
   toggle = (nr) => () => {
     let modalNumber = 'modal' + nr;
@@ -92,17 +71,61 @@ class AddArtwork extends Component {
       var hash = 0, len = input.length;
       for (var i = 0; i < len; i++) {
         hash  = ((hash << 5) - hash) + input.charCodeAt(i);
-        hash |= 0; // to 32bit integer
+        hash |= 0; 
+        // to 32bit integer
       }
     
             
       return hash;
     }
-
-
-    let date = new Date();
     let {
-      startingStore: {artwork, listOfArtists, listOfCategories, listOfStyles,listOfPrintSize},
+      startingStore: {upload,artwork,listOfArtworks},
+    } = this.props;
+    let getArtNames = listOfArtworks.filter(data=> data.artName === artwork.artName).length
+console.log(artwork.artName,getArtNames,'nameee')
+  let  onSubmit =()=> {
+      let mydata = JSON.parse(sessionStorage.getItem('userData'))
+
+  if (getArtNames === 0){
+
+    const data = new FormData();
+    artwork.setProperty('artistName', `${mydata.accFname} ${mydata.accLname}`)
+    data.append('artworkImg',this.state.selectedFile);
+    
+    data.append('type', 'artwork');
+    upload(data);
+    const success = () => {
+      message
+        .loading('Submitting Artwork..', 1.3)
+        .then(() => message.success('Artwork submitted', 1));
+    };
+  
+    setTimeout(() => {
+      success();
+    }, 1500);
+  
+  
+     }else{
+  
+       const success = () => {
+         message
+           .loading('Checking Availability', 1.3)
+           .then(() => message.success('Art name already taken', 1));
+       };
+   
+       setTimeout(() => {
+         success();
+       }, 1500);
+  
+     } 
+  
+  
+    }
+
+
+
+    let {
+      startingStore: { listOfArtists, listOfCategories, listOfStyles,listOfPrintSize},
     } = this.props;
     let mydata = JSON.parse(sessionStorage.getItem('userData'))
 artwork.setProperty('accID',mydata.accID)
@@ -129,7 +152,10 @@ artwork.setProperty('artworkStatus','Pending')
         <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered>
           <MDBModalHeader toggle={this.toggle(1)} style={{backgroundColor:'#262626'}}><span style={{color:'white'}}> Register Artwork</span></MDBModalHeader>
           <MDBModalBody className='adminmodalbody'>
-            <form onSubmit={this.onSubmit} className='formbtn'>
+            <form 
+            // onSubmit={this.onSubmit} 
+            
+            className='formbtn'>
               <MDBRow>
                 <MDBCol>
                   <MDBInput
@@ -140,6 +166,7 @@ artwork.setProperty('artworkStatus','Pending')
                     
                       artwork.setProperty('artName', artName.target.value)
                       artwork.setProperty('artworkID',`${getHash(artName.target.value.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`
+                    
                       )
                     }}
                     required
@@ -148,22 +175,22 @@ artwork.setProperty('artworkStatus','Pending')
                       Please provide a valid email.
                     </div>
                   </MDBInput>
-                  <select
-                  style={{width:'95%'}}
-                    onChange={(artistName) =>
-                      artwork.setProperty('artistName', artistName.target.value)
-                    }
-                    required
+              
+
+
+                  <MDBInput
+                    label='Artist'
+                    type='text'
+                    disabled
+                    style={{width:'95%'}}
+                    valueDefault={`${mydata.accFname} ${mydata.accLname}`}
+                  
                   >
-                    <option>Artist</option>
-                    {listOfArtists.map((artist) => {
-                      return (
-                        <option value={`${artist.accFname} ${artist.accLname}`}>
-                          {artist.accFname} {artist.accLname}
-                        </option>
-                      );
-                    })}
-                  </select>
+                    <div className='invalid-feedback'>
+                      Please provide a valid email.
+                    </div>
+                  </MDBInput>
+
                   <MDBInput
                     label='Year'
                     type='number'
@@ -206,6 +233,7 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     displayValue='catType'
                     onSelect={selectCategory}
+                    required
                
                   />
                   </div>
@@ -219,6 +247,7 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     onSelect={selectStyle}
                     displayValue='styleType'
+                    required
                  
                   />
                    </div>
@@ -234,6 +263,7 @@ artwork.setProperty('artworkStatus','Pending')
                     showCheckbox={true}
                     displayValue='printSize'
                     onSelect={selectArtSize}
+                    required
               
                   />
                   </div>
@@ -256,16 +286,18 @@ artwork.setProperty('artworkStatus','Pending')
                     onChange={(artType) =>
                       artwork.setProperty('artType', artType.target.value)
                     }
+                    required
                   >
                     <option> Art Type </option>
                     <option value='Original'> Original </option>
                     <option value='Secondary'> Secondary </option>
                   </select>
-                  <img src={this.state.selectedFile}/>
+                  {/* <img src={this.state.selectedFile} alt='artwork'/> */}
                   <MDBInput
                   style={{width:'95%'}}
                     label='Quantity'
                     type='number'
+                    required
                  
                   >
                     <div className='invalid-feedback'>
@@ -278,13 +310,16 @@ artwork.setProperty('artworkStatus','Pending')
                       type='file'
                       name='file'
                       onChange={this.onFileChange}
+                      style={{overflow: 'hidden',textOverflow:' ellipsis'}}
                     />
-                    <img src={this.state.selectedFile} alt='' />
+                    {/* <img src={this.state.selectedFile} alt='artwork' /> */}
                     <p className='req'>
-                      Please upload a high resolution photo.
+                      Please upload a high resolution photo with 72dpi and above.
+                     <br/><span style={{fontStyle: 'italic'}}>DPI = Pixel Length * Pixel Width </span> 
                     </p>
+              
                   </div>
-                  <MDBBtn className='submitreg clearfix' type='submit'>
+                  <MDBBtn className='submitreg clearfix' type='submit' onClick={()=>onSubmit()}>
                     SUBMIT
                   </MDBBtn>
                 </MDBCol>

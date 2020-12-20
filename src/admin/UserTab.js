@@ -1,10 +1,7 @@
+import { MDBBreadcrumb, MDBBreadcrumbItem, MDBCard, MDBCardBody } from 'mdbreact';
 import React, { Component } from 'react';
-import {
-  MDBCard, MDBCardBody, MDBIcon, MDBBreadcrumb, MDBBreadcrumbItem,
-  MDBFormInline, MDBBtn
-} from 'mdbreact';
-import UserTab from './sections/UsersTab';
 import AddUser from './sections/AddUser';
+import UserTab from './sections/UsersTab';
 
 export class User extends Component {
   render () {

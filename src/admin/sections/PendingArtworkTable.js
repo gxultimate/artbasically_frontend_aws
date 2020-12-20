@@ -1,14 +1,14 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead, MDBModalFooter} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
-
-import {message} from 'antd';
 import { Grid } from '@material-ui/core';
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
+  MDBModalBody,
+
+  MDBModalFooter, MDBModalHeader
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import moment from 'moment';
+import React, { Component, Fragment } from 'react';
 
  class PendingArtwork extends Component {
   state = {
@@ -19,21 +19,32 @@ import { Grid } from '@material-ui/core';
 
    componentDidMount() {   
     let {
-      startingStore: {getAllArtworks, getArtists, getStyles, getCategories},
+      startingStore: {getAllArtworks, getArtists, getStyles, getCategories,getPrintSize},
     } = this.props;
     
     getAllArtworks();
     getArtists();
     getStyles();
     getCategories();
+    getPrintSize()
 
   }
   
 
   render() {
-    let { startingStore: {listOfArtworks, editArtwork, artwork}} = this.props;
+    let { startingStore: {listOfArtworks, editArtwork, artwork,notif,addNotif}} = this.props;
+  
+    function getHash(input){
+      var hash = 0, len = input.length;
+      for (var i = 0; i < len; i++) {
+        hash  = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0; // to 32bit integer
+      }
+    
+            
+      return hash;
+    }
 
- 
     function createData(artworkDB,id,title,artist, style, date, price,action) {
       return { artworkDB,id,title,artist, style, date, price,action };
     }
@@ -86,8 +97,17 @@ let pArtworks = filArtworks.map(artworks =>{
           artwork.setProperty('accID',data.accID)
           artwork.setProperty('artworkStatus','Active');
 
-          editArtwork();
 
+          notif.setProperty('notifID',`${getHash(data.artName.slice(0,3))}-${Math.floor(1000 + Math.random() * 9000)}`)
+          notif.setProperty('notifSender','admin-001')
+          notif.setProperty('notifRecipient',data.accID)
+          notif.setProperty('notifSubject','Artwork approval')
+          notif.setProperty('notifMsg',`Your artwork '${data.artName}' has been approved` )
+          notif.setProperty('notifDT',moment().format('MMM/DD/YYYY'))
+          notif.setProperty('notifStatus','unread')
+
+          editArtwork();
+          addNotif()
           const success = () => {
             message
               .loading('', 1)
@@ -100,6 +120,8 @@ let pArtworks = filArtworks.map(artworks =>{
             window.location.reload(false);
           },1500)
           };
+          
+
           let reject =(data)=>{
             artwork.setProperty('_id', data._id);
             artwork.setProperty('accID',data.accID)
@@ -188,7 +210,7 @@ const PendingArtworkTable = () => {
         artist: `${row.artist}`,
       
         style: `${row.style}`,
-        price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+        price: `${row.price}`,
         date:`${row.date}`,
         action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'> Info</MDBBtn><MDBBtn style={{float:'left'}}  onClick={()=>approve(row.artworkDB)} color='approve'> Approve</MDBBtn><MDBBtn  onClick={()=>reject(row.artworkDB)} color='reject'> Reject</MDBBtn></div>,
       
@@ -222,7 +244,7 @@ const PendingArtworkTable = () => {
        <div className='artImg'  >
                     <img
                 
-                      src={artwork.artworkImg}/></div>
+                      src={artwork.artworkImg} alt='artwork'/></div>
 </Grid>
 <Grid item xs={8}  >
 <div style={{padding:'10px'}}>
@@ -230,7 +252,7 @@ const PendingArtworkTable = () => {
 
                     <h6>Style : {artwork.artStyle} </h6>
     <h6>Size : {artwork.artSize}</h6>
-    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Price : &#8369;{artwork.artPrice}</h6>
     <h6>Description : </h6>
     <p>{artwork.artDescription}</p>
                     </div>

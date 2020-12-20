@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import DownloadImage from '../sections/DownloadImage';
-import {inject, observer} from 'mobx-react';
 import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
+  MDBTableHead
 } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import DownloadImage from '../sections/DownloadImage';
 
 class ViewOrderDetails extends Component {
   state = {
@@ -79,16 +79,16 @@ class ViewOrderDetails extends Component {
                         <img
                           style={{width: '100% ', height: 'auto'}}
                           src={data.artworkImg}
-                          alt=''
+                          alt='artwork'
                         />
                       </td>
                       <td>{data.artistName}</td>
                       <td>{data.artworkName}</td>
                       <td>{data.artworkSize}</td>
-                      <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                      <td>{data.artworkPaymentAmount}</td>
                       <td>{data.artworkMaterial}</td>
                       <td>{data.artworkFramingOptions}</td>
-                      <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                      <td>{data.artworkPrice}</td>
                       <td>{data.artworkQuantity}</td>
                       <td className='actions'>
                         <DownloadImage data={data.artworkImg} />

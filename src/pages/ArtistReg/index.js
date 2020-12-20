@@ -1,13 +1,10 @@
-import React, {Component} from 'react';
-import {MDBInput, MDBBtn} from 'mdbreact';
-import Navbar from '../../components/Navbar';
+import { message } from 'antd';
+import { MDBBtn, MDBInput } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import moment from 'moment';
+import React, { Component } from 'react';
 import Footer from '../../components/Footer';
-import {inject, observer} from 'mobx-react';
-import {message} from 'antd';
-import FBReg from '../../components/RegisterFB/'
-import GmailReg from './../../components/RegisterGmail/'
-import moment from 'moment'
-import Resizer from 'react-image-file-resizer';
+import Navbar from '../../components/Navbar';
 
  class ArtistReg extends Component {
    

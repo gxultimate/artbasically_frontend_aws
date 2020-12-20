@@ -1,6 +1,5 @@
-import {MDBBtn} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import ArtworkFilter from '../../components/ArtworkFilter';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -101,104 +100,104 @@ class Artworks extends Component {
 
                   <h5>Price</h5>
                   <ul>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='anyprice'
                       />
-                      <label class='custom-control-label' for='anyprice'>
+                      <label className='custom-control-label' htmlFor='anyprice'>
                         Any
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange1'
                         onChange={() => {
                           this.setPrice(['0', '5000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange1'>
+                      <label className='custom-control-label' htmlFor='pricerange1'>
                         PHP0 - PHP5,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange2'
                         onChange={() => {
                           this.setPrice(['5000', '10000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange2'>
+                      <label className='custom-control-label' htmlFor='pricerange2'>
                         PHP5,000 - PHP10,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange3'
                         onChange={() => {
                           this.setPrice(['10000', '20000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange3'>
+                      <label className='custom-control-label' htmlFor='pricerange3'>
                         PHP10,000 - PHP20,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange4'
                         onChange={() => {
                           this.setPrice(['20000', '30000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange4'>
+                      <label className='custom-control-label' htmlFor='pricerange4'>
                         PHP20,000 - PHP30,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange5'
                         onChange={() => {
                           this.setPrice(['30000', '40000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange5'>
+                      <label className='custom-control-label' htmlFor='pricerange5'>
                         PHP30,000 - PHP40,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange6'
                         onChange={() => {
                           this.setPrice(['40000', '50000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange6'>
+                      <label className='custom-control-label' htmlFor='pricerange6'>
                         PHP40,000 - PHP50,000
                       </label>
                     </li>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='pricerange7'
                         onChange={() => {
                           this.setPrice(['50000', '1000000']);
                         }}
                       />
-                      <label class='custom-control-label' for='pricerange7'>
+                      <label className='custom-control-label' htmlFor='pricerange7'>
                         PHP50,000 and Up
                       </label>
                     </li>

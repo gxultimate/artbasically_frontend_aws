@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {MDBNavLink, MDBIcon} from 'mdbreact';
-import Navbar from '../../components/Navbar';
+import { MDBIcon, MDBNavLink } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import Footer from '../../components/Footer';
-import {inject, observer} from 'mobx-react';
-import {Skeleton} from 'antd';
+import Navbar from '../../components/Navbar';
 
 class CProfile extends Component {
   componentDidMount() {

@@ -1,14 +1,10 @@
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined';
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
-import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
-import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 import SmsFailedOutlinedIcon from '@material-ui/icons/SmsFailedOutlined';
+import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import {observer,inject} from 'mobx-react'
-import { number } from 'joi';
 class DashCards extends Component {
   componentDidMount(){
     let{startingStore:{getAccounts,getOrders,getOrderUser}}=this.props;
@@ -168,14 +164,14 @@ function DCards(){
 <Typography className={classes.title}   >
 Earnings YTD
 </Typography>
-<div class='mt-1'>
+<div className='mt-1'>
 <Typography className={classes.value}>
   
   {
     sales == 'undefined' ?(
       '0'
     ):(
-      sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+      sales
     )
   }
 
@@ -207,8 +203,8 @@ Earnings YTD
 <Typography className={classes.title}   >
 Ongoing Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{Orders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{Orders}</Typography></div>
 </Grid>
 
 </Grid>
@@ -240,8 +236,8 @@ Ongoing Orders
 <Typography className={classes.title}   >
 Cancelled Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{CancelledOrders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{CancelledOrders}</Typography></div>
 </Grid>
 
 </Grid>

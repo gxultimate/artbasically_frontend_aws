@@ -1,15 +1,16 @@
 
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead, MDBModalFooter} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
-import DownloadImage from '../sections/DownloadImage';
-import {message} from 'antd';
 import { Grid } from '@material-ui/core';
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
+  MDBModalBody,
+
+
+
+  MDBModalFooter, MDBModalHeader
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
 
  class PendingArtwork extends Component {
   state = {
@@ -151,7 +152,7 @@ const PendingArtworkTable = () => {
         artist: `${row.artist}`,
       
         style: `${row.style}`,
-        price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+        price: `${row.price}`,
         action:<div><MDBBtn  onClick={()=>moreInfo(row.artworkDB)} color='approve'> More Info</MDBBtn>
         <MDBBtn  onClick={()=>archive(row.artworkDB)} color='reject'> Archive</MDBBtn></div>,
       
@@ -187,7 +188,7 @@ const PendingArtworkTable = () => {
        <div className='artImg'  >
                     <img
                 
-                      src={artwork.artworkImg}/></div>
+                      src={artwork.artworkImg} alt='artwork'/></div>
 </Grid>
 <Grid item xs={8}  >
 <div style={{padding:'10px'}}>
@@ -195,7 +196,7 @@ const PendingArtworkTable = () => {
 
                     <h6>Style : {artwork.artStyle} </h6>
     <h6>Size : {artwork.artSize}</h6>
-    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Price : &#8369;{artwork.artPrice}</h6>
     <h6>Description : </h6>
     <p>{artwork.artDescription}</p>
                     </div>

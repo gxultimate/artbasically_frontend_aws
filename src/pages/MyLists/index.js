@@ -1,5 +1,5 @@
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import ArtworkFilter from '../../components/ArtworkFilter';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';

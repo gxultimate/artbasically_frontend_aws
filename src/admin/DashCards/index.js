@@ -169,12 +169,12 @@ function DCards(){
 <Typography className={classes.title}   >
 Sales YTD
 </Typography>
-<div class='mt-1'>
+<div className='mt-1'>
 <Typography className={classes.value}>
   {sales === 'undefined' ?(
     '0'
   ):(
-  sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+  sales
   )
 
 }
@@ -207,8 +207,8 @@ Sales YTD
 <Typography className={classes.title}   >
 Art Enthusiasts
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{artEnthu.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{artEnthu}</Typography></div>
 </Grid>
 
 </Grid>
@@ -236,8 +236,8 @@ Art Enthusiasts
 <Typography className={classes.title}   >
 Artists
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{activeArtists.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{activeArtists}</Typography></div>
 </Grid>
 
 </Grid>
@@ -269,8 +269,8 @@ Artists
 <Typography className={classes.title}   >
 Ongoing Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{Orders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{Orders}</Typography></div>
 </Grid>
 
 </Grid>
@@ -301,8 +301,8 @@ Ongoing Orders
 <Typography className={classes.title}   >
 Cancelled Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{CancelledOrders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{CancelledOrders}</Typography></div>
 </Grid>
 
 </Grid>
@@ -330,8 +330,8 @@ Cancelled Orders
 <Typography className={classes.title}   >
 Completed Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{CompletedOrders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{CompletedOrders}</Typography></div>
 </Grid>
 
 </Grid>

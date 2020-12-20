@@ -1,13 +1,12 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
-    MDBModalBody,
-    MDBModalHeader,
-    MDBTable,
-    MDBModalFooter,
-    MDBTableHead,} from 'mdbreact';
-  import {inject, observer} from 'mobx-react';
-  import React, { Component, Fragment } from 'react'
-  import DownloadImage from './../../sections/DownloadImage';
-  import {message} from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
+  MDBModalBody,
+
+
+  MDBModalFooter, MDBModalHeader
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
   
   
    class UserFeedback extends Component {

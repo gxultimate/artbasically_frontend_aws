@@ -1,11 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Art,Basically",
+  "name": "Art,Basically",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://res.cloudinary.com/startupprojectph/image/upload/v1608170317/Webimg/resizeimage_kvs3n4.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "https://res.cloudinary.com/startupprojectph/image/upload/v1608170317/Webimg/resizeimage_kvs3n4.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://res.cloudinary.com/startupprojectph/image/upload/v1608170317/Webimg/resizeimage_kvs3n4.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",

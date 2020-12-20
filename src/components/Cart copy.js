@@ -142,6 +142,7 @@ class OrderTab extends Component {
                           <img
                             style={{ width: '75px', height: '75px' }}
                             src={item.artworkImg}
+                            alt='artwork'
                           />
                         ) : (
                             ''

@@ -1,9 +1,12 @@
-import React, {Component, Fragment} from 'react';
-import {MDBNavLink, MDBIcon, MDBCard, MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBCardBody} from 'mdbreact';
+import {
+  MDBBreadcrumb,
+  MDBBreadcrumbItem, MDBCard,
 
-import {inject, observer} from 'mobx-react';
+  MDBCardBody
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
+
 
 class ArtistMessaging extends Component {
   componentDidMount() {

@@ -1,19 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {Skeleton} from 'antd';
-import {MDBIcon, MDBNavLink, MDBBtn, MDBLink} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {message} from 'antd';
+import { message, Skeleton } from 'antd';
+import { MDBBtn, MDBIcon, MDBLink, MDBNavLink } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import moment from 'moment';
+import React, { Component, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import {
+  EmailIcon,
+  EmailShareButton, FacebookIcon, FacebookShareButton,
+
+
+  FacebookShareCount
+} from "react-share";
 import AddToBag from '../../components/AddToBag';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
-import ViewCart from '../../components/ViewCart';
 import ViewRoom from '../../components/ViewRoom';
 import art from '../../images/artworks/art1.png';
-import {Multiselect} from 'multiselect-react-dropdown';
-import LoginCart from './../../components/CartLogin/'
-import {withRouter} from 'react-router-dom'
+import ATLogin from './../../components/ATLogin';
+import LoginCart from './../../components/CartLogin/';
+import FollowLogin from './../../components/FollowLogin';
+
+
 class SingleArt extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +66,7 @@ class SingleArt extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    
     
     let {
       startingStore: {
@@ -109,7 +118,9 @@ class SingleArt extends Component {
         listOfMyLists,
         listOfPrintSize,
         addMyLists,
-        mylists
+        mylists,
+        addArtShare,
+        artshare,
        
       },
     } = this.props;
@@ -197,6 +208,16 @@ class SingleArt extends Component {
      let artworkList = listofArtistArtwork.map(data => data.artSize)
 
 
+     let countShares =()=>{
+
+      artshare.setProperty('shareID',`${logged.accID}-${Math.floor(100 + Math.random() * 900)}`)
+      artshare.setProperty('userID',logged.accID)
+  
+      artshare.setProperty('social','Facebook')
+      artshare.setProperty('dateTime',moment().format("MMM/DD/YYYY"))
+      addArtShare()
+
+     }
     return (
       <div className='home'>
         <Navbar />
@@ -212,19 +233,24 @@ class SingleArt extends Component {
                       <Skeleton active />
                     )}
                     <MDBBtn
-                      className={this.state.condition ? 'followed' : 'ifollow'}
-                      color='transparent'
-                      floating
-                      rounded
-                      title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
-                      onClick={() =>
-                        this.handleClick(followArtist(listofArtistInfo._id))
-                      }
+                     		color='primary'
+											   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px',marginLeft:'16px'}}
+												 outline
+										 
+								  
+											   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
+											   onClick={() =>
+										 this.handleClick(followArtist(listofArtistInfo._id))
+											   }
                     >
-                      {this.state.isToggleOn ? (
-                        <MDBIcon icon='plus' />
+                      {mydata === null ? (
+                  <FollowLogin/>
+
                       ) : (
-                        'Following'
+                        (this.state.isToggleOn === null)?(
+                          (	<div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>)
+                        ):
+                       'Following'
                       )}
                     </MDBBtn>
                   </h2>
@@ -258,19 +284,44 @@ class SingleArt extends Component {
                     {listOfSingleArtwork[0] !== undefined ? (
                       <ul className='artOpt'>
                         {' '}
-                        <li>
+                        {(logged === null) ?(
+                          <li>
+                          <ATLogin/>
+                          </li>
+                        ):(
+                          <li onClick={()=>{addtoList(listOfSingleArtwork[0])}}>
                           <MDBLink to='#' onClick={()=>{addtoList(listOfSingleArtwork[0])}}>Add to List</MDBLink>
                         </li>
-                        <li>
+                        ) }
+                     
+                        <li >
                           <ViewRoom img={listOfSingleArtwork[0].artworkImg}  Aheight={this.state.height} Awidth={this.state.width} selectedsize = {this.state.selectedSize}/>
                         </li>
-                        <li>
-                          <a href=''>Share</a>
-                        </li>{' '}
+                        {' '}
                       </ul>
                     ) : (
                       <Skeleton active />
                     )}
+                   { (logged === null)?(
+                      <Fragment></Fragment>
+                    ):(
+                    <div >
+<FacebookShareButton url={window.location.href} appId='216207193165878' pageId='301933277234280' subject='Share' hashtag="#ArtBasically" style={{marginRight:'8px'}}
+onShareWindowClose={()=>countShares()}
+>
+  <FacebookIcon size={40}   round={true}/>
+  <FacebookShareCount  url={window.location.href}/ >
+
+  </FacebookShareButton>
+
+  <EmailShareButton url={window.location.href}>
+<EmailIcon size={40}   round={true}/>
+  </EmailShareButton>
+
+  </div>
+  )}
+                    
+                    
                   </div>
                   <div className='abtArtist'>
                     <h4>About the Artist</h4>

@@ -261,7 +261,7 @@ ol {
 }
 
 .admloginbtn {
-  padding: 15px;
+  padding: 12px;
   background-color: #fae933;
   max-width: 200px;
   width: 100%;
@@ -640,3 +640,5 @@ tr {
     display: none;
   }
 }
+
+

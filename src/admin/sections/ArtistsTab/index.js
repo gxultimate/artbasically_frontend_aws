@@ -1,20 +1,17 @@
 import {
-    MDBCol,
-    MDBIcon,
-    MDBNav,
-    MDBNavItem,
-    MDBNavLink,
-    MDBRow,
-    MDBTabContent,
-    MDBTabPane,
-    MDBBtn,
-  } from 'mdbreact';
-  import {inject, observer} from 'mobx-react';
-  import React, {Component} from 'react';
-  import {withRouter} from 'react-router-dom';
-  import Pending from './../PendingArtistTable'
-  import Artists from './../ArtistTable'
-  import Deactivated from './../DeactivatedArtist'
+  MDBNav,
+  MDBNavItem,
+  MDBNavLink,
+
+  MDBTabContent,
+  MDBTabPane
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Artists from './../ArtistTable';
+import Deactivated from './../DeactivatedArtist';
+import Pending from './../PendingArtistTable';
  
 
   

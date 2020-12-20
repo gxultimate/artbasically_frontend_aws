@@ -1,7 +1,7 @@
-import {BackTop, Pagination} from 'antd';
-import {MDBIcon, MDBBtn} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import { BackTop, Pagination } from 'antd';
+import { MDBBtn, MDBIcon } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {MDBModal, MDBModalBody, MDBModalHeader} from 'mdbreact';
+import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import React, { Component } from 'react';
 
 class ViewDocu extends Component {
   state = {
@@ -40,7 +40,7 @@ class ViewDocu extends Component {
           ></MDBModalHeader>
           <MDBModalBody>
             <div className='imagecom'>
-              <img src={this.props.data} alt='' className='artimg' />
+              <img src={this.props.data} alt='artwork' className='artimg' />
             </div>
           </MDBModalBody>
         </MDBModal>

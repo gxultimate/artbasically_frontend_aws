@@ -7,9 +7,9 @@ import {
 import React from 'react';
 import DashCards from './DashCards';
 import FinishedProd from './sections/COrderDeli';
-
 import CPendingOrders from './sections/CPendingOrders';
 import OngoingProd from './sections/OngoingOrders';
+
 
 const pDashboardSection = () => {
   return (
@@ -29,7 +29,7 @@ const pDashboardSection = () => {
         </MDBCard>
       </div>
 
-      <div class='mb-4'>
+      <div className='mb-4'>
       <DashCards/>
       </div>
 
@@ -37,7 +37,7 @@ const pDashboardSection = () => {
       <Grid container  xs={12} sm={12}>
       <Grid item xs={12} sm={12}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Pending Orders</h3>
  <CPendingOrders />
       </div>
@@ -46,7 +46,7 @@ const pDashboardSection = () => {
 
       <Grid item xs={12} sm={12} style={{marginTop:'25px'}}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Ongoing Production</h3>
  <OngoingProd />
       </div>
@@ -56,7 +56,7 @@ const pDashboardSection = () => {
       
       <Grid item xs={12} sm={12} style={{marginTop:'25px'}}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Finished Production</h3>
  <FinishedProd />
       </div>

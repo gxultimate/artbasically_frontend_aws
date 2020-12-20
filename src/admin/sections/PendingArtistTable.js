@@ -1,16 +1,17 @@
-import { MDBDataTable,MDBNavLink,MDBBtn ,  MDBModal,
+import { message } from 'antd';
+import {
+  MDBBtn, MDBDataTable, MDBModal,
   MDBModalBody,
-  MDBModalHeader,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead,
-  MDBModalFooter
-} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, { Component, Fragment } from 'react'
 
-import {message} from 'antd';
-import {withRouter} from 'react-router-dom'
+
+
+
+  MDBModalFooter, MDBModalHeader
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
+
 
  class Deactivated extends Component {
   state = {

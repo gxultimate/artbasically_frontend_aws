@@ -6,13 +6,11 @@ import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutline
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 class DashCards extends Component {
-  componentDidMount(){
-    let{startingStore:{getAccounts}}=this.props;
-  }
+
 
     render() {
         let mydata =JSON.parse(sessionStorage.getItem('userData'))
-      let {startingStore:{listofUserOrder,listOfUsers,listOfArtworks}}=this.props;
+      let {startingStore:{listofUserOrder,listOfArtworks}}=this.props;
       let Artwoks = listOfArtworks.filter(art => art.accID === mydata.accID).length
       let Orders = listofUserOrder.filter (ord => ord.orderItems.accID === mydata.accID).length;
    
@@ -135,7 +133,7 @@ Earnings YTD
 </Typography>
 <Typography variant="h5"  style={{textAlign:"left"}} >
 <MonetizationOnOutlinedIcon style={{fontSize:"3.5em",color:"white"}}/>
-{/* <span style={{textAlign:"right",color:"white"}}> &#8369;{sales.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span> */}
+{/* <span style={{textAlign:"right",color:"white"}}> &#8369;{sales}</span> */}
 </Typography>
 
 <Typography variant="body2" component="p">
@@ -167,8 +165,8 @@ Earnings YTD
 <Typography className={classes.title}   >
 Artworks 
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{Artwoks.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{Artwoks}</Typography></div>
 </Grid>
 
 </Grid>
@@ -200,8 +198,8 @@ Artworks
 <Typography className={classes.title}   >
 Orders
 </Typography>
-<div class='mt-1'>
-<Typography className={classes.value}>{Orders.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography></div>
+<div className='mt-1'>
+<Typography className={classes.value}>{Orders}</Typography></div>
 </Grid>
 
 </Grid>

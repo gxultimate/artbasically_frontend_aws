@@ -1,6 +1,5 @@
-import {MDBBtn} from 'mdbreact';
-import {inject, observer} from 'mobx-react';
-import React, {Component} from 'react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import ArtworkFilter from '../../components/ArtworkFilter';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -129,30 +128,30 @@ import Navbar from '../../components/Navbar';
                 <form>
                   <h5>Category</h5>
                   <ul>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                       <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='anycat'
                         onChange={() => {
                           this.setCategories('none');
                         }}
                       />
-                      <label class='custom-control-label' for='anycat'>
+                      <label className='custom-control-label' htmlFor='anycat'>
                         Any
                       </label>
                     </li>
                     {categoryList.map((cat) => (
-                      <li class='custom-control custom-checkbox'>
+                      <li className='custom-control custom-checkbox'>
                         <input
                           type='checkbox'
-                          class='custom-control-input'
+                          className='custom-control-input'
                           id={cat}
                           onChange={() => {
                             this.setCategories(cat);
                           }}
                         />
-                        <label class='custom-control-label' for={cat}>
+                        <label className='custom-control-label' htmlFor={cat}>
                           {cat}
                         </label>
                       </li>
@@ -164,30 +163,30 @@ import Navbar from '../../components/Navbar';
     
                   <h5>Orientation/Size</h5>
                   <ul>
-                    <li class='custom-control custom-checkbox'>
+                    <li className='custom-control custom-checkbox'>
                     <input
                         type='checkbox'
-                        class='custom-control-input'
+                        className='custom-control-input'
                         id='anysize'
                         onChange={() => {
                           this.setPrintSize('none');
                         }}
                       />
-                      <label class='custom-control-label' for='anysize'>
+                      <label className='custom-control-label' htmlFor='anysize'>
                         Any
                       </label>
                     </li>
                     {printSizeList.map((size) => (
-                      <li class='custom-control custom-checkbox'>
+                      <li className='custom-control custom-checkbox'>
                         <input
                           type='checkbox'
-                          class='custom-control-input'
+                          className='custom-control-input'
                           id={size}
                           onChange={() => {
                             this.setPrintSize(size);
                           }}
                         />
-                        <label class='custom-control-label' for={size}>
+                        <label className='custom-control-label' htmlFor={size}>
                           {size}
                         </label>
                       </li>

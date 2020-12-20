@@ -32,6 +32,7 @@ import PartnerLogin from './printingpartner/PartnerLogin.js';
 import PrintingPartner from './printingpartner/PrintingPartner.js';
 import ArtistHome from './ArtistPage/'
 
+import ForgotPass from './components/ForgotPass'
 import {StartingStore, Api} from './stores';
 
 const api = new Api();
@@ -58,33 +59,33 @@ class Routes extends React.Component {
           pauseOnHover
         />
         <Route exact path='/' component={Landing} />
-        <Route exact path='/Home' component={Homepage} />
-        <Route exact path='/Artist/:name' component={SingleArtist} />
-        <Route exact path='/ArtistRegistration' component={ArtistReg} />
-        <Route exact path='/UserRegistration' component={UserReg} />
-        <Route exact path='/ArtistGalleryRegistration' component={ArtGalReg} />
-        <Route exact path='/Upload' component={UploadWork} />
-        <Route exact path='/Art/:id/:name' component={SingleArt} />
-        <Route exact path='/Artworks' component={Artworks} />
+        <Route  path='/Home' component={Homepage} />
+        <Route  path='/Artist/:name' component={SingleArtist} />
+        <Route  path='/ArtistRegistration' component={ArtistReg} />
+        <Route  path='/UserRegistration' component={UserReg} />
+        <Route  path='/ArtistGalleryRegistration' component={ArtGalReg} />
+        <Route  path='/Upload' component={UploadWork} />
+        <Route  path='/Art/:id/:name' component={SingleArt} />
+        <Route  path='/Artworks' component={Artworks} />
      
-        <Route exact path='/Artists' component={Artists} />
-        <Route exact path='/CProfile/:id' component={CProfile} />
-        <Route exact path='/CProfileEdit/:id' component={CProfileEdit} />
-        <Route exact path='/RegVerify' component={RegVerify} />
-        <Route exact path='/SubmitArt' component={SubmitArt} />
-        <Route exact path='/MyLists' component={MyLists} />
+        <Route  path='/Artists' component={Artists} />
+        <Route  path='/CProfile/:id' component={CProfile} />
+        <Route  path='/CProfileEdit/:id' component={CProfileEdit} />
+        <Route  path='/RegVerify' component={RegVerify} />
+        <Route  path='/SubmitArt' component={SubmitArt} />
+        <Route  path='/MyLists' component={MyLists} />
 
-        <Route exact path='/ShopByPrice' component={ShopByPrice} />
-        <Route exact path='/ShopByCategory' component={ShopByCategory} />
-        <Route exact path='/OnSale' component={OnSale} />
+        <Route  path='/ShopByPrice' component={ShopByPrice} />
+        <Route  path='/ShopByCategory' component={ShopByCategory} />
+        <Route  path='/OnSale' component={OnSale} />
 
-        <Route exact path='/Admin' component={AdminLogin} />
-        <Route exact path='/AdminHome' component={AdminHome} />
-        <Route exact path='/Order' component={Order} />
-        <Route exact path='/PartnerLogin' component={PartnerLogin} />
-        <Route exact path='/PrintingPartner' component={PrintingPartner} />
-
-        <Route exact path='/ArtistHome' component={ArtistHome} />
+        <Route  path='/Admin' component={AdminLogin} />
+        <Route  path='/AdminHome' component={AdminHome} />
+        <Route  path='/Order' component={Order} />
+        <Route  path='/PartnerLogin' component={PartnerLogin} />
+        <Route  path='/PrintingPartner' component={PrintingPartner} />
+        <Route  path='/ForgotPass' component={ForgotPass} />
+        <Route  path='/ArtistHome' component={ArtistHome} />
         <ToastContainer />
 
         {/* render={function() {

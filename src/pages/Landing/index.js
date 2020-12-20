@@ -1,14 +1,13 @@
-import { BackTop,Skeleton } from 'antd';
+import { BackTop, Skeleton } from 'antd';
 import { MDBIcon, MDBNavLink } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 import CookieConsent from "react-cookie-consent";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import AYLogin from '../../components/AddYoursLogin/index.js';
 import Footer from '../../components/Footer';
 import Login from '../../components/Login';
 import Navbar from '../../components/Navbar';
-import {withRouter} from 'react-router-dom'
  class Landing extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,7 @@ import {withRouter} from 'react-router-dom'
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
+  handleClick() { 
     this.setState(function (prevState) {
       return {
         isToggleOn: !prevState.isToggleOn,
@@ -33,43 +32,54 @@ import {withRouter} from 'react-router-dom'
     let {
       startingStore: {
      
-        listOfEmergingArtist,
-        getArtworkInfo,
+        
+        getAllArtworks,
         getEmergingArtistArtwork,
         getPrintSize,
         getAccounts,
         getArtists,
         
         
+        
 
       },
     } = this.props;
-   
+      
       getEmergingArtistArtwork();
-      getArtworkInfo();
+      getAllArtworks();
       getPrintSize()
       getAccounts()
       getArtists(); 
+     
   }
 
   render() {
  
-    let userData = JSON.parse(sessionStorage.getItem('userData'));
+   
     let {
-      startingStore: {listOfArtworks,listOfUsers},
+      startingStore: {listOfEmergingArtist,listOfArtworks,listOfUsers,listOfArtists},
     } = this.props;
 
 
+    function createData(aomName,aomID){
+      return{aomName,aomID}
+    }
 
-    let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+    
+    let AOMid = listOfUsers.filter(fil => fil.accessType === 'Artist')
+    let ArtistOftheMonth = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active' && AOMid.pop() === fil.accID).map(usr =>  {return (`${usr.accFname} ${usr.accLname}`)})
+
+    
+    // let ArtistOftheMonthID = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active' ).map(usr =>  {return (`${usr.accID}`)})
 
 
-
-    let AOMid = listOfUsers.filter(fil => fil.accessType === 'Artist' && fil.acc_Status === 'Active').map(usr =>  {return (`${usr.accID}`)})
   
     
    
     let AOM = ArtistOftheMonth.pop()
+
+
+
     return (
       <Fragment>
         <CookieConsent
@@ -88,7 +98,7 @@ import {withRouter} from 'react-router-dom'
       expires={999}
         >
           <h6 style={{color:'white'}}>Cookies on Art, Basically</h6>
-          <p style={{color:'white'}}>We use cookies to personalize contents, to provide social media features and to ensure that we give you the best experience on our website. We also share information about your use of our site with our social media partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.</p>
+          <p style={{color:'white'}}>We use cookies to personalize contents, to provide social media features and to ensure that we give you the best experience on our website. We also share information about your use of our site with our social media partners who may combine it with other information that you’ve provided to them from your use of their services.</p>
         </CookieConsent>
 
       <div className='home'>
@@ -107,10 +117,10 @@ import {withRouter} from 'react-router-dom'
                 Art Enthusiast
               </MDBNavLink>
             </div>
-            <p className='inlinep'>
+            <span className='inlinep'>
               What would best fit your description?{' '}
               <MDBNavLink to='#!'>We can help.</MDBNavLink>
-            </p>
+            </span>
             <div className='signinOpt block'>
               <p className='inlinep paddh4'>Already have an account?</p>
               <Login />
@@ -118,38 +128,49 @@ import {withRouter} from 'react-router-dom'
           </div>
           <section className='artistofdmonth'>
             <div className='title center'>
-            <a
-                      href=''
+       
+       
+     
+                 
                     
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Artist/${AOM}`,
-                          state: {artistName:AOM ,artistid:AOMid
-             
-                          }
-                        });
-                      }}
-                    >
                         
                          
-                        { (listOfArtworks.length == 0 ) ? (<p></p>):(  <h2>{AOM}      </h2>)}
+                        {/* { 
+                        (listOfArtworks.filter(art => art.accID === AOMid).length === 0 ) ? 
+                        (<Skeleton rows="1" size="small" loading={true}/>)
+                        : 
+                        (   */}
+                        <Link
+                          to={{ pathname: `/Artist/${AOM}`,
+                          state: {artistName:AOM ,artistid:AOMid}
+                         }}
+                          ><h2>{AOM}      </h2>      
+                          </Link>
+                          {/* )
+                        } */}
                
-
-        
+                  
                      
-                    </a>
+              
 
              
-              <p>ARTIST OF THE MONTH</p>
+              <p>ARTIST OF THE MONTH </p>
             </div>
             <ul className='col3img clearfix'>
               {/*  */}
-              {listOfArtworks.filter(fil => fil.accID === AOMid.pop()).slice(0,3).map((image,i) => {
+              {listOfArtworks.filter(fil => `${fil.accID} ${fil.accID}` === AOM).slice(0,3).map((image,i) => {
                    
                   return (
                     
                     <li key={i}>
-                      <a href='#!' className='artlink'>
+                      
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName,artID:image.artworkID}
+                          }}
+                          className='artlink'
+                        >
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -159,30 +180,22 @@ import {withRouter} from 'react-router-dom'
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                     
                           <img src={image.artworkImg} alt='artwork'/>
                         </Link>
-                      </a>
+                    
                       <div className='artistinfo clearfix pad10'>
                     
 
-                        <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+               <Link to={{
                           pathname:  `/Art/${image.artworkID}/${image.artistName}`,
                           state: {artistName:image.artistName}
-                        });
+                       
                       }}
                     >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                         </Link>
           
                       </div>
 
@@ -211,10 +224,18 @@ import {withRouter} from 'react-router-dom'
                   return (
 
                    (image !== null || image !== undefined)?(
-                      <Skeleton/>
+                      <Skeleton key={i}/>
                    ):(
                       <li key={i}>
-                      <a href='#!' className='artlink'>
+                     
+                      <Link
+                        artid={image.artworkID}
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName,artID:image.artworkID}
+                          }}
+                          className='artlink'
+                        >
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -224,46 +245,37 @@ import {withRouter} from 'react-router-dom'
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                       
                             <img src={image.artworkImg} alt='artwork'/>
                         
                         </Link>
-                      </a>
+                      
                       <div className='artistinfo clearfix pad10'>
-                      <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                      <Link to={{
+                        
                           pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
+                          state: {artistName:image.artistName,artID:image.artworkID}
+                       
                       }}
                     >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                    </Link>
 
                     
                     <br/>
                        
-                        <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                        <Link to={{
+
+                      
                           pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
+                          state: {artistName:image.artistName,artID:image.artworkID}
+                       
                       }}
                     >
                          <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
-                    </a>
+                    </Link>
                  
                   </div>
                     </li>
@@ -284,77 +296,80 @@ import {withRouter} from 'react-router-dom'
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {/*  */}
-              {listOfArtworks
-                .filter((item) => item.artworkStatus !== 'Pending')
-                .reverse()
-                .slice(0, 3)
-                .map((image,i) => {
-                  
-                  return (
-                    <li key={i}>
-                      <a href='#!' className='artlink'>
-                        <div className='artlabel'>
-                          <span className='new'>NEW</span>
-                          <span className='hot'>HOT</span>
-                          <span className='type'>
-                            {image.artType === 'Secondary'
-                              ? 'Second Edition'
-                              : 'Original'}
-                          </span>
-                        </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
-                             <img src={image.artworkImg} alt='artwork'/>
-                        
-                        </Link>
-                      </a>
-                     
-                      <div className='artistinfo clearfix pad10'>
          
-                            
-                         <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
+         {( listOfArtworks.length === 0) ? ( <Skeleton/>):
+         (
+          listOfArtworks
+            .filter((item) => item.artworkStatus === 'Active')
+            .reverse()
+            .slice(0, 3)
+            .map((image,i) => {
+              
+              return (
+                <li key={i}>
+                  <Link
+                      to={{
+                        pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                        state: {artistName:image.artistName,artID:image.artworkID}
                       }}
+                      className='artlink'
                     >
-                         <p className='artistname'>{image.artName}</p>
-                     
-                    </a>
-
+               
+                    <div className='artlabel'>
+                      <span className='new'>NEW</span>
+                      <span className='hot'>HOT</span>
+                      <span className='type'>
+                        {image.artType === 'Secondary'
+                          ? 'Second Edition'
+                          : 'Original'}
+                      </span>
+                    </div>
                     
-                    <br/>
-                       
-                        <a
-                      href=''
+                         <img src={image.artworkImg} alt='artwork'/>
                     
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
-                      }}
-                    >
-                         <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
-                     
-                    </a>
-                        
-                     
-                   
+                    </Link>
+              
                  
-                  </div>
-                      
-                    </li>
-                  );
-                })}
+                  <div className='artistinfo clearfix pad10'>
+     
+                        
+                   <Link to={{
+                      pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                      state: {artistName:image.artistName,artID:image.artworkID}
+                 
+                  }}
+                >
+                     <p className='artistname'>{image.artName}</p>
+                 
+                </Link>
+
+                
+                <br/>
+                   
+                 <Link to={{
+                      pathname: `/Artist/${image.artistName}`,
+                      state: {artistName:image.artistName,artID:image.artworkID}
+              
+                  }}
+                >
+                     <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
+                 
+                </Link>
+                    
+                 
+               
+             
+              </div>
+                  
+                </li>
+              );
+            })
+
+         )}
+              
+
+
+
             </ul>
           </section>
           <div className='addwork'>
@@ -364,11 +379,7 @@ import {withRouter} from 'react-router-dom'
             <p>Post your art and start earning like crazy.</p>
             
 
-            {userData !== null && userData !== undefined ? (
-            <MDBNavLink to='/Upload' className='btnBlack'>
-            Add your work now
-          </MDBNavLink>)
-        : (<AYLogin login={'aywn'} />)}
+          <AYLogin login={'aywn'} />
             <a href='/' className='learnmore' style={{color:'black'}}>
               Learn More <MDBIcon icon='caret-right' />{' '}
             </a>
@@ -384,15 +395,21 @@ import {withRouter} from 'react-router-dom'
               <MDBIcon icon='caret-right' />
             </a>
             <ul className='col3img clearfix'>
-              {/*  */}
-              {listOfArtworks
+              
+              {(listOfEmergingArtist.length === 0)?(<Skeleton/>):
+              (
+                listOfEmergingArtist
                 .filter((item) => item.artworkStatus !== 'Pending')
                 .reverse()
                 .slice(0, 3)
                 .map((image,i) => {
                   return (
                     <li key={i}>
-                      <a href='#!' className='artlink'>
+                      <Link
+                          to={{
+                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
+                            state: {artistName:image.artistName,artID:image.artworkID}
+                          }} className='artlink'>
                         <div className='artlabel'>
                           <span className='new'>NEW</span>
                           <span className='hot'>HOT</span>
@@ -402,62 +419,50 @@ import {withRouter} from 'react-router-dom'
                               : 'Original'}
                           </span>
                         </div>
-                        <Link
-                          to={{
-                            pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          }}
-                        >
+                      
                              <img src={image.artworkImg} alt='artwork'/>
                         
                         </Link>
-                      </a>
+                      
                      
                       <div className='artistinfo clearfix pad10'>
-                      <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                     <Link to={{
                           pathname: `/Art/${image.artworkID}/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
+                          state: {artistName:image.artistName,artID:image.artworkID}
+                      
                       }}
                     >
                          <p className='artistname'>{image.artName}</p>
                      
-                    </a>
+                    </Link>
 
                     
                     <br/>
                        
-                        <a
-                      href=''
-                    
-                      onClick={() => {
-                        this.props.history.push({
+                      <Link to={{
                           pathname: `/Artist/${image.artistName}`,
-                          state: {artistName:image.artistName}
-                        });
+                          state: {artistName:image.artistName,artID:image.artworkID}
+                     
                       }}
                     >
                          <p className='artistname' style={{fontSize:'10px',fontStyle:'italic'}}>by {image.artistName}</p>
                      
-                    </a>
+                    </Link>
                  
                   </div>
                       
                     </li>
                   );
-                })}
+                })
+              )
+              }
+              
             </ul>
           </section>
           <div className='bttop'>
          
 
-            {userData !== null && userData !== undefined ? (<MDBNavLink to='/Upload' className='btnYellow'>
-              Add Yours
-            </MDBNavLink>)
-        : (<AYLogin login={'ay'}/>)}
+        <AYLogin login={'ay'}/>
             <BackTop style={{margin:'auto'}}>
               {'     '}
               <a href='#!' style={{color:'black'}}>

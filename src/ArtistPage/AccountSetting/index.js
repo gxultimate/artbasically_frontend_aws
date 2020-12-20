@@ -1,16 +1,17 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    MDBBreadcrumb,
-    MDBBreadcrumbItem, MDBCard,
-    MDBCardBody,
-    MDBBtn
-} from 'mdbreact';
 import TextField from '@material-ui/core/TextField';
+import { message } from 'antd';
+import {
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+
+  MDBBtn, MDBCard,
+  MDBCardBody
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import {inject,observer} from 'mobx-react'
-import {message} from 'antd';
 class AccountSettings extends Component {
 
 
@@ -124,9 +125,10 @@ const useStyles = makeStyles((theme) => ({
           Account Settings
       </h4>
       
-      <h6 className='title' >
+      <h6 className='title' style={{float:'left'}}>
           General
       </h6>
+      <p style={{float:'right'}}>Account#:{mydata.accID}</p>
       <Grid container spacing={3} alignItems='center' justify='center'>
       {getMyData.map((row,i) => { 
           let a = i+1;

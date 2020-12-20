@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { MDBNavLink, MDBIcon, MDBBtn } from 'mdbreact';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import art from '../../images/artworks/art1.png';
-import { inject, observer } from 'mobx-react';
-import { Skeleton, message } from 'antd';
-import { Link ,withRouter} from 'react-router-dom';
+import { message, Skeleton } from 'antd';
 import _ from 'lodash';
+import { MDBBtn, MDBIcon, MDBNavLink } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
+import art from '../../images/artworks/art1.png';
 
 class SingleArtist extends Component {
 	constructor(props) {
@@ -51,14 +51,17 @@ class SingleArtist extends Component {
 			message.success({ content: 'Loaded!', duration: 2 });
 		}, 1000);
 	};
+	
 
 	render() {
 		let userData = JSON.parse(sessionStorage.getItem('userData'));
+	
 		let {
 			startingStore: { listOfFollowing,listofArtistInfo, listofArtistArtwork, listofArtistCategories, followArtist, followed }
 		} = this.props;
 
 		let getFollowers = listOfFollowing.filter(data => data.followingID === this.props.artistid).length
+	
 		return (
 			<div className="home">
 				<Navbar />
@@ -84,14 +87,15 @@ class SingleArtist extends Component {
 												color='primary'
 											   style={{borderRadius:'5px',width:'50px',height:'25px',fontSize:'8px',margin:0,padding:'2px',marginLeft:'16px'}}
 												 outline
-										   floating
+										 
 								  
 											   title={this.state.isToggleOn ? 'Follow' : 'Unfollow'}
 											   onClick={() =>
 										 this.handleClick(followArtist(listofArtistInfo._id))
 											   }
 										 >
-										   {this.state.isToggleOn ? (
+										   {(this.state.isToggleOn) ? (
+
 												<div > <MDBIcon icon='plus'  style={{float:'left',fontSize:'9px',color:'#4285F4',marginTop:'2px'}}/><p style={{fontSize:'9px',color:'#4285F4'}}>Follow</p></div>
 											   ) : (
 												 'Following'

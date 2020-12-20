@@ -179,7 +179,7 @@ addNotif()
                 <div>
                   <span  style={{marginBottom:'-8px'}}>Your Title</span>
                   <MDBInput
-                      
+                     
                     label='Title'
                     type='text'
                     onChange={(artName) =>{
@@ -194,7 +194,7 @@ addNotif()
                     </div>
                   </MDBInput>
                 </div>
-                <div style={{marginBottom:'10px'}} class='custom-checkbox '>
+                <div style={{marginBottom:'10px'}} className='custom-checkbox '>
                 <span>Artist</span>
                 <select
                   value={this.state.ArtByMe}
@@ -216,14 +216,14 @@ addNotif()
                 <p className='inlinep' style={{marginLeft:'20px',marginTop:'-22px',paddingBottom:'22px'}}>
                             <input
                               type='checkbox'
-                              class='custom-control-input '
+                              className='custom-control-input '
                               id='anycat'
                               onChange={()=>{madeByMe()}}
                               
                             />
                             <label
-                              class='custom-control-label clabel'
-                              for='anycat'
+                              className='custom-control-label clabel'
+                              htmlFor='anycat'
                               style={{fontSize:'12px',paddingTop:'4px'}}
                             >
                               Is this artwork made by you?
@@ -400,7 +400,7 @@ addNotif()
                 <div className='uploadreq clearfix'>
                 
                   <div className='upload' >
-                    {/* <label htmlFor='submitart' for='submitart' disabled>
+                    {/* <label htmlhtmlFor='submitart' htmlFor='submitart' disabled>
                       Coming Soon
                     </label>
                     <input type='submit' id='submitart' disabled /> */}

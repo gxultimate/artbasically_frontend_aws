@@ -2,16 +2,17 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    MDBBreadcrumb,
-    MDBBreadcrumbItem, MDBCard,
-    MDBCardBody,
-    MDBBtn
-} from 'mdbreact';
 import TextField from '@material-ui/core/TextField';
+import { message } from 'antd';
+import {
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+
+  MDBBtn, MDBCard,
+  MDBCardBody
+} from 'mdbreact';
+import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import {inject,observer} from 'mobx-react'
-import {message} from 'antd';
 class AccountSettings extends Component {
 
 

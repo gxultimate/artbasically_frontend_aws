@@ -7,15 +7,14 @@ import {
 } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { withRouter } from 'react-router-dom';
 import '../css/admin.css';
 import Settings from './AccountSetting';
 import ArtworkTab from './ArtworkManagement';
+import EarningsTab from './Earnings';
 import Notif from './Notification';
 import Profile from './Profile';
-import EarningsTab from './Earnings'
-import Messages from './Messaging'
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 class Admin extends Component {
   state = {
@@ -65,11 +64,15 @@ class Admin extends Component {
       sessionStorage.clear();
       window.location.href = '/';
   }
+ 
     return (
       <div>
      <MessengerCustomerChat
     pageId="301933277234280"
     appId="216207193165878"
+    shouldShowDialog={true}
+    loggedInGreeting="Hi! How can we help you?"
+
   />
 
         <div className='admin'>
@@ -144,7 +147,7 @@ class Admin extends Component {
            
                 <MDBNavItem>
 
-
+{/* 
                 <MDBNavLink
                     to='#'
                     active={this.state.items['default'] === '4'}
@@ -152,7 +155,7 @@ class Admin extends Component {
                   >
                     <MDBIcon icon='envelope' className='mr-3' />
                     Messaging
-                  </MDBNavLink>
+                  </MDBNavLink> */}
 
                   <MDBNavLink
                     to='#'
@@ -181,9 +184,9 @@ class Admin extends Component {
             <MDBTabPane tabId='3'>
               <EarningsTab />
             </MDBTabPane>
-            <MDBTabPane tabId='4'>
+            {/* <MDBTabPane tabId='4'>
               <Messages/>
-            </MDBTabPane>
+            </MDBTabPane> */}
             <MDBTabPane tabId='5'>
               <Settings />
             </MDBTabPane>

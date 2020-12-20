@@ -141,9 +141,9 @@ class OrderDetails extends Component {
                           <MDBCol md='3' className='artimg colpad'>
                             {item.artworkImg !== null ? (
                               <img
-                                class='item-image'
+                                className='item-image'
                                 src={item.artworkImg}
-                                alt=''
+                                alt='artwork'
                               />
                             ) : (
                               ''
@@ -225,7 +225,7 @@ class OrderDetails extends Component {
                       : '0').toLocaleString('en-GB', {
                         style: 'currency',
                         currency: 'PHP',
-                      }).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                      })}
                   </MDBCol>
                 </MDBRow>
                 {/* <div className='actsbtn'>

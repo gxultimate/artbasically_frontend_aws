@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
 import {
   MDBCard,
   MDBCardBody,
-  MDBTable,
+
+
+
+
+  MDBCol, MDBRow, MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBRow,
-  MDBCol,
+  MDBTableHead
 } from 'mdbreact';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import EditCat from './EditCat';
+import EditPrintSize from './EditPrintSize';
 import EditStyle from './EditStyle';
-import EditPrintSize from './EditPrintSize'
 
 class CategoryTable extends Component {
   componentDidMount() {

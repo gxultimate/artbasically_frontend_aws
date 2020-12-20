@@ -1,24 +1,33 @@
-import { message } from 'antd';
-import { MDBBtn, MDBDataTable , MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { Grid } from '@material-ui/core';
+import { MDBBtn, MDBDataTable, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import { Grid } from '@material-ui/core';
   
   
-   class PendingArtwork extends Component {
+   class PendingArtwork extends Component { 
     state = {
       modal: false,
       items:[]
      
     };
+
+
+    componentDidMount() {   
+      let {
+        startingStore: {getAllArtworks},
+      } = this.props;
+      getAllArtworks();
+ 
+  
+    }
   
    
     
   
     render() {
         let mydata = JSON.parse(sessionStorage.getItem('userData'))
-      let { startingStore: {listOfArtworks, editArtwork, artwork}} = this.props;
-  
+      let { startingStore: {listOfArtworks,  artwork}} = this.props;
+
       
       function createData(artworkDB,id,title,artist, style, date, price,action) {
         return { artworkDB,id,title,artist, style, date, price,action };
@@ -123,7 +132,7 @@ import { Grid } from '@material-ui/core';
           artist: `${row.artist}`,
         
           style: `${row.style}`,
-          price: `${row.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+          price: `${row.price}`,
           action: <div style={{maxWidth:'300px',float:'right',marginLeft:'0px'}}><MDBBtn  style={{float:'left'}} onClick={()=>info(row.artworkDB)} color='approve'>More Info</MDBBtn></div>
         
   
@@ -144,7 +153,7 @@ import { Grid } from '@material-ui/core';
       />
   
   <MDBModal isOpen={this.state.modal}  centered>
-          <MDBModalHeader toggle={()=>close()}>Artwork Information</MDBModalHeader>
+          <MDBModalHeader toggle={()=>close()} style={{backgroundColor:'#231F20',color:'white'}}><span style={{color:'white'}}>Artwork Information</span></MDBModalHeader>
           <MDBModalBody>
             <Grid container direction='row' xs={12}>
             <Grid item xs={12}>
@@ -156,15 +165,15 @@ import { Grid } from '@material-ui/core';
        <div className='artImg'  >
                     <img
                 
-                      src={artwork.artworkImg}/></div>
+                      src={artwork.artworkImg} alt='artwork'/></div>
 </Grid>
 <Grid item xs={8}  >
 <div style={{padding:'10px'}}>
     <h6>Theme : {artwork.artTheme}</h6>
-    <h6>Category : {artwork.artCategory}</h6>
+    <h6>Style : {artwork.artStyle}</h6>
                     <h6>Style : {artwork.artStyle} </h6>
     <h6>Size : {artwork.artSize}</h6>
-    <h6>Price : &#8369;{artwork.artPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h6>
+    <h6>Price : &#8369;{artwork.artPrice}</h6>
     <h6>Description : {artwork.artDescription}</h6>
                     </div>
                     </Grid>

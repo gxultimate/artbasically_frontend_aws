@@ -13,6 +13,6 @@ export default props =>
       >
         <MDBIcon icon={plus} size='2x' />
       </div>
-      <img src={image.secure_url} alt='' />
+      <img src={image.secure_url} alt='img' />
     </div>
   )

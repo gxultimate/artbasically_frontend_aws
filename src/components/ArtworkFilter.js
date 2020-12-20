@@ -26,6 +26,9 @@ class ArtworkFilter extends Component {
     });
   };
   componentDidMount(){
+    let{startingStore:{getAllArtworks}}=this.props;
+    getAllArtworks();
+  
     let mydata = JSON.parse(sessionStorage.getItem('userData'))
 
 if (mydata === null){
@@ -34,7 +37,10 @@ if (mydata === null){
   let{startingStore:{getMyLists}}=this.props;
     getMyLists()
   }
+
+  
   }
+
 
   render() {
    
@@ -147,7 +153,7 @@ setTimeout(()=>{
                   }}
                 >
                {/* <Image publicId={image.artworkImg} secure="true"></Image>    */}
-               <img src={image.artworkImg} alt='' />
+               <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -219,7 +225,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -295,7 +301,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -366,7 +372,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -438,7 +444,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -490,7 +496,7 @@ setTimeout(()=>{
             </li>
           ));
       } else if (this.props.type === 'latest') {
-        return toJS(listOfArtworks.filter(art=> art.artworkStatus === 'Approved'))
+        return toJS(listOfArtworks.filter(art=> art.artworkStatus === 'Approved' || art.artworkStatus === 'Active'))
          .reverse()
           .map((image,i) => (
             <li key={i}>
@@ -509,7 +515,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -581,7 +587,7 @@ setTimeout(()=>{
                    pathname: `/Art/${image.artworkID}/${image.artistName}`,
                  }}
                >
-                 <img src={image.artworkImg} alt='' />
+                 <img src={image.artworkImg} alt='artwork' />
                </Link>
              </a>
              <div className='artistinfo clearfix pad10'>
@@ -654,7 +660,7 @@ setTimeout(()=>{
                     pathname: `/Art/${image.artworkID}/${image.artistName}`,
                   }}
                 >
-                  <img src={image.artworkImg} alt='' />
+                  <img src={image.artworkImg} alt='artwork' />
                 </Link>
               </a>
               <div className='artistinfo clearfix pad10'>
@@ -731,7 +737,7 @@ setTimeout(()=>{
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <img src={image.artworkImg} alt='artwork' />
                     </Link>
                   </a>
                   <div className='artistinfo clearfix pad10'>

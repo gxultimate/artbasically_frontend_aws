@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
+import { message } from 'antd';
 import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBInput,
+  MDBBtn, MDBCol, MDBContainer,
+
+
+
+
+
+
+  MDBIcon, MDBInput,
   MDBModal,
   MDBModalBody,
-  MDBModalHeader,
-  MDBIcon,
-  MDBBtn,
+  MDBModalHeader, MDBRow
 } from 'mdbreact';
-import {message} from 'antd';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 class EditArt extends Component {
   state = {
     modal1: false,

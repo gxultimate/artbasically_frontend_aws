@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {MDBInput, MDBBtn} from 'mdbreact';
-import {message} from 'antd';
+import { message } from 'antd';
+import { MDBBtn, MDBInput } from 'mdbreact';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import {inject, observer} from 'mobx-react';
-import {withRouter} from 'react-router-dom';
 class AdminLogin extends Component {
   submitHandler = (event) => {
     event.preventDefault();

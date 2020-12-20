@@ -1,23 +1,19 @@
-import React from 'react';
+import { Grid, Paper } from '@material-ui/core';
 import {
-  MDBCard,
-  MDBCardBody,
-  MDBIcon,
   MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBFormInline,
-  MDBBtn,
-} from 'mdbreact';
-import DashCard from './DashCards'
-import ArtistTable from './sections/ArtistTable';
-import CustomerTable from './sections/CustomerTable';
-import ArtworkTable from './sections/ArtworkTable';
+  MDBBreadcrumbItem, MDBCard,
+  MDBCardBody,
 
-import OrderTable from './sections/OrderTable';
+
+
+  MDBFormInline
+} from 'mdbreact';
+import React from 'react';
+import DashCard from './DashCards';
 import PendingArtistTable from './sections/PendingArtistTable';
 import PendingArtworkTable from './sections/PendingArtworkTable';
 import PendingOrderTable from './sections/PendingOrderTable';
-import { Grid, Paper } from '@material-ui/core';
+
 
 const DashboardSection = () => {
   return (
@@ -48,14 +44,14 @@ const DashboardSection = () => {
       </div>
 
 
-      <div class='mb-4'>
+      <div className='mb-4'>
 <DashCard/>
 </div>
 <Grid container  xs={12} sm={12}>
   <Grid item xs={12} sm={12} style={{marginBottom:'12px'}}>
     
   <Paper>
-    <div class='p-2 '>
+    <div className='p-2 '>
 <h3>Pending Orders</h3>
       <PendingOrderTable />
       </div>
@@ -66,7 +62,7 @@ const DashboardSection = () => {
 
       <Grid item xs={12} sm={12} style={{marginBottom:'12px'}}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Pending Arworks</h3>
       <PendingArtworkTable />
       </div>
@@ -76,7 +72,7 @@ const DashboardSection = () => {
 
       <Grid item xs={12} sm={12}>
       <Paper>
-      <div class='p-2 '>
+      <div className='p-2 '>
  <h3>Artist Membership Requests</h3>
       <PendingArtistTable />
       </div>

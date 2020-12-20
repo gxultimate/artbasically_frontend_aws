@@ -55,7 +55,7 @@ class ArtworkFilter extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <img src={image.artworkImg} alt='artwork' />
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -96,7 +96,7 @@ class ArtworkFilter extends Component {
                         pathname: `/Art/${image.artworkID}/${image.artistName}`,
                       }}
                     >
-                      <img src={image.artworkImg} alt='' />
+                      <img src={image.artworkImg} alt='artwork' />
                     </Link>
                   </a>
                   <a href='#!' className='artistinfo clearfix pad10'>
@@ -124,7 +124,7 @@ class ArtworkFilter extends Component {
                   <span className='type'>Secondary</span>
                 </div>
                 <Link to='!#'>
-                  <img src={art} alt='' />
+                  <img src={art} alt='artwork' />
                 </Link>
               </a>
               <a href='#!' className='artistinfo clearfix pad10'>

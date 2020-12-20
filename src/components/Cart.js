@@ -195,7 +195,7 @@ addNotif();
                     </MDBCol>
                     <MDBCol md='2' className='artimg colpad'>
                       {item.artworkImg !== '' ? (
-                        <img src={item.artworkImg} alt='' />
+                        <img src={item.artworkImg} alt='artwork' />
                       ) : (
                         ''
                       )}

@@ -46,11 +46,7 @@ let Corder = listOfOrders.filter((Delivery) => {
             ))
           })
 
-          let myorder = listOfOrders.map( ord => ord.orderItems)
-      //  let a = myorder[0].map(ord => ord)
    
-
-// console.log(a[0],'dataa')
         let  toggle = (itm) => {
         
             this.setState({
@@ -131,7 +127,7 @@ const CompletedOrderTable = () => {
         orderBy: `${row.orderBy}`,
         date: `${row.date}`,
         paymentStat: `${row.paymentStat}`,
-        amount:`${total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`,
+        amount:`${total}`,
         action: <MDBBtn  onClick={()=>toggle(row.items)} color='yellow'> Items</MDBBtn>,
       
 
@@ -204,16 +200,16 @@ const CompletedOrderTable = () => {
                   <img
                     style={{width: '100% ', height: 'auto'}}
                     src={data.artworkImg}
-                    alt=''
+                    alt='artwork'
                   />
                 </td>
                 <td>{data.artistName}</td>
                 <td>{data.artworkName}</td>
                 <td>{data.artworkSize}</td>
-                <td>{data.artworkPaymentAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkPaymentAmount}</td>
                 <td>{data.artworkMaterial}</td>
                 <td>{data.artworkFramingOptions}</td>
-                <td>{data.artworkPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td>{data.artworkPrice}</td>
                 <td>{data.artworkQuantity}</td>
                 <td className='actions'>
                   <DownloadImage data={data.artworkImg} />
